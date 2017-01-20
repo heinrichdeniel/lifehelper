@@ -1,0 +1,16 @@
+
+.error {
+  display: inline-block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f6dddd;
+  .text{
+    color: #c80400;
+  }
+  span{
+    padding-top: 2px;
+    float: right;
+    cursor: hand;
+  }
+}

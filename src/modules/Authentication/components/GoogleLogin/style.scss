@@ -1,0 +1,22 @@
+.google{
+  max-width: 300px;
+  margin: 10px auto;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  padding: 10px 20px;
+  background-color: #D3482C;
+  border: 1px solid #D3482C;
+  border-radius: 4px;
+  color: #ffffff;
+  text-align: left;
+  height: 40px;
+  i{
+    float: left;
+    font-size: 26px;
+    width: 60px;
+    text-align: left;
+  }
+}
+.google:hover{
+  box-shadow: 0 0 5px 0px #D3482C;
+}

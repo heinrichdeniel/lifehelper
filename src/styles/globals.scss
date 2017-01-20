@@ -1,0 +1,12 @@
+@import "./colors.scss";
+
+body {
+  font-size: 14px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: regular;
+  color: rgb(77,77,77);
+  h1 {
+    color: $primary-color;
+    font-size: 30px;
+  }
+}
