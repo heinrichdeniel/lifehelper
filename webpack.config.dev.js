@@ -1,29 +1,29 @@
-import webpack from "webpack";
-import path from "path";
-import TransferWebpackPlugin from 'transfer-webpack-plugin';
+var webpack = require('webpack');
+var path = require('path');
+var TransferWebpackPlugin = require('transfer-webpack-plugin');
 
-export default {
-  debug: true,
-  devtool: 'cheap-module-eval-source-map',
+module.exports = {
+  devtool: 'eval',
   entry: [
-    'eventsource-polyfill', // necessary for hot reloading with IE
-    'webpack-hot-middleware/client?reload=true', //note that it reloads the page if hot module reloading fails.
-    './src/index'
+    'babel-polyfill',
+    'webpack-hot-middleware/client',
+    path.join(__dirname, 'src/index.js')
   ],
   resolve: {
-      root: path.resolve('src'),
-      extensions: ['', '.js', '.jsx', '.json']
+    root: path.resolve('src'),
+    extensions: ['', '.js', '.json']
   },
-  target: 'web',
   output: {
-    path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
+    path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './'
+    contentBase: './dist',
+    hot: true
   },
   plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new TransferWebpackPlugin([
       {from: 'src/assets/fonts', to: 'assets/fonts'},
       {from: 'src/assets/img', to: 'assets/img'},
@@ -34,7 +34,10 @@ export default {
   ],
   module: {
     loaders: [
-      {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel']},
+      {test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      },
       {test: /(\.css)$/, loaders: ['style', 'css?modules', 'postcss']},
       {test: /\.scss$/, loaders: [
         'style',
