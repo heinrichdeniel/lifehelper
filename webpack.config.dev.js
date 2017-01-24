@@ -14,12 +14,12 @@ module.exports = {
     extensions: ['', '.js', '.json']
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'public'),
     publicPath: '/',
-    filename: '[name].js'
+    filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './public',
     hot: true
   },
   plugins: [
