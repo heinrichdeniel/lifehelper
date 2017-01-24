@@ -3,7 +3,7 @@ var path = require('path');
 var TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'eval',
   entry: [
     'babel-polyfill',
     'webpack-hot-middleware/client?reload=true',
