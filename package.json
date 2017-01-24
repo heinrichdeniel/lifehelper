@@ -7,7 +7,7 @@
     "open:src": "babel-node server.js",
     "lint": "node_modules/.bin/esw webpack.config.dev.* src ",
     "lint:watch": "npm run lint -- --watch",
-    "postinstall": "webpack -p --config webpack.config.prod.js"
+    "heroku-postbuild": "webpack -p --config webpack.config.prod.js --progress"
   },
   "author": "Heinrich Deniel",
   "dependencies": {
