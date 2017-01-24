@@ -29,8 +29,7 @@ module.exports = {
       {from: 'src/assets/img', to: 'assets/img'},
       {from: 'src/assets', to: ''}
     ]),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [
