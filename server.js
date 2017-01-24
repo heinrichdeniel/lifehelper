@@ -8,7 +8,7 @@ var PORT = process.env.PORT || 3000;
 var app = express();
 
 if(process.env.NODE_ENV !== 'production') {
-  var webpackDevMiddleware = require('webpack-dev-server');
+  var webpackDevMiddleware = require('webpack-dev-middleware');
   var webpackHotMiddleware = require('webpack-hot-middleware');
   var webpack = require('webpack');
   var config = require('./webpack.config.dev');
@@ -19,6 +19,10 @@ if(process.env.NODE_ENV !== 'production') {
 }
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', function(request, response) {
+  response.sendFile(config.output.publicPath)
+});
 
 
 app.listen(PORT, function(err) {
