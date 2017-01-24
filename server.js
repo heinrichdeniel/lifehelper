@@ -21,7 +21,7 @@ if(process.env.NODE_ENV !== 'production') {
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(request, response) {
-  response.sendFile(config.output.publicPath)
+  response.sendFile(path.join(config.output.publicPath,'index.html'))
 });
 
 

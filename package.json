@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "main": "server.js",
   "scripts": {
+    "build": "webpack --config ./webpack.config.prod.js --progress --colors",
     "start": "npm-run-all --parallel open:src lint:watch",
     "open:src": "babel-node server.js",
     "lint": "node_modules/.bin/esw webpack.config.dev.* src ",
     "lint:watch": "npm run lint -- --watch",
-    "heroku-postbuild": "webpack -p --config webpack.config.prod.js --progress"
+    "postinstall": "npm run build"
   },
   "author": "Heinrich Deniel",
   "dependencies": {
