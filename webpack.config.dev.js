@@ -16,7 +16,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   devServer: {
     contentBase: './dist',
@@ -38,8 +38,14 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel'
       },
-      {test: /(\.css)$/, loaders: ['style', 'css?modules', 'postcss']},
+      {test: /\.css$/,
+        loaders: [
+        'style',
+        'css?modules&&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]',
+        'postcss'
+      ] },
       {test: /\.scss$/, loaders: [
+
         'style',
         'css?modules&&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]',
         'postcss',
