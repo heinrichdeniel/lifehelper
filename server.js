@@ -20,10 +20,6 @@ if(process.env.NODE_ENV !== 'production') {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(request, response) {
-  response.sendFile(config.output.publicPath)
-});
-
 
 app.listen(PORT, function(err) {
   if (err) {

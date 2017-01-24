@@ -1,5 +1,5 @@
 node_modules
-dist
+public
 .idea
-*.log
+npm-debug.log
 **/.idea/workspace.xml **/.idea/tasks.xml
