@@ -1,12 +1,6 @@
 @import "src/styles/colors.scss";
 
 .nav{
-  //background: rgba(210,255,82,1);
-  //background: -moz-linear-gradient(top, #c5ff22  0%, #8be737 100%);
-  //background: -webkit-linear-gradient(top, #c5ff22  0%, #8be737 100%);
-  //background: -o-linear-gradient(top, #c5ff22  0%, #8be737 100%);
-  //background: -ms-linear-gradient(top, #c5ff22  0%, #8be737 100%);
-  //background: linear-gradient(to bottom, #c5ff22  0%, #8be737 100%);
   background: rgb(255,255,255);
   background: -moz-linear-gradient(top, white 0%, #eee 33%, rgb(230, 230, 230) 50%, #eee 66%, #f6f6f6 100%);
   background: -webkit-linear-gradient(top, white 0%, #eee 33%, rgb(230, 230, 230) 50%, #eee 66%, #f6f6f6 100%);
@@ -27,7 +21,7 @@
   }
 
   .logo{
-    background: transparent url(assets/img/logo2.png) no-repeat center right;
+    background: transparent url("/assets/img/logo2.png") no-repeat center right;
     background-size: 50px;
     width: 50px;
     height: 75px;

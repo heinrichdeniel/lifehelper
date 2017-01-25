@@ -6,7 +6,7 @@ module.exports = {
   devtool: 'eval',
   entry: [
     'babel-polyfill',
-    'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'src/index.js')
   ],
   resolve: {
@@ -14,12 +14,12 @@ module.exports = {
     extensions: ['', '.js', '.json']
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'public'),
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './public',
     hot: true
   },
   plugins: [
@@ -29,8 +29,7 @@ module.exports = {
       {from: 'src/assets/img', to: 'assets/img'},
       {from: 'src/assets', to: ''}
     ]),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [
@@ -38,7 +37,12 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel'
       },
-      {test: /(\.css)$/, loaders: ['style', 'css?modules', 'postcss']},
+      {test: /\.css$/,
+        loaders: [
+        'style',
+        'css?modules&&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]',
+        'postcss'
+      ] },
       {test: /\.scss$/, loaders: [
         'style',
         'css?modules&&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]',
