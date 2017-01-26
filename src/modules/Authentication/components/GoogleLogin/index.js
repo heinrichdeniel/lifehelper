@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import css from './style.scss'
-import config from 'config'
 
 export default class GoogleLogin extends Component{
   constructor(props) {
     super(props);
     this.clickHandler=this.clickHandler.bind(this);
   }
- /* componentDidMount() {
+
+  componentDidMount() {
     (function(d, s, id){
       var js, gs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {return;}
@@ -16,14 +16,14 @@ export default class GoogleLogin extends Component{
       gs.parentNode.insertBefore(js, gs);
     }(document, 'script', 'google-platform'));
   }
-*/
+
   clickHandler () {
-   /* let responseHandler = this.props.responseHandler;
+    let responseHandler = this.props.responseHandler;
     let onLogin = this.props.onLogin;
 
     gapi.load('auth2', function() {
       gapi.auth2.init({
-        client_id: '855509894038-od20qknpjku44bii3fb8e5hg3q1t5mdk.apps.googleusercontent.com',
+        client_id: '40390405871-cd8e57krlj9c0tr2t3l546so5391qkh2.apps.googleusercontent.com',
         fetch_basic_profile: true,
         cookiepolicy: 'single_host_origin',
       }).then( function(auth2){
@@ -32,7 +32,7 @@ export default class GoogleLogin extends Component{
           onLogin();
         });
       });
-    });*/
+    });
   }
   render() {
     return (
