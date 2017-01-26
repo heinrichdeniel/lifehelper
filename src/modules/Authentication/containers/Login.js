@@ -5,12 +5,12 @@ import * as selectors from 'redux/modules/Authentication/selectors'
 import Login from "../components/Login"
 
 const mapActionsToProps = (dispatch) => ({
-  setName: actions.setName,
+  setEmail: actions.setEmail,
   setPassword: actions.setPassword,
   sendLogin: actions.login,
   resetLogin: actions.resetLogin,
-  authFacebook: actions.authFacebook,
-  authGoogle: actions.authGoogle,
+  loginFacebook: actions.loginFacebook,
+  loginGoogle: actions.loginGoogle,
   reset: actions.reset
 });
 const mapStateToProps = (state) => ({

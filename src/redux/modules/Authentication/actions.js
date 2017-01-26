@@ -34,14 +34,14 @@ export function resetLogin() {
   })
 }
 
-export function authFacebook(payload) {
+export function loginFacebook(payload) {
   store.dispatch((dispatch, getState) => {
     return dispatch({
       type: constants.SET_USER,
       payload: {
-        email: payload.userInfo.email,
-        photo_url: payload.userInfo.picture.data.url,
-        name: payload.userInfo.name
+        email: payload.user.email,
+        photo_url: payload.user.picture.data.url,
+        name: payload.user.name
       }
     })
   })
@@ -53,12 +53,37 @@ export function authFacebook(payload) {
         constants.LOGIN_ERROR
       ],
       payload: {
-        promise: api.authFacebook(payload)
+        promise: api.loginFacebook(payload)
       }
     })
   })
 }
 
+
+export function loginGoogle(payload) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.SET_USER,
+      payload: {
+        email: payload.w3.U3,
+        photo_url: payload.w3.Paa,
+        name: payload.w3.ig
+      }
+    })
+  });
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.LOGIN_PENDING,
+        constants.LOGIN_SUCCESS,
+        constants.LOGIN_ERROR
+      ],
+      payload: {
+        promise: api.loginGoogle(payload)
+      }
+    })
+  });
+}
 export function getProfile(payload) {
   store.dispatch((dispatch, getState) => {
     return dispatch({
@@ -89,30 +114,6 @@ export function updateProfile(payload) {
 }
 
 
-export function authGoogle(payload) {
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      type: constants.SET_USER,
-      payload: {
-        email: payload.w3.U3,
-        photo_url: payload.w3.Paa,
-        name: payload.w3.ig
-      }
-    })
-  });
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      types: [
-        constants.LOGIN_PENDING,
-        constants.LOGIN_SUCCESS,
-        constants.LOGIN_ERROR
-      ],
-      payload: {
-        promise: api.authGoogle(payload)
-      }
-    })
-  });
-}
 
 export function setName(payload) {
   store.dispatch((dispatch, getState) => {

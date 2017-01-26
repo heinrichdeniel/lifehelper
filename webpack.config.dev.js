@@ -1,6 +1,6 @@
-var webpack = require('webpack');
-var path = require('path');
-var TransferWebpackPlugin = require('transfer-webpack-plugin');
+let webpack = require('webpack');
+let path = require('path');
+let TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 module.exports = {
   devtool: 'eval',
