@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'components/Button';
 import LoginModal from 'modules/Authentication/containers/Login'
+import RegistrationModal from 'modules/Authentication/containers/Registration'
 import css from "./style.scss";
 import { Link, browserHistory } from 'react-router'
 
@@ -38,7 +39,9 @@ export default class Header extends Component {
 
   render() {
         let fixed = this.props.fixed ? 'navbar-fixed-top' : null;
-        return (
+
+        if (!this.props.token){
+          return (
             <nav className={"navbar "+css.nav + " "+fixed}>
               <div className="container">
                 <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
@@ -49,9 +52,26 @@ export default class Header extends Component {
 
                 <LoginModal isModalOpen={this.state.loginModal}
                             closeModal={this.closeModals}/>
+                <RegistrationModal isModalOpen={this.state.registrationModal}
+                                   closeModal={this.closeModals}
+                                   openConfirmModal={this.openModal.bind(this,{confirmModal:true})}/>
               </div>
             </nav>
-        )
+          )
+        }
+        else{
+          return (
+            <nav className={"navbar "+css.nav + " "+fixed}>
+              <div className="container">
+                <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
+                <div className={css.rightIcons}>
+                  <Button onClick={this.logout} text="Log out" ><i className="fa fa-sign-out"/></Button>
+                </div>
+              </div>
+            </nav>
+          )
+        }
+
     }
 
 }

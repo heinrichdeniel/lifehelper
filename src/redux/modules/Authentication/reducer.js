@@ -7,6 +7,10 @@ const initialState = {
     pending: false,
     error: false
   },
+  registration: {
+    pending: false,
+    error: false
+  },
   authDetails: auth ? auth : {},
   user: {
     username: "",
@@ -42,6 +46,31 @@ const AuthReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         login: Object.assign({}, state.login, {pending: false, error: false})
+      }
+    case constants.REGISTRATION_PENDING:
+      return {
+        ...state,
+        registration: Object.assign({}, state.registration, {pending: true, error: false})
+      }
+
+    case constants.REGISTRATION_SUCCESS:
+      localStorage.setItem('auth', JSON.stringify(action.payload));
+      return {
+        ...state,
+        registration: Object.assign({}, state.registration, {pending: false, error: false}),
+        authDetails: action.payload
+      }
+
+    case constants.REGISTRATION_ERROR:
+      return {
+        ...state,
+        registration: Object.assign({}, state.registration, {pending: false, error: action.payload.message})
+      }
+
+    case constants.RESET_REGISTRATION:
+      return {
+        ...state,
+        registration: Object.assign({}, state.registration, {pending: false, error: false})
       }
 
     case constants.GET_PROFILE_PENDING:

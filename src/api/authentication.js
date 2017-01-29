@@ -16,6 +16,20 @@ export function login (payload) {
   })
 }
 
+export function registration (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'auth/registration/')
+      .send(payload)
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
 export function loginFacebook (payload) {
   return new Promise((resolve, reject) => {
     request
@@ -45,7 +59,7 @@ export function loginGoogle (payload) {
         google_id: payload.El,
         email: payload.w3.U3,
         photo_url: payload.w3.Paa+"?sz=500",
-        name: payload.w3.ig,
+        name: payload.w3.ig
       })
       .end(function (err, res) {
         if (!res.body.success) {

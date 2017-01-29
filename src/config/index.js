@@ -1,5 +1,5 @@
 module.exports = {
   api: {
-    host: 'https://lifehelper-api.herokuapp.com/'
-  },
+    host: 'http://localhost:5000/'
+  }
 }

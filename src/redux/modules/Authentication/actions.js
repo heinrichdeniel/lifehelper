@@ -25,15 +25,6 @@ export function login(payload) {
     })
   })
 }
-
-export function resetLogin() {
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      type: constants.RESET_LOGIN
-    })
-  })
-}
-
 export function loginFacebook(payload) {
   store.dispatch((dispatch, getState) => {
     return dispatch({
@@ -84,36 +75,21 @@ export function loginGoogle(payload) {
     })
   });
 }
-export function getProfile(payload) {
+
+export function registration(payload) {
   store.dispatch((dispatch, getState) => {
     return dispatch({
       types: [
-        constants.GET_PROFILE_PENDING,
-        constants.GET_PROFILE_SUCCESS,
-        constants.GET_PROFILE_ERROR
+        constants.REGISTRATION_PENDING,
+        constants.REGISTRATION_SUCCESS,
+        constants.REGISTRATION_ERROR
       ],
       payload: {
-        promise: api.getProfile(payload)
+        promise: api.registration(payload)
       }
     })
   })
 }
-export function updateProfile(payload) {
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      types: [
-        constants.UPDATE_PROFILE_PENDING,
-        constants.UPDATE_PROFILE_SUCCESS,
-        constants.UPDATE_PROFILE_ERROR
-      ],
-      payload: {
-        promise: api.updateProfile(payload)
-      }
-    })
-  })
-}
-
-
 
 export function setName(payload) {
   store.dispatch((dispatch, getState) => {
@@ -145,6 +121,23 @@ export function reset() {
   store.dispatch((dispatch, getState) => {
     return dispatch({
       type: constants.RESET
+    })
+  })
+}
+
+
+export function resetLogin() {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.RESET_LOGIN
+    })
+  })
+}
+
+export function resetRegistration() {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.RESET_REGISTRATION
     })
   })
 }

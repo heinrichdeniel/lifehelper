@@ -21,5 +21,6 @@ constants['SET_EMAIL'] = module + '_' + 'SET_EMAIL';
 constants['SET_PASSWORD'] = module + '_' + 'SET_PASSWORD';
 constants['RESET'] = module + '_' + 'RESET';
 constants['RESET_LOGIN'] = module + '_' + 'RESET_LOGIN';
+constants['RESET_REGISTRATION'] = module + '_' + 'RESET_REGISTRATION';
 
 export default constants;

@@ -13,7 +13,8 @@ class Landing extends Component {
   render() {
     return(
       <div className={css.base}>
-        <Header/>
+        <Header token={this.props.authDetails.token}
+                logout={this.props.logout}/>
         <Footer/>
       </div>
     )

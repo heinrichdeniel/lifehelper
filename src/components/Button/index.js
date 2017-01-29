@@ -11,6 +11,7 @@ class Button extends Component {
               disabled={disabled}
               onClick={onClick} >
         {text}
+        {this.props.children}
       </button>
     )
   }

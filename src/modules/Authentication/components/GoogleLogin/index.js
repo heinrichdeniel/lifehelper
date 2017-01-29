@@ -9,7 +9,7 @@ export default class GoogleLogin extends Component{
 
   componentDidMount() {
     (function(d, s, id){
-      var js, gs = d.getElementsByTagName(s)[0];
+      let js, gs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {return;}
       js = d.createElement(s); js.id = id;
       js.src = 'https://apis.google.com/js/platform.js'
@@ -25,7 +25,7 @@ export default class GoogleLogin extends Component{
       gapi.auth2.init({
         client_id: '40390405871-cd8e57krlj9c0tr2t3l546so5391qkh2.apps.googleusercontent.com',
         fetch_basic_profile: true,
-        cookiepolicy: 'single_host_origin',
+        cookiepolicy: 'single_host_origin'
       }).then( function(auth2){
         auth2.signIn().then(function(googleUser) {
           responseHandler(googleUser);
