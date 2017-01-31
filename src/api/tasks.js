@@ -1,7 +1,7 @@
 import request from "superagent";
 import config from "../config";
 
-export function login (payload) {
+export function createTask (payload) {
   return new Promise((resolve, reject) => {
     request
       .post(config.api.host + 'tasks/')

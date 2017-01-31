@@ -4,6 +4,7 @@ import * as api from 'api/tasks'
 
 export function sendTask(payload) {
   store.dispatch((dispatch, getState) => {
+    console.log(getState())
     return dispatch({
       types: [
         constants.CREATE_TASK_PENDING,
@@ -11,7 +12,10 @@ export function sendTask(payload) {
         constants.CREATE_TASK_ERROR
       ],
       payload: {
-        promise: api.createTask(payload)
+        promise: api.createTask({
+                    ...payload,
+                    userID: getState().Authentication.user.id
+                })
       }
     })
   })

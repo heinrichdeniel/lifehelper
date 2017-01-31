@@ -34,7 +34,11 @@ const AuthReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         login: Object.assign({}, state.login, {pending: false, error: false}),
-        authDetails: action.payload
+        authDetails: action.payload,
+        user:{
+          ...state.user,
+          id: action.payload.id
+        }
       }
 
     case constants.LOGIN_ERROR:
@@ -42,11 +46,13 @@ const AuthReducer = (state = initialState, action = {}) => {
         ...state,
         login: Object.assign({}, state.login, {pending: false, error: action.payload.message})
       }
+
     case constants.RESET_LOGIN:
       return {
         ...state,
         login: Object.assign({}, state.login, {pending: false, error: false})
       }
+
     case constants.REGISTRATION_PENDING:
       return {
         ...state,
@@ -58,7 +64,11 @@ const AuthReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         registration: Object.assign({}, state.registration, {pending: false, error: false}),
-        authDetails: action.payload
+        authDetails: action.payload,
+        user:{
+          ...state.user,
+          id: action.payload.id
+        }
       }
 
     case constants.REGISTRATION_ERROR:

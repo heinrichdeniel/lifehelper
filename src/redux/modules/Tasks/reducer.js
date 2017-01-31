@@ -17,8 +17,29 @@ const initialState = {
 };
 
 
-const AuthReducer = (state = initialState, action = {}) => {
+const TaskReducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case constants.CREATE_TASK_PENDING:
+      return {
+        ...state,
+        pending: true,
+        error: false
+      };
+
+    case constants.CREATE_TASK_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        error: false
+      };
+
+    case constants.CREATE_TASK_ERROR:
+      return {
+        ...state,
+        pending: false,
+        error: action.payload.message
+      };
+
     case constants.SET_NAME:
       return {
         ...state,
@@ -63,4 +84,4 @@ const AuthReducer = (state = initialState, action = {}) => {
   }
 };
 
-export default AuthReducer;
+export default TaskReducer;

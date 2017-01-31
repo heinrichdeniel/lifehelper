@@ -54,6 +54,7 @@ class AddTask extends Component {
       return this.setState({error: 'The task name must contain at least 3, maximum 20 character!'})
     }
     this.props.sendTask(this.props.task.current);
+    this.changeModalState();
   }
 
   render() {
