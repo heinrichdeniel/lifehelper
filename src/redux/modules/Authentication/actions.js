@@ -2,7 +2,6 @@ import store from 'redux/config/store'
 import constants from './constants'
 import * as api from 'api/authentication'
 
-
 export function logout() {
   store.dispatch((dispatch, getState) => {
     return dispatch({
@@ -25,6 +24,7 @@ export function login(payload) {
     })
   })
 }
+
 export function loginFacebook(payload) {
   store.dispatch((dispatch, getState) => {
     return dispatch({
@@ -49,7 +49,6 @@ export function loginFacebook(payload) {
     })
   })
 }
-
 
 export function loginGoogle(payload) {
   store.dispatch((dispatch, getState) => {
@@ -99,6 +98,7 @@ export function setName(payload) {
     })
   })
 }
+
 export function setPassword(payload) {
   store.dispatch((dispatch, getState) => {
     return dispatch({
@@ -124,7 +124,6 @@ export function reset() {
     })
   })
 }
-
 
 export function resetLogin() {
   store.dispatch((dispatch, getState) => {

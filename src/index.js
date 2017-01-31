@@ -8,7 +8,6 @@ import routes from "./routes";
 import {syncHistoryWithStore} from "react-router-redux";
 import './styles/globals.scss';
 
-
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(

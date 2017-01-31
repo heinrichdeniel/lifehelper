@@ -4,6 +4,8 @@ import css from './style.scss'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 
+import AddTask from 'modules/Tasks/containers/AddTaskContainer'
+
 class Landing extends Component {
   constructor(props){
     super(props);
@@ -15,6 +17,7 @@ class Landing extends Component {
       <div className={css.base}>
         <Header token={this.props.authDetails.token}
                 logout={this.props.logout}/>
+        <AddTask/>
         <Footer/>
       </div>
     )

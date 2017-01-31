@@ -37,11 +37,11 @@ class Input extends Component{
   }
 
   render(){
-    let { placeholder, value, minLength, maxLength, onChange } = this.props;
+    let { placeholder, value, minLength, maxLength, onChange, style} = this.props;
     let addon = this.renderAddon(minLength, maxLength, value);
 
     return(
-      <div className={css.base}>
+      <div className={css.base + ' ' + style}>
         <div className="form-group ">
           <div className={"input-group "+css.inputGroup}>
 
