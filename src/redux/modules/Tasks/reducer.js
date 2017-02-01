@@ -22,22 +22,66 @@ const TaskReducer = (state = initialState, action = {}) => {
     case constants.CREATE_TASK_PENDING:
       return {
         ...state,
-        pending: true,
-        error: false
+        task: {
+          ...state.task,
+          pending: true,
+          error: false
+        }
       };
 
     case constants.CREATE_TASK_SUCCESS:
       return {
         ...state,
-        pending: false,
-        error: false
+        task: {
+          ...state.task,
+          list:[
+            action.payload.task,
+            ...state.task.list
+          ],
+          pending: false,
+          error: false
+        }
       };
 
     case constants.CREATE_TASK_ERROR:
       return {
         ...state,
-        pending: false,
-        error: action.payload.message
+        task: {
+          ...state.task,
+          pending: false,
+          error: action.payload.message
+        }
+      };
+    case constants.GET_LIST_PENDING:
+      return {
+        ...state,
+        task: {
+          ...state.task,
+          pending: true,
+          error: false
+        }
+      };
+
+    case constants.GET_LIST_SUCCESS:
+      return {
+        ...state,
+        task:{
+          ...state.task,
+          list: action.payload.tasks,
+          pending: false,
+          error: false
+        }
+
+      };
+
+    case constants.GET_LIST_ERROR:
+      return {
+        ...state,
+        task: {
+          ...state.task,
+          pending: false,
+          error: action.payload.message
+        }
       };
 
     case constants.SET_NAME:
@@ -77,7 +121,14 @@ const TaskReducer = (state = initialState, action = {}) => {
       };
 
     case constants.RESET:
-      return  initialState;
+      return  {
+        ...state,
+        task:{
+          ...state.task,
+          current: initialState.task.current
+        }
+
+      };
 
     default:
       return state

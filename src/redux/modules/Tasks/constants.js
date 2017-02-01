@@ -2,7 +2,8 @@ const module = 'TASKS';
 const actionTypes = [
   'CREATE_TASK',
   'UPDATE_TASK',
-  'DELETE_TASK'
+  'DELETE_TASK',
+  'GET_LIST'
 ];
 
 const statusTypes = ['PENDING', 'SUCCESS', 'ERROR'];

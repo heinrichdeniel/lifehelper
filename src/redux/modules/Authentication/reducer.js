@@ -13,6 +13,7 @@ const initialState = {
   },
   authDetails: auth ? auth : {},
   user: {
+    id: auth ? auth.id : "",
     username: "",
     password: "",
     email: "",

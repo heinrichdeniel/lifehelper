@@ -4,7 +4,6 @@ import * as api from 'api/tasks'
 
 export function sendTask(payload) {
   store.dispatch((dispatch, getState) => {
-    console.log(getState())
     return dispatch({
       types: [
         constants.CREATE_TASK_PENDING,
@@ -16,6 +15,22 @@ export function sendTask(payload) {
                     ...payload,
                     userID: getState().Authentication.user.id
                 })
+      }
+    })
+  });
+}
+export function getTaskList() {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.GET_LIST_PENDING,
+        constants.GET_LIST_SUCCESS,
+        constants.GET_LIST_ERROR
+      ],
+      payload: {
+        promise: api.getTaskList({
+          userID: getState().Authentication.user.id
+        })
       }
     })
   })
