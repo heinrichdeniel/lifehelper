@@ -13,8 +13,8 @@ export function sendTask(payload) {
       payload: {
         promise: api.createTask({
                     ...payload,
-                    userID: getState().Authentication.user.id
-                })
+                    token: getState().Authentication.authDetails.token
+        })
       }
     })
   });
@@ -29,7 +29,7 @@ export function getTaskList() {
       ],
       payload: {
         promise: api.getTaskList({
-          userID: getState().Authentication.user.id
+          token: getState().Authentication.authDetails.token
         })
       }
     })

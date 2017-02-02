@@ -59,7 +59,7 @@ export default class Registration extends Component{
       this.setState({error: 'Please fill the ' + errors.join(', ') + ' field!'});
       return null;
     } else {
-      if (this.props.user.username.length < 6 || this.props.user.username.length > 20) {
+      if (this.props.user.username.length < 4 || this.props.user.username.length > 20) {
         return this.setState({error: 'The name must contain at least 4, maximum 20 character!'})
       }
       if (this.props.user.email.length < 6 ) {

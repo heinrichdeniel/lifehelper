@@ -18,6 +18,10 @@ const initialState = {
 
 
 const TaskReducer = (state = initialState, action = {}) => {
+  if (action.payload && action.payload.err == "Error: Token expired"){
+    localStorage.clear();
+    window.location.href = '/'
+  }
   switch (action.type) {
     case constants.CREATE_TASK_PENDING:
       return {
