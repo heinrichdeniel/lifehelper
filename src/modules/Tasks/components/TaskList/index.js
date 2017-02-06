@@ -16,7 +16,8 @@ class TaskList extends Component {
         <div className={css.base}>
           {
             tasks.map( (task) =>
-             <TaskItem key={task.id} task={task}/>
+             <TaskItem key={task.id}
+                       task={task}/>
             )
           }
         </div>

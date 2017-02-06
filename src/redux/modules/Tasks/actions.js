@@ -19,6 +19,25 @@ export function sendTask(payload) {
     })
   });
 }
+
+export function getTaskById(id) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.GET_TASK_PENDING,
+        constants.GET_TASK_SUCCESS,
+        constants.GET_TASK_ERROR
+      ],
+      payload: {
+        promise: api.getTaskById({
+          token: getState().Authentication.authDetails.token,
+          id: id
+        })
+      }
+    })
+  })
+}
+
 export function getTaskList() {
   store.dispatch((dispatch, getState) => {
     return dispatch({

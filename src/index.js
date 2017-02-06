@@ -1,18 +1,18 @@
-import "babel-polyfill";
 import React from "react";
 import ReactDOM from "react-dom";
-import {Router, browserHistory} from "react-router";
+import {browserHistory} from "react-router";
+import Routes from './routes'
 import store from "./redux/config/store";
 import {Provider} from "react-redux";
-import routes from "./routes";
 import {syncHistoryWithStore} from "react-router-redux";
+
 import './styles/globals.scss';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={history} routes={routes}/>
+        <Routes history={history}/>
     </Provider>,
     document.getElementById('app')
 );

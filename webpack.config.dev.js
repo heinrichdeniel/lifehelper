@@ -14,12 +14,14 @@ module.exports = {
     extensions: ['', '.js', '.json']
   },
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, '/public'),
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './public',
+    historyApiFallback: true,
+    contentBase: './',
+    port: 3000,
     hot: true
   },
   plugins: [

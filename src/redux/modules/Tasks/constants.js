@@ -3,6 +3,7 @@ const actionTypes = [
   'CREATE_TASK',
   'UPDATE_TASK',
   'DELETE_TASK',
+  'GET_TASK',
   'GET_LIST'
 ];
 

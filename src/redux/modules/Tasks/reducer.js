@@ -88,6 +88,37 @@ const TaskReducer = (state = initialState, action = {}) => {
         }
       };
 
+    case constants.GET_TASK_PENDING:
+      return {
+        ...state,
+        task: {
+          ...state.task,
+          pending: true,
+          error: false
+        }
+      };
+
+    case constants.GET_TASK_SUCCESS:
+      return {
+        ...state,
+        task:{
+          ...state.task,
+          current: action.payload.task,
+          pending: false,
+          error: false
+        }
+      };
+
+    case constants.GET_TASK_ERROR:
+      return {
+        ...state,
+        task: {
+          ...state.task,
+          pending: false,
+          error: action.payload.message
+        }
+      };
+
     case constants.SET_NAME:
       return {
         ...state,

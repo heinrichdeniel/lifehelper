@@ -1,13 +1,25 @@
 import React, { Component } from 'react'
-import TimePicker from 'rc-time-picker';
+import TimePicker from 'react-timepicker';
 import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import Modal from 'react-bootstrap/lib/Modal'
+import Button from 'components/Button'
 
 import css from './style.scss'
 
 class datePicker extends Component{
   constructor(props){
     super(props);
+    this.changeModalState = this.changeModalState.bind(this);
+
+    this.state = {
+      showModal:false
+    }
+  }
+
+  changeModalState(){
+    this.setState({
+      showModal: !this.state.showModal
+    });
   }
 
   render(){
@@ -15,13 +27,20 @@ class datePicker extends Component{
 
     return(
       <div className={css.base}>
-        <TimePicker
-          value={moment(value, "HH:mm")}
-          onChange={onChange}
-          showSecond={false}
-          clearText="clear"
-          defaultValue={moment(value, "HH:mm")}
+        <p onClick={this.changeModalState}>{value}</p>
+        <Modal show={this.state.showModal}  dialogClassName={css.modal}  onHide={this.changeModalState}>
+          <TimePicker
+            value={moment(value, "HH:mm")}
+            onChange={onChange}
+            showSecond={false}
+            clearText="clear"
+            />
+          <Button
+            type="button"
+            text="Select time"
+            onClick={this.changeModalState}
           />
+        </Modal>
       </div>
     )
   }

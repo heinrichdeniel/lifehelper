@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
+import TextArea from 'components/TextArea';
 import DatePicker from 'components/DatePicker';
 import TimePicker from 'components/TimePicker';
 
@@ -69,14 +70,14 @@ class AddTask extends Component {
       let task = this.props.task.current;
 
       return(
-        <Modal className="login-modal" show={this.state.showModal} onHide={this.changeModalState}>
+        <Modal show={this.state.showModal} onHide={this.changeModalState}>
           <div className={css.container}>
             <div className={css.body}>
               <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
 
               <h1>Add Task</h1>
               <Input type="text" placeholder="Task name" value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
-              <textarea type="text" placeholder="Description" value={task.description} onChange={this.changeDescription} className={css.textarea}  />
+              <TextArea type="text" placeholder="Description" value={task.description} onChange={this.changeDescription}  />
 
               <DatePicker value={task.date} onChange={this.changeDate}/>
               <TimePicker value={task.time} onChange={this.changeTime}/>
