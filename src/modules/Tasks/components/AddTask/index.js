@@ -79,7 +79,7 @@ class AddTask extends Component {
     if (!this.state.showModal) {
       return(
         <div className={css.base}>
-          <Button type="button" onClick={this.changeModalState} text={this.props.buttonText}  style={css.addButton}/>
+          <Button type="button" onClick={this.changeModalState} text={this.props.buttonText}  style={css.addButton+" "+this.props.buttonStyle}/>
         </div>
       );
     }

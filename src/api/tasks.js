@@ -46,3 +46,19 @@ export function getTaskById (payload) {
       })
   })
 }
+
+export function deleteTask (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'tasks/delete/'+payload.id)
+      .set('x-access-token', payload.token)
+      .send({id: payload.id})
+      .end(function (err, res) {
+        //  If auth token is not returned, that means the user entered bad credentials.
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}

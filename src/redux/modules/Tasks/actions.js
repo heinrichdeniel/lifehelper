@@ -38,6 +38,24 @@ export function getTaskById(id) {
   })
 }
 
+export function deleteTask(id) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.DELETE_TASK_PENDING,
+        constants.DELETE_TASK_SUCCESS,
+        constants.DELETE_TASK_ERROR
+      ],
+      payload: {
+        promise: api.deleteTask({
+          token: getState().Authentication.authDetails.token,
+          id: id
+        })
+      }
+    })
+  })
+}
+
 export function getTaskList() {
   store.dispatch((dispatch, getState) => {
     return dispatch({

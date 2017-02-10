@@ -60,6 +60,7 @@ const TaskReducer = (state = initialState, action = {}) => {
           error: action.payload.message
         }
       };
+
     case constants.GET_LIST_PENDING:
       return {
         ...state,
@@ -115,6 +116,38 @@ const TaskReducer = (state = initialState, action = {}) => {
 
     case constants.GET_TASK_ERROR:
       window.location = "/asd";
+      return {
+        ...state,
+        task: {
+          ...state.task,
+          pending: false,
+          error: action.payload.message
+        }
+      };
+
+    case constants.DELETE_TASK_PENDING:
+      return {
+        ...state,
+        task: {
+          ...state.task,
+          pending: true,
+          error: false
+        }
+      };
+
+    case constants.DELETE_TASK_SUCCESS:
+
+      return {
+        ...state,
+        task: {
+          ...state.task,
+          list: state.task.list.filter( (task) => task.id != state.task.current.id),
+          pending: false,
+          error: false
+        }
+      };
+
+    case constants.DELETE_TASK_ERROR:
       return {
         ...state,
         task: {
