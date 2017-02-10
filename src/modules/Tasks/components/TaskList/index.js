@@ -8,6 +8,7 @@ class TaskList extends Component {
   }
   componentWillMount(){
     this.props.getTaskList();
+    this.props.reset();
   }
 
   render() {

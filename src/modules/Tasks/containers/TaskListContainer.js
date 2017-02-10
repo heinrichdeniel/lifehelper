@@ -5,7 +5,8 @@ import * as actions from 'redux/modules/Tasks/actions'
 import * as selectors from 'redux/modules/Tasks/selectors'
 
 const mapActionsToProps = (dispatch) => ({
-  getTaskList: actions.getTaskList
+  getTaskList: actions.getTaskList,
+  reset: actions.reset
 });
 const mapStateToProps = (state) => ({
   task: selectors.task(state)

@@ -19,9 +19,11 @@ class AddTask extends Component {
     this.changeTime = this.changeTime.bind(this);
     this.changeDescription = this.changeDescription.bind(this);
     this.sendTask = this.sendTask.bind(this);
+    this.timeModalChanged = this.timeModalChanged.bind(this);
     this.state = {
-      showModal:false,
-      error: ""
+      showModal: false,
+      error: "",
+      opacity: 1
     }
   }
 
@@ -34,19 +36,31 @@ class AddTask extends Component {
   }
 
   changeDate(date){
-    this.props.setDate(moment(date).format("MM-DD-YYYY"));
+    this.props.setDate(moment(date));
   }
 
-  changeTime(time){
-    this.props.setTime(moment(time).format("HH:mm"));
+  changeTime(h,m){
+    this.props.setTime(moment(h+":"+m,"H:m").format("H:m"));
   }
 
   changeModalState(){
-    if (this.state.showModal){    //if the modal will be closed, then the form data will be deleted
+    if (window.location.pathname.substring(0,5) == "/task"){
+      this.props.getTaskById(window.location.pathname.substring(6));
+
+    }
+    else if (this.state.showModal){    //if the modal will be closed, then the form data will be deleted
       this.props.reset();
     }
     this.setState({
+      ...this.state,
       showModal: !this.state.showModal
+    });
+  }
+
+  timeModalChanged(){
+    this.setState({
+      ...this.state,
+      opacity: 1 - this.state.opacity
     });
   }
 
@@ -55,23 +69,25 @@ class AddTask extends Component {
       return this.setState({error: 'The task name must contain at least 3, maximum 20 character!'})
     }
     this.props.sendTask(this.props.task.current);
-    this.changeModalState();
+    this.setState({
+      ...this.state,
+      showModal: !this.state.showModal
+    });
   }
 
   render() {
     if (!this.state.showModal) {
       return(
         <div className={css.base}>
-          <Button type="button" onClick={this.changeModalState} text="Add new task" style={css.addButton}/>
+          <Button type="button" onClick={this.changeModalState} text={this.props.buttonText}  style={css.addButton}/>
         </div>
       );
     }
     else{
       let task = this.props.task.current;
-
       return(
-        <Modal show={this.state.showModal} onHide={this.changeModalState}>
-          <div className={css.container}>
+        <Modal style={{opacity : this.state.opacity}} show={this.state.showModal} onHide={this.changeModalState}>
+          <div  className={css.container}>
             <div className={css.body}>
               <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
 
@@ -80,8 +96,8 @@ class AddTask extends Component {
               <TextArea type="text" placeholder="Description" value={task.description} onChange={this.changeDescription}  />
 
               <DatePicker value={task.date} onChange={this.changeDate}/>
-              <TimePicker value={task.time} onChange={this.changeTime}/>
-              <Button type="button" onClick={this.sendTask} text="Add task" style={css.addButton}/>
+              <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime}/>
+              <Button type="button" onClick={this.sendTask} text={this.props.sendButtonText} style={css.addButton}/>
             </div>
           </div>
         </Modal>

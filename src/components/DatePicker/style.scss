@@ -12,6 +12,7 @@
     padding: 10px;
     cursor: pointer;
     width: 100%;
+    text-align: center;
     &:focus{
       outline:none;
       border-color: #CCCCCC;
@@ -23,6 +24,9 @@
 
   }
 
+}
+:global .react-datepicker__input-container {
+  width: 100%;
 }
 :global .react-datepicker {
   .react-datepicker__header {

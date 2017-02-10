@@ -11,7 +11,9 @@ const mapActionsToProps = (dispatch) => ({
   setDate: actions.setDate,
   setTime: actions.setTime,
   sendTask: actions.sendTask,
-  reset: actions.reset
+  reset: actions.reset,
+  getTaskById: actions.getTaskById
+
 });
 const mapStateToProps = (state) => ({
   task: selectors.task(state)

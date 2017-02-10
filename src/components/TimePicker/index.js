@@ -17,6 +17,9 @@ class datePicker extends Component{
   }
 
   changeModalState(){
+    if (this.props.onClick){
+      this.props.onClick();
+    }
     this.setState({
       showModal: !this.state.showModal
     });
@@ -27,10 +30,11 @@ class datePicker extends Component{
 
     return(
       <div className={css.base}>
-        <p onClick={this.changeModalState}>{value}</p>
+        <p onClick={this.changeModalState}>{moment(value, "H:m").format("HH:mm")}</p>
         <Modal show={this.state.showModal}  dialogClassName={css.modal}  onHide={this.changeModalState}>
           <TimePicker
-            value={moment(value, "HH:mm")}
+            hours={parseInt(moment(value, "H:m").format("H"))}
+            minutes={parseInt(moment(value, "H:m").format("m"))}
             onChange={onChange}
             showSecond={false}
             clearText="clear"
@@ -39,6 +43,7 @@ class datePicker extends Component{
             type="button"
             text="Select time"
             onClick={this.changeModalState}
+            style={css.select}
           />
         </Modal>
       </div>

@@ -18,7 +18,9 @@ class Landing extends Component {
     if (this.props.authDetails.token)   //if the user is logged in
     return(
       <div className="container">
-        <AddTask/>
+        <AddTask
+        buttonText="Add new task"
+        sendButtonText="Create task"/>
         <TaskList/>
       </div>
       )

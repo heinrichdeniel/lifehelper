@@ -7,8 +7,8 @@ const initialState = {
     current: {
       name: "",
       description: "",
-      date: moment().format("MM-DD-YYYY"),
-      time: moment().format("HH:mm"),
+      date: moment(),
+      time: moment().format("H:m"),
       location: ""
     },
     pending: false,
@@ -34,14 +34,18 @@ const TaskReducer = (state = initialState, action = {}) => {
       };
 
     case constants.CREATE_TASK_SUCCESS:
+      let list = state.task.list;
+      if (action.payload.task){
+        list = [
+          action.payload.task,
+          ...state.task.list
+        ]
+      }
       return {
         ...state,
         task: {
           ...state.task,
-          list:[
-            action.payload.task,
-            ...state.task.list
-          ],
+          list: list,
           pending: false,
           error: false
         }
@@ -110,6 +114,7 @@ const TaskReducer = (state = initialState, action = {}) => {
       };
 
     case constants.GET_TASK_ERROR:
+      window.location = "/asd";
       return {
         ...state,
         task: {

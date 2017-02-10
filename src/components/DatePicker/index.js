@@ -15,7 +15,7 @@ class datePicker extends Component{
     return(
       <div className={css.base}>
         <DatePicker
-          selected={moment(value, "MM-DD-YYYY")}
+          selected={moment(value)}
           dateFormat="MMMM Do YYYY"
           minDate={moment()}
           onChange={onChange}
@@ -29,7 +29,6 @@ class datePicker extends Component{
 }
 
 datePicker.propTypes = {
-  value: React.PropTypes.string,
   onChange: React.PropTypes.func.isRequired
 }
 

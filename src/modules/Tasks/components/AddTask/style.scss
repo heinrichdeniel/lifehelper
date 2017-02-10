@@ -1,16 +1,15 @@
 @import "src/styles/colors.scss";
+
 .addButton{
   width: 150px;
   height: 35px;
-  margin: 0;
+  margin-top: 50px;
+  margin-left: 0;
 }
 .base{
   position:relative;
   margin-bottom: 50px;
-  .addButton{
-    position:absolute;
-    right: 0;
-  }
+  text-align: center;
 }
 .body{
   width: 60%;
@@ -26,10 +25,6 @@
   h1{
     margin-bottom: 50px;
   }
-  .addButton{
-    margin-top: 50px;
-  }
-
 }
 
 

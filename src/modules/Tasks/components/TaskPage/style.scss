@@ -1,3 +1,26 @@
 .base{
+  text-align: center;
+  h1{
+    text-align: center;
+    margin: 50px;
+  }
+  .details{
+    display: flex;
+    position: relative;
+    .description{
+      font-size: 20px;
+    }
+    .date{
+      font-size: 18px;
+      right: 0;
+      font-weight: 300;
+      position: absolute;
+    }
+  }
 
+}
+.update{
+  width: 150px;
+  height: 35px;
+  margin: 50px auto;
 }
