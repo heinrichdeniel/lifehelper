@@ -18,7 +18,7 @@ const initialState = {
 
 
 const TaskReducer = (state = initialState, action = {}) => {
-  if (action.payload && action.payload.err == "Error: Token expired"){
+  if (action.payload && action.payload.message == "Expired token"){
     localStorage.clear();
     window.location.href = '/'
   }
@@ -34,18 +34,14 @@ const TaskReducer = (state = initialState, action = {}) => {
       };
 
     case constants.CREATE_TASK_SUCCESS:
-      let list = state.task.list;
-      if (action.payload.task){
-        list = [
-          action.payload.task,
-          ...state.task.list
-        ]
-      }
       return {
         ...state,
         task: {
           ...state.task,
-          list: list,
+          list: [
+            ...state.task.list,
+            action.payload.task ? action.payload.task : null
+          ],
           pending: false,
           error: false
         }

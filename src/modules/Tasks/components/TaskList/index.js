@@ -17,7 +17,7 @@ class TaskList extends Component {
         <div className={css.base}>
           {
             tasks.map( (task) =>
-             !task.deleted ? <TaskItem key={task.id} task={task}/> : null //if deleted then return null else return the task
+             (task && !task.deleted) ? <TaskItem key={task.id} task={task}/> : null //if deleted then return null else return the task
             )
           }
         </div>
