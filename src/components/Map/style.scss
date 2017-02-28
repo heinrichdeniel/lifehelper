@@ -1,23 +1,28 @@
 @import "src/styles/colors.scss";
 
 .map{
-  position: absolute;
+  position: relative;
   margin-top: 20px;
-  left: 0;
   height: 350px;
   width: 100%;
   z-index: 50;
 }
 
 .input{
+  position: relative;
   border-radius: 3px;
   outline: none;
   height: 35px;
   padding: 8px;
+  float: right;
   min-width: 250px;
-  border: 1px solid $primary-color;
-  margin-top: 30px;
+  border: 1px solid #68ca4d;
+  margin-top: -340px;
+  margin-right: 10px;
   width: 100%;
+  @media screen and (max-width: 400px){
+    margin-top: -300px;
+  }
   &:hover{
     box-shadow: 0px 0px 5px 0px$primary-color;
   }
@@ -41,14 +46,23 @@
 
 :global .geosuggest__suggests-wrapper{
   text-align: right;
-  position: absolute;
+  position: relative;
   width: 100%;
+  min-width: 250px;
+  float: right;
+
 }
 :global .geosuggest__suggests{
   padding: 0;
   border-left: 1px solid $primary-color;
   border-right: 1px solid $primary-color;
   border-radius: 3px;
+  margin-top: -305px;
+  margin-left: -10px;
+  width: 100%;
+  @media screen and (max-width: 400px){
+    margin-top: -265px;
+  }
 }
 :global .geosuggest__suggests--hidden{
   display:none;

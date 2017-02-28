@@ -4,6 +4,7 @@ import * as api from 'api/tasks'
 
 export function sendTask(payload) {
   store.dispatch((dispatch, getState) => {
+    console.log(payload)
     return dispatch({
       types: [
         constants.CREATE_TASK_PENDING,
@@ -69,51 +70,6 @@ export function getTaskList() {
           token: getState().Authentication.authDetails.token
         })
       }
-    })
-  })
-}
-
-export function setName(payload) {
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      type: constants.SET_NAME,
-      payload: payload
-    })
-  })
-}
-
-export function setDescription(payload) {
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      type: constants.SET_DESCRIPTION,
-      payload: payload
-    })
-  })
-}
-
-export function setDate(payload) {
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      type: constants.SET_DATE,
-      payload: payload
-    })
-  })
-}
-
-export function setTime(payload) {
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      type: constants.SET_TIME,
-      payload: payload
-    })
-  })
-}
-
-export function setLocation(location) {
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      type: constants.SET_LOCATION,
-      payload: location
     })
   })
 }

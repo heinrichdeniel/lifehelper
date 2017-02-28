@@ -19,8 +19,8 @@ class Map extends Component{
     //get current position from navigator
     if (this.props.location){
       this.setState({
-        latitude: this.props.location.location.lat,
-        longitude: this.props.location.location.lng
+        latitude: this.props.lat,
+        longitude: this.props.lng
       });
     }
     else{
@@ -46,9 +46,6 @@ class Map extends Component{
   }
 
   render(){
-
-
-    console.log(this.props.location)
     let GoogleMapHoc = withGoogleMap(props => {
       return !this.state.latitude ? null :(
         <GoogleMap
@@ -57,23 +54,27 @@ class Map extends Component{
           defaultCenter={{ lat: this.state.latitude, lng: this.state.longitude }}>
           {
             this.props.location
-            ? <Marker position={new google.maps.LatLng(this.props.location.location.lat, this.props.location.location.lng)} title={this.props.location.label}/>
+            ? <Marker position={new google.maps.LatLng(this.props.lat, this.props.lng)} title={this.props.location}/>
             :null
           }
         </GoogleMap>
       );
     });
 
+    let suggest = this.props.location? this.props.location : "";
     return(
       <div className={css.base}>
         <GoogleMapHoc
-          containerElement={<div className={css.map}/>}
+          containerElement={<div className={css.map + " " +this.props.style}/>}
           mapElement={<div style={{height: "100%", width: "100%", position: "absolute"}}/>}
           {...this.props}/>
         <Geosuggest
           onSuggestSelect={this.onSuggestSelect}
           location={new google.maps.LatLng(this.state.latitude, this.state.latitude)}
           inputClassName={css.input}
+          initialValue={suggest}
+          label={suggest}
+          suggestItemActiveClassName={css.activeItem}
           radius="20"/>
       </div>
     )

@@ -11,6 +11,7 @@ const mapActionsToProps = (dispatch) => ({
   setDate: actions.setDate,
   setTime: actions.setTime,
   sendTask: actions.sendTask,
+  setLocation: actions.setLocation,
   reset: actions.reset,
   getTaskById: actions.getTaskById
 

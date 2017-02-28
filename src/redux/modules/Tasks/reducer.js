@@ -42,6 +42,7 @@ const TaskReducer = (state = initialState, action = {}) => {
             ...state.task.list,
             action.payload.task ? action.payload.task : null
           ],
+          current: action.payload.task,
           pending: false,
           error: false
         }
@@ -150,51 +151,6 @@ const TaskReducer = (state = initialState, action = {}) => {
           ...state.task,
           pending: false,
           error: action.payload.message
-        }
-      };
-
-    case constants.SET_NAME:
-      return {
-        ...state,
-        task:{
-          ...state.task,
-          current: Object.assign({}, state.task.current, {name: action.payload})
-        }
-      };
-
-    case constants.SET_DESCRIPTION:
-      return {
-        ...state,
-        task:{
-          ...state.task,
-          current: Object.assign({}, state.task.current, {description: action.payload})
-        }
-      };
-
-    case constants.SET_DATE:
-      return {
-        ...state,
-        task:{
-          ...state.task,
-          current: Object.assign({}, state.task.current, {date: action.payload})
-        }
-      };
-
-    case constants.SET_TIME:
-      return {
-        ...state,
-        task:{
-          ...state.task,
-          current: Object.assign({}, state.task.current, {time: action.payload})
-        }
-      };
-
-    case constants.SET_LOCATION:
-      return {
-        ...state,
-        task:{
-          ...state.task,
-          current: Object.assign({}, state.task.current, {location: action.payload})
         }
       };
 

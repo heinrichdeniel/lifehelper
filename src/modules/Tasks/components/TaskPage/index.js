@@ -62,14 +62,18 @@ class TaskPage extends Component {
 
           {/*google Map*/}
           <Map setLocation={this.props.setLocation}
-               location={task.location}/>
+               location={task.location}
+               lat={task.lat}
+               lng={task.lng}/>
 
-          <AddTask              //rendering a button for editing the task
-            buttonText="Edit task"
-            sendButtonText="Update task"
-            buttonStyle={css.update}/>
-          {this.renderDeleteModal()}
-          <Button type="button" onClick={this.changeModalState} text="Delete task" style={css.delete}/>
+          <div className={css.buttons}>
+            <AddTask              //rendering a button for editing the task
+              buttonText="Edit task"
+              sendButtonText="Update task"
+              buttonStyle={css.update}/>
+            {this.renderDeleteModal()}
+            <Button type="button" onClick={this.changeModalState} text="Delete task" style={css.delete}/>
+          </div>
         </div>
       );
     }

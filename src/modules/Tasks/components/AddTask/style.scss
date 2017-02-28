@@ -4,13 +4,27 @@
   width: 150px;
   height: 35px;
   margin-top: 50px;
-  margin-left: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.prevButton{
+  width: 150px;
+  height: 35px;
+  background-color: #ea0000;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 1px;
+  &:hover{
+    box-shadow: 0 0 5px 0px #ea0000;
+  }
 }
 .base{
   position:relative;
   margin-bottom: 50px;
   text-align: center;
+  height: 50px;
 }
+
 .body{
   width: 60%;
   margin: 50px auto;
@@ -24,6 +38,29 @@
   }
   h1{
     margin-bottom: 50px;
+  }
+}
+
+.mapModal{
+  max-width: 100%;
+  width: 800px;
+
+  .body{
+    width: 100%;
+  }
+  .map{
+    width: 100%;
+  }
+}
+
+.summary{
+  text-align: left;
+  margin-left: 15px;
+  font-size: 18px;
+  color: $secondary-color;
+
+  span{
+    color: black;
   }
 }
 

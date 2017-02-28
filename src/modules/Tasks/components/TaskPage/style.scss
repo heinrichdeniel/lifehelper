@@ -17,20 +17,21 @@
       position: absolute;
     }
   }
-
 }
-.update{
-  margin-left:460px;
-  margin-top: 400px;
 
+.update{
+  position: absolute;
+  margin: 50px 5px;
+  margin-bottom: 100px;
+  margin-left: 10px;
 }
 .delete{
   width: 150px;
   height: 35px;
   background-color: #ea0000;
   position: absolute;
-  margin-top: -85px;
-  margin-left: -160px;
+  margin-left: -150px;
+  margin-top: -50px;
   &:hover{
     box-shadow: 0 0 5px 0px #ea0000;
   }
