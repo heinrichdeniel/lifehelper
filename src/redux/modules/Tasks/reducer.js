@@ -189,6 +189,15 @@ const TaskReducer = (state = initialState, action = {}) => {
         }
       };
 
+    case constants.SET_LOCATION:
+      return {
+        ...state,
+        task:{
+          ...state.task,
+          current: Object.assign({}, state.task.current, {location: action.payload})
+        }
+      };
+
     case constants.RESET:
       return  {
         ...state,

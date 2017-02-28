@@ -109,6 +109,15 @@ export function setTime(payload) {
   })
 }
 
+export function setLocation(location) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.SET_LOCATION,
+      payload: location
+    })
+  })
+}
+
 export function reset() {
   store.dispatch((dispatch, getState) => {
     return dispatch({

@@ -19,11 +19,13 @@ class AddTask extends Component {
     this.changeTime = this.changeTime.bind(this);
     this.changeDescription = this.changeDescription.bind(this);
     this.sendTask = this.sendTask.bind(this);
+    this.nextStep = this.nextStep.bind(this);
     this.timeModalChanged = this.timeModalChanged.bind(this);
     this.state = {
       showModal: false,
       error: "",
-      opacity: 1
+      opacity: 1,
+      step: 1
     }
   }
 
@@ -53,7 +55,8 @@ class AddTask extends Component {
     }
     this.setState({
       ...this.state,
-      showModal: !this.state.showModal
+      showModal: !this.state.showModal,
+      step: 1
     });
   }
 
@@ -75,15 +78,22 @@ class AddTask extends Component {
     });
   }
 
+  nextStep(){     //changing modal with the next step
+    this.setState({
+      ...this.state,
+      step: this.state.step + 1
+    });
+  }
+
   render() {
-    if (!this.state.showModal) {
+    if (!this.state.showModal) {      //rendering the button
       return(
         <div className={css.base}>
           <Button type="button" onClick={this.changeModalState} text={this.props.buttonText}  style={css.addButton+" "+this.props.buttonStyle}/>
         </div>
       );
     }
-    else{
+    else if (this.state.step == 1){               //rendering the modal with title, description and datetime
       let task = this.props.task.current;
       return(
         <Modal style={{opacity : this.state.opacity}} show={this.state.showModal} onHide={this.changeModalState}>
@@ -91,12 +101,28 @@ class AddTask extends Component {
             <div className={css.body}>
               <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
 
-              <h1>Add Task</h1>
+              <h1>{this.props.sendButtonText}</h1>
               <Input type="text" placeholder="Task name" value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
               <TextArea type="text" placeholder="Description" value={task.description} onChange={this.changeDescription}  />
 
               <DatePicker value={task.date} onChange={this.changeDate}/>
               <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime}/>
+              <Button type="button" onClick={this.nextStep} text={"Next step"} style={css.addButton}/>
+            </div>
+          </div>
+        </Modal>
+      );
+    }
+    else{
+      let task = this.props.task.current;
+      return(
+        <Modal  show={this.state.showModal} onHide={this.changeModalState}>
+          <div  className={css.container}>
+            <div className={css.body}>
+              <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
+
+              <h1>{this.props.sendButtonText}</h1>
+              <Input type="text" placeholder="Task name" value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
               <Button type="button" onClick={this.sendTask} text={this.props.sendButtonText} style={css.addButton}/>
             </div>
           </div>

@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/lib/Modal'
 
 import AddTask from 'modules/Tasks/containers/AddTaskContainer'
 import Button from 'components/Button'
+import Map from 'components/Map'
 
 class TaskPage extends Component {
   constructor(props){
@@ -58,7 +59,12 @@ class TaskPage extends Component {
             <p className={css.description}>{task.description}</p>
             <p className={css.date}>{moment(task.date).format("MMM DD")}, {task.time}</p>
           </div>
-          <AddTask
+
+          {/*google Map*/}
+          <Map setLocation={this.props.setLocation}
+               location={task.location}/>
+
+          <AddTask              //rendering a button for editing the task
             buttonText="Edit task"
             sendButtonText="Update task"
             buttonStyle={css.update}/>
