@@ -74,6 +74,15 @@ export function getTaskList() {
   })
 }
 
+export function applyDateFilter(filter) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.APPLY_DATE_FILTER,
+      payload: filter
+    })
+  })
+}
+
 export function reset() {
   store.dispatch((dispatch, getState) => {
     return dispatch({

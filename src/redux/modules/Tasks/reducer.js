@@ -11,6 +11,8 @@ const initialState = {
       time: moment().format("H:m"),
       location: ""
     },
+    dateFrom: moment(),
+    dateTo: moment().add(1,'years'),
     pending: false,
     error: false
   }
@@ -151,6 +153,16 @@ const TaskReducer = (state = initialState, action = {}) => {
           ...state.task,
           pending: false,
           error: action.payload.message
+        }
+      };
+
+    case constants.APPLY_DATE_FILTER:
+      return {
+        ...state,
+        task: {
+          ...state.task,
+          dateFrom: action.payload.dateFrom,
+          dateTo: action.payload.dateTo
         }
       };
 

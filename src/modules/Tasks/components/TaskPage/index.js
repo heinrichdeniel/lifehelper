@@ -13,6 +13,7 @@ class TaskPage extends Component {
     super(props);
     this.deleteTask=this.deleteTask.bind(this);
     this.changeModalState=this.changeModalState.bind(this);
+    this.renderMap=this.renderMap.bind(this);
     this.state={
       showModal:false
     }
@@ -32,6 +33,20 @@ class TaskPage extends Component {
   deleteTask(){
     this.props.deleteTask(this.props.task.current.id);
     browserHistory.push("/");
+  }
+
+  renderMap(){
+    let task = this.props.task.current;
+
+    if (task.location){       {/*google Map*/}
+      return (
+        <Map setLocation={this.props.setLocation}
+             location={task.location}
+             lat={task.lat}
+             lng={task.lng}
+             suggestEnabled={true}/>
+      )
+    }
   }
 
   renderDeleteModal(){
@@ -60,11 +75,7 @@ class TaskPage extends Component {
             <p className={css.date}>{moment(task.date).format("MMM DD")}, {task.time}</p>
           </div>
 
-          {/*google Map*/}
-          <Map setLocation={this.props.setLocation}
-               location={task.location}
-               lat={task.lat}
-               lng={task.lng}/>
+          {this.renderMap()}
 
           <div className={css.buttons}>
             <AddTask              //rendering a button for editing the task

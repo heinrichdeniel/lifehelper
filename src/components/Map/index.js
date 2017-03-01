@@ -68,11 +68,13 @@ class Map extends Component{
           containerElement={<div className={css.map + " " +this.props.style}/>}
           mapElement={<div style={{height: "100%", width: "100%", position: "absolute"}}/>}
           {...this.props}/>
+        <span className="fa fa-map-marker"/>
         <Geosuggest
           onSuggestSelect={this.onSuggestSelect}
           location={new google.maps.LatLng(this.state.latitude, this.state.latitude)}
           inputClassName={css.input}
           initialValue={suggest}
+          disabled={this.props.suggestEnabled}
           label={suggest}
           suggestItemActiveClassName={css.activeItem}
           radius="20"/>

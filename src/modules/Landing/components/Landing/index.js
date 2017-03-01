@@ -3,8 +3,8 @@ import css from './style.scss'
 
 import Header from 'components/Header'
 import Footer from 'components/Footer'
+import Filters from 'modules/Filters'
 
-import AddTask from 'modules/Tasks/containers/AddTaskContainer'
 import TaskList from 'modules/Tasks/containers/TaskListContainer'
 
 class Landing extends Component {
@@ -17,10 +17,7 @@ class Landing extends Component {
   renderTasks(){
     if (this.props.authDetails.token)   //if the user is logged in
     return(
-      <div className="container">
-        <AddTask
-        buttonText="Add new task"
-        sendButtonText="Create task"/>
+      <div className="col-sm-7 col-lg-7">
         <TaskList/>
       </div>
       )
@@ -31,7 +28,10 @@ class Landing extends Component {
       <div className={css.base}>
         <Header token={this.props.authDetails.token}
                 logout={this.props.logout}/>
-        {this.renderTasks()}
+        <div className={css.content + " container"}>
+          <Filters/>
+          {this.renderTasks()}
+        </div>
         <Footer/>
       </div>
     )

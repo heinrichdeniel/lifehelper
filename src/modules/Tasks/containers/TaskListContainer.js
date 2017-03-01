@@ -9,7 +9,9 @@ const mapActionsToProps = (dispatch) => ({
   reset: actions.reset
 });
 const mapStateToProps = (state) => ({
-  task: selectors.task(state)
+  task: selectors.task(state),
+  dateFrom: selectors.dateFrom(state),
+  dateTo: selectors.dateTo(state)
 });
 
 

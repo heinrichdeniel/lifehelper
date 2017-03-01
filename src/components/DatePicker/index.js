@@ -10,14 +10,17 @@ class datePicker extends Component{
   }
 
   render(){
-    let { value, onChange} = this.props;
+    let { value, onChange , minDate} = this.props;
 
+    let minimum = minDate?minDate:moment();
     return(
       <div className={css.base}>
+        <span className="fa fa-calendar"/>
         <DatePicker
           selected={moment(value)}
-          dateFormat="MMMM Do YYYY"
-          minDate={moment()}
+          dateFormat="MMM Do YYYY"
+          minDate={minimum}
+          todayButton={"Today"}
           onChange={onChange}
           className={css.datePicker}
           locale="en-gb"

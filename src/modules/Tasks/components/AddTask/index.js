@@ -189,7 +189,8 @@ class AddTask extends Component {
                  location={task.location}
                  lat={task.lat}
                  lng={task.lng}
-                 style={css.map}/>
+                 style={css.map}
+                 suggestEnabled={false}/>
             <Button type="button" onClick={this.prevStep} text={"Previous step"} style={css.prevButton}/>
             <Button type="button" onClick={this.nextStep} text={"Next step"} style={css.addButton}/>
           </div>

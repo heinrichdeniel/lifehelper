@@ -15,11 +15,13 @@
   height: 35px;
   padding: 8px;
   float: right;
+  background-color: #ffffff;
   min-width: 250px;
   border: 1px solid #68ca4d;
   margin-top: -340px;
   margin-right: 10px;
   width: 100%;
+  padding-right: 25px;
   @media screen and (max-width: 400px){
     margin-top: -300px;
   }
@@ -35,6 +37,17 @@
 
 .base{
   text-align: right;
+  span{
+    position: absolute;
+    margin-top: -336px;
+    font-size: 25px;
+    margin-left: -32px;
+    z-index: 150;
+    color: $primary-color;
+    @media screen and (max-width: 400px){
+      margin-top: -295px;
+    }
+  }
 }
 
 :global .geosuggest{

@@ -2,8 +2,17 @@
 
 .base{
   width: 45%;
-  text-align: center;
+  text-align: left;
   display: inline-block;
+  span{
+    float: left;
+    position: absolute;
+    z-index: 100;
+    padding: 9px;
+    font-size: 20px;
+    margin: 0;
+    color: $primary-color;
+  }
   .datePicker{
     border-radius: 3px;
     border: 1px solid #CCCCCC;
@@ -13,6 +22,7 @@
     cursor: pointer;
     width: 100%;
     text-align: center;
+    padding-left: 25px;
     &:focus{
       outline:none;
       border-color: #CCCCCC;
