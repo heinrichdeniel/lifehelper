@@ -1,2 +1,18 @@
+@import 'src/styles/globals.scss';
 .base{
+
+  h1{
+    color: $red-color;
+    text-align: left;
+    margin: 15px;
+  }
+  .addTask{
+    background-color: #ea0000;
+    position: relative;
+    float: right;
+    margin-top: -45px;
+    &:hover{
+      box-shadow:  0 0 5px 0px #ea0000;
+    }
+  }
 }

@@ -65,14 +65,14 @@ class TaskPage extends Component {
 
   render() {
     let task = this.props.task.current;
-
     if (task.name){       //returning the task data
       return(
         <div className={css.base + " container"}>
           <h1>{task.name}</h1>
           <div className={css.details}>
-            <p className={css.description}>{task.description}</p>
-            <p className={css.date}>{moment(task.date).format("MMM DD")}, {task.time}</p>
+            <p className={css.description}><span>Description: </span> {task.description}</p>
+            <p className={css.date}>{moment(task.date).format("MMM DD")}, {moment(task.time, "H:m").format("HH:mm")}</p>
+            <p className={css.project}><span>Project: </span>{task.Project?task.Project.name:"-"}</p>
           </div>
 
           {this.renderMap()}

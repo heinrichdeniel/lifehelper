@@ -13,12 +13,19 @@ class TaskItem extends Component {
     browserHistory.push("/task/"+this.props.task.id);
   }
   render() {
-
+    let project = null;
+    if (this.props.task.Project) {  //if a task was selected
+      project =  <p className={css.project}>
+        <i className={" fa fa-chain"}/>
+        {this.props.task.Project.name}
+      </p>
+    }
     return(
       <div className={css.base} onClick={this.onClick}>
           <h2>{this.props.task.name}</h2>
           <p className={css.description}>{this.props.task.description}</p>
           <p className={css.date}>{moment(this.props.task.date).format("MMM DD")}, {moment(this.props.task.time,"hh:m").format("HH:mm")}</p>
+          {project}
       </div>
     );
   }

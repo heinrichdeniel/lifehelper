@@ -8,8 +8,9 @@ const initialState = {
       name: "",
       description: "",
       date: moment(),
-      time: moment().format("H:m"),
-      location: ""
+      time: moment().add(1,'hours').format("H:m"),
+      location: "",
+      ProjectId: "0"
     },
     dateFrom: moment(),
     dateTo: moment().add(1,'years'),

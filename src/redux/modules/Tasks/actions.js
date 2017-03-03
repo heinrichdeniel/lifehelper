@@ -4,7 +4,6 @@ import * as api from 'api/tasks'
 
 export function sendTask(payload) {
   store.dispatch((dispatch, getState) => {
-    console.log(payload)
     return dispatch({
       types: [
         constants.CREATE_TASK_PENDING,

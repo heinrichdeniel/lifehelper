@@ -22,13 +22,15 @@
   position:relative;
   margin-bottom: 50px;
   text-align: center;
-  height: 50px;
 }
 
 .body{
   width: 60%;
   margin: 50px auto;
   text-align: center;
+  @media screen and (max-width:500px){
+    width: 80%;
+  }
   .close{
     cursor: pointer;
     font-size: 18px;
@@ -61,6 +63,7 @@
 
   span{
     color: black;
+    word-wrap: break-word;
   }
 }
 

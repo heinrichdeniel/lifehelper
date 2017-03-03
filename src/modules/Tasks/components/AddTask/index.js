@@ -9,6 +9,7 @@ import TextArea from 'components/TextArea';
 import DatePicker from 'components/DatePicker';
 import TimePicker from 'components/TimePicker';
 import ErrorBox from 'components/ErrorBox';
+import Dropdown from 'components/Dropdown';
 import Map from 'components/Map';
 
 class AddTask extends Component {
@@ -21,6 +22,7 @@ class AddTask extends Component {
     this.changeTime = this.changeTime.bind(this);
     this.changeDescription = this.changeDescription.bind(this);
     this.changeLocation = this.changeLocation.bind(this);
+    this.selectProject = this.selectProject.bind(this);
     this.sendTask = this.sendTask.bind(this);
     this.nextStep = this.nextStep.bind(this);
     this.prevStep = this.prevStep.bind(this);
@@ -41,7 +43,8 @@ class AddTask extends Component {
     this.setState({
       ...this.state,
       task:this.props.task.current
-    })
+    });
+    this.props.getProjectList();
   }
 
   changeName(e){
@@ -96,6 +99,16 @@ class AddTask extends Component {
     });
   }
 
+  selectProject(project){
+  this.setState({
+    ...this.state,
+    task:{
+      ...this.state.task,
+      ProjectId: project.value
+    }
+  });
+}
+
   changeModalState(){
     if (window.location.pathname.substring(0,5) == "/task"){
       this.props.getTaskById(window.location.pathname.substring(6));
@@ -126,14 +139,19 @@ class AddTask extends Component {
       ...this.state,
       showModal: !this.state.showModal
     });
+
   }
 
   nextStep(){     //changing to the next step
     if (this.state.task.name.length < 3 || this.state.task.name.length > 20) {
-      return this.setState({error: 'The task name must contain at least 3, maximum 20 character!'})
+      return this.setState({
+        ...this.state,
+        error: 'The task name must contain at least 3, maximum 20 character!'
+      })
     }
     this.setState({
       ...this.state,
+      error: "",
       step: this.state.step + 1
     });
   }
@@ -155,6 +173,7 @@ class AddTask extends Component {
 
   renderDetails(){         //rendering the modal with title, description and datetime
     let task = this.state.task;
+
     return(
       <Modal style={{opacity : this.state.opacity}} show={this.state.showModal} onHide={this.changeModalState}>
         <div  className={css.container}>
@@ -167,6 +186,8 @@ class AddTask extends Component {
 
             <DatePicker value={task.date} onChange={this.changeDate}/>
             <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime}/>
+
+            <Dropdown onChange={this.selectProject} projects={this.props.project.list} selected={task.ProjectId}/>
             {this.state.error ? <ErrorBox error={this.state.error}/> : null}
 
             <Button type="button" onClick={this.nextStep} text={"Next step"} style={css.addButton}/>
@@ -201,6 +222,7 @@ class AddTask extends Component {
 
   renderSummary(){
     let task = this.state.task;
+    let project = task.ProjectId!="0" ? this.props.project.list.filter((project) => project.id == task.ProjectId)[0].name : "-";
     return(
       <Modal  show={this.state.showModal} onHide={this.changeModalState}>
         <div  className={css.container}>
@@ -212,8 +234,9 @@ class AddTask extends Component {
             <div className={css.summary}>
               <p className={css.name}><span>Task name:</span> {task.name}</p>
               <p className={css.description}><span>Description:</span> {task.description?task.description:"-"}</p>
-              <p className={css.date}><span>Selected date:</span> {moment(task.date).format("MMM DD")}, {task.time}</p>
+              <p className={css.date}><span>Selected date:</span> {moment(task.date).format("MMM DD")}, {moment(task.time, "H:m").format("HH:mm")}</p>
               <p className={css.location}><span>Selected location:</span> {task.location?task.location:"-"}</p>
+              <p className={css.location}><span>Project:</span> {project}</p>
             </div>
             <Button type="button" onClick={this.prevStep} text={"Previous step"} style={css.prevButton}/>
             <Button type="button" onClick={this.sendTask} text={this.props.sendButtonText} style={css.addButton}/>

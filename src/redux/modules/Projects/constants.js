@@ -1,0 +1,19 @@
+const module = 'PROJECTS';
+const actionTypes = [
+  'CREATE_TASK',
+  'GET_LIST'
+];
+
+const statusTypes = ['PENDING', 'SUCCESS', 'ERROR'];
+const constants = {};
+
+for (let actionType of actionTypes) {
+  for (let statusType of statusTypes) {
+    constants[actionType + '_' + statusType] = module + '_' + actionType + '_' + statusType
+  }
+}
+
+constants['SELECT_PROJECT'] = module + '_' + 'SELECT_PROJECT';
+
+
+export default constants;

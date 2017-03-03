@@ -103,7 +103,7 @@ export default class Registration extends Component{
         <form  action="POST" onSubmit={this.onSendRegistration}>
           <input style={{display:'none'}} type="text" name="" />    {/*that is needed to turn off autocomplete*/}
           <input style={{display:'none'}} type="password" name="" />      {/*that is needed to turn off autocomplete*/}
-          <Input type="text" placeholder="Full name" value={this.props.user.username} onChange={this.changeName} minLength={4} maxLength={20} />
+          <Input type="text" placeholder="Username" value={this.props.user.username} onChange={this.changeName} minLength={4} maxLength={20} />
           <Input type="text" placeholder="Email" value={this.props.user.email} onChange={this.changeEmail} minLength={6} />
           <Input type="password" placeholder="Password" value={this.props.user.password} onChange={this.changePassword} minLength={6} maxLength={20} />
 

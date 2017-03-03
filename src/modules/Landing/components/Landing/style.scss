@@ -1,7 +1,17 @@
 .base{
   background-color: #f6f6f6;
   .content{
+  }
+  .taskList{
+    background-color: darkgrey;
+    border-radius: 5px;
+    max-height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
     padding: 0;
+    padding-right: 15px;
+    z-index: 1000;
+    border: 15px solid darkgrey;
   }
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import css from './style.scss'
 
 import DateFilters from './containers/DateFiltersContainer'
-import AddTask from 'modules/Tasks/containers/AddTaskContainer'
+import ProjectFilters from './containers/ProjectContainer'
 
 class Filters extends Component {
   constructor(props){
@@ -16,10 +16,7 @@ class Filters extends Component {
       <div className={css.base + " col-sm-5 col-lg-5"}>
         <div className={css.body}>
           <DateFilters/>
-          <AddTask
-            buttonText="Add new task"
-            buttonStyle={css.addTask}
-            sendButtonText="Create task"/>
+          <ProjectFilters/>
         </div>
       </div>
     )

@@ -1,3 +1,4 @@
+@import 'src/styles/globals.scss';
 .base{
   text-align: center;
   h1{
@@ -5,33 +6,48 @@
     margin: 25px;
   }
   .details{
-    display: flex;
+    display: block;
     position: relative;
+    span{
+      font-weight: 700;
+      color: $secondary-color;
+    }
     .description{
-      font-size: 20px;
+      font-size: 18px;
+      text-align: left;
+      width: 100%;
+      word-wrap: break-word;
     }
     .date{
       font-size: 18px;
-      right: 0;
+      width: 40%;
       font-weight: 500;
-      position: absolute;
+      text-align: right;
+      float: right;
+      margin: 15px 0 ;
+    }
+    .project{
+      margin: 25px 0 ;
+      font-size: 18px;
+      text-align: left;
+      width: 60%;
     }
   }
 }
 
 .update{
   position: absolute;
-  margin: 50px 5px;
-  margin-bottom: 100px;
+  margin: 0px 5px 50px;
+  margin-bottom: 150px;
   margin-left: 10px;
 }
 .delete{
   width: 150px;
   height: 35px;
   background-color: #ea0000;
-  position: absolute;
+  position: relative;
   margin-left: -150px;
-  margin-top: -50px;
+  margin-top: 0px;
   &:hover{
     box-shadow: 0 0 5px 0px #ea0000;
   }
