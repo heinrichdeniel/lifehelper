@@ -1,6 +1,7 @@
 import store from 'redux/config/store'
 import constants from './constants'
 import * as api from 'api/projects'
+import * as TaskActions from '../Tasks/actions'
 
 export function createProject(payload) {
   store.dispatch((dispatch, getState) => {
@@ -16,6 +17,26 @@ export function createProject(payload) {
           token: getState().Authentication.authDetails.token
         })
       }
+    })
+  });
+}
+
+export function deleteProject(id) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.DELETE_PROJECT_PENDING,
+        constants.DELETE_PROJECT_SUCCESS,
+        constants.DELETE_PROJECT_ERROR
+      ],
+      payload: {
+        promise: api.deleteProject({
+          id,
+          token: getState().Authentication.authDetails.token
+        })
+      }
+    }).then(function(){
+      TaskActions.getTaskList();
     })
   });
 }

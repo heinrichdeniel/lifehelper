@@ -1,6 +1,8 @@
 const module = 'PROJECTS';
 const actionTypes = [
-  'CREATE_TASK',
+  'CREATE_PROJECT',
+  'UPDATE_PROJECT',
+  'DELETE_PROJECT',
   'GET_LIST'
 ];
 

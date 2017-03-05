@@ -1,0 +1,29 @@
+@import 'src/styles/globals.scss';
+.base{
+  .input{
+    margin-left: 5px;
+    margin-right: -5px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-weight: 700;
+    div{
+      margin-bottom: 0;
+    }
+  }
+  .addButton{
+    width: 120px;
+    height: 30px;
+    background-color: $secondary-color;
+    margin-top: 10px;
+    &:hover{
+      box-shadow: 0 0 5px $secondary-color;
+    }
+  }
+  .cancel{
+    background-color: $red-color;
+    height: 30px;
+    &:hover{
+      box-shadow: 0 0 5px $red-color;
+    }
+  }
+}

@@ -10,12 +10,12 @@
 .prevButton{
   width: 150px;
   height: 35px;
-  background-color: #ea0000;
+  background-color: $red-color;
   margin-left: 5px;
   margin-right: 5px;
   margin-top: 1px;
   &:hover{
-    box-shadow: 0 0 5px 0px #ea0000;
+    box-shadow: 0 0 5px 0px $red-color;
   }
 }
 .base{
@@ -60,11 +60,13 @@
   margin-left: 15px;
   font-size: 18px;
   color: $secondary-color;
-
-  span{
-    color: black;
+  .description{
     word-wrap: break-word;
   }
+  span{
+    color: black;
+  }
+
 }
 
 

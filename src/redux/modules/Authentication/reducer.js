@@ -105,7 +105,6 @@ const AuthReducer = (state = initialState, action = {}) => {
 
 
     case constants.SET_USER:
-      localStorage.setItem('user', JSON.stringify(action.payload));
       return {
         ...state,
         user: {

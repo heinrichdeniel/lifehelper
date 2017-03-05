@@ -42,10 +42,10 @@ const TaskReducer = (state = initialState, action = {}) => {
         task: {
           ...state.task,
           list: [
-            ...state.task.list,
-            action.payload.task ? action.payload.task : null
+            ...state.task.list.filter((task) => task.id != action.payload.task.id),
+            action.payload.task
           ],
-          current: action.payload.task,
+          current: {},
           pending: false,
           error: false
         }

@@ -166,7 +166,9 @@ class AddTask extends Component {
   renderButton(){     //rendering the button
     return(
       <div className={css.base}>
-        <Button type="button" onClick={this.changeModalState} text={this.props.buttonText}  style={css.addButton+" "+this.props.buttonStyle}/>
+        <Button type="button" onClick={this.changeModalState} text={this.props.buttonText}  style={css.addButton+" "+this.props.buttonStyle}>
+          {this.props.children}
+        </Button>
       </div>
     );
   }
@@ -236,7 +238,7 @@ class AddTask extends Component {
               <p className={css.description}><span>Description:</span> {task.description?task.description:"-"}</p>
               <p className={css.date}><span>Selected date:</span> {moment(task.date).format("MMM DD")}, {moment(task.time, "H:m").format("HH:mm")}</p>
               <p className={css.location}><span>Selected location:</span> {task.location?task.location:"-"}</p>
-              <p className={css.location}><span>Project:</span> {project}</p>
+              <p className={css.project}><span>Project:</span> {project}</p>
             </div>
             <Button type="button" onClick={this.prevStep} text={"Previous step"} style={css.prevButton}/>
             <Button type="button" onClick={this.sendTask} text={this.props.sendButtonText} style={css.addButton}/>
@@ -248,18 +250,17 @@ class AddTask extends Component {
 
 
   render() {
-    if (!this.state.showModal) {
-      {return this.renderButton()}
+    if (!this.state.showModal){
+      return this.renderButton();
     }
-    else if (this.state.step == 1){               //rendering the modal with title, description and datetime
-      {return this.renderDetails()}
-    }
-    else if (this.state.step == 2){
-      {return this.renderMap()}
-    }
-    else if (this.state.step == 3){
-      {return this.renderSummary()}
-    }
+    return(
+      <div>
+        {this.renderButton()}
+        {(this.state.step == 1) ? this.renderDetails() : null}
+        {(this.state.step == 2) ? this.renderMap() : null}
+        {(this.state.step == 3) ? this.renderSummary() : null}
+      </div>
+    )
 
   }
 }

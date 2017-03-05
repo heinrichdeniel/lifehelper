@@ -7,6 +7,7 @@ const initialState = {
       name: "",
       color: "#000000"
     },
+    selected: JSON.parse(localStorage.getItem('project')),
     pending: false,
     error: false
   }
@@ -30,21 +31,56 @@ const ProjectReducer = (state = initialState, action = {}) => {
       };
 
     case constants.CREATE_PROJECT_SUCCESS:
+      localStorage.setItem('project', JSON.stringify(action.payload.project));
       return {
         ...state,
         project: {
           ...state.project,
           list: [
-            ...state.project.list,
-            action.payload.project ? action.payload.project : null
+            ...state.project.list.filter((project) => project.id != action.payload.project.id),
+            action.payload.project
           ],
-          current: action.payload.project,
+          selected: action.payload.project,
+          current: {},
           pending: false,
           error: false
         }
       };
 
     case constants.CREATE_PROJECT_ERROR:
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          pending: false,
+          error: action.payload.message
+        }
+      };
+
+    case constants.DELETE_PROJECT_PENDING:
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          pending: true,
+          error: false
+        }
+      };
+
+    case constants.DELETE_PROJECT_SUCCESS:
+      localStorage.setItem('project', null);
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          list: state.project.list.filter( (project) => project.id != state.project.selected.id),
+          selected: null,
+          pending: false,
+          error: false
+        }
+      };
+
+    case constants.DELETE_PROJECT_ERROR:
       return {
         ...state,
         project: {
@@ -87,11 +123,13 @@ const ProjectReducer = (state = initialState, action = {}) => {
       };
 
     case constants.SELECT_PROJECT:
+      let selected = (action.payload == state.project.selected) ? null : action.payload;
+      localStorage.setItem('project', JSON.stringify(selected));
       return {
         ...state,
         project: {
           ...state.project,
-          selected: (action.payload == state.project.selected) ? null : action.payload
+          selected: selected
         }
       };
 

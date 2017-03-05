@@ -7,7 +7,8 @@ import * as projectSelectors from 'redux/modules/Projects/selectors'
 
 const mapActionsToProps = (dispatch) => ({
   getProjectList: projectAction.getProjectList,
-  selectProject: projectAction.selectProject
+  selectProject: projectAction.selectProject,
+  createProject: projectAction.createProject
 });
 const mapStateToProps = (state) => ({
   project: projectSelectors.project(state)

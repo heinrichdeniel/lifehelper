@@ -22,7 +22,6 @@ export function getTaskList (payload) {
       .get(config.api.host + 'tasks/')
       .set('x-access-token', payload.token)
       .end(function (err, res) {
-        //  If auth token is not returned, that means the user entered bad credentials.
         if (!res.body.success) {
           reject(res.body);
         }
@@ -38,7 +37,6 @@ export function getTaskById (payload) {
       .set('x-access-token', payload.token)
       .query({id: payload.id})
       .end(function (err, res) {
-        //  If auth token is not returned, that means the user entered bad credentials.
         if (!res.body.success) {
           reject(res.body);
         }
@@ -54,7 +52,6 @@ export function deleteTask (payload) {
       .set('x-access-token', payload.token)
       .send({id: payload.id})
       .end(function (err, res) {
-        //  If auth token is not returned, that means the user entered bad credentials.
         if (!res.body.success) {
           reject(res.body);
         }

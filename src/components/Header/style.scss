@@ -16,6 +16,26 @@
       margin: 0px;
       margin-left: 10px;
     }
+    .logout{
+      background-color: #ea0000;
+      &:hover{
+        box-shadow:  0 0 5px 0px #ea0000;
+      }
+    }
+    .addTask{
+      background-color: $secondary-color;
+      width: 100px;
+      height: 30px;
+      text-align:center;
+      i{
+        font-size: 15px;
+        margin-right: 0;
+        margin-left: 5px;
+      }
+      &:hover{
+        box-shadow:  0 0 5px 0px $primary-color;
+      }
+    }
   }
   h1{
     margin-left: 60px;

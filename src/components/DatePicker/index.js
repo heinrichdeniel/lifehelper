@@ -15,7 +15,7 @@ class datePicker extends Component{
     let minimum = minDate?minDate:moment();
     return(
       <div className={css.base}>
-        <span className="fa fa-calendar"/>
+        <span className={css.calendar + " fa fa-calendar"}/>
         <DatePicker
           selected={moment(value)}
           dateFormat="MMM Do YYYY"

@@ -4,6 +4,7 @@ import LoginModal from 'modules/Authentication/containers/Login'
 import RegistrationModal from 'modules/Authentication/containers/Registration'
 import css from "./style.scss";
 import { Link, browserHistory } from 'react-router'
+import AddTask from 'modules/Tasks/containers/AddTaskContainer'
 
 export default class Header extends Component {
   constructor(props){
@@ -65,7 +66,13 @@ export default class Header extends Component {
               <div className="container">
                 <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
                 <div className={css.rightIcons}>
-                  <Button onClick={this.logout} text="Log out" ><i className="fa fa-sign-out"/></Button>
+                  <AddTask
+                    buttonText=" Add task"
+                    buttonStyle={css.addTask}
+                    sendButtonText="Create task">
+                    <i className="fa fa-plus-square" aria-hidden="true"/>
+                  </AddTask>
+                  <Button style={css.logout} onClick={this.logout} text="Log out" ><i className="fa fa-sign-out"/></Button>
                 </div>
               </div>
             </nav>

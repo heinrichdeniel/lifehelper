@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import css from './style.scss'
 
+import AddProject from './AddProject'
 
 class ProjectFilters extends Component {
   constructor(props){
@@ -16,7 +17,14 @@ class ProjectFilters extends Component {
 
   componentWillMount(){
     this.props.getProjectList();
+    if (this.props.project.selected) {    //if a project was selected
+      this.setState({
+        showFilters: true,
+        arrow: "up"
+      })
+    }
   }
+
 
   changeVisibility(){
     if (this.state.showFilters){
@@ -35,23 +43,28 @@ class ProjectFilters extends Component {
 
   renderProjects(){
     if (this.state.showFilters){
+      let selected = this.props.project.selected;
       return(
         <div className={css.projects}>
           {this.props.project.list.map((project) => {
-            return <p key={project.id} onClick={this.props.selectProject.bind(this,project)}>
+            return (
+              <p key={project.id} onClick={this.props.selectProject.bind(this,project)}>
               {project.name}
-              {this.props.project.selected==project?<i className="fa fa-check-square"/>:<i className="fa fa-square-o"/>}
+              {(selected && selected.id==project.id)?<i className="fa fa-check-square"/>:<i className="fa fa-square-o"/>}
             </p>
+            );
           })}
+          <AddProject createProject={this.props.createProject}/>
         </div>
       )
     }
   }
 
+
   render() {
     return(
       <div className={css.base}>
-        <h2 onClick={this.changeVisibility}>Show tasks of a project <i className={"fa fa-arrow-"+this.state.arrow} /></h2>
+        <h2 onClick={this.changeVisibility}>Select a project <i className={"fa fa-arrow-"+this.state.arrow} /></h2>
         {this.renderProjects()}
       </div>
     )
