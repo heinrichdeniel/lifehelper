@@ -135,6 +135,7 @@ const AuthReducer = (state = initialState, action = {}) => {
     case constants.LOGOUT:
       localStorage.clear();
       initialState.authDetails = {};
+      window.location.href = '/'
       return initialState;
 
     case constants.RESET:

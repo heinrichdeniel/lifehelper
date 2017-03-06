@@ -1,14 +1,18 @@
 @import "src/styles/colors.scss";
 
 .addButton{
-  width: 150px;
+  width: 115px;
   height: 35px;
   margin-top: 50px;
   margin-left: 5px;
   margin-right: 5px;
+  @media screen and (max-width:500px) {
+    margin-top: 30px;
+  }
 }
+
 .prevButton{
-  width: 150px;
+  width: 115px;
   height: 35px;
   background-color: $red-color;
   margin-left: 5px;
@@ -20,7 +24,6 @@
 }
 .base{
   position:relative;
-  margin-bottom: 50px;
   text-align: center;
 }
 
@@ -28,9 +31,7 @@
   width: 60%;
   margin: 50px auto;
   text-align: center;
-  @media screen and (max-width:500px){
-    width: 80%;
-  }
+
   .close{
     cursor: pointer;
     font-size: 18px;
@@ -40,6 +41,13 @@
   }
   h1{
     margin-bottom: 50px;
+  }
+  @media screen and (max-width:500px){
+    width: 90%;
+    margin: 30px auto;
+    h1{
+      margin-bottom: 30px;
+    }
   }
 }
 
@@ -52,6 +60,11 @@
   }
   .map{
     width: 100%;
+  }
+  @media screen and (max-width:500px) {
+    .map{
+      height: 300px;
+    }
   }
 }
 
@@ -66,7 +79,6 @@
   span{
     color: black;
   }
-
 }
 
 

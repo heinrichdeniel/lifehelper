@@ -43,13 +43,22 @@ export default class Header extends Component {
 
         if (!this.props.token){
           return (
-            <nav className={"navbar "+css.nav + " "+fixed}>
+            <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
               <div className="container">
                 <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
-                <div className={css.rightIcons}>
-                  <Button onClick={this.openModal.bind(this,{loginModal:true})} text="Log in" />
-                  <Button onClick={this.openModal.bind(this,{registrationModal:true})} text="Sign up" />
-                </div>
+                  <button type="button" className={css.navbarToggle+" navbar-toggle collapsed"} data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"/>
+                    <span className="icon-bar"/>
+                    <span className="icon-bar"/>
+                  </button>
+                  <div className={"collapse navbar-collapse " +css.rightIcons} id="navbar-collapse">
+                    <ul className="nav navbar-nav navbar-right">
+                      <Button onClick={this.openModal.bind(this,{loginModal:true})} text="Log in" />
+
+                      <Button onClick={this.openModal.bind(this,{registrationModal:true})} text="Sign up" />
+                    </ul>
+                  </div>
 
                 <LoginModal isModalOpen={this.state.loginModal}
                             closeModal={this.closeModals}/>
@@ -62,17 +71,25 @@ export default class Header extends Component {
         }
         else{
           return (
-            <nav className={"navbar "+css.nav + " "+fixed}>
+            <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
               <div className="container">
                 <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
-                <div className={css.rightIcons}>
-                  <AddTask
-                    buttonText=" Add task"
-                    buttonStyle={css.addTask}
-                    sendButtonText="Create task">
-                    <i className="fa fa-plus-square" aria-hidden="true"/>
-                  </AddTask>
-                  <Button style={css.logout} onClick={this.logout} text="Log out" ><i className="fa fa-sign-out"/></Button>
+                <button type="button" className={css.navbarToggle+" navbar-toggle collapsed"} data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                  <span className="sr-only">Toggle navigation</span>
+                  <span className="icon-bar"/>
+                  <span className="icon-bar"/>
+                  <span className="icon-bar"/>
+                </button>
+                <div className={"collapse navbar-collapse " +css.rightIcons} id="navbar-collapse">
+                  <ul className="nav navbar-nav navbar-right">
+                    <AddTask
+                      buttonText=" Add task"
+                      buttonStyle={css.addTask}
+                      sendButtonText="Create task">
+                      <i className="fa fa-plus-square" aria-hidden="true"/>
+                    </AddTask>
+                    <Button style={css.logout} onClick={this.logout} text="Log out" ><i className="fa fa-sign-out"/></Button>
+                  </ul>
                 </div>
               </div>
             </nav>

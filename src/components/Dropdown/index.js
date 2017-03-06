@@ -9,7 +9,7 @@ class Dropdown extends Component{
   }
 
   onClick(){
-    this.props.onChange({value: "0"});
+    this.props.onChange(null);
   }
 
   render(){

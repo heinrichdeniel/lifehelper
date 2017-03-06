@@ -24,8 +24,9 @@
     padding: 10px;
     cursor: pointer;
     width: 100%;
+    min-width: 118px;
     text-align: center;
-    padding-left: 25px;
+    padding-left: 28px;
     &:focus{
       outline:none;
       border-color: #CCCCCC;

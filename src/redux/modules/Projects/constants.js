@@ -16,6 +16,7 @@ for (let actionType of actionTypes) {
 }
 
 constants['SELECT_PROJECT'] = module + '_' + 'SELECT_PROJECT';
+constants['RESET'] = module + '_' + 'RESET';
 
 
 export default constants;

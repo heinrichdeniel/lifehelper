@@ -133,6 +133,14 @@ const ProjectReducer = (state = initialState, action = {}) => {
         }
       };
 
+    case constants.RESET:
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          error: false
+        }
+      };
 
     default:
       return state

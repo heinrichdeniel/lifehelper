@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Modal from 'react-bootstrap/lib/Modal'
 import css from './style.scss'
 import moment from 'moment';
+import {browserHistory} from 'react-router';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -36,14 +37,24 @@ class AddTask extends Component {
       showModal: false,
       error: "",
       opacity: 1,
-      step: 1
+      step: 1,
+      task: {
+        name: "",
+        description: "",
+        date: moment(),
+        time: moment().add(1,'hours').format("H:m"),
+        location: "",
+        ProjectId: null
+      }
     }
   }
   componentWillMount() {
-    this.setState({
-      ...this.state,
-      task:this.props.task.current
-    });
+    if (this.props.sendButtonText == "Update task"){
+      this.setState({
+        ...this.state,
+        task:this.props.task.current
+      });
+    }
     this.props.getProjectList();
   }
 
@@ -100,12 +111,13 @@ class AddTask extends Component {
   }
 
   selectProject(project){
-  this.setState({
-    ...this.state,
-    task:{
-      ...this.state.task,
-      ProjectId: project.value
-    }
+    let projectId = (project) ? project.value : null
+    this.setState({
+      ...this.state,
+      task:{
+        ...this.state.task,
+        ProjectId: projectId
+      }
   });
 }
 
@@ -118,7 +130,6 @@ class AddTask extends Component {
       ...this.state,
       showModal: !this.state.showModal,
       step: 1,
-      task:this.props.task.current,
       error: ""
     });
   }
@@ -130,7 +141,8 @@ class AddTask extends Component {
     });
   }
 
-  sendTask(){
+  sendTask(e){
+    e.preventDefault();
     if (this.state.task.name.length < 3 || this.state.task.name.length > 20) {
       return this.setState({error: 'The task name must contain at least 3, maximum 20 character!'})
     }
@@ -139,10 +151,13 @@ class AddTask extends Component {
       ...this.state,
       showModal: !this.state.showModal
     });
-
+    if (!this.state.task.id){
+      browserHistory.push("/");
+    }
   }
 
-  nextStep(){     //changing to the next step
+  nextStep(e){     //changing to the next step
+    e.preventDefault();
     if (this.state.task.name.length < 3 || this.state.task.name.length > 20) {
       return this.setState({
         ...this.state,
@@ -183,16 +198,18 @@ class AddTask extends Component {
             <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
 
             <h1>{this.props.sendButtonText}</h1>
-            <Input type="text" placeholder="Task name" value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
-            <TextArea type="text" placeholder="Description" value={task.description} onChange={this.changeDescription}  />
+            <form  action="POST" onSubmit={this.nextStep}>
+              <Input type="text" placeholder="Task name" value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
+              <TextArea type="text" placeholder="Description" value={task.description} onChange={this.changeDescription}  />
 
-            <DatePicker value={task.date} onChange={this.changeDate}/>
-            <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime}/>
+              <DatePicker value={task.date} onChange={this.changeDate}/>
+              <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime}/>
 
-            <Dropdown onChange={this.selectProject} projects={this.props.project.list} selected={task.ProjectId}/>
-            {this.state.error ? <ErrorBox error={this.state.error}/> : null}
+              <Dropdown onChange={this.selectProject} projects={this.props.project.list} selected={task.ProjectId}/>
+              {this.state.error ? <ErrorBox error={this.state.error}/> : null}
 
-            <Button type="button" onClick={this.nextStep} text={"Next step"} style={css.addButton}/>
+              <Button type="button" onClick={this.nextStep} text={"Next step"} style={css.addButton}/>
+            </form>
           </div>
         </div>
       </Modal>
@@ -208,14 +225,16 @@ class AddTask extends Component {
             <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
 
             <h1>Place of the task</h1>
-            <Map setLocation={this.changeLocation}
-                 location={task.location}
-                 lat={task.lat}
-                 lng={task.lng}
-                 style={css.map}
-                 suggestEnabled={false}/>
-            <Button type="button" onClick={this.prevStep} text={"Previous step"} style={css.prevButton}/>
-            <Button type="button" onClick={this.nextStep} text={"Next step"} style={css.addButton}/>
+            <form  action="POST" onSubmit={this.nextStep}>
+              <Map setLocation={this.changeLocation}
+                   location={task.location}
+                   lat={task.lat}
+                   lng={task.lng}
+                   style={css.map}
+                   suggestEnabled={false}/>
+              <Button type="button" onClick={this.prevStep} text={"Previous step"} style={css.prevButton}/>
+              <Button type="button" onClick={this.nextStep} text={"Next step"} style={css.addButton}/>
+            </form>
           </div>
         </div>
       </Modal>
@@ -224,7 +243,7 @@ class AddTask extends Component {
 
   renderSummary(){
     let task = this.state.task;
-    let project = task.ProjectId!="0" ? this.props.project.list.filter((project) => project.id == task.ProjectId)[0].name : "-";
+    let project = task.ProjectId!=null ? this.props.project.list.filter((project) => project.id == task.ProjectId)[0].name : "-";
     return(
       <Modal  show={this.state.showModal} onHide={this.changeModalState}>
         <div  className={css.container}>
@@ -232,16 +251,17 @@ class AddTask extends Component {
             <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
 
             <h1>Summary</h1>
-
-            <div className={css.summary}>
-              <p className={css.name}><span>Task name:</span> {task.name}</p>
-              <p className={css.description}><span>Description:</span> {task.description?task.description:"-"}</p>
-              <p className={css.date}><span>Selected date:</span> {moment(task.date).format("MMM DD")}, {moment(task.time, "H:m").format("HH:mm")}</p>
-              <p className={css.location}><span>Selected location:</span> {task.location?task.location:"-"}</p>
-              <p className={css.project}><span>Project:</span> {project}</p>
-            </div>
-            <Button type="button" onClick={this.prevStep} text={"Previous step"} style={css.prevButton}/>
-            <Button type="button" onClick={this.sendTask} text={this.props.sendButtonText} style={css.addButton}/>
+            <form  action="POST" onSubmit={this.sendTask}>
+              <div className={css.summary}>
+                <p className={css.name}><span>Task name:</span> {task.name}</p>
+                <p className={css.description}><span>Description:</span> {task.description?task.description:"-"}</p>
+                <p className={css.date}><span>Selected date:</span> {moment(task.date).format("MMM DD")}, {moment(task.time, "H:m").format("HH:mm")}</p>
+                <p className={css.location}><span>Selected location:</span> {task.location?task.location:"-"}</p>
+                <p className={css.project}><span>Project:</span> {project}</p>
+              </div>
+              <Button type="button" onClick={this.prevStep} text={"Previous step"} style={css.prevButton}/>
+              <Button type="button" onClick={this.sendTask} text={this.props.sendButtonText} style={css.addButton}/>
+            </form>
           </div>
         </div>
       </Modal>

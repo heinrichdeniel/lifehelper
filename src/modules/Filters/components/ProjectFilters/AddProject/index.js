@@ -3,6 +3,7 @@ import css from './style.scss'
 
 import Input from 'components/Input';
 import Button from 'components/Button';
+import ErrorBox from 'components/ErrorBox';
 
 class AddProject extends Component {
   constructor(props){
@@ -14,18 +15,33 @@ class AddProject extends Component {
 
     this.state={
       addProject: false,
-      project: {}
+      project: {
+        name:""
+      }
+    }
+  }
+
+  componentDidUpdate(){
+    if (this.props.error && !this.state.addProject){
+      this.changeVisibility();
     }
   }
 
   changeVisibility(){
+    if (this.state.addProject){     //if the form will be closed
+      this.props.reset();
+    }
     this.setState({
-      project:{},
-      addProject: !this.state.addProject
+      project:{
+        name: ""
+      },
+      addProject: !this.state.addProject,
+      error: false
     })
   }
 
   changeName(e){
+
     this.setState({
       project: {
         name:e.target.value
@@ -34,12 +50,17 @@ class AddProject extends Component {
     })
   }
 
-  createProject(){
-    this.props.createProject(this.state.project);
+  createProject(e){
+    e.preventDefault();
+    if (this.state.project.name.length < 3 || this.state.project.name.length > 15) {
+      return this.setState({error: 'The name must contain at least 3, maximum 15 character!'})
+    }
+    this.props.createProject(this.state.project);     //sending request to the api
     this.setState({
-      project:{},
-      addProject: false
-    })
+      ...this.state,
+      addProject: false,
+      error: false
+    });
   }
 
   render() {
@@ -53,9 +74,13 @@ class AddProject extends Component {
     else{     //render an input
       return(
         <div className={css.base}>
-          <Input placeholder="Project name" value={this.state.project.name} style={css.input} onChange={this.changeName}/>
-          <Button text="Create Project" style={css.addButton} onClick={this.createProject}/>
-          <Button text="Cancel" style={css.cancel} onClick={this.changeVisibility}/>
+          <form  action="POST" onSubmit={this.createProject}>
+            <Input placeholder="Project name" value={this.state.project.name} style={css.input} onChange={this.changeName}  minLength={3} maxLength={15}/>
+            {this.state.error ? <ErrorBox error={this.state.error}/> : null}
+            {this.props.error ? <ErrorBox error={this.props.error}/> : null}
+            <Button text="Create Project" style={css.addButton} onClick={this.createProject}/>
+            <Button text="Cancel" style={css.cancel} onClick={this.changeVisibility}/>
+          </form>
         </div>
       )
     }

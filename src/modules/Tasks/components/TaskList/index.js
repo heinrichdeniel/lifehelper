@@ -49,7 +49,8 @@ class TaskList extends Component {
     this.setState({
       updateProject: true,
       deleteProject: false,
-      project: this.props.project.selected
+      project: this.props.project.selected,
+      error: false
     })
   }
 

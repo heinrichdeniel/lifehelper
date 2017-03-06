@@ -1,8 +1,9 @@
 @import 'src/styles/globals.scss';
 .base{
+  margin-left: 5px;
+  margin-right: -5px;
+
   .input{
-    margin-left: 5px;
-    margin-right: -5px;
     margin-top: 10px;
     margin-bottom: 0;
     font-weight: 700;
@@ -11,6 +12,7 @@
     }
   }
   .addButton{
+    margin-left: 0px;
     width: 120px;
     height: 30px;
     background-color: $secondary-color;

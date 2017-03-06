@@ -9,7 +9,7 @@ export default class Footer extends Component {
 
     render() {
         return (
-            <nav className={"navbar "}>
+            <nav className={"navbar "+css.base}>
 
             </nav>
         )

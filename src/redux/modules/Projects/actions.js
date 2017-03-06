@@ -66,3 +66,11 @@ export function selectProject(project) {
     })
   })
 }
+
+export function reset() {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.RESET,
+    })
+  })
+}

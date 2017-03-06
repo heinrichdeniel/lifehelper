@@ -54,7 +54,9 @@ class ProjectFilters extends Component {
             </p>
             );
           })}
-          <AddProject createProject={this.props.createProject}/>
+          <AddProject createProject={this.props.createProject}
+                      error={this.props.project.error}
+                      reset={this.props.reset}/>
         </div>
       )
     }

@@ -42,10 +42,10 @@ const TaskReducer = (state = initialState, action = {}) => {
         task: {
           ...state.task,
           list: [
-            ...state.task.list.filter((task) => task.id != action.payload.task.id),
-            action.payload.task
+            action.payload.task,
+            ...state.task.list.filter((task) => task.id != action.payload.task.id)
           ],
-          current: {},
+          current: (state.task.current.id == action.payload.task.id)?action.payload.task:state.task.current,
           pending: false,
           error: false
         }
@@ -115,7 +115,6 @@ const TaskReducer = (state = initialState, action = {}) => {
       };
 
     case constants.GET_TASK_ERROR:
-      window.location = "/asd";
       return {
         ...state,
         task: {
