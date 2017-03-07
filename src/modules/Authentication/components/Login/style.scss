@@ -36,4 +36,14 @@
       margin: 25px auto;
     }
   }
+  @media screen and (max-width: 500px) {
+    margin-bottom: 20px;
+    margin-top: 60px;
+    h1 {
+      display: none;
+    }
+    .separator {
+      margin: 30px auto;
+    }
+  }
 }

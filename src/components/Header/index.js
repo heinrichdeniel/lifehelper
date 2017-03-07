@@ -74,13 +74,13 @@ export default class Header extends Component {
             <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
               <div className="container">
                 <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
-                <button type="button" className={css.navbarToggle+" navbar-toggle collapsed"} data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                <button type="button" className={css.navbarToggle+" navbar-toggle collapsed"} data-toggle="collapse" data-target="#navbar-collapse2" aria-expanded="false">
                   <span className="sr-only">Toggle navigation</span>
                   <span className="icon-bar"/>
                   <span className="icon-bar"/>
                   <span className="icon-bar"/>
                 </button>
-                <div className={"collapse navbar-collapse " +css.rightIcons} id="navbar-collapse">
+                <div className={"collapse navbar-collapse " +css.rightIcons} id="navbar-collapse2">
                   <ul className="nav navbar-nav navbar-right">
                     <AddTask
                       buttonText=" Add task"

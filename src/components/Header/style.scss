@@ -10,12 +10,19 @@
   .navbarToggle{
     border-color: #aaa;
     margin-top: 20px;
-    margin-right: 0;
+    display: block;
+    margin-right: 0px;
+    @media screen and (min-width: 450px){
+      display: none;
+    }
   }
   .rightIcons{
     border: 0;
     margin-top: -50px;
-    @media screen and (max-width: 768px){
+    @media screen and (min-width: 450px){
+      display: block;
+    }
+    @media screen and (max-width: 450px){
       margin-top: 0px;
       text-align: center;
     }
@@ -33,6 +40,11 @@
     }
     ul{
       display: inline-flex;
+      @media screen and (min-width: 450px){
+        float: right;
+        margin: 0;
+      }
+
     }
     .addTask{
       background-color: $secondary-color;
