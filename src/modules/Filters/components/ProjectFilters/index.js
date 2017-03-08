@@ -9,6 +9,7 @@ class ProjectFilters extends Component {
 
     this.changeVisibility = this.changeVisibility.bind(this);
     this.renderProjects = this.renderProjects.bind(this);
+    this.selectProject = this.selectProject.bind(this);
     this.state={
       showFilters: false,
       arrow: "down"
@@ -41,6 +42,15 @@ class ProjectFilters extends Component {
     }
   }
 
+  selectProject(project){
+    if (this.props.project.selected && this.props.project.selected.id == project.id){
+      this.props.selectProject(null);
+    }
+    else{
+      this.props.selectProject(project);
+    }
+  }
+
   renderProjects(){
     if (this.state.showFilters){
       let selected = this.props.project.selected;
@@ -48,7 +58,7 @@ class ProjectFilters extends Component {
         <div className={css.projects}>
           {this.props.project.list.map((project) => {
             return (
-              <p key={project.id} onClick={this.props.selectProject.bind(this,project)}>
+              <p key={project.id} onClick={this.selectProject.bind(this,project)}>
               {project.name}
               {(selected && selected.id==project.id)?<i className="fa fa-check-square"/>:<i className="fa fa-square-o"/>}
             </p>

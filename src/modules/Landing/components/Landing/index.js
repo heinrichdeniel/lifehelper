@@ -13,6 +13,9 @@ class Landing extends Component {
 
     this.renderContent = this.renderContent.bind(this);
   }
+  componentWillMount(){
+      this.props.getProfile();
+  }
 
   renderContent(){
     if (this.props.authDetails.token)   //if the user is logged in
@@ -29,7 +32,8 @@ class Landing extends Component {
   render() {
     return(
       <div className={css.base}>
-        <Header token={this.props.authDetails.token}
+        <Header user={this.props.user}
+                token={this.props.authDetails.token}
                 logout={this.props.logout}/>
         {this.renderContent()}
         <Footer/>

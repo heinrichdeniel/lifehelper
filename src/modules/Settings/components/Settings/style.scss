@@ -1,0 +1,59 @@
+@import 'src/styles/globals.scss';
+.base{
+  position: relative;
+  .userImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-top: -5px;
+    cursor: pointer;
+  }
+  .userIcon{
+    width: 41px;
+    height: 40px;
+    font-size: 40px;
+    margin-top: -5px;
+    color: $primary-color;
+  }
+  .options{
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    width: 150px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    box-shadow: 5px 5px 10px;
+    &:focus{
+      background-color: #3e5a95;
+    }
+    .option{
+      margin-bottom: 0;
+      padding: 7px;
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+      position: relative;
+      &.logout{
+        border-bottom: 0;
+      }
+      &:hover{
+        background-color: #ddd;
+        font-weight: 700;
+      }
+      i{
+        float: right;
+        margin: 2px;
+        font-size: 16px;
+      }
+    }
+    .caretUp{
+      position: absolute;
+      margin-top: -20px;
+      font-size: 28px;
+      right: 10px;
+      color: darkgrey;
+    }
+  }
+}

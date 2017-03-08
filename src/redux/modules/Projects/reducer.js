@@ -123,13 +123,12 @@ const ProjectReducer = (state = initialState, action = {}) => {
       };
 
     case constants.SELECT_PROJECT:
-      let selected = (action.payload == state.project.selected) ? null : action.payload;
-      localStorage.setItem('project', JSON.stringify(selected));
+      localStorage.setItem('project', JSON.stringify(action.payload));
       return {
         ...state,
         project: {
           ...state.project,
-          selected: selected
+          selected: action.payload
         }
       };
 

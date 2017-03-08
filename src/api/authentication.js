@@ -69,3 +69,17 @@ export function loginGoogle (payload) {
       })
   })
 }
+
+export function getProfile (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .get(config.api.host + 'auth/profile')
+      .set('x-access-token', payload.token)
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}

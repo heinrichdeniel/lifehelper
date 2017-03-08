@@ -36,10 +36,7 @@ const AuthReducer = (state = initialState, action = {}) => {
         ...state,
         login: Object.assign({}, state.login, {pending: false, error: false}),
         authDetails: action.payload,
-        user:{
-          ...state.user,
-          id: action.payload.id
-        }
+        user: action.payload.user
       }
 
     case constants.LOGIN_ERROR:
@@ -66,10 +63,7 @@ const AuthReducer = (state = initialState, action = {}) => {
         ...state,
         registration: Object.assign({}, state.registration, {pending: false, error: false}),
         authDetails: action.payload,
-        user:{
-          ...state.user,
-          id: action.payload.id
-        }
+        user: action.payload.user
       }
 
     case constants.REGISTRATION_ERROR:
@@ -93,7 +87,7 @@ const AuthReducer = (state = initialState, action = {}) => {
     case constants.GET_PROFILE_SUCCESS:
       return {
         ...state,
-        user: Object.assign({}, state.user, action.payload )
+        user: action.payload.user
       }
 
     case constants.GET_PROFILE_ERROR:

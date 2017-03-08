@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Landing from "../components/Landing"
+import Settings from "../components/Settings"
 import * as authActions from 'redux/modules/Authentication/actions'
 import * as authSelectors from 'redux/modules/Authentication/selectors'
 
 
 const mapActionsToProps = (dispatch) => ({
-  getProfile: authActions.getProfile,
   logout: authActions.logout
+
 });
 const mapStateToProps = (state) => ({
   authDetails: authSelectors.authDetails(state),
@@ -15,4 +15,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps, mapActionsToProps) (Landing);
+export default connect(mapStateToProps, mapActionsToProps) (Settings);

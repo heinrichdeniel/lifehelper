@@ -3,15 +3,16 @@ import Button from 'components/Button';
 import LoginModal from 'modules/Authentication/containers/Login'
 import RegistrationModal from 'modules/Authentication/containers/Registration'
 import css from "./style.scss";
-import { Link, browserHistory } from 'react-router'
+import { Link } from 'react-router'
 import AddTask from 'modules/Tasks/containers/AddTaskContainer'
+import Settings from 'modules/Settings/containers/Settings'
+import Search from 'modules/Filters/containers/SearchContainer'
 
 export default class Header extends Component {
   constructor(props){
     super(props);
     this.openModal = this.openModal.bind(this);
     this.closeModals = this.closeModals.bind(this);
-    this.logout = this.logout.bind(this);
 
     this.state = {
       loginModal: false,
@@ -32,15 +33,8 @@ export default class Header extends Component {
     });
   }
 
-  logout(){
-    this.props.logout();
-    browserHistory.push('/');
-  }
-
-
   render() {
         let fixed = this.props.fixed ? 'navbar-fixed-top' : null;
-
         if (!this.props.token){
           return (
             <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
@@ -73,22 +67,17 @@ export default class Header extends Component {
           return (
             <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
               <div className="container">
-                <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
-                <button type="button" className={css.navbarToggle+" navbar-toggle collapsed"} data-toggle="collapse" data-target="#navbar-collapse2" aria-expanded="false">
-                  <span className="sr-only">Toggle navigation</span>
-                  <span className="icon-bar"/>
-                  <span className="icon-bar"/>
-                  <span className="icon-bar"/>
-                </button>
-                <div className={"collapse navbar-collapse " +css.rightIcons} id="navbar-collapse2">
+                <Link to={'/'} className={css.logo}><h1 className={css.hideOnSmallSize}>LifeHelper</h1></Link>
+                <div className={css.rightIcons+" "+ css.afterLogin} >
                   <ul className="nav navbar-nav navbar-right">
+                    <Search/>
                     <AddTask
                       buttonText=" Add task"
                       buttonStyle={css.addTask}
                       sendButtonText="Create task">
                       <i className="fa fa-plus-square" aria-hidden="true"/>
                     </AddTask>
-                    <Button style={css.logout} onClick={this.logout} text="Log out" ><i className="fa fa-sign-out"/></Button>
+                    <Settings/>
                   </ul>
                 </div>
               </div>

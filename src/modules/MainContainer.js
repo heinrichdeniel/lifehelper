@@ -6,11 +6,15 @@ import Header from 'components/Header'
 import Footer from 'components/Footer'
 
 class MainContainer extends Component {
+  componentWillMount(){
+    this.props.getProfile();
+  }
   render() {
     return (
       <div>
-        <Header token={this.props.authDetails.token}
-                  logout={this.props.logout}/>
+        <Header user={this.props.user}
+                token={this.props.authDetails.token}
+                logout={this.props.logout}/>
         <div>
           {this.props.children}   {/*the content depends on the route*/}
         </div>
@@ -22,11 +26,13 @@ class MainContainer extends Component {
 
 
 const mapActionsToProps = (dispatch) => ({
+  getProfile: actions.getProfile,
   logout: actions.logout
 });
 
 const mapStateToProps = (state) => ({
-  authDetails: selectors.authDetails(state)
+  authDetails: selectors.authDetails(state),
+  user: selectors.user(state)
 });
 
 export default connect(mapStateToProps,mapActionsToProps)(MainContainer);

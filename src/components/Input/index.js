@@ -50,7 +50,9 @@ class Input extends Component{
                    placeholder={placeholder}
                    value={value}
                    onChange={onChange}
-                   autoComplete="nope"/>
+                   autoComplete="nope"
+                   onFocus={this.props.onFocus}
+                   onBlur={this.props.onBlur}/>
             {addon}
           </div>
         </div>

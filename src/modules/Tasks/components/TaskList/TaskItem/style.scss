@@ -22,6 +22,7 @@
     margin-bottom:0;
     word-wrap: break-word;
     width: 75%;
+    margin-top: 5px;
   }
   .date{
     position: absolute;
@@ -36,6 +37,24 @@
     color: $secondary-color;
     i{
       margin-right: 5px;
+    }
+  }
+  @media screen and (max-width: 500px){
+    .description{
+      width: 100%;
+    }
+    .date{
+      position: relative;
+      padding-bottom: 0;
+      top: 5px;
+      left: 0;
+      right: 0;
+      display: inline;
+    }
+    .project {
+      float: right;
+      position: initial;
+      margin-top: 5px;
     }
   }
 }

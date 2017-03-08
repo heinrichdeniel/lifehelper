@@ -90,6 +90,23 @@ export function registration(payload) {
   })
 }
 
+export function getProfile() {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.GET_PROFILE_PENDING,
+        constants.GET_PROFILE_SUCCESS,
+        constants.GET_PROFILE_ERROR
+      ],
+      payload: {
+        promise: api.getProfile({
+          token: getState().Authentication.authDetails.token
+        })
+      }
+    })
+  })
+}
+
 export function setName(payload) {
   store.dispatch((dispatch, getState) => {
     return dispatch({

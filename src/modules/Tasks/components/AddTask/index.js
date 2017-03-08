@@ -179,13 +179,25 @@ class AddTask extends Component {
   }
 
   renderButton(){     //rendering the button
-    return(
-      <div className={css.base}>
-        <Button type="button" onClick={this.changeModalState} text={this.props.buttonText}  style={css.addButton+" "+this.props.buttonStyle}>
-          {this.props.children}
-        </Button>
-      </div>
-    );
+    if(this.props.sendButtonText == "Create task"){
+      return(
+        <div className={css.base}>
+          <div className={css.addIcon} onClick={this.changeModalState}>
+            <i className={"fa fa-plus"} aria-hidden="true"/>
+          </div>
+        </div>
+      );
+    }
+    else{
+      return(
+        <div className={css.base}>
+          <Button type="button" onClick={this.changeModalState} text={this.props.buttonText}  style={css.addButton+" "+this.props.buttonStyle}>
+            {this.props.children}
+          </Button>
+        </div>
+      );
+
+    }
   }
 
   renderDetails(){         //rendering the modal with title, description and datetime

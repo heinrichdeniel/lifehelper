@@ -1,0 +1,96 @@
+@import 'src/styles/globals.scss';
+.base{
+  margin: 5px;
+  position: relative;
+  @media screen and (max-width:500px){
+    display:none;
+  }
+  .icon {
+    border: 1px solid $primary-color;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    border-radius: 50%;
+    margin-top: -10px;
+    background-color: #f6f6f6;
+    color: $primary-color;
+    cursor:pointer;
+    &:hover{
+      background-color: $primary-color;
+      color: #f6f6f6;
+    }
+    i {
+      font-size: 22px;
+      margin-top: 7px;
+      margin-left: 9px;
+    }
+  }
+  .input{
+    display:block;
+    width: 50%;
+    float: right;
+    margin-top: -10px;
+    margin-right: 5px;
+  }
+
+  .hideInput{
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.5s, opacity 0.5s linear;
+  }
+
+  .showInput{
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+
+  .hideIcon{
+    border: 0;
+    background: none;
+    z-index: 10;
+    &:hover{
+      background-color: transparent;
+      color: $primary-color;
+    }
+  }
+}
+
+.found{
+  width: 50%;
+  margin-right: 5px;
+  float: right;
+  position: absolute;
+  right: 0;
+  margin-top: 40px!important;
+  z-index: 101;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 5px #aaa;
+  .foundItems{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-top: -10px;
+    border-radius: 3px;
+    .groupName{
+      text-align:center;
+      font-weight: 700;
+      color: $secondary-color;
+      padding: 10px;
+      background-color: #eee;
+      cursor: default;
+      margin-bottom: 0;
+    }
+    .groupItem{
+      padding: 10px;
+      margin-bottom: 0;
+      background-color: #fff;
+      border-radius: 3px;
+      cursor: pointer;
+      &:hover{
+        background-color: #ccc;
+      }
+    }
+  }
+}

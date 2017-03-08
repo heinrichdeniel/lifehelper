@@ -19,13 +19,11 @@
   .rightIcons{
     border: 0;
     margin-top: -50px;
-    @media screen and (min-width: 450px){
-      display: block;
-    }
     @media screen and (max-width: 450px){
       margin-top: 0px;
       text-align: center;
     }
+
     button{
       width: 80px;
       height: 30px;
@@ -38,6 +36,7 @@
         box-shadow:  0 0 5px 0px #ea0000;
       }
     }
+
     ul{
       display: inline-flex;
       @media screen and (min-width: 450px){
@@ -57,7 +56,24 @@
         margin-left: 5px;
       }
       &:hover{
-        box-shadow:  0 0 5px 0px $primary-color;
+        box-shadow:  0 0 5px 0px $secondary-color;
+      }
+    }
+    &.afterLogin{
+      margin-right: 15px;
+      @media screen and (max-width: 768px){
+        margin-right: 0;
+      }
+      @media screen and (max-width: 500px) {
+        margin-top: -55px;
+      }
+      @media screen and (max-width: 450px){
+        text-align: right;
+        margin-top: -70px;
+        ul{
+          text-align: left;
+          margin: 0;
+        }
       }
     }
   }
@@ -68,6 +84,12 @@
     color: $primary-color;
   }
 
+  .hideOnSmallSize{
+    @media screen and (max-width: 500px){
+      display: none;
+    }
+  }
+
   .logo{
     background: transparent url("/assets/img/logo2.png") no-repeat center right;
     background-size: 50px;
@@ -75,6 +97,8 @@
     height: 75px;
     display: inline-block;
     text-decoration: none;
+    position: relative;
+    z-index: 10;
   }
 
   i{
