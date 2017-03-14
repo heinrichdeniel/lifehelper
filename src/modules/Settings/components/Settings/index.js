@@ -42,12 +42,12 @@ class Settings extends Component {
   logout(){
     this.hideOptions();
     this.props.logout();
-    browserHistory.push('/');
+    browserHistory.push(window.location.pathname.substring(0,3));
   }
 
   openSettings(){
     this.hideOptions();
-    browserHistory.push('/settings');
+    browserHistory.push(window.location.pathname.substring(0,3)+'/settings');
   }
 
   renderOptions(){

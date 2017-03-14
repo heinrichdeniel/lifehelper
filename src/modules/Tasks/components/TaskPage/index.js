@@ -21,7 +21,7 @@ class TaskPage extends Component {
 
   componentWillMount() {
     //get id from the url
-    this.props.getTaskById(window.location.pathname.substring(6))
+    this.props.getTaskById(window.location.pathname.substring(9))
   }
 
   changeModalState(){
@@ -32,7 +32,7 @@ class TaskPage extends Component {
 
   deleteTask(){
     this.props.deleteTask(this.props.task.current.id);
-    browserHistory.push("/");
+    browserHistory.push(window.location.pathname.substring(0,3));
   }
 
   renderMap(){

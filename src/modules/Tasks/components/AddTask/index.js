@@ -168,7 +168,7 @@ class AddTask extends Component {
       showModal: !this.state.showModal
     });
     if (!this.state.task.id){
-      browserHistory.push("/");
+      browserHistory.push(window.location.pathname.substring(0,3));
     }
   }
 

@@ -1,4 +1,36 @@
 .base{
   bottom:0;
   position: absolute;
+  text-align: center;
+  background-color: #ddd;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  .flags{
+    margin: auto;
+    display: inline-flex;
+    padding-top: 5px;
+    div{
+      width: 30px;
+      height: 30px;
+      margin: 0 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      &:hover{
+        box-shadow: 0 0 5px 3px #a9a9a9;
+      }
+    }
+    .english{
+      background: url("/assets/img/Flag_of_United_Kingdom.png") no-repeat center;
+      background-size: 100%;
+    }
+    .hungarian{
+      background: url("/assets/img/Flag_of_Hungary.png") no-repeat center;
+      background-size: 100%;
+    }
+    .romanian{
+      background: url("/assets/img/Flag_of_Romania.png") no-repeat center;
+      background-size: 100%;
+    }
+  }
 }

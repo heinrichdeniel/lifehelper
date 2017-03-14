@@ -7,19 +7,20 @@ import TaskPage from 'modules/Tasks/routes'
 import SettingsPage from 'modules/Settings/routes'
 
 class Routes extends Component {
+
   render() {
     return (
     <Router history={this.props.history}>
-      <Route path="/">
-        {LandingPage}
-        {SettingsPage}
-        <Route component={MainContainer}>
-          <IndexRedirect to="/"/>
+        <Route path=":lang">
           {LandingPage}
-          {TaskPage}
-          <Redirect from="/*" to="/"/>
+          {SettingsPage}
+          <Route component={MainContainer}>
+            <IndexRedirect to="/"/>
+            {LandingPage}
+            {TaskPage}
+          </Route>
         </Route>
-      </Route>
+        <Redirect from="/*" to="/en"/>
     </Router>
     )
   }

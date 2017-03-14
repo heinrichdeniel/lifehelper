@@ -33,7 +33,7 @@ class Search extends Component {
   }
 
   selectTask(task){
-    browserHistory.push("/task/"+task.id);
+    browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+task.id);
   }
 
   selectProject(project){

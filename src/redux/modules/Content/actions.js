@@ -1,5 +1,6 @@
 import store from 'redux/config/store'
 import constants from './constants'
+import {browserHistory} from 'react-router'
 
 export function switchLanguage(lang) {
   store.dispatch((dispatch, getState) => {
@@ -8,5 +9,8 @@ export function switchLanguage(lang) {
       payload: lang
     })
   })
+
+
+  browserHistory.push(lang+window.location.pathname.substring(3));
 }
 

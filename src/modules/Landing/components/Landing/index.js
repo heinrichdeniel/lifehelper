@@ -39,7 +39,7 @@ class Landing extends Component {
                 token={this.props.authDetails.token}
                 logout={this.props.logout}/>
         {this.renderContent()}
-        <Footer/>
+        <Footer switchLanguage={this.props.switchLanguage}/>
       </div>
     )
   }

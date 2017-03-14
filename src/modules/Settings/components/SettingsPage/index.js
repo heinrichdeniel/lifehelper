@@ -18,6 +18,7 @@ class SettingsPage extends Component {
     return(
       <div className={css.base}>
         <Header user={this.props.user}/>
+        <h1>Settings</h1>
       </div>
     )
   }

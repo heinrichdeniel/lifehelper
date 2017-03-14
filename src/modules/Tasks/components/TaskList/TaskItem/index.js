@@ -10,7 +10,7 @@ class TaskItem extends Component {
   }
 
   onClick(){
-    browserHistory.push("/task/"+this.props.task.id);
+    browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+this.props.task.id);
   }
   render() {
     let project = null;
