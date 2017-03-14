@@ -1,0 +1,23 @@
+@import 'src/styles/globals.scss';
+.base{
+  padding: 15px 10%;
+  border-radius: 0 0 5px 5px;
+  background-color: #ddd;
+  position: relative;
+  display: block;
+  .row{
+    display:block;
+  }
+
+  p{
+    padding: 10px 0;
+    font-size: 16px;
+  }
+
+  .language,.dateFormat,.timeFormat{
+    width: 30%;
+    right: 10%;
+    position: absolute;
+    margin-top: -50px;
+  }
+}

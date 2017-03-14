@@ -10,7 +10,12 @@ export function switchLanguage(lang) {
     })
   })
 
-
-  browserHistory.push(lang+window.location.pathname.substring(3));
+  let index = window.location.pathname.indexOf('/',1);   //first '/' character after language
+  if (index > 0){
+    browserHistory.push("/" + lang + window.location.pathname.substring(index));
+  }
+  else{
+    browserHistory.push("/" + lang);
+  }
 }
 

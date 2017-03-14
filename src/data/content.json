@@ -80,7 +80,21 @@
       },
       "options": {
         "settings": "Settings",
-        "logout": "Log out"
+        "logout": "Sign out"
+      },
+      "settings": {
+        "title": "Settings",
+        "menu":{
+          "general": "General",
+          "account": "Profile",
+          "shortcuts": "Shortcuts"
+        },
+        "general":{
+          "language": "Default language",
+          "dateFormat": "Date format",
+          "timeFormat": "Time format",
+          "hours": "hours"
+        }
       }
     }
   },
@@ -167,6 +181,20 @@
       "options": {
         "settings": "Beállítások",
         "logout": "Kijelentkezés"
+      },
+      "settings": {
+        "title": "Beállítások",
+        "menu":{
+          "general": "Álltalános beállítások",
+          "account": "Fiók beállítások",
+          "shortcuts": "Billentyűparancsok"
+        },
+        "general":{
+          "language": "Alapértelmezett nyelv",
+          "dateFormat": "Dátum formátum",
+          "timeFormat": "Idő formátum",
+          "hours": "óra"
+        }
       }
     }
   },
@@ -252,6 +280,20 @@
       "options": {
         "settings": "Setări",
         "logout": "Deconectare"
+      },
+      "settings": {
+        "title": "Setări",
+        "menu":{
+          "general": "Setări generale",
+          "account": "Setările contului",
+          "shortcuts": "Comenzile rapide"
+        },
+        "general":{
+          "language": "Limba maternă",
+          "dateFormat": "Formatul datei",
+          "timeFormat": "Format oră",
+          "hours": "oră"
+        }
       }
     }
   }

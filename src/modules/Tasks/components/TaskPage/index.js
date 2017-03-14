@@ -75,7 +75,7 @@ class TaskPage extends Component {
           <h1>{task.name}</h1>
           <div className={css.details}>
             <p className={css.description}><span>{content.description}: </span> {task.description}</p>
-            <p className={css.date}>{moment(task.date).format("MMM DD")}, {moment(task.time, "H:m").format("HH:mm")}</p>
+            <p className={css.date}>{moment(task.date).format("MMM DD")}, {moment(task.time, "H:m").format("H:mm")}</p>
             <p className={css.project}><span>{content.project}: </span>{task.Project?task.Project.name:"-"}</p>
           </div>
 

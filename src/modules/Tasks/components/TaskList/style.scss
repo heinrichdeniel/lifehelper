@@ -9,8 +9,14 @@
   .tasks{
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 70vh;
+    max-height: 60vh;
     padding: 7.5px;
+    @media screen and (max-height: 600px){
+      max-height: 50vh;
+    }
+    @media screen and (max-height: 500px){
+      max-height: 43vh;
+    }
   }
   h1{
     color: $secondary-color;

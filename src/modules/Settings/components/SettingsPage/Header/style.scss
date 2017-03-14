@@ -1,10 +1,9 @@
 @import "src/styles/colors.scss";
 
 .nav{
-  background: rgb(255,255,255);
-  background: -moz-linear-gradient(top, white 0%, #eee 33%, rgb(230, 230, 230) 50%, #eee 66%, #f6f6f6 100%);
-  background: -webkit-linear-gradient(top, white 0%, #eee 33%, rgb(230, 230, 230) 50%, #eee 66%, #f6f6f6 100%);
-  background: linear-gradient(to bottom, white 0%, #eee 33%, rgb(230, 230, 230) 50%, #eee 66%, #f6f6f6 100%);
+  background: -moz-linear-gradient(to bottom, #ddd 0%, #d6d6d6 22%, #e6e6e6 50%, #d6d6d6 78%, #ddd 100%);
+  background: -webkit-linear-gradient(to bottom, #ddd 0%, #d6d6d6 22%, #e6e6e6 50%, #d6d6d6 78%, #ddd 100%);
+  background: linear-gradient(to bottom, #ddd 0%, #d6d6d6 22%, #e6e6e6 50%, #d6d6d6 78%, #ddd 100%);
   min-height: 80px;
   border: 0px;
   .userImg{
@@ -45,8 +44,9 @@
       }
     }
     .userName{
-      font-size: 20px;
+      font-size: 24px;
       color: $primary-color;
+      margin-top: -4px;
       @media screen and (max-width: 450px) {
         display: none;
       }
@@ -55,7 +55,7 @@
 
   h1{
     margin-left: 60px;
-    font-size: 26px;
+    font-size: 24px;
     margin-top: 25px;
     color: $primary-color;
   }

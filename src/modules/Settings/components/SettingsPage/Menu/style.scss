@@ -1,0 +1,24 @@
+@import 'src/styles/globals.scss';
+.base{
+  background-color: $primary-color;
+  border-radius: 5px 5px 0px 0px;
+  display: flex;
+  border-bottom: 3px solid $secondary-color;
+  .option{
+    font-size: 18px;
+    color: #ffffff;
+    width: 33.33333%;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    &:hover{
+      background-color: #3a920d;
+      border-radius: 5px 5px 0px 0px;
+    }
+    &.active{
+      background-color: $secondary-color;
+      border-radius: 5px 5px 0px 0px;
+    }
+  }
+}

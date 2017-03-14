@@ -11,7 +11,7 @@ class Routes extends Component {
   render() {
     return (
     <Router history={this.props.history}>
-        <Route path=":lang">
+        <Route path="/:lang">
           {LandingPage}
           {SettingsPage}
           <Route component={MainContainer}>

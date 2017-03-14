@@ -89,6 +89,9 @@ const AuthReducer = (state = initialState, action = {}) => {
       }
 
     case constants.GET_PROFILE_SUCCESS:
+      if (action.payload.user.language != "en" && window.location.pathname.substring(0,3)=="/en"){
+        browserHistory.push(action.payload.user.language+window.location.pathname.substring(3))
+      }
       return {
         ...state,
         user: action.payload.user
