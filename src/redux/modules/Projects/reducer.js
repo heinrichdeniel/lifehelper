@@ -15,7 +15,7 @@ const initialState = {
 
 
 const ProjectReducer = (state = initialState, action = {}) => {
-  if (action.payload && action.payload.message == "Expired token"){
+  if (action.payload && (action.payload.message == "Expired token" || action.payload.message == "Token is missing")){
     localStorage.clear();
     window.location.href = '/'
   }

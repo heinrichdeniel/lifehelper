@@ -14,7 +14,9 @@ class Landing extends Component {
     this.renderContent = this.renderContent.bind(this);
   }
   componentWillMount(){
+    if (this.props.authDetails.token){
       this.props.getProfile();
+    }
   }
 
   renderContent(){
@@ -32,7 +34,8 @@ class Landing extends Component {
   render() {
     return(
       <div className={css.base}>
-        <Header user={this.props.user}
+        <Header content={this.props.content}
+                user={this.props.user}
                 token={this.props.authDetails.token}
                 logout={this.props.logout}/>
         {this.renderContent()}

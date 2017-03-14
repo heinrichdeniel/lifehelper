@@ -2,7 +2,7 @@
 
 .addButton{
   width: 115px;
-  height: 35px;
+  min-height: 35px;
   margin-top: 50px;
   margin-left: 5px;
   margin-right: 5px;
@@ -37,7 +37,7 @@
     cursor: pointer;
     i{
       color: $primary-color;
-      margin-top: 5px;
+      margin-top: 6px;
       margin-left: 0;
       font-size: 30px;
     }

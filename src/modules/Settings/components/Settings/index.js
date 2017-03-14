@@ -12,6 +12,7 @@ class Settings extends Component {
     this.hideOptions = this.hideOptions.bind(this);
     this.handleDocumentClick = this.handleDocumentClick.bind(this);
     this.logout = this.logout.bind(this);
+    this.openSettings = this.openSettings.bind(this);
 
     this.state={
       showOptions: false
@@ -29,7 +30,6 @@ class Settings extends Component {
       showOptions: !this.state.showOptions
     });
     document.addEventListener('click', this.handleDocumentClick, false);
-
   }
 
   hideOptions(){
@@ -40,17 +40,24 @@ class Settings extends Component {
   }
 
   logout(){
+    this.hideOptions();
     this.props.logout();
     browserHistory.push('/');
   }
 
+  openSettings(){
+    this.hideOptions();
+    browserHistory.push('/settings');
+  }
+
   renderOptions(){
+    let content = this.props.content.page.options;
     if (this.state.showOptions){
       return(
         <div className={css.options}>
           <i className={css.caretUp + " fa fa-caret-up"} aria-hidden="true"/>
-          <p className={css.option} onClick={this.openSettings}>Settings<i className="fa fa-wrench"/></p>
-          <p className={css.option +" "+ css.logout} onClick={this.logout}>Log out<i className="fa fa-sign-out"/></p>
+          <p className={css.option} onClick={this.openSettings}>{content.settings}<i className="fa fa-wrench"/></p>
+          <p className={css.option +" "+ css.logout} onClick={this.logout}>{content.logout}<i className="fa fa-sign-out"/></p>
         </div>
       )
     }

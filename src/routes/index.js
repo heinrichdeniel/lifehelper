@@ -4,6 +4,7 @@ import {IndexRedirect,Redirect, Router, Route} from "react-router";
 import MainContainer from 'modules/MainContainer'
 import LandingPage from 'modules/Landing/routes'
 import TaskPage from 'modules/Tasks/routes'
+import SettingsPage from 'modules/Settings/routes'
 
 class Routes extends Component {
   render() {
@@ -11,6 +12,7 @@ class Routes extends Component {
     <Router history={this.props.history}>
       <Route path="/">
         {LandingPage}
+        {SettingsPage}
         <Route component={MainContainer}>
           <IndexRedirect to="/"/>
           {LandingPage}

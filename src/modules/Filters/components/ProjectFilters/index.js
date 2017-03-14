@@ -64,7 +64,8 @@ class ProjectFilters extends Component {
             </p>
             );
           })}
-          <AddProject createProject={this.props.createProject}
+          <AddProject content={this.props.content.page.project}
+                      createProject={this.props.createProject}
                       error={this.props.project.error}
                       reset={this.props.reset}/>
         </div>
@@ -76,7 +77,7 @@ class ProjectFilters extends Component {
   render() {
     return(
       <div className={css.base}>
-        <h2 onClick={this.changeVisibility}>Select a project <i className={"fa fa-arrow-"+this.state.arrow} /></h2>
+        <h2 onClick={this.changeVisibility}>{this.props.content.page.filters.projectFilter} <i className={"fa fa-arrow-"+this.state.arrow} /></h2>
         {this.renderProjects()}
       </div>
     )

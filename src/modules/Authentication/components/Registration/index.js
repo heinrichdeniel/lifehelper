@@ -37,6 +37,7 @@ export default class Registration extends Component{
   onSendRegistration(e) {
     e.preventDefault();
     this.props.resetRegistration();
+    let content = this.props.content.page.errors;
 
     let errors = [];
 
@@ -52,29 +53,26 @@ export default class Registration extends Component{
       errors.push('password');
     }
 
-    if (errors.length > 1) {
-      this.setState({error: 'Please fill the ' + errors.join(', ') + ' fields!'});
-      return null;
-    } else if (errors.length > 0) {
-      this.setState({error: 'Please fill the ' + errors.join(', ') + ' field!'});
+    if (errors.length > 0) {
+      this.setState({error: content.fillOut});
       return null;
     } else {
       if (this.props.user.username.length < 4 || this.props.user.username.length > 20) {
-        return this.setState({error: 'The name must contain at least 4, maximum 20 character!'})
+        return this.setState({error: content.smallName})
       }
       if (this.props.user.email.length < 6 ) {
-        return this.setState({error: 'Email must contain at least 6!'})
+        return this.setState({error: content.smallEmail})
       }
       let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!this.props.user.email.match(emailRegex)){
-        return this.setState({error: 'Email must be valid!'})
+        return this.setState({error: content.invalidEmail})
       }
       if (this.props.user.password.length < 6 || this.props.user.password.length > 20) {
-        return this.setState({error: 'Password must contain at least 6, maximum 20 character!'})
+        return this.setState({error: content.smallPassword})
       }
       let passRegex = /^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/
       if (!this.props.user.password.match(passRegex)) {
-        return this.setState({error: 'Password must contain at least 1 uppercase letter, 1 lowercase letter and 1 number!'})
+        return this.setState({error: content.invalidPassword})
       }
     }
 
@@ -98,40 +96,47 @@ export default class Registration extends Component{
   }
 
   renderForm(){
+    let content = this.props.content.page.registration;
+    let error = null;
+    if (this.props.registration.error == "Wrong email address or password!"){
+      error = <ErrorBox error={content.wrongData}/>
+    }
     return(
       <div className={css.form}>
         <form  action="POST" onSubmit={this.onSendRegistration}>
           <input style={{display:'none'}} type="text" name="" />    {/*that is needed to turn off autocomplete*/}
           <input style={{display:'none'}} type="password" name="" />      {/*that is needed to turn off autocomplete*/}
-          <Input type="text" placeholder="Username" value={this.props.user.username} onChange={this.changeName} minLength={4} maxLength={20} />
-          <Input type="text" placeholder="Email" value={this.props.user.email} onChange={this.changeEmail} minLength={6} />
-          <Input type="password" placeholder="Password" value={this.props.user.password} onChange={this.changePassword} minLength={6} maxLength={20} />
+          <Input type="text" placeholder={content.username} value={this.props.user.username} onChange={this.changeName} minLength={4} maxLength={20} />
+          <Input type="text" placeholder={content.email}  value={this.props.user.email} onChange={this.changeEmail} minLength={6} />
+          <Input type="password" placeholder={content.password} value={this.props.user.password} onChange={this.changePassword} minLength={6} maxLength={20} />
 
           {this.state.error ? <ErrorBox error={this.state.error}/> : null}
-          {this.props.registration.error ? <ErrorBox error={this.props.registration.error}/> : null}
-          <Button type="submit" text="Sign up" style={css.button}/>
+          {error}
+          <Button type="submit" text={content.name} style={css.button}/>
         </form>
       </div>
     )
   }
 
   render() {
+    let content = this.props.content.page.registration;
+
     return (
       <Modal className="login-modal" show={this.props.isModalOpen} onHide={this.closeModal}>
         <div className={css.container}>
           <div className={css.body}>
             <i className={`fa fa-close ${css.close}`} onClick={this.closeModal} />
-            <h1>Sign up</h1>
+            <h1>{content.name}</h1>
             <div className={css.buttons}>
               <FacebookLogin onLogin={this.onSocialLogin}
                              responseHandler={this.props.loginFacebook}
-                             buttonText="Sign up with Facebook"/>
+                             buttonText={content.facebook}/>
               <GoogleLogin onLogin={this.onSocialLogin}
                            responseHandler={this.props.loginGoogle}
-                           buttonText="Sign up with Google"/>
+                           buttonText={content.google}/>
               <div className={css.separator}>
                 <div>
-                  or
+                  {content.or}
                 </div>
               </div>
 

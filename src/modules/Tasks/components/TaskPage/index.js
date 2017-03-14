@@ -50,12 +50,14 @@ class TaskPage extends Component {
   }
 
   renderDeleteModal(){
+    let content = this.props.content.page.tasks.deleteTask;
+
     return (
       <Modal show={this.state.showModal}  dialogClassName={css.deleteModal} onHide={this.changeModalState}>
         <div  className={css.container}>
           <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
           <h1>{this.props.task.current.name}</h1>
-          <p>Are you sure you want to delete this task?</p>
+          <p>{content.question}</p>
           <Button type="button" onClick={this.deleteTask} text={"Delete"} style={css.confirm}/>
           <Button type="button" onClick={this.changeModalState} text={"Cancel"} style={css.cancel}/>
         </div>
@@ -65,25 +67,28 @@ class TaskPage extends Component {
 
   render() {
     let task = this.props.task.current;
+    let content = this.props.content.page.tasks;
+
     if (task.name){       //returning the task data
       return(
         <div className={css.base + " container"}>
           <h1>{task.name}</h1>
           <div className={css.details}>
-            <p className={css.description}><span>Description: </span> {task.description}</p>
+            <p className={css.description}><span>{content.description}: </span> {task.description}</p>
             <p className={css.date}>{moment(task.date).format("MMM DD")}, {moment(task.time, "H:m").format("HH:mm")}</p>
-            <p className={css.project}><span>Project: </span>{task.Project?task.Project.name:"-"}</p>
+            <p className={css.project}><span>{content.project}: </span>{task.Project?task.Project.name:"-"}</p>
           </div>
 
           {this.renderMap()}
 
           <div className={css.buttons}>
             <AddTask              //rendering a button for editing the task
-              buttonText="Edit task"
-              sendButtonText="Update task"
-              buttonStyle={css.update}/>
+              buttonText={content.editTask.name}
+              sendButtonText={content.editTask.update}
+              buttonStyle={css.update}
+              update={true}/>
             {this.renderDeleteModal()}
-            <Button type="button" onClick={this.changeModalState} text="Delete task" style={css.delete}/>
+            <Button type="button" onClick={this.changeModalState} text={content.deleteTask.name} style={css.delete}/>
           </div>
         </div>
       );

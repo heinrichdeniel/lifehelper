@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import TaskPage from "../components/TaskPage"
 import * as actions from 'redux/modules/Tasks/actions'
 import * as selectors from 'redux/modules/Tasks/selectors'
+import * as contentSelectors from 'redux/modules/Content/selectors'
 
 const mapActionsToProps = (dispatch) => ({
   getTaskById: actions.getTaskById,
@@ -10,7 +11,9 @@ const mapActionsToProps = (dispatch) => ({
   setLocation: actions.setLocation
 });
 const mapStateToProps = (state) => ({
-  task: selectors.task(state)
+  task: selectors.task(state),
+  content: contentSelectors.content(state)
+
 });
 
 

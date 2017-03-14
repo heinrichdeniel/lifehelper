@@ -67,7 +67,7 @@ class AddProject extends Component {
     if (!this.state.addProject){     //render a button with "Add Project" text
       return(
         <div className={css.base}>
-          <Button text="Add Project" style={css.addButton} onClick={this.changeVisibility}/>
+          <Button text={this.props.content.addProject} style={css.addButton} onClick={this.changeVisibility}/>
         </div>
       )
     }
@@ -75,11 +75,11 @@ class AddProject extends Component {
       return(
         <div className={css.base}>
           <form  action="POST" onSubmit={this.createProject}>
-            <Input placeholder="Project name" value={this.state.project.name} style={css.input} onChange={this.changeName}  minLength={3} maxLength={15}/>
+            <Input placeholder={this.props.content.name} focused={true} value={this.state.project.name} style={css.input} onChange={this.changeName}  minLength={3} maxLength={15}/>
             {this.state.error ? <ErrorBox error={this.state.error}/> : null}
             {this.props.error ? <ErrorBox error={this.props.error}/> : null}
-            <Button text="Create Project" style={css.addButton} onClick={this.createProject}/>
-            <Button text="Cancel" style={css.cancel} onClick={this.changeVisibility}/>
+            <Button text={this.props.content.createProject} style={css.addButton} onClick={this.createProject}/>
+            <Button text={this.props.content.cancel} style={css.cancel} onClick={this.changeVisibility}/>
           </form>
         </div>
       )

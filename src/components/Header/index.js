@@ -35,24 +35,20 @@ export default class Header extends Component {
 
   render() {
         let fixed = this.props.fixed ? 'navbar-fixed-top' : null;
+        let content = this.props.content.page;
+
         if (!this.props.token){
           return (
             <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
               <div className="container">
                 <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
-                  <button type="button" className={css.navbarToggle+" navbar-toggle collapsed"} data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-                    <span className="sr-only">Toggle navigation</span>
-                    <span className="icon-bar"/>
-                    <span className="icon-bar"/>
-                    <span className="icon-bar"/>
-                  </button>
-                  <div className={"collapse navbar-collapse " +css.rightIcons} id="navbar-collapse">
-                    <ul className="nav navbar-nav navbar-right">
-                      <Button onClick={this.openModal.bind(this,{loginModal:true})} text="Log in" />
+                <div className={"collapse navbar-collapse " +css.rightIcons} id="navbar-collapse">
+                  <ul className="nav navbar-nav navbar-right">
+                    <Button onClick={this.openModal.bind(this,{loginModal:true})} text={content.login.name} />
 
-                      <Button onClick={this.openModal.bind(this,{registrationModal:true})} text="Sign up" />
-                    </ul>
-                  </div>
+                    <Button onClick={this.openModal.bind(this,{registrationModal:true})} text={content.registration.name} />
+                  </ul>
+                </div>
 
                 <LoginModal isModalOpen={this.state.loginModal}
                             closeModal={this.closeModals}/>
@@ -67,14 +63,14 @@ export default class Header extends Component {
           return (
             <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
               <div className="container">
-                <Link to={'/'} className={css.logo}><h1 className={css.hideOnSmallSize}>LifeHelper</h1></Link>
+                <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
                 <div className={css.rightIcons+" "+ css.afterLogin} >
                   <ul className="nav navbar-nav navbar-right">
                     <Search/>
                     <AddTask
                       buttonText=" Add task"
                       buttonStyle={css.addTask}
-                      sendButtonText="Create task">
+                      sendButtonText={content.tasks.addTask.name}>
                       <i className="fa fa-plus-square" aria-hidden="true"/>
                     </AddTask>
                     <Settings/>

@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProjectFilters from "../components/ProjectFilters"
 import * as projectAction from 'redux/modules/Projects/actions'
 import * as projectSelectors from 'redux/modules/Projects/selectors'
+import * as contentSelector from 'redux/modules/Content/selectors'
 
 
 const mapActionsToProps = (dispatch) => ({
@@ -12,7 +12,9 @@ const mapActionsToProps = (dispatch) => ({
   reset: projectAction.reset
 });
 const mapStateToProps = (state) => ({
-  project: projectSelectors.project(state)
+  project: projectSelectors.project(state),
+  content: contentSelector.content(state)
+
 });
 
 

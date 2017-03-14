@@ -101,11 +101,12 @@ class TaskList extends Component {
 
   renderTitle(){
     let selectedProject = this.props.project.selected;
+    let content = this.props.content.page;
 
     if (!selectedProject){
       return (
         <div className={css.projectTitle}>
-          <h1>Your tasks</h1>
+          <h1>{content.tasks.yourTasks}</h1>
         </div>
       )
     }
@@ -114,8 +115,8 @@ class TaskList extends Component {
         <div className={css.projectTitle}>
           <h1>{selectedProject.name}</h1>
           <div className={css.buttons}>
-            <i onClick={this.editProject} data-tip="Edit project" className="fa fa-pencil" aria-hidden="true"/>
-            <i onClick={this.changeModalState} data-tip="Delete project" className="fa fa-trash" aria-hidden="true"/>
+            <i onClick={this.editProject} data-tip={content.project.editProject} className="fa fa-pencil" aria-hidden="true"/>
+            <i onClick={this.changeModalState} data-tip={content.project.deleteProject} className="fa fa-trash" aria-hidden="true"/>
           </div>
           <ReactTooltip />
 
@@ -125,10 +126,10 @@ class TaskList extends Component {
     else{                 //if the user want to update the project
       return (
         <div className={css.projectTitle}>
-          <Input type="text" placeholder="Project name" style={css.input} value={this.state.project.name} onChange={this.changeName} minLength={3} maxLength={15} />
+          <Input type="text" placeholder={content.project.name} style={css.input} value={this.state.project.name} onChange={this.changeName} minLength={3} maxLength={15} />
           {this.state.error ? <ErrorBox error={this.state.error}/> : null}
-          <Button type="button" onClick={this.updateProject} text={"Update project"} style={css.update}/>
-          <Button type="button" onClick={this.closeEdit} text={"Cancel"} style={css.cancel}/>
+          <Button type="button" onClick={this.updateProject} text={content.project.updateProject} style={css.update}/>
+          <Button type="button" onClick={this.closeEdit} text={content.project.cancel} style={css.cancel}/>
         </div>
       )
     }
@@ -146,17 +147,18 @@ class TaskList extends Component {
   }
 
   renderDeleteModal(){
+    let content = this.props.content.page.project.delete;
     if (this.state.deleteProject){
       return (
         <Modal show={this.state.deleteProject} dialogClassName={css.deleteModal} onHide={this.changeModalState}>
           <div className={css.container}>
             <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
             <h1>{this.props.project.selected.name}</h1>
-            <p>Are you sure you want to delete this project?</p>
+            <p> {content.question}</p>
             <p className={css.warning}> <i className="fa fa-exclamation" aria-hidden="true"/>
-              If you delete the project then all contained task will be deleted!</p>
-            <Button type="button" onClick={this.deleteProject} text={"Delete"} style={css.confirm}/>
-            <Button type="button" onClick={this.changeModalState} text={"Cancel"} style={css.cancel}/>
+              {content.warning}</p>
+            <Button type="button" onClick={this.deleteProject} text={content.delete} style={css.confirm}/>
+            <Button type="button" onClick={this.changeModalState} text={content.cancel} style={css.cancel}/>
           </div>
         </Modal>
       )

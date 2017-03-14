@@ -29,10 +29,16 @@
   }
   .input{
     display:block;
-    width: 50%;
+    width: 350px;
     float: right;
     margin-top: -10px;
     margin-right: 5px;
+    @media screen and (max-width:680px){
+      width: 35vh;
+    }
+    @media screen and (max-width:570px){
+      width: 100%;
+    }
   }
 
   .hideInput{
@@ -45,6 +51,8 @@
     visibility: visible;
     opacity: 1;
     transition: visibility 0s, opacity 0.5s linear;
+    margin-left: -5px;
+
   }
 
   .hideIcon{
@@ -59,7 +67,7 @@
 }
 
 .found{
-  width: 50%;
+  width: 100%;
   margin-right: 5px;
   float: right;
   position: absolute;

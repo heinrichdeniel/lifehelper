@@ -23,10 +23,8 @@ class Dropdown extends Component{
       value = options.filter((option) => option.value == selected)[0];
     }
     else{
-      value = {value: "0", text: "Select a project"};
+      value = {value: "0", text: this.props.placeholder};
     }
-
-
 
     return(
       <div className={css.base}>

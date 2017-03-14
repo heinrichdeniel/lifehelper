@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import css from './style.scss'
 
 import DatePicker from 'components/DatePicker'
-import moment from 'moment'
 
 class DateFilters extends Component {
   constructor(props){
@@ -32,7 +31,7 @@ class DateFilters extends Component {
   render() {
     return(
       <div className={css.base}>
-        <h2>Show tasks between</h2>
+        <h2>{this.props.content.page.filters.timeFilter}</h2>
         <DatePicker onChange={this.changeDateFrom}
                     value={this.props.dateFrom}/>
         <span>-</span>

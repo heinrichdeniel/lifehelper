@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from 'redux/modules/Authentication/actions'
 import * as selectors from 'redux/modules/Authentication/selectors'
+import * as contentSelector from 'redux/modules/Content/selectors'
 import Registration from "../components/Registration"
 
 const mapActionsToProps = (dispatch) => ({
@@ -17,7 +18,8 @@ const mapActionsToProps = (dispatch) => ({
 });
 const mapStateToProps = (state) => ({
   user: selectors.user(state),
-  registration: selectors.registration(state)
+  registration: selectors.registration(state),
+  content: contentSelector.content(state)
 });
 
 export default connect(mapStateToProps, mapActionsToProps)(Registration);

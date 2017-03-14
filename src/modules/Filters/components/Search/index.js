@@ -62,6 +62,7 @@ class Search extends Component {
       showIcon: css.hideIcon
     });
     document.addEventListener('click', this.handleDocumentClick, false);
+
   }
 
   renderProject(project){
@@ -90,11 +91,11 @@ class Search extends Component {
         <div className={this.state.showInput +" "+css.found}>
           <div className={css.foundItems}>
             <div className={css.group}>
-              <p className={css.groupName}>Projects</p>
+              <p className={css.groupName}>{this.props.content.page.filters.search.projects}</p>
               {this.props.project.list.map((project) => {return this.renderProject(project)})}
             </div>
             <div className={css.group}>
-              <p className={css.groupName}>Tasks</p>
+              <p className={css.groupName}>{this.props.content.page.filters.search.tasks}</p>
               {this.props.task.list.map((task) => {return this.renderTask(task)})}
             </div>
           </div>
@@ -107,7 +108,7 @@ class Search extends Component {
   render() {
     return(
       <div className={css.base}>
-        <Input value={this.state.searchValue} onChange={this.changeValue} placeholder="Quick search" style={css.input +" "+ this.state.showInput}/>
+        <Input value={this.state.searchValue} onChange={this.changeValue} placeholder={this.props.content.page.filters.search.quickSearch} style={css.input +" "+ this.state.showInput} focused={true}/>
         <div className={css.icon +" "+ this.state.showIcon} onClick={this.showInput} >
           <i className="fa fa-search" aria-hidden="true"/>
         </div>

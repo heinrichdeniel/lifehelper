@@ -37,6 +37,8 @@ export default class Login extends Component{
     e.preventDefault();
     this.props.resetLogin();
 
+    let content = this.props.content.page.errors;
+
     let errors = [];
 
     if (!this.props.user.email) {
@@ -47,26 +49,23 @@ export default class Login extends Component{
       errors.push('password');
     }
 
-    if (errors.length > 1) {
-      this.setState({error: 'Please fill the ' + errors.join(', ') + ' fields!'});
-      return null;
-    } else if (errors.length > 0) {
-      this.setState({error: 'Please fill the ' + errors.join(', ') + ' field!'});
+    if (errors.length > 0) {
+      this.setState({error: content.fillOut});
       return null;
     } else {
-      if (this.props.user.email.length < 6 || this.props.user.email.length > 20) {
-        return this.setState({error: 'Email must contain at least 6, maximum 20 character!'})
+      if (this.props.user.email.length < 6) {
+        return this.setState({error: content.smallEmail})
       }
       let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!this.props.user.email.match(emailRegex)){
-        return this.setState({error: 'Email must be valid!'})
+        return this.setState({error: content.invalidEmail})
       }
       if (this.props.user.password.length < 6 || this.props.user.password.length > 20) {
-        return this.setState({error: 'Password must contain at least 6, maximum 20 character!'})
+        return this.setState({error: content.smallPassword})
       }
       let passRegex = /^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/
       if (!this.props.user.password.match(passRegex)) {
-        return this.setState({error: 'Password must contain at least 1 uppercase letter, 1 lowercase letter and 1 number!'})
+        return this.setState({error: content.invalidPassword})
       }
     }
 
@@ -86,39 +85,42 @@ export default class Login extends Component{
   }
 
   renderLoginForm(){
+    let content = this.props.content.page.login;
     return(
       <div className={css.loginForm}>
         <form  action="POST" onSubmit={this.onSendLogin}>
           <input style={{display:'none'}} type="text" name="" />    {/*that is needed to turn off autocomplete*/}
           <input style={{display:'none'}} type="password" name="" />      {/*that is needed to turn off autocomplete*/}
-          <Input type="text" placeholder="Email" value={this.props.user.email} onChange={this.changeEmail} minLength={6} maxLength={20} />
-          <Input type="password" placeholder="Password" value={this.props.user.password} onChange={this.changePassword} minLength={6} maxLength={20} />
+          <Input type="text" placeholder={content.email}  value={this.props.user.email} onChange={this.changeEmail} minLength={6} />
+          <Input type="password" placeholder={content.password} value={this.props.user.password} onChange={this.changePassword} minLength={6} maxLength={20} />
 
           {this.state.error ? <ErrorBox error={this.state.error}/> : null}
           {this.props.login.error ? <ErrorBox error={this.props.login.error}/> : null}
-          <Button type="submit" text="Log in" style={css.login}/>
+          <Button type="submit" text={content.name} style={css.login}/>
         </form>
       </div>
     )
   }
 
   render() {
+    let content = this.props.content.page.login;
+
     return (
       <Modal className="login-modal" show={this.props.isModalOpen} onHide={this.closeModal}>
         <div className={css.container}>
           <div className={css.body}>
             <i className={`fa fa-close ${css.close}`} onClick={this.closeModal} />
-            <h1>Log in</h1>
+            <h1>{content.name}</h1>
             <div className={css.buttons}>
               <FacebookLogin onLogin={this.onSocialLogin}
                              responseHandler={this.props.loginFacebook}
-                             buttonText="Log in with Facebook"/>
+                             buttonText={content.facebook}/>
               <GoogleLogin onLogin={this.onSocialLogin}
                            responseHandler={this.props.loginGoogle}
-                           buttonText="Log in with Google"/>
+                           buttonText={content.google}/>
               <div className={css.separator}>
                 <div>
-                  or
+                  {content.or}
                 </div>
               </div>
 

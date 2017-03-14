@@ -23,6 +23,10 @@ const initialState = {
 
 
 const AuthReducer = (state = initialState, action = {}) => {
+  if (action.payload && (action.payload.message == "Expired token" || action.payload.message == "Token is missing")){
+    localStorage.clear();
+    window.location.href = '/'
+  }
   switch (action.type) {
     case constants.LOGIN_PENDING:
       return {
