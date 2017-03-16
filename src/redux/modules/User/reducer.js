@@ -13,7 +13,7 @@ const initialState = {
   },
   authDetails: auth ? auth : {},
   user: {
-    id: auth ? auth.id : "",
+    id: "",
     username: "",
     password: "",
     email: "",
@@ -22,7 +22,7 @@ const initialState = {
 }
 
 
-const AuthReducer = (state = initialState, action = {}) => {
+const UserReducer = (state = initialState, action = {}) => {
   if (action.payload && (action.payload.message == "Expired token" || action.payload.message == "Token is missing")){
     localStorage.clear();
     window.location.href = '/'
@@ -35,7 +35,7 @@ const AuthReducer = (state = initialState, action = {}) => {
       }
 
     case constants.LOGIN_SUCCESS:
-      localStorage.setItem('auth', JSON.stringify(action.payload));
+      localStorage.setItem('auth', JSON.stringify({token:action.payload.token}));
       return {
         ...state,
         login: Object.assign({}, state.login, {pending: false, error: false}),
@@ -62,7 +62,7 @@ const AuthReducer = (state = initialState, action = {}) => {
       }
 
     case constants.REGISTRATION_SUCCESS:
-      localStorage.setItem('auth', JSON.stringify(action.payload));
+      localStorage.setItem('auth', JSON.stringify({token:action.payload.token}));
       return {
         ...state,
         registration: Object.assign({}, state.registration, {pending: false, error: false}),
@@ -82,6 +82,24 @@ const AuthReducer = (state = initialState, action = {}) => {
         registration: Object.assign({}, state.registration, {pending: false, error: false})
       }
 
+    case constants.UPDATE_GENERAL_SETTINGS_PENDING:
+      return {
+        ...state,
+        user: Object.assign({}, state.user, {pending: true})
+      }
+
+    case constants.UPDATE_GENERAL_SETTINGS_ERROR:
+      return {
+        ...state,
+        user: Object.assign({}, state.user, {pending: false, error: true})
+      }
+
+    case constants.UPDATE_GENERAL_SETTINGS_SUCCESS:
+      return {
+        ...state,
+        user: action.payload.user
+      }
+
     case constants.GET_PROFILE_PENDING:
       return {
         ...state,
@@ -89,9 +107,6 @@ const AuthReducer = (state = initialState, action = {}) => {
       }
 
     case constants.GET_PROFILE_SUCCESS:
-      if (action.payload.user.language != "en" && window.location.pathname.substring(0,3)=="/en"){
-        browserHistory.push(action.payload.user.language+window.location.pathname.substring(3))
-      }
       return {
         ...state,
         user: action.payload.user
@@ -147,4 +162,4 @@ const AuthReducer = (state = initialState, action = {}) => {
   }
 }
 
-export default AuthReducer;
+export default UserReducer;

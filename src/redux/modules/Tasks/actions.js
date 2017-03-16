@@ -13,7 +13,7 @@ export function sendTask(payload) {
       payload: {
         promise: api.createTask({
                     ...payload,
-                    token: getState().Authentication.authDetails.token
+                    token: getState().User.authDetails.token
         })
       }
     })
@@ -30,7 +30,7 @@ export function getTaskById(id) {
       ],
       payload: {
         promise: api.getTaskById({
-          token: getState().Authentication.authDetails.token,
+          token: getState().User.authDetails.token,
           id: id
         })
       }
@@ -48,7 +48,7 @@ export function deleteTask(id) {
       ],
       payload: {
         promise: api.deleteTask({
-          token: getState().Authentication.authDetails.token,
+          token: getState().User.authDetails.token,
           id: id
         })
       }
@@ -66,7 +66,7 @@ export function getTaskList() {
       ],
       payload: {
         promise: api.getTaskList({
-          token: getState().Authentication.authDetails.token
+          token: getState().User.authDetails.token
         })
       }
     })

@@ -12,11 +12,22 @@ class Landing extends Component {
     super(props);
 
     this.renderContent = this.renderContent.bind(this);
+    this.switchLanguage = this.switchLanguage.bind(this);
   }
   componentWillMount(){
     if (this.props.authDetails.token){
       this.props.getProfile();
     }
+  }
+  componentDidUpdate(){
+    if (this.props.user.language && window.location.pathname.substring(1,3)!= this.props.user.language){
+      this.props.switchLanguage(this.props.user.language);
+    }
+  }
+
+  switchLanguage(lang){
+    this.props.switchLanguage(lang);
+    this.props.updateGeneralSettings({language:lang});
   }
 
   renderContent(){
@@ -39,7 +50,7 @@ class Landing extends Component {
                 token={this.props.authDetails.token}
                 logout={this.props.logout}/>
         {this.renderContent()}
-        <Footer switchLanguage={this.props.switchLanguage}/>
+        <Footer switchLanguage={this.switchLanguage}/>
       </div>
     )
   }

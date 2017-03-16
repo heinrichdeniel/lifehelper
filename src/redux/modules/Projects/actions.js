@@ -14,7 +14,7 @@ export function createProject(payload) {
       payload: {
         promise: api.createProject({
           ...payload,
-          token: getState().Authentication.authDetails.token
+          token: getState().User.authDetails.token
         })
       }
     })
@@ -32,7 +32,7 @@ export function deleteProject(id) {
       payload: {
         promise: api.deleteProject({
           id,
-          token: getState().Authentication.authDetails.token
+          token: getState().User.authDetails.token
         })
       }
     }).then(function(){
@@ -51,7 +51,7 @@ export function getProjectList() {
       ],
       payload: {
         promise: api.getProjectList({
-          token: getState().Authentication.authDetails.token
+          token: getState().User.authDetails.token
         })
       }
     })
@@ -70,7 +70,7 @@ export function selectProject(project) {
 export function reset() {
   store.dispatch((dispatch, getState) => {
     return dispatch({
-      type: constants.RESET,
+      type: constants.RESET
     })
   })
 }

@@ -1,9 +1,10 @@
-const module = 'AUTHENTICATION';
+const module = 'User';
 const actionTypes = [
   'LOGIN',
   'REGISTRATION',
   'UPDATE_PROFILE',
-  'GET_PROFILE'
+  'GET_PROFILE',
+  'UPDATE_GENERAL_SETTINGS'
 ];
 const statusTypes = ['PENDING', 'SUCCESS', 'ERROR'];
 const constants = {};

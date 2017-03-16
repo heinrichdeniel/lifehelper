@@ -17,5 +17,7 @@ export function switchLanguage(lang) {
   else{
     browserHistory.push("/" + lang);
   }
+
+
 }
 

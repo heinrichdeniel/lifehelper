@@ -89,11 +89,19 @@
           "account": "Profile",
           "shortcuts": "Shortcuts"
         },
-        "general":{
+        "general": {
           "language": "Default language",
           "dateFormat": "Date format",
           "timeFormat": "Time format",
-          "hours": "hours"
+          "hours": "hours",
+          "saveChanges": "Save changes"
+        },
+        "account": {
+          "username": "Username",
+          "email": "Email address",
+          "currentPassword": "Current password",
+          "newPassword": "New password",
+          "newPassword2": "Re-type password"
         }
       }
     }
@@ -193,7 +201,15 @@
           "language": "Alapértelmezett nyelv",
           "dateFormat": "Dátum formátum",
           "timeFormat": "Idő formátum",
-          "hours": "óra"
+          "hours": "óra",
+          "saveChanges": "Változtatások mentése"
+        },
+        "account": {
+          "username": "Felhasználónév",
+          "email": "E-mail cím",
+          "currentPassword": "Jelenlegi jelszó",
+          "newPassword": "Új jelszó",
+          "newPassword2": "Új jelszó újra"
         }
       }
     }
@@ -291,8 +307,16 @@
         "general":{
           "language": "Limba maternă",
           "dateFormat": "Formatul datei",
-          "timeFormat": "Format oră",
-          "hours": "oră"
+          "timeFormat": "Format oră ",
+          "hours": "oră",
+          "saveChanges": "Salvare"
+        },
+        "account": {
+          "username": "Nume utilizator",
+          "email": "Adresă e-mail",
+          "currentPassword": "Parola actuală",
+          "newPassword": "Parolă nouă",
+          "newPassword2": "Rescrie parola nouă"
         }
       }
     }

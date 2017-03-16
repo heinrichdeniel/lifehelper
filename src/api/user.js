@@ -4,7 +4,7 @@ import config from "../config";
 export function login (payload) {
   return new Promise((resolve, reject) => {
     request
-      .post(config.api.host + 'auth/login/')
+      .post(config.api.host + 'user/login/')
       .send(payload)
       .end(function (err, res) {
         //  If auth token is not returned, that means the user entered bad credentials.
@@ -19,7 +19,7 @@ export function login (payload) {
 export function registration (payload) {
   return new Promise((resolve, reject) => {
     request
-      .post(config.api.host + 'auth/registration/')
+      .post(config.api.host + 'user/registration/')
       .send(payload)
       .end(function (err, res) {
         if (!res.body.success) {
@@ -33,7 +33,7 @@ export function registration (payload) {
 export function loginFacebook (payload) {
   return new Promise((resolve, reject) => {
     request
-      .post(config.api.host + 'auth/login/facebook')
+      .post(config.api.host + 'user/login/facebook')
       .send({
         access_token: payload.authResponse.accessToken,
         facebook_id: payload.authResponse.userID,
@@ -53,7 +53,7 @@ export function loginFacebook (payload) {
 export function loginGoogle (payload) {
   return new Promise((resolve, reject) => {
     request
-      .post(config.api.host + 'auth/login/google')
+      .post(config.api.host + 'user/login/google')
       .send({
         access_token: payload.Zi.access_token,
         google_id: payload.El,
@@ -73,8 +73,23 @@ export function loginGoogle (payload) {
 export function getProfile (payload) {
   return new Promise((resolve, reject) => {
     request
-      .get(config.api.host + 'auth/profile')
+      .get(config.api.host + 'user/profile')
       .set('x-access-token', payload.token)
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
+export function updateGeneralSettings (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'user/updateGeneralSettings')
+      .set('x-access-token', payload.token)
+      .send(payload.settings)
       .end(function (err, res) {
         if (!res.body.success) {
           reject(res.body);

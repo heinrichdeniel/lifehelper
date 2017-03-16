@@ -51,6 +51,9 @@
 
   li{
     text-align: center;
+    a{
+      padding: 8px;
+    }
     a:hover{
       background-color: $primary-color;
     }

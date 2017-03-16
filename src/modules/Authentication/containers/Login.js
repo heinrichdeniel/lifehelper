@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as actions from 'redux/modules/Authentication/actions'
-import * as selectors from 'redux/modules/Authentication/selectors'
+import * as actions from 'redux/modules/User/actions'
+import * as selectors from 'redux/modules/User/selectors'
 import * as contentSelector from 'redux/modules/Content/selectors'
 import Login from "../components/Login"
 

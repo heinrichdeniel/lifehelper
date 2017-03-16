@@ -1,15 +1,30 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as selectors from 'redux/modules/Authentication/selectors'
-import * as actions from 'redux/modules/Authentication/actions'
+import * as selectors from 'redux/modules/User/selectors'
+import * as actions from 'redux/modules/User/actions'
 import * as contentActions from 'redux/modules/Content/actions'
 import * as contentSelectors from 'redux/modules/Content/selectors'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 
 class MainContainer extends Component {
+  constructor(props){
+    super(props);
+    this.switchLanguage = this.switchLanguage.bind(this);
+  }
+
   componentWillMount(){
     this.props.getProfile();
+  }
+
+  componentDidMount(){
+    if (this.props.user.language && window.location.pathname.substring(1,3)!= this.props.user.language){
+      this.props.switchLanguage(this.props.user.language);
+    }
+  }
+  switchLanguage(lang){
+    this.props.switchLanguage(lang);
+    this.props.updateGeneralSettings({language:lang});
   }
   render() {
     return (
@@ -21,7 +36,7 @@ class MainContainer extends Component {
         <div>
           {this.props.children}   {/*the content depends on the route*/}
         </div>
-        <Footer switchLanguage={this.props.switchLanguage}/>
+        <Footer switchLanguage={this.switchLanguage}/>
       </div>
     )
   }
@@ -31,6 +46,7 @@ class MainContainer extends Component {
 const mapActionsToProps = (dispatch) => ({
   getProfile: actions.getProfile,
   logout: actions.logout,
+  updateGeneralSettings: actions.updateGeneralSettings,
   switchLanguage: contentActions.switchLanguage
 });
 

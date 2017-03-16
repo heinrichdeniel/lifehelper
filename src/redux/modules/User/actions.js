@@ -1,6 +1,6 @@
 import store from 'redux/config/store'
 import constants from './constants'
-import * as api from 'api/authentication'
+import * as api from 'api/User'
 
 export function logout() {
   store.dispatch((dispatch, getState) => {
@@ -100,7 +100,7 @@ export function getProfile() {
       ],
       payload: {
         promise: api.getProfile({
-          token: getState().Authentication.authDetails.token
+          token: getState().User.authDetails.token
         })
       }
     })
@@ -154,6 +154,24 @@ export function resetRegistration() {
   store.dispatch((dispatch, getState) => {
     return dispatch({
       type: constants.RESET_REGISTRATION
+    })
+  })
+}
+
+export function updateGeneralSettings(settings) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.UPDATE_GENERAL_SETTINGS_PENDING,
+        constants.UPDATE_GENERAL_SETTINGS_SUCCESS,
+        constants.UPDATE_GENERAL_SETTINGS_ERROR
+      ],
+      payload: {
+        promise: api.updateGeneralSettings({
+          token: getState().User.authDetails.token,
+          settings: settings
+        })
+      }
     })
   })
 }

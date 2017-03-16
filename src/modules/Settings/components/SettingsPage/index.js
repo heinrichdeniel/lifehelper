@@ -32,24 +32,34 @@ class SettingsPage extends Component {
   }
 
   renderSettingsTab(){
+
     if (this.state.selectedTab == 1){
       return (
         <GeneralSettings
           content={this.props.content.page.settings.general}
-          user={this.props.user}/>
+          user={this.props.user}
+          saveChanges={this.props.updateGeneralSettings}
+          switchLanguage={this.props.switchLanguage}/>
       )
     }
     else if (this.state.selectedTab == 2){
-      return <AccountSettings content={this.props.content.page.settings.account}/>
+      return (
+        <AccountSettings content={this.props.content.page.settings.account}
+                              user={this.props.user}/>
+      )
     }
     else if (this.state.selectedTab == 3){
-      return <Shortcuts content={this.props.content.page.settings.shortcuts}/>
+      return (
+        <Shortcuts content={this.props.content.page.settings.shortcuts}/>
+      )
     }
   }
 
 
   render() {
-
+    if (!this.props.user.id){     //if the user not loaded yet
+      return null;
+    }
     return(
       <div className={css.base}>
         <Header user={this.props.user}/>

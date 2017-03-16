@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import css from './style.scss'
-import Dropdown from 'react-bootstrap-dropdown'
+import Option from './Option'
+import Button from 'components/Button'
 
 class GeneralSettings extends Component {
   constructor(props){
     super(props);
     this.selectLanguage = this.selectLanguage.bind(this);
+    this.selectDateFormat = this.selectDateFormat.bind(this);
+    this.selectTimeFormat = this.selectTimeFormat.bind(this);
+    this.saveChanges = this.saveChanges.bind(this);
 
     this.state={
       languages: [
@@ -19,93 +23,66 @@ class GeneralSettings extends Component {
         {value: "YYYY/MM/DD", text: "YYYY/MM/DD"}
       ],
       timeFormats: [
-        {value: "h:mm A", text: "12 "+this.props.content.hours},
-        {value: "HH:mm", text: "24 "+this.props.content.hours}
-      ],
-      selectedLanguage: {value: "en", text: "English"},
-      selectedDateFormat: {value: "DD/MM/YYYY", text: "DD/MM/YYYY"},
-      selectedTimeFormat: {value: "HH:mm", text: "24 "+this.props.content.hours}
+        {value: "h:mm A", text: "12"},
+        {value: "HH:mm", text: "24"}
+      ]
     }
   }
 
-  componentDidUpdate(){
-    let selectedLanguage = this.state.selectedLanguage;
-    let selectedDateFormat = this.state.selectedDateFormat;
-    let selectedTimeFormat = this.state.selectedTimeFormat;
-    let changed = false;
-
-    if (this.props.user.language && (this.props.user.language != this.state.selectedLanguage.value)) {     //if a language was selected before
-      selectedLanguage = this.state.languages.filter( lang => lang.value == this.props.user.language)[0];
-      changed = true;
-    }
-    if (this.props.user.dateFormat && (this.props.user.dateFormat != this.state.selectedLanguage.value)) {     //if a language was selected before
-      selectedDateFormat = this.state.dateFormats.filter( dateFormat => dateFormat.value == this.props.user.dateFormat)[0];
-      changed = true;
-    }
-    if (this.props.user.timeFormat && (this.props.user.timeFormat != this.state.selectedLanguage.value)) {     //if a language was selected before
-      selectedTimeFormat = this.state.timeFormats.filter( timeFormat => timeFormat.value == this.props.user.timeFormat)[0];
-      changed = true;
-    }
-    if (changed){
-      this.setState({
-        ...this.state,
-        selectedLanguage: selectedLanguage,
-        selectedDateFormat: selectedDateFormat,
-        selectedTimeFormat: selectedTimeFormat
-      });
-    }
-  }
 
   selectLanguage(selected){
     this.setState({
       ...this.state,
-      seletedLanguage: selected
+      selectedLanguage: selected
     })
+    this.props.switchLanguage(selected.value)
   }
 
   selectDateFormat(selected){
     this.setState({
       ...this.state,
-      seletedDateFormat: selected
+      selectedDateFormat: selected
     })
   }
 
   selectTimeFormat(selected){
     this.setState({
       ...this.state,
-      seletedTimeFormat: selected
+      selectedTimeFormat: selected
     })
   }
 
+  saveChanges(){
+    let settings = {
+      language: this.state.selectedLanguage ? this.state.selectedLanguage.value : this.props.user.language,
+      dateFormat: this.state.selectedDateFormat ? this.state.selectedDateFormat.value : this.props.user.dateFormat,
+      timeFormat: this.state.selectedTimeFormat ? this.state.selectedTimeFormat.value : this.props.user.timeFormat
+    };
+    this.props.saveChanges(settings);
+  }
+
   render() {
+    let language = this.state.selectedLanguage ? this.state.selectedLanguage : this.state.languages.filter( lang => lang.value == this.props.user.language)[0];
+    let dateFormat = this.state.selectedDateFormat ? this.state.selectedDateFormat : this.state.dateFormats.filter( dateFormat => dateFormat.value == this.props.user.dateFormat)[0];
+    let timeFormat = this.state.selectedTimeFormat ? this.state.selectedTimeFormat : this.state.timeFormats.filter( timeFormat => timeFormat.value == this.props.user.timeFormat)[0];
     return(
       <div className={css.base}>
-        <div className={css.row}>
-          <p className={css.languageSpan}>{this.props.content.language}</p>
-          <div className={css.language}>
-            <Dropdown title={this.state.selectedLanguage.text}
-                      items={this.state.languages}
-                      selected={this.state.selectedLanguage}
-                      onSelect={this.selectLanguage}/>
-          </div>
-        </div>
-        <div className={css.row}>
-          <p className={css.dateFormatSpan}>{this.props.content.dateFormat}</p>
-          <div className={css.dateFormat}>
-            <Dropdown title={this.state.selectedDateFormat.text}
-                      items={this.state.dateFormats}
-                      selected={this.state.selectedDateFormat}
-                      onSelect={this.selectDateFormat}/>
-          </div>
-        </div>
-        <div className={css.row}>
-          <p className={css.timeFormatSpan}>{this.props.content.timeFormat}</p>
-          <div className={css.timeFormat}>
-            <Dropdown title={this.state.selectedTimeFormat.text}
-                      items={this.state.timeFormats}
-                      selected={this.state.selectedTimeFormat}
-                      onSelect={this.selectTimeFormat}/>
-          </div>
+        <Option content = {this.props.content.language}
+                options = {this.state.languages}
+                selectedOption={language}
+                onSelect={this.selectLanguage}/>
+
+        <Option content = {this.props.content.dateFormat}
+                options = {this.state.dateFormats}
+                selectedOption={dateFormat}
+                onSelect={this.selectDateFormat}/>
+
+        <Option content = {this.props.content.timeFormat}
+                options = {this.state.timeFormats}
+                selectedOption={timeFormat}
+                onSelect={this.selectTimeFormat}/>
+        <div className={css.buttons}>
+          <Button onClick={this.saveChanges} text={this.props.content.saveChanges} style={css.save}/>
         </div>
       </div>
     )
