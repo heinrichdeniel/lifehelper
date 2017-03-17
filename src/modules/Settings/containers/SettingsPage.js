@@ -10,6 +10,8 @@ import * as contentSelectors from 'redux/modules/Content/selectors'
 const mapActionsToProps = (dispatch) => ({
   getProfile: userActions.getProfile,
   updateGeneralSettings: userActions.updateGeneralSettings,
+  updateAccountSettings: userActions.updateAccountSettings,
+  removeError: userActions.removeError,
   switchLanguage: contentActions.switchLanguage
 });
 

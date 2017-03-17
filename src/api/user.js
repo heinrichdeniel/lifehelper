@@ -98,3 +98,18 @@ export function updateGeneralSettings (payload) {
       })
   })
 }
+
+export function updateAccountSettings (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'user/updateAccountSettings')
+      .set('x-access-token', payload.token)
+      .send(payload.settings)
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}

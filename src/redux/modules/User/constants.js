@@ -4,7 +4,8 @@ const actionTypes = [
   'REGISTRATION',
   'UPDATE_PROFILE',
   'GET_PROFILE',
-  'UPDATE_GENERAL_SETTINGS'
+  'UPDATE_GENERAL_SETTINGS',
+  'UPDATE_ACCOUNT_SETTINGS'
 ];
 const statusTypes = ['PENDING', 'SUCCESS', 'ERROR'];
 const constants = {};
@@ -23,5 +24,6 @@ constants['SET_PASSWORD'] = module + '_' + 'SET_PASSWORD';
 constants['RESET'] = module + '_' + 'RESET';
 constants['RESET_LOGIN'] = module + '_' + 'RESET_LOGIN';
 constants['RESET_REGISTRATION'] = module + '_' + 'RESET_REGISTRATION';
+constants['REMOVE_ERROR'] = module + '_' + 'REMOVE_ERROR';
 
 export default constants;

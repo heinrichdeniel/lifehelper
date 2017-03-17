@@ -157,6 +157,13 @@ export function resetRegistration() {
     })
   })
 }
+export function removeError() {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.REMOVE_ERROR
+    })
+  })
+}
 
 export function updateGeneralSettings(settings) {
   store.dispatch((dispatch, getState) => {
@@ -168,6 +175,24 @@ export function updateGeneralSettings(settings) {
       ],
       payload: {
         promise: api.updateGeneralSettings({
+          token: getState().User.authDetails.token,
+          settings: settings
+        })
+      }
+    })
+  })
+}
+
+export function updateAccountSettings(settings) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.UPDATE_ACCOUNT_SETTINGS_PENDING,
+        constants.UPDATE_ACCOUNT_SETTINGS_SUCCESS,
+        constants.UPDATE_ACCOUNT_SETTINGS_ERROR
+      ],
+      payload: {
+        promise: api.updateAccountSettings({
           token: getState().User.authDetails.token,
           settings: settings
         })

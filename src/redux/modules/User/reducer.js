@@ -97,7 +97,31 @@ const UserReducer = (state = initialState, action = {}) => {
     case constants.UPDATE_GENERAL_SETTINGS_SUCCESS:
       return {
         ...state,
-        user: action.payload.user
+        user: {
+          ...action.payload.user,
+          success: true
+        }
+      }
+
+    case constants.UPDATE_ACCOUNT_SETTINGS_PENDING:
+      return {
+        ...state,
+        user: Object.assign({}, state.user, {pending: true, success: false})
+      }
+
+    case constants.UPDATE_ACCOUNT_SETTINGS_ERROR:
+      return {
+        ...state,
+        user: Object.assign({}, state.user, {pending: false, error: action.payload.message, success: false})
+      }
+
+    case constants.UPDATE_ACCOUNT_SETTINGS_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...action.payload.user,
+          success: true
+        }
       }
 
     case constants.GET_PROFILE_PENDING:
@@ -146,6 +170,12 @@ const UserReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         user: Object.assign({}, state.user, {email: action.payload})
+      };
+
+    case constants.REMOVE_ERROR:
+      return {
+        ...state,
+        user: Object.assign({}, state.user, {error: false})
       };
 
     case constants.LOGOUT:

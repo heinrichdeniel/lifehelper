@@ -39,41 +39,26 @@ export default class Registration extends Component{
     this.props.resetRegistration();
     let content = this.props.content.page.errors;
 
-    let errors = [];
-
-    if (!this.props.user.username) {
-      errors.push('name');
-    }
-
-    if (!this.props.user.email) {
-      errors.push('email');
-    }
-
-    if (!this.props.user.password) {
-      errors.push('password');
-    }
-
-    if (errors.length > 0) {
+    if (!this.props.user.username || !this.props.user.email || !this.props.user.password) {
       this.setState({error: content.fillOut});
-      return null;
-    } else {
-      if (this.props.user.username.length < 4 || this.props.user.username.length > 20) {
-        return this.setState({error: content.smallName})
-      }
-      if (this.props.user.email.length < 6 ) {
-        return this.setState({error: content.smallEmail})
-      }
-      let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (!this.props.user.email.match(emailRegex)){
-        return this.setState({error: content.invalidEmail})
-      }
-      if (this.props.user.password.length < 6 || this.props.user.password.length > 20) {
-        return this.setState({error: content.smallPassword})
-      }
-      let passRegex = /^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/
-      if (!this.props.user.password.match(passRegex)) {
-        return this.setState({error: content.invalidPassword})
-      }
+    }
+
+    if (this.props.user.username.length < 4 || this.props.user.username.length > 20) {
+      return this.setState({error: content.smallName})
+    }
+    if (this.props.user.email.length < 6 ) {
+      return this.setState({error: content.smallEmail})
+    }
+    let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!this.props.user.email.match(emailRegex)){
+      return this.setState({error: content.invalidEmail})
+    }
+    if (this.props.user.password.length < 6 || this.props.user.password.length > 20) {
+      return this.setState({error: content.smallPassword})
+    }
+    let passRegex = /^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/
+    if (!this.props.user.password.match(passRegex)) {
+      return this.setState({error: content.invalidPassword})
     }
 
     this.setState({

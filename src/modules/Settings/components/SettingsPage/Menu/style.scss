@@ -12,6 +12,7 @@
     text-align: center;
     padding: 5px;
     cursor: pointer;
+    word-wrap: break-word;
     &:hover{
       background-color: #3a920d;
       border-radius: 5px 5px 0px 0px;
@@ -21,4 +22,5 @@
       border-radius: 5px 5px 0px 0px;
     }
   }
+
 }

@@ -53,34 +53,46 @@ class GeneralSettings extends Component {
   }
 
   saveChanges(){
+
     let settings = {
       language: this.state.selectedLanguage ? this.state.selectedLanguage.value : this.props.user.language,
       dateFormat: this.state.selectedDateFormat ? this.state.selectedDateFormat.value : this.props.user.dateFormat,
       timeFormat: this.state.selectedTimeFormat ? this.state.selectedTimeFormat.value : this.props.user.timeFormat
     };
+
     this.props.saveChanges(settings);
+
+    this.setState({
+      ...this.state,
+      success:true
+    })
   }
 
   render() {
     let language = this.state.selectedLanguage ? this.state.selectedLanguage : this.state.languages.filter( lang => lang.value == this.props.user.language)[0];
     let dateFormat = this.state.selectedDateFormat ? this.state.selectedDateFormat : this.state.dateFormats.filter( dateFormat => dateFormat.value == this.props.user.dateFormat)[0];
     let timeFormat = this.state.selectedTimeFormat ? this.state.selectedTimeFormat : this.state.timeFormats.filter( timeFormat => timeFormat.value == this.props.user.timeFormat)[0];
+
     return(
       <div className={css.base}>
-        <Option content = {this.props.content.language}
-                options = {this.state.languages}
-                selectedOption={language}
-                onSelect={this.selectLanguage}/>
+        <div className={css.center}>
+          <div className={css.options}>
+            <Option content = {this.props.content.language}
+                    options = {this.state.languages}
+                    selectedOption={language}
+                    onSelect={this.selectLanguage}/>
 
-        <Option content = {this.props.content.dateFormat}
-                options = {this.state.dateFormats}
-                selectedOption={dateFormat}
-                onSelect={this.selectDateFormat}/>
+            <Option content = {this.props.content.dateFormat}
+                    options = {this.state.dateFormats}
+                    selectedOption={dateFormat}
+                    onSelect={this.selectDateFormat}/>
 
-        <Option content = {this.props.content.timeFormat}
-                options = {this.state.timeFormats}
-                selectedOption={timeFormat}
-                onSelect={this.selectTimeFormat}/>
+            <Option content = {this.props.content.timeFormat}
+                    options = {this.state.timeFormats}
+                    selectedOption={timeFormat}
+                    onSelect={this.selectTimeFormat}/>
+          </div>
+        </div>
         <div className={css.buttons}>
           <Button onClick={this.saveChanges} text={this.props.content.saveChanges} style={css.save}/>
         </div>

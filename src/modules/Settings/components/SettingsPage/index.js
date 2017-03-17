@@ -44,8 +44,10 @@ class SettingsPage extends Component {
     }
     else if (this.state.selectedTab == 2){
       return (
-        <AccountSettings content={this.props.content.page.settings.account}
-                              user={this.props.user}/>
+        <AccountSettings content={this.props.content.page}
+                         saveChanges={this.props.updateAccountSettings}
+                         removeError={this.props.removeError}
+                         user={this.props.user}/>
       )
     }
     else if (this.state.selectedTab == 3){

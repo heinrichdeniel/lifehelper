@@ -4,11 +4,13 @@
     text-align: center;
   }
   .body{
-    width: 100%;
     top: 50%;
     position: absolute;
     left: 50%;
     margin: auto;
     transform: translateX(-50%) translateY(-50%)!important;
+    @media screen and (max-width: 768px){
+      width: 100%;
+    }
   }
 }

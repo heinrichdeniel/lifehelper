@@ -26,7 +26,8 @@
         "invalidEmail": "Email must be valid!",
         "smallPassword": "Password must contain at least 6, maximum 20 character!",
         "invalidPassword": "Password must contain at least 1 uppercase letter, 1 lowercase letter and 1 number!",
-        "wrongData": "Wrong email address or password!"
+        "wrongData": "Wrong email address or password!",
+        "differentPasswords": "Passwords do not match!"
       },
       "tasks": {
         "yourTasks": "Your tasks",
@@ -99,9 +100,13 @@
         "account": {
           "username": "Username",
           "email": "Email address",
-          "currentPassword": "Current password",
+          "currentPassword": "Password",
+          "prevPassword": "Current password",
           "newPassword": "New password",
-          "newPassword2": "Re-type password"
+          "newPassword2": "Re-type password",
+          "setPassword": "Set new password",
+          "saveChanges": "Save changes",
+          "updated": "Your account has been updated."
         }
       }
     }
@@ -133,7 +138,8 @@
         "invalidEmail": "Az e-mail cím érvényes kell legyen!",
         "smallPassword": "A jelszó minimum 6, maximum 20 karaktert kell tartalmazzon!",
         "invalidPassword": "A jelszónak tartalmaznia kell minimum 1 kisbetűt, 1 nagybetűt és 1 számot!",
-        "wrongData": "Az e-mail cím vagy a jelszó helytelen!"
+        "wrongData": "Az e-mail cím vagy a jelszó helytelen!",
+        "differentPasswords": "A jelszavak nem egyeznek meg!"
       },
       "tasks":{
         "yourTasks": "Teendőid",
@@ -207,9 +213,13 @@
         "account": {
           "username": "Felhasználónév",
           "email": "E-mail cím",
-          "currentPassword": "Jelenlegi jelszó",
+          "currentPassword": "Jelszó",
+          "prevPassword": "Régi jelszó",
           "newPassword": "Új jelszó",
-          "newPassword2": "Új jelszó újra"
+          "newPassword2": "Új jelszó újra",
+          "setPassword": "Új jelszó beállítása",
+          "saveChanges": "Változtatások mentése",
+          "updated": "A fiókod sikeresen frissítve lett."
         }
       }
     }
@@ -241,7 +251,8 @@
         "invalidEmail": "Adresa de e-mail trebuie să fie valabile!",
         "smallPassword": "Parola trebuie să conțină cel puțin 6, maxim 20 de caractere!",
         "invalidPassword": "Parola trebuie să conțină cel puțin 1 literă mare, 1 literă mică și 1 număr!",
-        "wrongData": "Adresă e-mail sau parola greșită!"
+        "wrongData": "Adresă e-mail sau parola greșită!",
+        "differentPasswords": "parole nu se potrivesc!"
       },
       "tasks":{
         "yourTasks": "Activitățile tale",
@@ -314,9 +325,13 @@
         "account": {
           "username": "Nume utilizator",
           "email": "Adresă e-mail",
-          "currentPassword": "Parola actuală",
+          "currentPassword": "Parolă",
+          "prevPassword": "Parola actuală",
           "newPassword": "Parolă nouă",
-          "newPassword2": "Rescrie parola nouă"
+          "newPassword2": "Rescrie parola nouă",
+          "setPassword": "Setați o parolă nouă",
+          "saveChanges": "Salvare",
+          "updated": "Contul tău a fost actualizat."
         }
       }
     }
