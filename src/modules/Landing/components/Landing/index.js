@@ -6,6 +6,7 @@ import Footer from 'components/Footer'
 import Filters from 'modules/Filters'
 
 import TaskList from 'modules/Tasks/containers/TaskListContainer'
+import ProjectList from 'modules/Projects/containers/ProjectContainer'
 
 class Landing extends Component {
   constructor(props){
@@ -31,15 +32,29 @@ class Landing extends Component {
   }
 
   renderContent(){
-    if (this.props.authDetails.token)   //if the user is logged in
-    return(
-      <div className={css.content + " container"}>
-        <Filters/>
-        <div className={css.taskList + " col-sm-7 col-lg-7"}>
-          <TaskList/>
-        </div>
-      </div>
-      )
+    if (this.props.authDetails.token){      //if the user is logged in
+      let pathname = window.location.pathname;
+      if (pathname.substring(pathname.length-8) == "projects"){//render the projects tab
+        return(
+          <div className={css.content + " container"}>
+            <Filters content={this.props.content.page.filters}/>
+            <div className={css.taskList + " col-sm-7 col-lg-7"}>
+              <ProjectList/>
+            </div>
+          </div>
+        )
+      }
+      else{     //render the tasks tab
+        return(
+          <div className={css.content + " container"}>
+            <Filters content={this.props.content.page.filters}/>
+            <div className={css.taskList + " col-sm-7 col-lg-7"}>
+              <TaskList/>
+            </div>
+          </div>
+        )
+      }
+    }
   }
 
   render() {

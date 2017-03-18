@@ -68,7 +68,7 @@ export default class Header extends Component {
               <ul className="nav navbar-nav navbar-right">
                 <Search/>
                 <AddTask
-                  buttonText=" Add task"
+                  buttonText={content.tasks.addTask.addTask}
                   buttonStyle={css.addTask}
                   sendButtonText={content.tasks.addTask.name}>
                   <i className="fa fa-plus-square" aria-hidden="true"/>

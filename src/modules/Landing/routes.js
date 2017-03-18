@@ -1,8 +1,12 @@
 import React from 'react'
-import { IndexRoute } from 'react-router'
+import { Route, IndexRoute } from 'react-router'
 
 import LandingContainer from "./containers/LandingContainer"
 
 export default (
-    <IndexRoute component={LandingContainer} />
+    <Route >
+      <IndexRoute component={LandingContainer} />
+      <Route path="/:lang/tasks" component={LandingContainer}/>
+      <Route path="/:lang/projects" component={LandingContainer}/>
+    </Route>
 );

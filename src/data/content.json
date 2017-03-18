@@ -32,6 +32,7 @@
       "tasks": {
         "yourTasks": "Your tasks",
         "addTask":{
+          "addTask": "Add task",
           "name": "Create task"
         },
         "editTask": {
@@ -57,7 +58,8 @@
       },
       "filters": {
         "timeFilter": "Show tasks between...",
-        "projectFilter": "Select a project",
+        "goToTasks": "Show Tasks",
+        "goToProjects": "Show Projects",
         "search":{
           "quickSearch": "Quick search",
           "projects": "Projects",
@@ -65,8 +67,9 @@
         }
       },
       "project": {
+        "title": "Projects",
         "name": "Project name",
-        "addProject": "Add project",
+        "addProject": "Add new project",
         "createProject": "Create project",
         "editProject": "Edit project",
         "deleteProject": "Delete project",
@@ -143,8 +146,9 @@
         "differentPasswords": "A jelszavak nem egyeznek meg!"
       },
       "tasks":{
-        "yourTasks": "Teendőid",
+        "yourTasks": "Feladatok",
         "addTask":{
+          "addTask": "Feladat hozzáadása",
           "name": "Hozzáad"
         },
         "editTask": {
@@ -171,7 +175,8 @@
       },
       "filters": {
         "timeFilter": "Idő intervallum",
-        "projectFilter": "Projekt kiválasztása",
+        "goToTasks": "Feladatok mutatása",
+        "goToProjects": "Projektek mutatása",
         "search":{
           "quickSearch": "Keresés",
           "projects": "Projektek",
@@ -179,9 +184,10 @@
         }
       },
       "project": {
+        "title": "Projektek",
         "name": "Projekt neve",
-        "addProject": "Projekt hozzáadása",
-        "createProject": "Hozzáadás",
+        "addProject": "Új projekt hozzáadása",
+        "createProject": "Projekt hozzáadása",
         "editProject": "Projekt szerkesztése",
         "deleteProject": "Projekt törlése",
         "updateProject": "Mentés",
@@ -259,6 +265,7 @@
       "tasks":{
         "yourTasks": "Activitățile tale",
         "addTask":{
+          "addTask": "Adaugă o nouă activitate",
           "name": "Adaugă"
         },
         "editTask": {
@@ -284,7 +291,8 @@
       },
       "filters": {
         "timeFilter": "Afișarea activitățile între...",
-        "projectFilter": "Selectați un proiect",
+        "goToTasks": "Activități",
+        "goToProjects": "Proiecte",
         "search":{
           "quickSearch": "Căutare",
           "projects": "Proiecte",
@@ -292,6 +300,7 @@
         }
       },
       "project": {
+        "title": "Proiecte",
         "name": "Numele proiectului",
         "addProject": "Adăugați un proiect",
         "createProject": "Adaugare",

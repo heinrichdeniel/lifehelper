@@ -199,7 +199,7 @@ class AddTask extends Component {
     if(!this.props.update){
       return(
         <div className={css.base}>
-          <div className={css.addIcon} onClick={this.changeModalState}>
+          <div className={this.props.iconStyle + " " + css.addIcon} data-tip={this.props.buttonText} onClick={this.changeModalState}>
             <i className={"fa fa-plus"} aria-hidden="true"/>
           </div>
         </div>

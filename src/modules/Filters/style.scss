@@ -8,9 +8,39 @@
 }
 
 .filters{
-  background-color: $primary-color;
-  padding: 15px 10px;
+  background-color: #ccc;
+  padding: 15px 10px 5px 10px;
   border-radius: 5px;
+  p{
+    display: block;
+    font-size: 14px;
+    padding: 8px;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    i{
+      right: 35px;
+      font-size: 18px;
+      position: absolute;
+      @media screen and (max-width: 768px){
+        right: 20px;
+      }
+    }
+  }
+  .goToTasks{
+    background-color: $primary-color;
+    &:hover{
+      box-shadow: 0 0 5px 0px $primary-color;
+      font-weight:700;
+    }
+  }
+  .goToProjects{
+    background-color: $red-color;
+    &:hover{
+      box-shadow: 0 0 5px 0px $red-color;
+    }
+  }
 }
 
 @media screen and (max-width: 768px){
@@ -62,7 +92,7 @@
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      box-shadow: 0 0 25px 0 $secondary-color;
+      box-shadow: 0 0 25px 0 #333;
       margin-right: 15px;
 
     }
