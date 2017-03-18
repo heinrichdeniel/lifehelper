@@ -10,6 +10,7 @@ class GeneralSettings extends Component {
     this.selectDateFormat = this.selectDateFormat.bind(this);
     this.selectTimeFormat = this.selectTimeFormat.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
+    this.renderSuccessMessage = this.renderSuccessMessage.bind(this);
 
     this.state={
       languages: [
@@ -25,7 +26,8 @@ class GeneralSettings extends Component {
       timeFormats: [
         {value: "h:mm A", text: "12"},
         {value: "HH:mm", text: "24"}
-      ]
+      ],
+      success: false
     }
   }
 
@@ -33,22 +35,25 @@ class GeneralSettings extends Component {
   selectLanguage(selected){
     this.setState({
       ...this.state,
-      selectedLanguage: selected
-    })
+      selectedLanguage: selected,
+      success: false
+    });
     this.props.switchLanguage(selected.value)
   }
 
   selectDateFormat(selected){
     this.setState({
       ...this.state,
-      selectedDateFormat: selected
+      selectedDateFormat: selected,
+      success: false
     })
   }
 
   selectTimeFormat(selected){
     this.setState({
       ...this.state,
-      selectedTimeFormat: selected
+      selectedTimeFormat: selected,
+      success: false
     })
   }
 
@@ -66,6 +71,16 @@ class GeneralSettings extends Component {
       ...this.state,
       success:true
     })
+  }
+
+  renderSuccessMessage(){
+    if (this.props.user.success && this.state.success){
+      return (
+        <div className={css.updateSuccess}>
+          {this.props.content.updated}
+        </div>
+      )
+    }
   }
 
   render() {
@@ -91,6 +106,7 @@ class GeneralSettings extends Component {
                     options = {this.state.timeFormats}
                     selectedOption={timeFormat}
                     onSelect={this.selectTimeFormat}/>
+            {this.renderSuccessMessage()}
           </div>
         </div>
         <div className={css.buttons}>

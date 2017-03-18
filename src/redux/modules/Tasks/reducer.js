@@ -13,7 +13,7 @@ const initialState = {
       ProjectId: "0"
     },
     dateFrom: moment(),
-    dateTo: moment().add(1,'years'),
+    dateTo: moment().add(1,'weeks'),
     pending: false,
     error: false
   }
@@ -140,7 +140,6 @@ const TaskReducer = (state = initialState, action = {}) => {
         ...state,
         task: {
           ...state.task,
-          list: state.task.list.filter( (task) => task.id != state.task.current.id),
           pending: false,
           error: false
         }

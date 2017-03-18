@@ -6,6 +6,7 @@ import * as selectors from 'redux/modules/Tasks/selectors'
 import * as projectActions from 'redux/modules/Projects/actions'
 import * as projectSelectors from 'redux/modules/Projects/selectors'
 import * as contentSelectors from 'redux/modules/Content/selectors'
+import * as userSelectors from 'redux/modules/User/selectors'
 
 const mapActionsToProps = (dispatch) => ({
   getTaskList: actions.getTaskList,
@@ -18,8 +19,8 @@ const mapStateToProps = (state) => ({
   dateFrom: selectors.dateFrom(state),
   dateTo: selectors.dateTo(state),
   project: projectSelectors.project(state),
-  content: contentSelectors.content(state)
-
+  content: contentSelectors.content(state),
+  user: userSelectors.user(state)
 });
 
 

@@ -33,11 +33,14 @@ class DateFilters extends Component {
       <div className={css.base}>
         <h2>{this.props.content.page.filters.timeFilter}</h2>
         <DatePicker onChange={this.changeDateFrom}
-                    value={this.props.dateFrom}/>
+                    value={this.props.dateFrom}
+                    maxDate={this.props.dateTo}
+                    dateFormat={this.props.user.dateFormat}/>
         <span>-</span>
         <DatePicker onChange={this.changeDateTo}
                     value={this.props.dateTo}
-                    minDate={this.props.dateFrom}/>
+                    minDate={this.props.dateFrom}
+                    dateFormat={this.props.user.dateFormat}/>
       </div>
     )
   }

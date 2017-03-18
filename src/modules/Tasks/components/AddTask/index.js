@@ -49,7 +49,7 @@ class AddTask extends Component {
     }
   }
   componentWillMount() {
-    if (this.props.sendButtonText == "Update task"){
+    if (this.props.update){
       this.setState({
         ...this.state,
         task:this.props.task.current
@@ -163,11 +163,12 @@ class AddTask extends Component {
       return this.setState({error: this.props.content.page.tasks.shortTaskName})
     }
     this.props.sendTask(this.state.task);
+    this.props.selectProject("");
     this.setState({
       ...this.state,
       showModal: !this.state.showModal
     });
-    if (!this.state.task.id){
+    if (!this.state.task.id){ // if a new task added then go to the homepage
       browserHistory.push(window.location.pathname.substring(0,3));
     }
   }
@@ -231,8 +232,8 @@ class AddTask extends Component {
               <Input type="text" placeholder={content.name} value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
               <TextArea type="text" placeholder={content.description} value={task.description} onChange={this.changeDescription}  />
 
-              <DatePicker value={task.date} onChange={this.changeDate}/>
-              <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime}/>
+              <DatePicker value={task.date} onChange={this.changeDate} dateFormat={this.props.user.dateFormat}/>
+              <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime} timeFormat={this.props.user.timeFormat}/>
 
               <Dropdown onChange={this.selectProject} placeholder={content.selectProject} projects={this.props.project.list} selected={task.ProjectId}/>
               {this.state.error ? <ErrorBox error={this.state.error}/> : null}
@@ -288,7 +289,7 @@ class AddTask extends Component {
               <div className={css.summary}>
                 <p className={css.name}><span>{content.name}:</span> {task.name}</p>
                 <p className={css.description}><span>{content.description}:</span> {task.description?task.description:"-"}</p>
-                <p className={css.date}><span>{content.date}:</span> {moment(task.date).format("MMM DD")}, {moment(task.time, "H:m").format("HH:mm")}</p>
+                <p className={css.date}><span>{content.date}:</span> {moment(task.date).format(this.props.user.dateFormat)}, {moment(task.time, "H:m").format(this.props.user.timeFormat)}</p>
                 <p className={css.location}><span>{content.locationTitle}:</span> {task.location?task.location:"-"}</p>
                 <p className={css.project}><span>{content.project}:</span> {project}</p>
               </div>

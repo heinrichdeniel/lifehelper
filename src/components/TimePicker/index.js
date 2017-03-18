@@ -31,7 +31,7 @@ class datePicker extends Component{
     return(
       <div className={css.base}>
         <span className="fa fa-clock-o"/>
-        <p onClick={this.changeModalState}>{moment(value, "H:m").format("HH:mm")}</p>
+        <p onClick={this.changeModalState}>{moment(value, "H:m").format(this.props.timeFormat)}</p>
         <Modal show={this.state.showModal}  dialogClassName={css.modal}  onHide={this.changeModalState}>
           <TimePicker
             hours={parseInt(moment(value, "H:m").format("H"))}

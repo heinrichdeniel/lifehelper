@@ -10,16 +10,18 @@ class datePicker extends Component{
   }
 
   render(){
-    let { value, onChange , minDate} = this.props;
+    let { value, onChange , minDate,maxDate} = this.props;
 
     let minimum = minDate?minDate:moment();
+    let maximum = maxDate?maxDate:null;
     return(
       <div className={css.base}>
         <span className={css.calendar + " fa fa-calendar"}/>
         <DatePicker
           selected={moment(value)}
-          dateFormat="MMM Do YYYY"
+          dateFormat={this.props.dateFormat}
           minDate={minimum}
+          maxDate={maximum}
           todayButton={"Today"}
           onChange={onChange}
           className={css.datePicker}

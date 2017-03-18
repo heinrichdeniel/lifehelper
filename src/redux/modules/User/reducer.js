@@ -85,13 +85,13 @@ const UserReducer = (state = initialState, action = {}) => {
     case constants.UPDATE_GENERAL_SETTINGS_PENDING:
       return {
         ...state,
-        user: Object.assign({}, state.user, {pending: true})
+        user: Object.assign({}, state.user, {pending: true, success:false})
       }
 
     case constants.UPDATE_GENERAL_SETTINGS_ERROR:
       return {
         ...state,
-        user: Object.assign({}, state.user, {pending: false, error: true})
+        user: Object.assign({}, state.user, {pending: false, error: true, success:false})
       }
 
     case constants.UPDATE_GENERAL_SETTINGS_SUCCESS:

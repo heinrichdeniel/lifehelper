@@ -95,7 +95,8 @@
           "dateFormat": "Date format",
           "timeFormat": "Time format",
           "hours": "hours",
-          "saveChanges": "Save changes"
+          "saveChanges": "Save changes",
+          "updated": "Your account has been updated."
         },
         "account": {
           "username": "Username",
@@ -208,7 +209,8 @@
           "dateFormat": "Dátum formátum",
           "timeFormat": "Idő formátum",
           "hours": "óra",
-          "saveChanges": "Változtatások mentése"
+          "saveChanges": "Változtatások mentése",
+          "updated": "A fiókod sikeresen frissítve lett."
         },
         "account": {
           "username": "Felhasználónév",
@@ -320,7 +322,8 @@
           "dateFormat": "Formatul datei",
           "timeFormat": "Format oră ",
           "hours": "oră",
-          "saveChanges": "Salvare"
+          "saveChanges": "Salvare",
+          "updated": "Contul tău a fost actualizat."
         },
         "account": {
           "username": "Nume utilizator",

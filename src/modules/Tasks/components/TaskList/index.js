@@ -140,7 +140,7 @@ class TaskList extends Component {
     let selectedProject = this.props.project.selected;
     if (task && !task.deleted){         //if the task was not deleted
       if (!selectedProject || (selectedProject.id == task.ProjectId)){ //if a project filter was selected then the task project must be the same
-        return <TaskItem key={task.id} task={task}/>
+        return <TaskItem key={task.id} task={task} dateFormat={this.props.user.dateFormat} timeFormat={this.props.user.timeFormat}/>
       }
     }
     return  null;
