@@ -1,6 +1,6 @@
 import store from 'redux/config/store'
 import constants from './constants'
-import * as api from 'api/User'
+import * as api from 'api/user'
 
 export function logout() {
   store.dispatch((dispatch, getState) => {
