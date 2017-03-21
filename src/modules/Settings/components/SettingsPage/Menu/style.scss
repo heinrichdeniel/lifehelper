@@ -16,10 +16,12 @@
     &:hover{
       background-color: #3a920d;
       border-radius: 5px 5px 0px 0px;
+      margin-bottom: -1px;
     }
     &.active{
       background-color: $secondary-color;
       border-radius: 5px 5px 0px 0px;
+      margin-bottom: -1px;
     }
   }
 

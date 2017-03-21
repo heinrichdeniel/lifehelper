@@ -62,6 +62,7 @@ class Settings extends Component {
       )
     }
   }
+
   render() {
     let icon = <i className={css.userIcon + " fa fa-cog"} onClick={this.showOptions}/>;
     if (this.props.user.photo_url){

@@ -227,7 +227,7 @@ class AddTask extends Component {
           <div className={css.body}>
             <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
 
-            <h1>{this.props.sendButtonText}</h1>
+            <h1>{content.addTask.addTask}</h1>
             <form  action="POST" onSubmit={this.nextStep}>
               <Input type="text" placeholder={content.name} value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
               <TextArea type="text" placeholder={content.description} value={task.description} onChange={this.changeDescription}  />

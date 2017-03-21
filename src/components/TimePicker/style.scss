@@ -7,8 +7,7 @@
   background-color: #ffffff;
   position: relative;
   &:hover{
-    font-weight: 700;
-    box-shadow: 0 0 5px 0 #CCCCCC;
+    box-shadow: 0 0 5px 0 #888;
   }
   @media screen and (max-width:500px){
     width: 100%;
@@ -191,7 +190,6 @@
   font-size:    2em;
   line-height:  1em;
   font-weight: bold;
-
   text-align: center;
 }
 

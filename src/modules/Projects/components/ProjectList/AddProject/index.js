@@ -12,7 +12,7 @@ class AddProject extends Component {
 
     this.changeModalState = this.changeModalState.bind(this);
     this.changeName = this.changeName.bind(this);
-    this.sendTask = this.sendTask.bind(this);
+    this.saveProject = this.saveProject.bind(this);
     this.renderButton = this.renderButton.bind(this);
     this.renderModal = this.renderModal.bind(this);
 
@@ -25,12 +25,22 @@ class AddProject extends Component {
     }
   }
 
+  componentWillMount(){
+    if (this.props.update){
+      this.setState({
+        ...this.state,
+        showModal: true,
+        project: this.props.project
+      })
+    }
+  }
+
   changeName(e){
     this.setState({
       ...this.state,
       project:{
-        ...this.state.task,
-        name:e.target.value
+        ...this.state.project,
+        name: e.target.value
       }
     });
   }
@@ -39,17 +49,23 @@ class AddProject extends Component {
     this.setState({
       ...this.state,
       showModal: !this.state.showModal,
+      project: {
+        name: ""
+      },
       error: ""
     });
+
+    if (this.props.onHide){     //in case of update
+      this.props.onHide();
+    }
   }
 
 
-  sendTask(e){
+  saveProject(e){
     e.preventDefault();
     if (this.state.project.name.length < 3 || this.state.project.name.length > 20) {
-      return this.setState({error: this.props.content.page.project.shortName})
+      return this.setState({error: this.props.content.shortName})
     }
-
     this.props.sendProject(this.state.project);
     this.changeModalState();
   }
@@ -65,13 +81,7 @@ class AddProject extends Component {
       );
     }
     else{
-      return(
-        <div className={css.base}>
-          <Button type="button" onClick={this.changeModalState} text={this.props.buttonText}  style={css.addButton+" "+this.props.buttonStyle}>
-            {this.props.children}
-          </Button>
-        </div>
-      );
+      return null;
 
     }
   }
@@ -79,15 +89,15 @@ class AddProject extends Component {
   renderModal(){         //rendering the modal with title, description and datetime
     let project = this.state.project;
     let content = this.props.content;
-
     return(
       <Modal show={this.state.showModal} onHide={this.changeModalState}>
         <div  className={css.container}>
           <div className={css.body}>
             <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
-            <h1>{this.props.sendButtonText}</h1>
+            <h1>{this.props.buttonText}</h1>
             <form  action="POST" onSubmit={this.saveProject}>
               <Input type="text" placeholder={content.name} value={project.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
+              {this.state.error ? <ErrorBox error={this.state.error}/> : null}
               <Button type="button" onClick={this.saveProject} text={this.props.sendButtonText} style={css.addButton}/>
               <Button type="button" onClick={this.changeModalState} text={content.cancel} style={css.cancel}/>
             </form>

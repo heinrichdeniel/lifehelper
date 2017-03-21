@@ -35,10 +35,13 @@
     margin-right: 5px;
     background-color: #f6f6f6;
     cursor: pointer;
+    position: relative;
     i{
       color: $primary-color;
-      margin-top: 6px;
-      margin-left: 0;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      position: absolute;
       font-size: 30px;
     }
     &:hover{

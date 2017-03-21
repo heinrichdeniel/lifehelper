@@ -23,36 +23,41 @@
       border-radius: 3px;
       margin: 10px 0 ;
       padding: 10px;
+      cursor: pointer;
       h3{
-        cursor: pointer;
-        color: $secondary-color;
+        color: $brown-color;
         font-size: 18px;
         margin: 0;
-        i{
-          float:right;
-        }
       }
       &:hover{
-        background-color: $secondary-color;
-        box-shadow: 0 0px 3px 0px $secondary-color;
+        background-color: $brown-color;
+        box-shadow: 0 0px 3px 0px $brown-color;
         h3{
           color: #fafafa;
         }
       }
+      .projectSettings{
+        float: right;
+        margin-right: 0;
+      }
     }
     .activeProject{
-      background-color: $secondary-color;
-      box-shadow: 0 0px 3px 0px $secondary-color;
+      background-color: $brown-color;
+      box-shadow: 0 0px 3px 0px $brown-color;
       h3{
         color: #fafafa;
       }
+      i{
+        margin-left: 3px;
+      }
     }
+
   }
   h1{
-    color: $secondary-color;
+    color: $brown-color;
     text-align: left;
     margin: 0px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 25px;
     font-weight: 700;
   }
@@ -60,30 +65,74 @@
     padding: 7.5px;
     padding-bottom: 0;
     .title{
-      color: $red-color;
+      color: $brown-color;
     }
     .addIcon{
-      border-color: $red-color;
+      border-color: $brown-color;
       position: absolute;
       right: 0;
-      top: -28px;
+      top: -33px;
       width: 30px;
       height: 30px;
+      margin-right: 3px;
       i{
         font-size: 22px;
-        margin-top: 5px;
-        color: $red-color;
+        margin: auto;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        vertical-align: middle;
+        color: $brown-color;
       }
       &:hover{
-        background-color: $red-color;
+        background-color: $brown-color;
         i{
           color: white;
         }
       }
     }
+
   }
 }
 
+.projectOptions{
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  width: 160px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  box-shadow: 5px 5px 10px;
+  &:focus{
+    background-color: #3e5a95;
+  }
+  .option{
+    margin-bottom: 0;
+    padding: 7px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    position: relative;
+    &:hover{
+      background-color: #ddd;
+    }
+    &.delete{
+      border-bottom: 0;
+    }
+    i{
+      float: right;
+      font-size: 16px;
+    }
+  }
+  .caretUp{
+    position: absolute;
+    margin-top: -20px;
+    font-size: 28px;
+    right: 23px;
+    color: darkgrey;
+  }
+}
 .deleteModal{
   text-align: center;
   width: 500px;

@@ -11,6 +11,7 @@
     overflow-x: hidden;
     max-height: 60vh;
     padding: 0 7.5px;
+    padding-bottom: 7.5px;
     @media screen and (max-height: 600px) {
       max-height: 50vh;
     }
@@ -22,7 +23,7 @@
     color: $secondary-color;
     text-align: left;
     margin: 0px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 25px;
     font-weight: 700;
   }
@@ -33,12 +34,12 @@
       border-color: $secondary-color;
       position: absolute;
       right: 0;
-      top: -38px;
+      top: -33px;
       width: 30px;
       height: 30px;
+      margin-right: 3px;
       i {
         font-size: 22px;
-        margin-top: 5px;
         color: $secondary-color;
       }
       &:hover {

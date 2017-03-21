@@ -29,16 +29,15 @@
     }
   }
   .goToTasks{
-    background-color: $primary-color;
+    background-color: $secondary-color;
     &:hover{
-      box-shadow: 0 0 5px 0px $primary-color;
-      font-weight:700;
+      box-shadow: 0 0 5px 0px $secondary-color;
     }
   }
   .goToProjects{
-    background-color: $red-color;
+    background-color: $brown-color;
     &:hover{
-      box-shadow: 0 0 5px 0px $red-color;
+      box-shadow: 0 0 5px 0px $brown-color;
     }
   }
 }
