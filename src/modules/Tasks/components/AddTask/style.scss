@@ -3,7 +3,7 @@
 .addButton{
   width: 115px;
   min-height: 35px;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-left: 5px;
   margin-right: 5px;
   @media screen and (max-width:500px) {
@@ -55,9 +55,42 @@
 
 .body{
   width: 60%;
-  margin: 50px auto;
+  margin: 35px auto;
   text-align: center;
-
+  .locationDiv {
+    .locationInput {
+      input {
+        padding: 8px 30px;
+        text-align: center;
+        cursor: pointer;
+      }
+      input::-webkit-input-placeholder{
+        color: #333;
+      }
+      cursor: pointer;
+      margin-top: 10px;
+      margin-bottom: 0px;
+    }
+    .mapMarker{
+      float: left;
+      font-size: 20px;
+      margin-top: -39px;
+      position: relative;
+      z-index: 10;
+      margin-left: 12px;
+      color: $secondary-color;
+    }
+    .clear{
+      float: right;
+      margin-top: -39px;
+      position: relative;
+      z-index: 5;
+      font-size: 20px;
+      margin-right: 10px;
+      color: $secondary-color;
+      cursor: pointer;
+    }
+  }
   .close{
     cursor: pointer;
     font-size: 18px;

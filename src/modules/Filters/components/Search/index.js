@@ -73,6 +73,7 @@ class Search extends Component {
         </p>
       )
     }
+    return null;
   }
 
   renderTask(task) {
@@ -83,24 +84,41 @@ class Search extends Component {
         </p>
       )
     }
+    return null;
   }
 
   renderFoundItems(){
     if (this.state.searchValue!= ""){
+      let projects = null;
+      let tasks = null;
+      let projectList = this.props.project.list.map((project) => {return this.renderProject(project)}).filter(project => project)
+      let taskList = this.props.task.list.map((task) => {return this.renderTask(task)}).filter(task => task)
+
+      if (projectList.length > 0) {    //if any project finded
+        projects = (
+          <div className={css.group}>
+            <p className={css.groupName}>{this.props.content.page.filters.search.projects}</p>
+            {projectList}
+          </div>
+        )
+      }
+
+      if (taskList.length > 0) {    //if any task finded
+        tasks = (
+          <div className={css.group}>
+            <p className={css.groupName}>{this.props.content.page.filters.search.tasks}</p>
+            {taskList}
+          </div>
+        )
+      }
+
       return (          //rendering the founded list of the project and task
         <div className={this.state.showInput +" "+css.found}>
           <div className={css.foundItems}>
-            <div className={css.group}>
-              <p className={css.groupName}>{this.props.content.page.filters.search.projects}</p>
-              {this.props.project.list.map((project) => {return this.renderProject(project)})}
-            </div>
-            <div className={css.group}>
-              <p className={css.groupName}>{this.props.content.page.filters.search.tasks}</p>
-              {this.props.task.list.map((task) => {return this.renderTask(task)})}
-            </div>
+            {projects}
+            {tasks}
           </div>
         </div>
-
       );
     }
   }

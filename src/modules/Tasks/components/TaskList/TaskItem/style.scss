@@ -13,11 +13,13 @@
     margin: 0px;
     font-size: 20px;
     color: $secondary-color;
+    margin-bottom: 4px;
   }
   .description{
     margin-bottom:0;
     word-wrap: break-word;
     width: 75%;
+    margin-bottom: 3px;
   }
   .date{
     position: absolute;
@@ -28,21 +30,32 @@
   .project{
     position: absolute;
     right: 15px;
-    top: 37px;
+    top: 41px;
     color: $secondary-color;
     i{
       margin-right: 5px;
+    }
+  }
+  .location{
+    margin-bottom: 0;
+    color: $secondary-color;
+    font-weight: 700;
+    i{
+      margin-right: 3px;
     }
   }
   &:hover{
     background-color: $secondary-color;
     border-color: $secondary-color;
     box-shadow: 0px 0px 10px 0px #555;
-    h2, .description{
+    h2{
       color: white;
     }
-    .date, .project{
+    .date, .project, .description, .location{
       color: #ccc;
+    }
+    .project, .location{
+      color: $primary-color;
     }
   }
   @media screen and (max-width: 500px){

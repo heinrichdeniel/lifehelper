@@ -30,7 +30,6 @@ class AddTask extends Component {
     this.renderButton = this.renderButton.bind(this);
     this.renderDetails = this.renderDetails.bind(this);
     this.renderMap = this.renderMap.bind(this);
-    this.renderSummary = this.renderSummary.bind(this);
     this.timeModalChanged = this.timeModalChanged.bind(this);
 
     this.state = {
@@ -99,15 +98,28 @@ class AddTask extends Component {
   }
 
   changeLocation(location){
-    this.setState({
-      ...this.state,
-      task:{
-        ...this.state.task,
-        location: location.label,
-        lat: location.location.lat,
-        lng: location.location.lng
-      }
-    });
+    if (!location){
+      this.setState({
+        ...this.state,
+        task:{
+          ...this.state.task,
+          location: "",
+          lat: "",
+          lng: ""
+        }
+      });
+    }
+    else{
+      this.setState({
+        ...this.state,
+        task:{
+          ...this.state.task,
+          location: location.label,
+          lat: location.location.lat,
+          lng: location.location.lng
+        }
+      });
+    }
   }
 
   selectProject(project){
@@ -123,7 +135,8 @@ class AddTask extends Component {
 
   changeModalState(){
     if (this.props.update){     //if a task was selected to update then not needed to empty the state
-      this.props.getTaskById(window.location.pathname.substring(6));
+      let pathname = window.location.pathname;
+      this.props.getTaskById(pathname.substring(pathname.lastIndexOf('/')+1));
       this.setState({
         ...this.state,
         showModal: !this.state.showModal,
@@ -175,12 +188,6 @@ class AddTask extends Component {
 
   nextStep(e){     //changing to the next step
     e.preventDefault();
-    if (this.state.task.name.length < 3 || this.state.task.name.length > 20) {
-      return this.setState({
-        ...this.state,
-        error: this.props.content.page.tasks.shortTaskName
-      })
-    }
     this.setState({
       ...this.state,
       error: "",
@@ -231,14 +238,19 @@ class AddTask extends Component {
             <form  action="POST" onSubmit={this.nextStep}>
               <Input type="text" placeholder={content.name} value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
               <TextArea type="text" placeholder={content.description} value={task.description} onChange={this.changeDescription}  />
-
               <DatePicker value={task.date} onChange={this.changeDate} dateFormat={this.props.user.dateFormat}/>
               <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime} timeFormat={this.props.user.timeFormat}/>
-
               <Dropdown onChange={this.selectProject} placeholder={content.selectProject} projects={this.props.project.list} selected={task.ProjectId}/>
+              <div className={css.locationDiv}>
+                <Input type="text" placeholder={content.searchLocation} value={task.location} onChange={this.changeLocation} onFocus={this.nextStep} style={css.input + " " + css.locationInput} minLength={3} maxLength={20} />
+                <i className={css.mapMarker + " fa fa-map-marker"}/>
+                <i className={css.clear + " fa fa-times-circle-o"} onClick={this.changeLocation.bind(this,null)}/>
+              </div>
+
               {this.state.error ? <ErrorBox error={this.state.error}/> : null}
 
-              <Button type="button" onClick={this.nextStep} text={content.nextStep} style={css.addButton}/>
+              <Button type="button" onClick={this.sendTask} text={this.props.sendButtonText} style={css.addButton}/>
+
             </form>
           </div>
         </div>
@@ -266,42 +278,13 @@ class AddTask extends Component {
                    suggestEnabled={false}
                    placeholder={content.searchLocation}/>
               <Button type="button" onClick={this.prevStep} text={content.prevStep} style={css.prevButton}/>
-              <Button type="button" onClick={this.nextStep} text={content.nextStep} style={css.addButton}/>
+              <Button type="button" onClick={this.prevStep} text={content.selectLocation} style={css.addButton}/>
             </form>
           </div>
         </div>
       </Modal>
     );
   }
-
-  renderSummary(){
-    let task = this.state.task;
-    let project = task.ProjectId!=null ? this.props.project.list.filter((project) => project.id == task.ProjectId)[0].name : "-";
-    let content = this.props.content.page.tasks;
-    return(
-      <Modal  show={this.state.showModal} onHide={this.changeModalState}>
-        <div  className={css.container}>
-          <div className={css.body}>
-            <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
-
-            <h1>{content.summary}</h1>
-            <form  action="POST" onSubmit={this.sendTask}>
-              <div className={css.summary}>
-                <p className={css.name}><span>{content.name}:</span> {task.name}</p>
-                <p className={css.description}><span>{content.description}:</span> {task.description?task.description:"-"}</p>
-                <p className={css.date}><span>{content.date}:</span> {moment(task.date).format(this.props.user.dateFormat)}, {moment(task.time, "H:m").format(this.props.user.timeFormat)}</p>
-                <p className={css.location}><span>{content.locationTitle}:</span> {task.location?task.location:"-"}</p>
-                <p className={css.project}><span>{content.project}:</span> {project}</p>
-              </div>
-              <Button type="button" onClick={this.prevStep} text={content.prevStep} style={css.prevButton}/>
-              <Button type="button" onClick={this.sendTask} text={this.props.sendButtonText} style={css.addButton}/>
-            </form>
-          </div>
-        </div>
-      </Modal>
-    );
-  }
-
 
   render() {
     if (!this.state.showModal){
@@ -312,7 +295,6 @@ class AddTask extends Component {
         {this.renderButton()}
         {(this.state.step == 1) ? this.renderDetails() : null}
         {(this.state.step == 2) ? this.renderMap() : null}
-        {(this.state.step == 3) ? this.renderSummary() : null}
       </div>
     )
 

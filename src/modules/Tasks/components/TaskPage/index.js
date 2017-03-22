@@ -21,7 +21,8 @@ class TaskPage extends Component {
 
   componentWillMount() {
     //get id from the url
-    this.props.getTaskById(window.location.pathname.substring(9))
+    let pathname = window.location.pathname
+    this.props.getTaskById(pathname.substring(pathname.lastIndexOf('/')+1))
   }
 
   changeModalState(){
@@ -58,8 +59,8 @@ class TaskPage extends Component {
           <i className={`fa fa-close ${css.close}`} onClick={this.changeModalState} />
           <h1>{this.props.task.current.name}</h1>
           <p>{content.question}</p>
-          <Button type="button" onClick={this.deleteTask} text={"Delete"} style={css.confirm}/>
-          <Button type="button" onClick={this.changeModalState} text={"Cancel"} style={css.cancel}/>
+          <Button type="button" onClick={this.deleteTask} text={content.delete} style={css.confirm}/>
+          <Button type="button" onClick={this.changeModalState} text={content.cancel} style={css.cancel}/>
         </div>
       </Modal>
     )

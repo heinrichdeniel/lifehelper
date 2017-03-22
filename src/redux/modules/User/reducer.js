@@ -40,7 +40,10 @@ const UserReducer = (state = initialState, action = {}) => {
         ...state,
         login: Object.assign({}, state.login, {pending: false, error: false}),
         authDetails: action.payload,
-        user: action.payload.user
+        user: {
+          ...state.user,
+          ...action.payload.user
+        }
       }
 
     case constants.LOGIN_ERROR:
@@ -148,6 +151,7 @@ const UserReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         user: {
+          ...state.user,
           email: action.payload.email,
           photo_url: action.payload.photo_url,
           name: action.payload.name
