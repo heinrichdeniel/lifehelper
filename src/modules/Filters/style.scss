@@ -7,11 +7,12 @@
   }
 }
 
-.filters{
-  background-color: #ccc;
+.filters {
+  background-color: #ddd;
   padding: 15px 10px 5px 10px;
   border-radius: 5px;
-  p{
+  box-shadow: 2px 2px 25px -5px #333;
+  p {
     display: block;
     font-size: 14px;
     padding: 8px;
@@ -19,25 +20,36 @@
     border-radius: 3px;
     color: #fff;
     cursor: pointer;
-    i{
-      right: 35px;
+    i {
+      margin-top: 2px;
+      left: 15px;
       font-size: 18px;
       position: absolute;
-      @media screen and (max-width: 768px){
-        right: 20px;
-      }
     }
   }
-  .goToTasks{
+
+  .filter {
+    max-width: 300px;
+    margin: 15px auto;
+    background-color: $primary-color;
+    box-shadow: 0 2px 10px 0px lightslategray;
+    transition: all 0.2s ease;
+    position: relative;
+    &:hover {
+      background-color: $secondary-color;
+      box-shadow: 0 2px 10px 0px dimgray;
+    }
+  }
+
+  .active {
+    max-width: 300px;
+    margin: 15px auto;
     background-color: $secondary-color;
-    &:hover{
-      box-shadow: 0 0 5px 0px $secondary-color;
-    }
-  }
-  .goToProjects{
-    background-color: $brown-color;
-    &:hover{
-      box-shadow: 0 0 5px 0px $brown-color;
+    box-shadow: 0 2px 10px 0px slategray;
+    transition: all 0.2s ease;
+    position: relative;
+    &:hover {
+      box-shadow: 0 2px 10px 0px #4d4d4d;
     }
   }
 }
@@ -93,7 +105,7 @@
       transform: translateY(-50%);
       box-shadow: 0 0 25px 0 #333;
       margin-right: 15px;
-
+      transition: all 0.2s ease;
     }
     .shadow{
       background: black;

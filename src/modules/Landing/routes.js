@@ -8,5 +8,6 @@ export default (
       <IndexRoute component={LandingContainer} />
       <Route path="/:lang/tasks" component={LandingContainer}/>
       <Route path="/:lang/projects" component={LandingContainer}/>
+      <Route path="/:lang/archive" component={LandingContainer}/>
     </Route>
 );

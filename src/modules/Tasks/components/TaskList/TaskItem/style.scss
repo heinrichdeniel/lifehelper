@@ -1,81 +1,230 @@
 @import "src/styles/colors.scss";
 .base {
-  width: 100%;
-  border-radius: 5px;
-  margin-top: 15px;
-  padding: 15px;
+  position: inherit;
+  max-height: 200px;
+  .task{
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 15px;
+    position: relative;
+    background-color: #fafafa;
+    cursor: pointer;
+    min-height: 70px;
+    border: 2px solid #999;
+    box-shadow: 0 2px 10px 0px dimgray;
+    transition: all 0.5s ease;
+    padding-left: 35px;
+    height: auto;
+    h2{
+      margin: 0px;
+      font-size: 20px;
+      color: $primary-color;
+      margin-bottom: 5px;
+    }
+    .date{
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      color: #aaa;
+      margin-bottom: 0;
+      i{
+        margin-right: 5px;
+        color: #888;
+      }
+    }
+    .project{
+      color: $project-color;
+      margin-bottom: 0px;
+      margin-top: 5px;
+      i{
+        margin-right: 5px;
+      }
+    }
+
+    .dots{
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 18px;
+      color: #333;
+      transition: color 0.3s;
+    }
+
+    .finishTask{
+      border-radius: 100%;
+      border: 2px solid $primary-color;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 16px;
+      left: 8px;
+      i{
+        margin-top: 2px;
+        margin-left: 2px!important;
+        position: absolute;
+        font-size: 13px;
+        opacity: 0;
+        transition: opacity 0.2s linear!important;
+      }
+      &:hover{
+        i{
+          opacity: 1;
+        }
+      }
+    }
+    .restoreTask{
+      border-radius: 100%;
+      border: 2px solid $primary-color;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 16px;
+      left: 8px;
+      i{
+        color: $primary-color;
+        margin-top: 2px;
+        margin-left: 2px!important;
+        position: absolute;
+        font-size: 13px;
+        opacity: 1;
+        transition: opacity 0.2s linear!important;
+      }
+      &:hover{
+        i{
+          opacity: 0;
+        }
+      }
+    }
+
+    &:hover{
+      background-color: $primary-color;
+      border-color: $primary-color;
+      box-shadow: 0px 0px 10px 0px #555;
+      transition: all 0.3s ease;
+      h2{
+        color: white;
+        transition: all 0.3s ease;
+      }
+      .date, .project{
+        color: #eee;
+        transition: all 0.3s ease;
+      }
+      .finishTask{
+        border-color: white;
+        transition: all 0.3s ease;
+        i{
+          color: white;
+          transition: color 0.3s;
+        }
+      }
+      .restoreTask{
+        border-color: white;
+        transition: all 0.3s ease;
+        i{
+          color: white;
+          transition: color 0.3s;
+        }
+      }
+      .dots{
+        color: white;
+        transition: color 0.3s;
+      }
+    }
+    @media screen and (max-width: 500px){
+      .date{
+        position: relative;
+        padding-bottom: 0;
+        left: 0;
+        right: 0;
+        top: 5px;
+        display: inline;
+      }
+      .project {
+        float: inherit;
+        position: initial;
+        margin-top: 5px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.options{
   position: relative;
-  background-color: #fafafa;
-  cursor: pointer;
-  min-height: 70px;
-  border: 2px solid #999;
-  h2{
-    margin: 0px;
-    font-size: 20px;
-    color: $secondary-color;
-    margin-bottom: 4px;
+  float: right;
+  z-index: 10;
+  width: 160px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: -35px;
+  margin-bottom: 10px;
+  box-shadow: 5px 5px 10px;
+  &:focus{
+    background-color: #3e5a95;
   }
-  .description{
-    margin-bottom:0;
-    word-wrap: break-word;
-    width: 75%;
-    margin-bottom: 3px;
+  .option{
+    margin-bottom: 0;
+    padding: 7px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    position: relative;
+    &:hover{
+      background-color: #ddd;
+      transition: all 0.3s ease;
+    }
+    &.delete{
+      border-bottom: 0;
+    }
+    i{
+      float: right;
+      font-size: 16px;
+      margin-top: 2px;
+    }
   }
-  .date{
+  .caretUp{
+    position: absolute;
+    margin-top: -20px;
+    font-size: 28px;
+    right: 14px;
+    color: darkgrey;
+  }
+}
+
+.deleteModal{
+  text-align: center;
+  width: 500px;
+  max-width: 100%;
+
+  i{
+    cursor: pointer;
+    font-size: 18px;
     position: absolute;
     top: 15px;
     right: 15px;
-    color: #aaa;
   }
-  .project{
-    position: absolute;
-    right: 15px;
-    top: 41px;
-    color: $secondary-color;
-    i{
-      margin-right: 5px;
-    }
+  h1{
+    margin-top: 50px;
   }
-  .location{
-    margin-bottom: 0;
-    color: $secondary-color;
-    font-weight: 700;
-    i{
-      margin-right: 3px;
-    }
+  p{
+    margin: 30px;
+    font-size: 16px;
   }
-  &:hover{
-    background-color: $secondary-color;
-    border-color: $secondary-color;
-    box-shadow: 0px 0px 10px 0px #555;
-    h2{
-      color: white;
-    }
-    .date, .project, .description, .location{
-      color: #ccc;
-    }
-    .project, .location{
-      color: $primary-color;
+  .confirm {
+    background-color: #ea0000;
+    width: 100px;
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    &:hover {
+      box-shadow: 0 0 5px 0px #ea0000;
+      transition: all 0.2s ease;
     }
   }
-  @media screen and (max-width: 500px){
-    .description{
-      width: 100%;
-    }
-    .date{
-      position: relative;
-      padding-bottom: 0;
-      left: 0;
-      right: 0;
-      top: 5px;
-      display: inline;
-    }
-    .project {
-      float: inherit;
-      position: initial;
-      margin-top: 5px;
-      margin-bottom: 0;
-    }
+  .cancel {
+    width: 100px;
+    height: 30px;
   }
 }
 

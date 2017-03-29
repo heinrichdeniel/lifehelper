@@ -33,6 +33,14 @@
       width: 60%;
     }
   }
+  .spinner{
+    text-align: center;
+    margin-top: 100px;
+    position: relative;
+    font-size: 50px;
+    text-align: center;
+    color: $primary-color;
+  }
 }
 .buttons{
   margin-bottom: 100px;
@@ -41,8 +49,11 @@
 .update{
   position: absolute;
   margin: 50px 5px 50px;
-  margin-bottom: 50px;
   margin-left: 20px;
+  &:hover{
+    box-shadow: 0 0 5px 0px $primary-color;
+    transition: all 0.2s ease;
+  }
 }
 .delete{
   width: 115px;
@@ -53,6 +64,7 @@
   margin-top: 50px;
   &:hover{
     box-shadow: 0 0 5px 0px #ea0000;
+    transition: all 0.2s ease;
   }
 }
 
@@ -83,11 +95,11 @@
     margin-bottom: 50px;
     &:hover {
       box-shadow: 0 0 5px 0px #ea0000;
+      transition: all 0.2s ease;
     }
   }
   .cancel {
     width: 100px;
     height: 30px;
   }
-
 }

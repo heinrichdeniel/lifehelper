@@ -15,7 +15,7 @@ class datePicker extends Component{
     let minimum = minDate?minDate:moment();
     let maximum = maxDate?maxDate:null;
     return(
-      <div className={css.base}>
+      <div className={css.base + " " + this.props.style}>
         <span className={css.calendar + " fa fa-calendar"}/>
         <DatePicker
           selected={moment(value)}

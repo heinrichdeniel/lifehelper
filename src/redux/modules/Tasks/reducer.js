@@ -31,20 +31,29 @@ const TaskReducer = (state = initialState, action = {}) => {
         ...state,
         task: {
           ...state.task,
-          pending: true,
-          error: false
+          addTask: {
+            pending: true,
+            error: false
+          }
         }
       };
 
     case constants.CREATE_TASK_SUCCESS:
+      let task = action.payload.task;
+      let list = [];
+      if (task.completed||task.archived||task.deleted){
+        list = state.task.list.filter((task) => task.id != action.payload.task.id)
+      }else{
+        list = [
+          task,
+          ...state.task.list.filter((task) => task.id != action.payload.task.id)
+        ]
+      }
       return {
         ...state,
         task: {
           ...state.task,
-          list: [
-            action.payload.task,
-            ...state.task.list.filter((task) => task.id != action.payload.task.id)
-          ],
+          list: list,
           current: (state.task.current.id == action.payload.task.id)?action.payload.task:state.task.current,
           pending: false,
           error: false

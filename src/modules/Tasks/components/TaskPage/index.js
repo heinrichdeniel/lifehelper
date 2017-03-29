@@ -14,6 +14,8 @@ class TaskPage extends Component {
     this.deleteTask=this.deleteTask.bind(this);
     this.changeModalState=this.changeModalState.bind(this);
     this.renderMap=this.renderMap.bind(this);
+    this.renderDeleteModal=this.renderDeleteModal.bind(this);
+
     this.state={
       showModal:false
     }
@@ -69,14 +71,22 @@ class TaskPage extends Component {
   render() {
     let task = this.props.task.current;
     let content = this.props.content.page.tasks;
+    let time = this.props.task.current.time?", "+moment(this.props.task.current.time,"hh:m").format(this.props.user.timeFormat): null
 
+    if (this.props.task.pending){
+      return(
+        <div className={css.base + " container"}>
+          {this.props.task.pending? <div className={css.spinner}><i className={"fa fa-spinner fa-spin"} /></div> : null}
+        </div>
+        )
+    }
     if (task.name){       //returning the task data
       return(
         <div className={css.base + " container"}>
           <h1>{task.name}</h1>
           <div className={css.details}>
             <p className={css.description}><span>{content.description}: </span> {task.description}</p>
-            <p className={css.date}>{moment(task.date).format(this.props.user.dateFormat)}, {moment(task.time, "H:m").format(this.props.user.timeFormat)}</p>
+            <p className={css.date}>{moment(task.date).format(this.props.user.dateFormat)}{time}</p>
             <p className={css.project}><span>{content.project}: </span>{task.Project?task.Project.name:"-"}</p>
           </div>
 
@@ -87,10 +97,12 @@ class TaskPage extends Component {
               buttonText={content.editTask.name}
               sendButtonText={content.editTask.update}
               buttonStyle={css.update}
-              update={true}/>
+              update={true}
+              taskToUpdate={task}/>
             {this.renderDeleteModal()}
             <Button type="button" onClick={this.changeModalState} text={content.deleteTask.name} style={css.delete}/>
           </div>
+
         </div>
       );
     }

@@ -30,6 +30,21 @@ export function getTaskList (payload) {
   })
 }
 
+
+export function getArchive(payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .get(config.api.host + 'tasks/archive/')
+      .set('x-access-token', payload.token)
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
 export function getTaskById (payload) {
   return new Promise((resolve, reject) => {
     request

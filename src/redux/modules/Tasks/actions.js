@@ -75,6 +75,23 @@ export function getTaskList() {
   })
 }
 
+export function getArchive() {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.GET_LIST_PENDING,
+        constants.GET_LIST_SUCCESS,
+        constants.GET_LIST_ERROR
+      ],
+      payload: {
+        promise: api.getArchive({
+          token: getState().User.authDetails.token
+        })
+      }
+    })
+  })
+}
+
 export function applyDateFilter(filter) {
   store.dispatch((dispatch, getState) => {
     return dispatch({

@@ -11,6 +11,7 @@
   color: #ffffff;
   text-align: left;
   height: 40px;
+  box-shadow: 0 2px 10px 0 #999;
   i{
     float: left;
     font-size: 26px;
@@ -20,4 +21,5 @@
 }
 .facebook:hover{
   box-shadow: 0 0 5px 0px #4563a2;
+  transition: all 0.2s ease;
 }

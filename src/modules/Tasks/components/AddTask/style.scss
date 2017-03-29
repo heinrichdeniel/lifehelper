@@ -9,6 +9,9 @@
   @media screen and (max-width:500px) {
     margin-top: 30px;
   }
+  &:hover{
+    box-shadow: 0 0 5px 0px $primary-color;
+  }
 }
 
 .prevButton{
@@ -20,15 +23,37 @@
   margin-top: 1px;
   &:hover{
     box-shadow: 0 0 5px 0px $red-color;
+    transition: all 0.2s ease;
   }
 }
+
+.confirmation{
+  position: fixed;
+  left: 50%;
+  top: 95px;
+  z-index: 100;
+  transform: translateX(-50%);
+  background-color: #68ca4d;
+  color: white;
+  padding: 10px;
+  width: 60%;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 5px;
+  box-shadow: 0px 15px 50px 0px #555;
+  opacity: 1;
+  transition: opacity 0.5s linear;
+  p{
+    margin-bottom: 3px;
+  }
+}
+
 .base{
   position:relative;
   text-align: center;
   .addIcon{
     height: 40px;
     width: 40px;
-    border-radius: 50%;
     border: 1px solid $primary-color;
     margin-top: -5px;
     margin-left: 5px;
@@ -36,6 +61,8 @@
     background-color: #f6f6f6;
     cursor: pointer;
     position: relative;
+    border-radius: 50%;
+
     i{
       color: $primary-color;
       margin: auto;
@@ -43,12 +70,14 @@
       transform: translateY(-50%) translateX(-50%);
       position: absolute;
       font-size: 30px;
+      transition: all 0.3s ease;
     }
     &:hover{
       background-color: $primary-color;
       i{
         color: #f6f6f6;
       }
+      transition: all 0.3s ease;
     }
   }
 }
@@ -78,7 +107,7 @@
       position: relative;
       z-index: 10;
       margin-left: 12px;
-      color: $secondary-color;
+      color: $primary-color;
     }
     .clear{
       float: right;
@@ -87,7 +116,7 @@
       z-index: 5;
       font-size: 20px;
       margin-right: 10px;
-      color: $secondary-color;
+      color: $primary-color;
       cursor: pointer;
     }
   }
@@ -100,6 +129,7 @@
   }
   h1{
     margin-bottom: 50px;
+    color: $primary-color;
   }
   @media screen and (max-width:500px){
     width: 90%;
@@ -124,19 +154,6 @@
     .map{
       height: 300px;
     }
-  }
-}
-
-.summary{
-  text-align: left;
-  margin-left: 15px;
-  font-size: 18px;
-  color: $secondary-color;
-  .description{
-    word-wrap: break-word;
-  }
-  span{
-    color: black;
   }
 }
 

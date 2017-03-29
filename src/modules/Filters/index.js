@@ -11,10 +11,51 @@ class Filters extends Component {
     this.changeVisibility = this.changeVisibility.bind(this);
     this.goToTasks = this.goToTasks.bind(this);
     this.goToProjects = this.goToProjects.bind(this);
+    this.goToArchive = this.goToArchive.bind(this);
 
     this.state = {
       style: css.hideFilters,
-      arrow: "right"
+      arrow: "right",
+      active: "tasks"
+    }
+  }
+
+  componentWillMount(){
+    let pathname = window.location.pathname;
+    if (pathname.substring(pathname.length - 8) == "projects"){
+      this.setState({
+        ...this.state,
+        active: "projects"
+      })
+    }
+    else if (pathname.substring(pathname.length - 7) == "archive"){
+      this.setState({
+        ...this.state,
+        active: "archive"
+      })
+    }
+  }
+
+  componentWillReceiveProps(){
+    let pathname = window.location.pathname;
+
+    if (this.state.active!="projects" && pathname.substring(pathname.length - 8) == "projects" ) {
+      this.setState({
+        ...this.state,
+        active: "projects"
+      })
+    }
+    else if (this.state.active!="archive" && pathname.substring(pathname.length - 7) == "archive") {
+      this.setState({
+        ...this.state,
+        active: "archive"
+      })
+    }
+    else if (this.state.active!="tasks") {
+      this.setState({
+        ...this.state,
+        active: "tasks"
+      })
     }
   }
 
@@ -34,11 +75,27 @@ class Filters extends Component {
   }
 
   goToTasks(){
+    this.setState({
+      ...this.state,
+      active: "tasks"
+    });
     browserHistory.push(window.location.pathname.substring(0,3) + '/tasks');
   }
 
   goToProjects(){
+    this.setState({
+      ...this.state,
+      active: "projects"
+    });
     browserHistory.push(window.location.pathname.substring(0,3) + '/projects');
+  }
+
+  goToArchive(){
+    this.setState({
+      ...this.state,
+      active: "archive"
+    });
+    browserHistory.push(window.location.pathname.substring(0,3) + '/archive');
   }
 
   render() {
@@ -48,8 +105,10 @@ class Filters extends Component {
         <div className={css.shadow} onClick={this.changeVisibility}/>
         <div className={css.filters}>
           <DateFilters/>
-          <p className={css.goToTasks} onClick={this.goToTasks}>{this.props.content.goToTasks}<i className="fa fa-arrow-right" aria-hidden="true"/></p>
-          <p className={css.goToProjects} onClick={this.goToProjects}>{this.props.content.goToProjects}<i className="fa fa-arrow-right" aria-hidden="true"/></p>
+          <p className={css.filter + ((this.state.active=="tasks") ? " "+css.active : "")} onClick={this.goToTasks}>{this.props.content.goToTasks}<i className="fa fa-tasks" aria-hidden="true"/></p>
+          <p className={css.filter + ((this.state.active=="projects") ? " "+css.active : "")} onClick={this.goToProjects}>{this.props.content.goToProjects}<i className="fa fa-chain" aria-hidden="true"/></p>
+          <p className={css.filter + ((this.state.active=="archive") ? " "+css.active : "")} onClick={this.goToArchive}>{this.props.content.goToArchive}<i className="fa fa-archive" aria-hidden="true"/></p>
+          <p className={css.filter} onClick={this.goToArchive}>{this.props.content.goToGroups}<i className="fa fa-users" aria-hidden="true"/></p>
         </div>
       </div>
     )

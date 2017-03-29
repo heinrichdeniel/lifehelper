@@ -35,6 +35,7 @@
       background-color: #ea0000;
       &:hover{
         box-shadow:  0 0 5px 0px #ea0000;
+        transition: all 0.2s ease;
       }
     }
 
@@ -58,6 +59,7 @@
       }
       &:hover{
         box-shadow:  0 0 5px 0px $secondary-color;
+        transition: all 0.2s ease;
       }
     }
     &.afterLogin{

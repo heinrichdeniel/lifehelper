@@ -10,6 +10,8 @@ class datePicker extends Component{
   constructor(props){
     super(props);
     this.changeModalState = this.changeModalState.bind(this);
+    this.onClick = this.onClick.bind(this);
+    this.selectTime = this.selectTime.bind(this);
 
     this.state = {
       showModal:false
@@ -25,13 +27,30 @@ class datePicker extends Component{
     });
   }
 
+  onClick(){
+    this.props.onChange(null);
+  }
+
+  selectTime(value){
+
+    this.props.onClick(moment(value, "H:m").format("H"),moment(value, "H:m").format("m"));
+    this.setState({
+      showModal: !this.state.showModal
+    });
+  }
+
   render(){
     let { value, onChange} = this.props;
+
+    if (!value){
+      value=moment().add(1,'hours');
+    }
 
     return(
       <div className={css.base}>
         <span className="fa fa-clock-o"/>
-        <p onClick={this.changeModalState}>{moment(value, "H:m").format(this.props.timeFormat)}</p>
+        <p onClick={this.changeModalState}>{this.props.value?moment(value, "H:m").format(this.props.timeFormat):"-"}</p>
+        <span onClick={this.onClick} className={css.reset + " fa fa-times-circle-o"}/>
         <Modal show={this.state.showModal}  dialogClassName={css.modal}  onHide={this.changeModalState}>
           <TimePicker
             hours={parseInt(moment(value, "H:m").format("H"))}
@@ -43,7 +62,7 @@ class datePicker extends Component{
           <Button
             type="button"
             text="Select time"
-            onClick={this.changeModalState}
+            onClick={this.selectTime.bind(this,value)}
             style={css.select}
           />
         </Modal>

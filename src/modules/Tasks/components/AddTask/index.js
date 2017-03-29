@@ -30,7 +30,9 @@ class AddTask extends Component {
     this.renderButton = this.renderButton.bind(this);
     this.renderDetails = this.renderDetails.bind(this);
     this.renderMap = this.renderMap.bind(this);
+    this.renderConfirmation = this.renderConfirmation.bind(this);
     this.timeModalChanged = this.timeModalChanged.bind(this);
+    this.handleDocumentClick = this.handleDocumentClick.bind(this);
 
     this.state = {
       showModal: false,
@@ -41,23 +43,52 @@ class AddTask extends Component {
         name: "",
         description: "",
         date: moment(),
-        time: moment().add(1,'hours').format("H:m"),
         location: "",
         ProjectId: null
+      },
+      style:{
+        opacity: '1'
       }
     }
   }
   componentWillMount() {
-    if (this.props.update){
-      this.setState({
-        ...this.state,
-        task:this.props.task.current
-      });
+    let showModal = this.props.showModal ? this.props.showModal : this.state.showModal;
+    let task = this.props.update ? this.props.task.current : this.state.task;
+    //if the user want to update an existing project the fill out the fields before rendering
+    if (this.props.taskToUpdate){
+      task = this.props.taskToUpdate;
     }
+    if (this.props.projectId){
+      task.ProjectId = this.props.projectId;
+    }
+    if (moment(task.date) < this.state.task.date){
+      task.date = this.state.task.date;
+    }
+
+    this.setState({
+      ...this.state,
+      task: task,
+      showModal: showModal
+    });
+
     this.props.getProjectList();
   }
 
-  changeName(e){
+  componentDidUpdate() {
+    if (this.props.taskToUpdate && !this.state.updated) {
+      this.setState({
+        ...this.state,
+        task: this.props.taskToUpdate,
+        updated: true
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleDocumentClick, false);
+  }
+
+    changeName(e){
     this.setState({
       ...this.state,
       task:{
@@ -88,13 +119,24 @@ class AddTask extends Component {
   }
 
   changeTime(h,m){
-    this.setState({
-      ...this.state,
-      task:{
-        ...this.state.task,
-        time:moment(h+":"+m,"H:m").format("H:m")
-      }
-    });
+    if (!h){
+      this.setState({
+        ...this.state,
+        task:{
+          ...this.state.task,
+          time:null
+        }
+      });
+    }
+    else{
+      this.setState({
+        ...this.state,
+        task:{
+          ...this.state.task,
+          time:moment(h+":"+m,"H:m").format("H:m")
+        }
+      });
+    }
   }
 
   changeLocation(location){
@@ -130,10 +172,13 @@ class AddTask extends Component {
         ...this.state.task,
         ProjectId: projectId
       }
-  });
-}
+    });
+  }
 
   changeModalState(){
+    if (this.state.showModal && this.props.onHide){
+      this.props.onHide();
+    }
     if (this.props.update){     //if a task was selected to update then not needed to empty the state
       let pathname = window.location.pathname;
       this.props.getTaskById(pathname.substring(pathname.lastIndexOf('/')+1));
@@ -154,20 +199,31 @@ class AddTask extends Component {
           name: "",
           description: "",
           date: moment(),
-          time: moment().add(1,'hours').format("H:m"),
+          time: null,
           location: "",
           ProjectId: null
         }
       });
     }
-
   }
 
-  timeModalChanged(){
-    this.setState({
-      ...this.state,
-      opacity: 1 - this.state.opacity
-    });
+  timeModalChanged(h,m){
+    if (h && m){
+      this.setState({
+        ...this.state,
+        opacity: 1 - this.state.opacity,
+        task:{
+          ...this.state.task,
+          time:moment(h+":"+m,"H:m").format("H:m")
+        }
+      });
+    }
+    else{
+      this.setState({
+        ...this.state,
+        opacity: 1 - this.state.opacity,
+      });
+    }
   }
 
   sendTask(e){
@@ -175,15 +231,30 @@ class AddTask extends Component {
     if (this.state.task.name.length < 3 || this.state.task.name.length > 20) {
       return this.setState({error: this.props.content.page.tasks.shortTaskName})
     }
-    this.props.sendTask(this.state.task);
-    this.props.selectProject("");
     this.setState({
       ...this.state,
-      showModal: !this.state.showModal
+      showModal: !this.state.showModal,
+      sent: true,
+      style: {
+        opacity: '1'
+      }
     });
-    if (!this.state.task.id){ // if a new task added then go to the homepage
-      browserHistory.push(window.location.pathname.substring(0,3));
+    if (this.props.onHide){
+      this.props.onHide();
     }
+    this.props.sendTask(Object.assign({},this.state.task,{completed: false,archived: false}));
+    document.addEventListener('click', this.handleDocumentClick, false);
+
+  }
+
+  handleDocumentClick() {      //if the user clicked somewhere in the page
+      this.setState({
+        style:{
+          opacity: '0'
+        }
+      });
+    document.removeEventListener('click', this.handleDocumentClick, false);
+
   }
 
   nextStep(e){     //changing to the next step
@@ -227,7 +298,6 @@ class AddTask extends Component {
   renderDetails(){         //rendering the modal with title, description and datetime
     let task = this.state.task;
     let content = this.props.content.page.tasks;
-
     return(
       <Modal style={{opacity : this.state.opacity}} show={this.state.showModal} onHide={this.changeModalState}>
         <div  className={css.container}>
@@ -238,7 +308,7 @@ class AddTask extends Component {
             <form  action="POST" onSubmit={this.nextStep}>
               <Input type="text" placeholder={content.name} value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
               <TextArea type="text" placeholder={content.description} value={task.description} onChange={this.changeDescription}  />
-              <DatePicker value={task.date} onChange={this.changeDate} dateFormat={this.props.user.dateFormat}/>
+              <DatePicker value={task.date} onChange={this.changeDate} dateFormat={this.props.user.dateFormat} style={css.datePicker}/>
               <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime} timeFormat={this.props.user.timeFormat}/>
               <Dropdown onChange={this.selectProject} placeholder={content.selectProject} projects={this.props.project.list} selected={task.ProjectId}/>
               <div className={css.locationDiv}>
@@ -286,13 +356,31 @@ class AddTask extends Component {
     );
   }
 
+  renderConfirmation(){     //after saving the task
+    let message = this.props.update ? this.props.content.page.tasks.editTask.confirmation : this.props.content.page.tasks.addTask.confirmation;
+
+    return (
+      <div className={css.confirmation} style={this.state.style}>
+        <p>{message}</p>
+      </div>
+    )
+  }
+
   render() {
-    if (!this.state.showModal){
-      return this.renderButton();
+    if (this.props.hide){
+      return this.state.sent ? this.renderConfirmation() : null
+    }
+    else if (!this.state.showModal){
+      return (
+        <div>
+          {this.renderButton()}
+          {this.state.sent ? this.renderConfirmation() : null}
+        </div>
+      );
     }
     return(
       <div>
-        {this.renderButton()}
+        {!this.props.showModal?this.renderButton():null}
         {(this.state.step == 1) ? this.renderDetails() : null}
         {(this.state.step == 2) ? this.renderMap() : null}
       </div>

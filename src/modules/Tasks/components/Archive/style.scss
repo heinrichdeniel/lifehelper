@@ -1,4 +1,5 @@
 @import 'src/styles/globals.scss';
+
 .base {
   background-color: #ddd;
   border-radius: 5px;
@@ -21,6 +22,7 @@
       max-height: 43vh;
     }
   }
+
   h1 {
     color: $primary-color;
     text-align: left;
@@ -28,34 +30,13 @@
     margin-bottom: 10px;
     font-size: 25px;
     font-weight: 700;
-  }
-  .projectTitle {
     padding: 7.5px;
     padding-bottom: 0;
-    .addIcon {
-      border-color: $primary-color;
-      position: absolute;
-      right: 0;
-      top: -33px;
-      width: 30px;
-      height: 30px;
-      margin-right: 3px;
-      i {
-        font-size: 22px;
-        color: $primary-color;
-      }
-      &:hover {
-        background-color: $primary-color;
-        i {
-          color: white;
-        }
-      }
-    }
   }
+
   .spinner{
     font-size: 50px;
     text-align: center;
     color: $primary-color;
   }
 }
-

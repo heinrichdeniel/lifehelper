@@ -11,6 +11,7 @@
   color: #ffffff;
   text-align: left;
   height: 40px;
+  box-shadow: 0 2px 10px 0 #999;
   i{
     float: left;
     font-size: 26px;
@@ -21,4 +22,5 @@
 }
 .google:hover{
   box-shadow: 0 0 5px 0px #D3482C;
+  transition: all 0.2s ease;
 }

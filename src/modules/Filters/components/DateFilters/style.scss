@@ -5,14 +5,15 @@
   margin-bottom: 15px;
   text-align: center;
   h2{
-    color: $secondary-color;
+    color: $primary-color;
     font-size: 18px;
     margin-top: 0;
     margin-bottom: 20px;
     cursor: default;
   }
   span{
-    color: #ffffff;
+    color: $primary-color;
+    font-size: 20px;
     width: 10%;
     display: inline-block;
   }

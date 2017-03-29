@@ -11,7 +11,8 @@ import * as userSelectors from 'redux/modules/User/selectors'
 const mapActionsToProps = (dispatch) => ({
   getTaskList: taskActions.getTaskList,
   sendProject: projectActions.createProject,
-  deleteProject: projectActions.deleteProject
+  deleteProject: projectActions.deleteProject,
+  deleteTask: taskActions.deleteTask
 
 });
 

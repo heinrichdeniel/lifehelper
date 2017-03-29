@@ -5,6 +5,7 @@ import Button from 'components/Button';
 import Modal from 'react-bootstrap/lib/Modal'
 import TaskItem from 'modules/Tasks/components/TaskList/TaskItem'
 import AddProject from './AddProject'
+import AddTask from 'modules/Tasks/containers/AddTaskContainer'
 import reactDom from 'react-dom';
 
 class ProjectList extends Component {
@@ -21,10 +22,12 @@ class ProjectList extends Component {
     this.showHideDeleteModal = this.showHideDeleteModal.bind(this);
     this.renderDeleteModal = this.renderDeleteModal.bind(this);
     this.deleteProject = this.deleteProject.bind(this);
+    this.addTask = this.addTask.bind(this);
 
     this.state = {
       updateProject: false,
       deleteProject: false,
+      addTask: false,
       selectedProjects: [],
       projectSettings:{
         show: false
@@ -67,13 +70,6 @@ class ProjectList extends Component {
       ...this.state,
       deleteProject: false
     })
-  }
-
-  renderTask(task){
-    if (task && !task.deleted){         //if the task was not deleted
-      return <TaskItem key={task.id} task={task} dateFormat={this.props.user.dateFormat} timeFormat={this.props.user.timeFormat}/>
-    }
-    return  null;
   }
 
   selectProject(id){
@@ -122,9 +118,35 @@ class ProjectList extends Component {
   }
 
   handleDocumentClick() {      //if the user clicked somewhere need to close the dropdown
-    if (!reactDom.findDOMNode(this.refs['settings']).contains(event.target)) {
+    if (this.refs['settings'] && !reactDom.findDOMNode(this.refs['settings']).contains(event.target)) {
       this.hideProjectSettings();
     }
+  }
+
+  addTask(e){
+    if (e){
+      e.stopPropagation();
+    }
+    document.removeEventListener('click', this.handleDocumentClick, false);
+    this.setState({
+      ...this.state,
+      addTask: !this.state.addTask
+    })
+  }
+
+  renderTask(task){
+    if (task && !task.deleted){         //if the task was not deleted
+      return (
+        <TaskItem
+          key={task.id}
+          task={task}
+          content={this.props.content}
+          dateFormat={this.props.user.dateFormat}
+          timeFormat={this.props.user.timeFormat}
+          deleteTask={this.props.deleteTask}/>
+      )
+    }
+    return  null;
   }
 
   renderDeleteModal(){
@@ -136,7 +158,7 @@ class ProjectList extends Component {
             <i className={`fa fa-close ${css.close}`} onClick={this.showHideDeleteModal} />
             <h1>{this.state.projectSettings.project.name}</h1>
             <p> {content.question}</p>
-            <p className={css.warning}> <i className="fa fa-exclamation" aria-hidden="true"/>
+            <p className={css.warning}>
               {content.warning}</p>
             <Button type="button" onClick={this.deleteProject} text={content.delete} style={css.confirm}/>
             <Button type="button" onClick={this.showHideDeleteModal} text={content.cancel} style={css.cancel}/>
@@ -147,8 +169,8 @@ class ProjectList extends Component {
   }
 
   renderProject(project){     //if the project was selected showing the tasks else only the header
-    let tasks = this.props.task.list.filter((task) => task.ProjectId == project.id && !task.deleted);
-    if (this.state.selectedProjects.indexOf(project.id) < 0 ){
+    let tasks = this.props.task.list.filter((task) => task.ProjectId == project.id && !task.deleted && !task.archived && !task.completed);
+    if (this.state.selectedProjects.indexOf(project.id) < 0 && this.props.project.selected != project){
       return (
         <div key={project.id} onClick={this.selectProject.bind(this,project.id)} className={css.project}>
           <h3>
@@ -189,6 +211,7 @@ class ProjectList extends Component {
       return(
         <div className={css.projectOptions} ref="settings">
           <i className={css.caretUp + " fa fa-caret-up"} aria-hidden="true"/>
+          <p className={css.option + " " + css.addTask} onClick={this.addTask}>{this.props.content.page.tasks.addTask.addTask}<i className="fa fa-plus"/></p>
           <p className={css.option} onClick={this.editProject}>{content.editProject}<i className="fa fa-pencil"/></p>
           <p className={css.option + " " + css.delete} onClick={this.showHideDeleteModal}>{content.deleteProject}<i className="fa fa-trash"/></p>
         </div>
@@ -208,6 +231,20 @@ class ProjectList extends Component {
                     sendProject={this.props.sendProject}
                     deleteProject={this.props.deleteProject}/>
       );
+    }
+  }
+
+  renderAddTask(){
+    if (this.state.addTask){      //if the user want to add a new task to this project
+      return (
+        <AddTask
+          buttonText={this.props.content.page.tasks.addTask.addTask}
+          buttonStyle={css.addTask}
+          sendButtonText={this.props.content.page.tasks.addTask.name}
+          showModal={true}
+          projectId={this.state.projectSettings.project.id}
+          onHide={this.addTask}/>
+      )
     }
   }
 
@@ -231,6 +268,8 @@ class ProjectList extends Component {
         </div>
         {this.renderDeleteModal()}      {/*modal for delete*/}
         {this.renderEditProject()}      {/*modal for update*/}
+        {this.renderAddTask()}      {/*modal for adding a new task*/}
+
         <div className={css.projects}>
           {
             projects.map( (project) =>
@@ -238,6 +277,8 @@ class ProjectList extends Component {
             )
           }
         </div>
+        {this.props.project.pending? <div className={css.spinner}><i className={"fa fa-spinner fa-spin"} /></div> : null}
+
       </div>
     );
   }

@@ -7,9 +7,10 @@
   margin: 5px;
   color: #fff;
   outline: 0;
-  min-width: 80px
+  min-width: 80px;
+  box-shadow: 0 2px 10px 0px lightslategrey;
 }
 
 .button:hover {
-  box-shadow: 0 0 5px 0px #69ca53;
+  box-shadow: 0 2px 10px 0px #999;
 }

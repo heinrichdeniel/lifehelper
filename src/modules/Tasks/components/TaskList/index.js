@@ -44,36 +44,53 @@ class TaskList extends Component {
           buttonStyle={css.addTask}
           sendButtonText={content.tasks.addTask.name}
           update={false}
-          iconStyle={css.addIcon}>
-        </AddTask>
+          iconStyle={css.addIcon}/>
       </div>
     );
   }
 
   renderTask(task){
-    let selectedProject = this.props.project.selected;
     if (task && !task.deleted){         //if the task was not deleted
-      if (!selectedProject || (selectedProject.id == task.ProjectId)){ //if a project filter was selected then the task project must be the same
-        return <TaskItem key={task.id} task={task} dateFormat={this.props.user.dateFormat} timeFormat={this.props.user.timeFormat}/>
-      }
+      return (
+        <TaskItem
+          key={task.id}
+          task={task}
+          content={this.props.content}
+          dateFormat={this.props.user.dateFormat}
+          timeFormat={this.props.user.timeFormat}
+          deleteTask={this.props.deleteTask}
+          updateTask={this.props.updateTask}/>
+      )
     }
     return  null;
   }
 
   render() {
-    let tasks = this.props.task.list.filter(this.applyDateFilter);
-    return(
+    if (this.props.task.pending) {    /* while dont get response from server */
+      return(
+        <div className={css.base}>
+          {this.renderTitle()}
+          <div className={css.spinner}>
+            <i className={"fa fa-spinner fa-spin"} />
+          </div>
+        </div>
+      )
+    }
+    else{
+      let tasks = this.props.task.list.filter(this.applyDateFilter);
+      return(
         <div className={css.base}>
           {this.renderTitle()}
           <div className={css.tasks}>
             {
               tasks.map( (task) =>
-               this.renderTask(task)
+                this.renderTask(task)
               )
             }
           </div>
         </div>
-    );
+      );
+    }
   }
 }
 

@@ -33,11 +33,13 @@
         "yourTasks": "Your tasks",
         "addTask":{
           "addTask": "Add task",
-          "name": "Create task"
+          "name": "Create task",
+          "confirmation": "Task successfully added!"
         },
         "editTask": {
           "name": "Edit task",
-          "update": "Update task"
+          "update": "Update task",
+          "confirmation": "Task successfully updated!"
         },
         "deleteTask": {
           "name": "Delete task",
@@ -59,8 +61,10 @@
       },
       "filters": {
         "timeFilter": "Show tasks between...",
-        "goToTasks": "Show Tasks",
-        "goToProjects": "Show Projects",
+        "goToTasks": "Tasks",
+        "goToProjects": "Projects",
+        "goToArchive": "Archive",
+        "goToGroups": "Groups",
         "search":{
           "quickSearch": "Quick search",
           "projects": "Projects",
@@ -114,6 +118,11 @@
           "saveChanges": "Save changes",
           "updated": "Your account has been updated."
         }
+      },
+      "archive": {
+        "title": "Archive",
+        "archive": "Archive task",
+        "restore": "Restore"
       }
     }
   },
@@ -151,11 +160,13 @@
         "yourTasks": "Feladatok",
         "addTask":{
           "addTask": "Feladat hozzáadása",
-          "name": "Hozzáad"
+          "name": "Hozzáad",
+          "confirmation": "Feladat sikeresen hozzáadva!"
         },
         "editTask": {
           "name": "Szerkesztés",
-          "update": "Módosítás"
+          "update": "Módosítás",
+          "confirmation": "Feladat sikeresen módosítva!"
         },
         "deleteTask": {
           "name": "Törlés",
@@ -178,8 +189,9 @@
       },
       "filters": {
         "timeFilter": "Idő intervallum",
-        "goToTasks": "Feladatok mutatása",
-        "goToProjects": "Projektek mutatása",
+        "goToTasks": "Feladatok",
+        "goToProjects": "Projektek",
+        "goToArchive": "Archívum",
         "search":{
           "quickSearch": "Keresés",
           "projects": "Projektek",
@@ -234,6 +246,12 @@
           "saveChanges": "Változtatások mentése",
           "updated": "A fiókod sikeresen frissítve lett."
         }
+      },
+      "archive": {
+        "title": "Archívum",
+        "archive": "Archiválás",
+        "restore": "Visszaállítás"
+
       }
     }
   },
@@ -271,11 +289,13 @@
         "yourTasks": "Activitățile tale",
         "addTask":{
           "addTask": "Adaugă o nouă activitate",
-          "name": "Adaugă"
+          "name": "Adaugă",
+          "confirmation": "Adăugat cu succes!"
         },
         "editTask": {
           "name": "Editare",
-          "update": "Salvare"
+          "update": "Salvare",
+          "confirmation": "Schimbat cu succes!"
         },
         "deleteTask": {
           "name": "Ștergere",
@@ -299,6 +319,7 @@
         "timeFilter": "Afișarea activitățile între...",
         "goToTasks": "Activități",
         "goToProjects": "Proiecte",
+        "goToArchive": "Arhivă",
         "search":{
           "quickSearch": "Căutare",
           "projects": "Proiecte",
@@ -352,6 +373,11 @@
           "saveChanges": "Salvare",
           "updated": "Contul tău a fost actualizat."
         }
+      },
+      "archive": {
+        "title": "Arhivă",
+        "archive": "Arhivare",
+        "restore": "Restabilire"
       }
     }
   }

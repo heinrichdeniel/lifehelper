@@ -7,6 +7,7 @@ import Filters from 'modules/Filters'
 
 import TaskList from 'modules/Tasks/containers/TaskListContainer'
 import ProjectList from 'modules/Projects/containers/ProjectContainer'
+import Archive from 'modules/Tasks/containers/ArchiveContainer'
 
 class Landing extends Component {
   constructor(props){
@@ -33,27 +34,23 @@ class Landing extends Component {
 
   renderContent(){
     if (this.props.authDetails.token){      //if the user is logged in
+      let content = <TaskList/>;
       let pathname = window.location.pathname;
-      if (pathname.substring(pathname.length-8) == "projects"){//render the projects tab
-        return(
-          <div className={css.content + " container"}>
-            <Filters content={this.props.content.page.filters}/>
-            <div className={css.taskList + " col-sm-7 col-lg-7"}>
-              <ProjectList/>
-            </div>
-          </div>
-        )
+      if (pathname.substring(pathname.length-8) == "projects"){   //render the projects tab
+        content = <ProjectList/>
       }
-      else{     //render the tasks tab
-        return(
-          <div className={css.content + " container"}>
-            <Filters content={this.props.content.page.filters}/>
-            <div className={css.taskList + " col-sm-7 col-lg-7"}>
-              <TaskList/>
-            </div>
-          </div>
-        )
+      else if (pathname.substring(pathname.length-7) == "archive"){     //render the archive
+        content = <Archive/>
       }
+
+      return(
+        <div className={css.content + " container"}>
+          <Filters content={this.props.content.page.filters}/>
+          <div className={css.taskList + " col-sm-7 col-lg-7"}>
+            {content}
+          </div>
+        </div>
+      )
     }
   }
 
@@ -64,7 +61,9 @@ class Landing extends Component {
                 user={this.props.user}
                 token={this.props.authDetails.token}
                 logout={this.props.logout}/>
-        {this.renderContent()}
+
+            {this.renderContent()}
+
         <Footer switchLanguage={this.switchLanguage}/>
       </div>
     )

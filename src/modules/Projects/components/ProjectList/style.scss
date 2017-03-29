@@ -1,11 +1,12 @@
 @import 'src/styles/globals.scss';
 .base{
-  background-color: #ccc;
+  background-color: #ddd;
   border-radius: 5px;
   max-height: 80vh;
   z-index: 1000;
-  border: 7.5px solid #ccc;
+  border: 7.5px solid #ddd;
   padding-bottom: 0;
+  box-shadow: 2px 2px 25px -5px #333;
   .projects{
     overflow-y: auto;
     overflow-x: hidden;
@@ -23,30 +24,40 @@
       border-radius: 3px;
       margin: 10px 0 ;
       padding: 10px;
+      box-shadow: 0 2px 10px 0px darkgray;
       cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+
       h3{
-        color: $brown-color;
+        color: $project-color;
         font-size: 18px;
         margin: 0;
+        transition: all 0.3s ease;
+
       }
       &:hover{
-        background-color: $brown-color;
-        box-shadow: 0 0px 3px 0px $brown-color;
+        background-color: $project-color;
+        box-shadow: 0 2px 10px 0px dimgray;
+        transition: all 0.3s ease;
         h3{
           color: #fafafa;
+          transition: all 0.3s ease;
         }
       }
       h2{
         font-size: 18px;
       }
       .projectSettings{
-        float: right;
+        right: 10px;
+        position: absolute;
         margin-right: 0;
       }
     }
     .activeProject{
-      background-color: $brown-color;
-      box-shadow: 0 0px 3px 0px $brown-color;
+      background-color: $project-color;
+      box-shadow: 0 2px 10px 0px dimgray;
+      transition: all 0.3s ease;
       h3{
         color: #fafafa;
       }
@@ -57,7 +68,7 @@
 
   }
   h1{
-    color: $brown-color;
+    color: $project-color;
     text-align: left;
     margin: 0px;
     margin-bottom: 10px;
@@ -68,16 +79,18 @@
     padding: 7.5px;
     padding-bottom: 0;
     .title{
-      color: $brown-color;
+      color: $project-color;
     }
     .addIcon{
-      border-color: $brown-color;
+      border-color: $project-color;
       position: absolute;
       right: 0;
       top: -33px;
       width: 30px;
       height: 30px;
       margin-right: 3px;
+      transition: all 0.3s ease;
+      border-radius: 100%;
       i{
         font-size: 22px;
         margin: auto;
@@ -85,16 +98,22 @@
         top: 50%;
         transform: translateY(-50%);
         vertical-align: middle;
-        color: $brown-color;
+        color: $project-color;
+        transition: all 0.3s ease;
+
       }
       &:hover{
-        background-color: $brown-color;
+        background-color: $project-color;
         i{
           color: white;
         }
       }
     }
-
+  }
+  .spinner{
+    font-size: 50px;
+    text-align: center;
+    color: $secondary-color;
   }
 }
 
@@ -119,6 +138,7 @@
     position: relative;
     &:hover{
       background-color: #ddd;
+      transition: all 0.3s ease;
     }
     &.delete{
       border-bottom: 0;
@@ -126,6 +146,10 @@
     i{
       float: right;
       font-size: 16px;
+      margin-top: 2px;
+    }
+    &.addTask i{
+      margin-top: 3px;
     }
   }
   .caretUp{
@@ -172,6 +196,7 @@
     margin-bottom: 50px;
     &:hover {
       box-shadow: 0 0 5px 0px #ea0000;
+      transition: all 0.2s ease;
     }
   }
   .cancel {

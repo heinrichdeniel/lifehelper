@@ -60,6 +60,7 @@
     background-color: $red-color;
     &:hover{
       box-shadow: 0 0 5px 0 $red-color;
+      transition: all 0.2s ease;
     }
   }
 

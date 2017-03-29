@@ -17,9 +17,11 @@
     background-color: #f6f6f6;
     color: $primary-color;
     cursor:pointer;
+    transition: all 0.3s ease;
     &:hover{
       background-color: $primary-color;
       color: #f6f6f6;
+      transition: all 0.3s ease;
     }
     i {
       font-size: 22px;
@@ -39,20 +41,33 @@
     @media screen and (max-width:570px){
       width: 100%;
     }
+    div,input{
+      border-radius: 50px!important;
+    }
   }
 
   .hideInput{
+    width: 40px;
+    opacity: 0.5;
     visibility: hidden;
-    opacity: 0;
-    transition: visibility 0.5s, opacity 0.5s linear;
+    input{
+      border: 0;
+      padding: 0;
+    }
+    transition: width 0.5s, opacity 0s, visibility 0.6s linear;
   }
 
   .showInput{
-    visibility: visible;
+    width: 350px;
     opacity: 1;
-    transition: visibility 0s, opacity 0.5s linear;
+    transition: width 0.5s, opacity 0.5s linear;
     margin-left: -5px;
-
+    box-shadow: none;
+    .foundItems{
+      box-shadow: 0 2px 10px 0px #999;
+      margin-top: -8px;
+      transition: all 0.2s ease;
+    }
   }
 
   .hideIcon{
@@ -62,6 +77,7 @@
     &:hover{
       background-color: transparent;
       color: $primary-color;
+      transition: all 0.2s ease;
     }
   }
 }
@@ -75,7 +91,7 @@
   margin-top: 40px!important;
   z-index: 101;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px 5px #aaa;
+  box-shadow: 0 2px 10px 0px #999;
   .foundItems{
     background-color: #fff;
     border: 1px solid #ccc;

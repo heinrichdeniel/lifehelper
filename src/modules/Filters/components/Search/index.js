@@ -33,15 +33,20 @@ class Search extends Component {
   }
 
   selectTask(task){
+    document.removeEventListener('click', this.handleDocumentClick, false);
     browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+task.id);
   }
 
   selectProject(project){
+    document.removeEventListener('click', this.handleDocumentClick, false);
     this.props.selectProject(project)
     this.setState({
       ...this.state,
-      searchValue: ""
+      searchValue: "",
+      showInput: css.hideInput,
+      showIcon: css.showIcon
     })
+    browserHistory.push(window.location.pathname.substring(0,3)+"/projects");
   }
 
   handleDocumentClick() {      //if the user clicked somewhere need to close the dropdown
@@ -53,6 +58,10 @@ class Search extends Component {
       });
       document.removeEventListener('click', this.handleDocumentClick, false);
     }
+    this.setState({
+      ...this.state,
+      searchValue: ""
+    })
   }
 
   showInput(){
