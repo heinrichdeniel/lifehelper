@@ -49,8 +49,8 @@ class Search extends Component {
     browserHistory.push(window.location.pathname.substring(0,3)+"/projects");
   }
 
-  handleDocumentClick() {      //if the user clicked somewhere need to close the dropdown
-    if (!reactDom.findDOMNode(this).contains(event.target)) {
+  handleDocumentClick(e) {      //if the user clicked somewhere need to close the dropdown
+    if (!reactDom.findDOMNode(this).contains(e.target)) {
       this.setState({
         ...this.state,
         showInput: css.hideInput,

@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/lib/Modal'
 import AddTask from 'modules/Tasks/containers/AddTaskContainer'
 import Button from 'components/Button'
 import Map from 'components/Map'
+import Spinner from 'components/Spinner';
 
 class TaskPage extends Component {
   constructor(props){
@@ -76,7 +77,7 @@ class TaskPage extends Component {
     if (this.props.task.pending){
       return(
         <div className={css.base + " container"}>
-          {this.props.task.pending? <div className={css.spinner}><i className={"fa fa-spinner fa-spin"} /></div> : null}
+          {this.props.task.pending? <Spinner/>: null}
         </div>
         )
     }

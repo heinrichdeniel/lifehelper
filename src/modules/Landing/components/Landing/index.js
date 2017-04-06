@@ -14,7 +14,6 @@ class Landing extends Component {
     super(props);
 
     this.renderContent = this.renderContent.bind(this);
-    this.switchLanguage = this.switchLanguage.bind(this);
   }
   componentWillMount(){
     if (this.props.authDetails.token){
@@ -22,18 +21,13 @@ class Landing extends Component {
     }
   }
   componentDidUpdate(){
-    if (this.props.user.language && window.location.pathname.substring(1,3)!= this.props.user.language){
-      this.props.switchLanguage(this.props.user.language);
+    if (this.props.user.current.language && window.location.pathname.substring(1,3)!= this.props.user.current.language){
+      this.props.switchLanguage(this.props.user.current.language);
     }
   }
 
-  switchLanguage(lang){
-    this.props.switchLanguage(lang);
-    this.props.updateGeneralSettings({language:lang});
-  }
-
   renderContent(){
-    if (this.props.authDetails.token){      //if the user is logged in
+    if ( this.props.authDetails.token){      //if the user is logged in
       let content = <TaskList/>;
       let pathname = window.location.pathname;
       if (pathname.substring(pathname.length-8) == "projects"){   //render the projects tab
@@ -58,13 +52,13 @@ class Landing extends Component {
     return(
       <div className={css.base}>
         <Header content={this.props.content}
-                user={this.props.user}
+                user={this.props.user.current}
                 token={this.props.authDetails.token}
                 logout={this.props.logout}/>
 
             {this.renderContent()}
 
-        <Footer switchLanguage={this.switchLanguage}/>
+        <Footer switchLanguage={this.props.switchLanguage}/>
       </div>
     )
   }

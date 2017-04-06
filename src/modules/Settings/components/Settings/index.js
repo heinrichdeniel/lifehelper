@@ -13,14 +13,15 @@ class Settings extends Component {
     this.handleDocumentClick = this.handleDocumentClick.bind(this);
     this.logout = this.logout.bind(this);
     this.openSettings = this.openSettings.bind(this);
+    this.openNotifications = this.openNotifications.bind(this);
 
     this.state={
       showOptions: false
     }
   }
 
-  handleDocumentClick() {      //if the user clicked somewhere need to close the dropdown
-    if (!reactDom.findDOMNode(this).contains(event.target)) {
+  handleDocumentClick(e) {      //if the user clicked somewhere need to close the dropdown
+    if (!reactDom.findDOMNode(this).contains(e.target)) {
       this.hideOptions();
     }
   }
@@ -50,12 +51,22 @@ class Settings extends Component {
     browserHistory.push(window.location.pathname.substring(0,3)+'/settings');
   }
 
+  openNotifications(){
+    this.hideOptions();
+    browserHistory.push(window.location.pathname.substring(0,3)+'/notifications');
+  }
+
   renderOptions(){
-    let content = this.props.content.page.options;
+    let content = this.props.content.page.settings.options;
+    let notification = <p className={css.option} onClick={this.openNotifications}>{content.notifications}<i className="fa fa-flag"/></p>;
+    if (this.props.user.notifications){
+      notification = <p className={css.option} onClick={this.openNotifications}>{content.notifications}<i className="fa fa-flag" style={{color: '#d30000'}}/></p>;
+    }
     if (this.state.showOptions){
       return(
         <div className={css.options}>
           <i className={css.caretUp + " fa fa-caret-up"} aria-hidden="true"/>
+          {notification}
           <p className={css.option} onClick={this.openSettings}>{content.settings}<i className="fa fa-wrench"/></p>
           <p className={css.option +" "+ css.logout} onClick={this.logout}>{content.logout}<i className="fa fa-sign-out"/></p>
         </div>
@@ -71,6 +82,7 @@ class Settings extends Component {
     return(
       <div className={css.base}>
         {icon}
+        {this.props.user.notifications ? <i className={css.notificationIcon + " fa fa-exclamation-circle"}/> : null}
         {this.renderOptions()}
       </div>
     )

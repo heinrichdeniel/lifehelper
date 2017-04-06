@@ -15,7 +15,7 @@ const mapActionsToProps = (dispatch) => ({
   reset: actions.reset
 });
 const mapStateToProps = (state) => ({
-  user: selectors.user(state),
+  user: selectors.user(state).current,
   login: selectors.login(state),
   content: contentSelector.content(state)
 });

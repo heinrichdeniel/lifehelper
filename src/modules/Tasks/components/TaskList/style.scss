@@ -6,7 +6,7 @@
   z-index: 1000;
   border: 7.5px solid #ddd;
   padding-bottom: 0;
-  box-shadow: 2px 2px 25px -5px #333;
+  box-shadow: 0px 0px 15px 0px #999;
 
   .tasks {
     overflow-y: auto;
@@ -51,11 +51,6 @@
         }
       }
     }
-  }
-  .spinner{
-    font-size: 50px;
-    text-align: center;
-    color: $primary-color;
   }
 }
 

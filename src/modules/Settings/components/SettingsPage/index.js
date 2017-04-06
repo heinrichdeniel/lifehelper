@@ -7,6 +7,7 @@ import Menu from './Menu'
 import GeneralSettings from './GeneralSettings'
 import AccountSettings from './AccountSettings'
 import Shortcuts from './Shortcuts'
+import Spinner from 'components/Spinner'
 
 class SettingsPage extends Component {
   constructor(props){
@@ -32,7 +33,9 @@ class SettingsPage extends Component {
   }
 
   renderSettingsTab(){
-
+    if (!this.props.user.id) {     //if the user not loaded yet
+      return <Spinner/>
+    }
     if (this.state.selectedTab == 1){
       return (
         <GeneralSettings
@@ -59,10 +62,7 @@ class SettingsPage extends Component {
 
 
   render() {
-    if (!this.props.user.id){     //if the user not loaded yet
-      return null;
-    }
-    return(
+    return (
       <div className={css.base}>
         <Header user={this.props.user}/>
         <div className={"container " + css.body}>

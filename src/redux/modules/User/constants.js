@@ -5,7 +5,10 @@ const actionTypes = [
   'UPDATE_PROFILE',
   'GET_PROFILE',
   'UPDATE_GENERAL_SETTINGS',
-  'UPDATE_ACCOUNT_SETTINGS'
+  'UPDATE_ACCOUNT_SETTINGS',
+  'GET_USERS_BY_FILTER',
+  'GET_COLLABORATORS',
+  'GET_NOTIFICATIONS'
 ];
 const statusTypes = ['PENDING', 'SUCCESS', 'ERROR'];
 const constants = {};

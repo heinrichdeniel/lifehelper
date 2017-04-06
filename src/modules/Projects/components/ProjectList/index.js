@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import css from './style.scss';
 import moment from 'moment';
 import Button from 'components/Button';
+import Spinner from 'components/Spinner';
 import Modal from 'react-bootstrap/lib/Modal'
 import TaskItem from 'modules/Tasks/components/TaskList/TaskItem'
 import AddProject from './AddProject'
@@ -117,8 +118,8 @@ class ProjectList extends Component {
     document.removeEventListener('click', this.handleDocumentClick, false);
   }
 
-  handleDocumentClick() {      //if the user clicked somewhere need to close the dropdown
-    if (this.refs['settings'] && !reactDom.findDOMNode(this.refs['settings']).contains(event.target)) {
+  handleDocumentClick(e) {      //if the user clicked somewhere need to close the dropdown
+    if (this.refs['settings'] && !reactDom.findDOMNode(this.refs['settings']).contains(e.target)) {
       this.hideProjectSettings();
     }
   }
@@ -141,9 +142,12 @@ class ProjectList extends Component {
           key={task.id}
           task={task}
           content={this.props.content}
-          dateFormat={this.props.user.dateFormat}
-          timeFormat={this.props.user.timeFormat}
-          deleteTask={this.props.deleteTask}/>
+          dateFormat={this.props.user.current.dateFormat}
+          timeFormat={this.props.user.current.timeFormat}
+          deleteTask={this.props.deleteTask}
+          users={this.props.user.list}
+          getUsersByFilter={this.props.getUsersByFilter}
+          shareTask={this.props.shareTask}/>
       )
     }
     return  null;
@@ -169,7 +173,7 @@ class ProjectList extends Component {
   }
 
   renderProject(project){     //if the project was selected showing the tasks else only the header
-    let tasks = this.props.task.list.filter((task) => task.ProjectId == project.id && !task.deleted && !task.archived && !task.completed);
+    let tasks = this.props.task.list.filter((task) => task.ProjectId == project.id && task.status == "pending");
     if (this.state.selectedProjects.indexOf(project.id) < 0 && this.props.project.selected != project){
       return (
         <div key={project.id} onClick={this.selectProject.bind(this,project.id)} className={css.project}>
@@ -277,7 +281,7 @@ class ProjectList extends Component {
             )
           }
         </div>
-        {this.props.project.pending? <div className={css.spinner}><i className={"fa fa-spinner fa-spin"} /></div> : null}
+        {this.props.project.pending? <Spinner/> : null}
 
       </div>
     );

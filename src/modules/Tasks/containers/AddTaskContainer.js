@@ -25,7 +25,7 @@ const mapStateToProps = (state) => ({
   task: taskSelectors.task(state),
   project: projectSelectors.project(state),
   content: contentSelectors.content(state),
-  user: userSelectors.user(state)
+  user: userSelectors.user(state).current
 });
 
 

@@ -113,3 +113,49 @@ export function updateAccountSettings (payload) {
       })
   })
 }
+
+export function getUsersByFilter (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .get(config.api.host + 'user/list')
+      .set('x-access-token', payload.token)
+      .query({filter: payload.filter, taskId: payload.taskId})
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
+export function getCollaborators (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .get(config.api.host + 'user/collaborators')
+      .set('x-access-token', payload.token)
+      .query({taskId: payload.taskId})
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
+export function getNotifications (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .get(config.api.host + 'user/notifications')
+      .set('x-access-token', payload.token)
+      .query(payload.parameters)
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+

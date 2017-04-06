@@ -15,7 +15,7 @@ const mapStateToProps = (state) => ({
   dateFrom: taskSelectors.dateFrom(state),
   dateTo: taskSelectors.dateTo(state),
   content: contentSelector.content(state),
-  user: userSelectors.user(state)
+  user: userSelectors.user(state).current
 });
 
 

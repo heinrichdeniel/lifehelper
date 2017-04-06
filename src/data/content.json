@@ -57,14 +57,28 @@
         "date": "Selected date",
         "project": "Project",
         "prevStep": "Back",
-        "shortTaskName": "The task name must contain at least 3, maximum 20 character!"
+        "shortTaskName": "The task name must contain at least 3, maximum 20 character!",
+        "share":{
+          "shareTask": "Share",
+          "name": "Share task",
+          "cancel": "Cancel",
+          "search": "Search by name or email",
+          "noResultsText": "No results found",
+          "typeToSearch": "Type to search",
+          "confirmation": "Task successfully shared!",
+          "title": "Collaborators",
+          "pending": "Pending",
+          "accepted": "Accepted",
+          "declined": "Declined",
+          "addMore": "Add more",
+          "me": "(Me)"
+        }
       },
       "filters": {
         "timeFilter": "Show tasks between...",
         "goToTasks": "Tasks",
         "goToProjects": "Projects",
         "goToArchive": "Archive",
-        "goToGroups": "Groups",
         "search":{
           "quickSearch": "Quick search",
           "projects": "Projects",
@@ -88,11 +102,12 @@
         },
         "shortName": "The project name must contain at least 3, maximum 20 character!"
       },
-      "options": {
-        "settings": "Settings",
-        "logout": "Sign out"
-      },
       "settings": {
+        "options": {
+          "notifications": "Notifications",
+          "settings": "Settings",
+          "logout": "Sign out"
+        },
         "title": "Settings",
         "menu":{
           "general": "General",
@@ -123,6 +138,13 @@
         "title": "Archive",
         "archive": "Archive task",
         "restore": "Restore"
+      },
+      "notifications": {
+        "shareRequests": "Sharing Requests",
+        "noShareRequests": "No requests!",
+        "shareMessage": " would like to share with you the next task: ",
+        "accept": "Accept",
+        "decline": "Decline"
       }
     }
   },
@@ -174,17 +196,32 @@
           "delete": "Törlés",
           "cancel": "Mégse"
         },
-        "name": "Tevékenység neve",
+        "name": "Feladat neve",
         "description": "Leírás",
         "selectProject": "Projekt kiválasztása",
-        "locationTitle": "Tevékenység helyszíne",
+        "locationTitle": "Feladat helyszíne",
         "selectLocation": "Kiválaszt",
         "searchLocation": "Válassz helyszínt",
         "summary": "Összegzés",
         "date": "Időpont",
         "project": "Projekt",
         "prevStep": "Vissza",
-        "shortTaskName": "A tevékenység neve minimum 3, maximum 20 karaktert kell tartalmazzon!"
+        "shortTaskName": "A feladat neve minimum 3, maximum 20 karaktert kell tartalmazzon!",
+        "share":{
+          "shareTask": "Megosztás",
+          "name": "Feladat megosztása",
+          "cancel": "Mégse",
+          "search": "Keresés név vagy e-mail szerint",
+          "noResultsText": "Nincs találat",
+          "typeToSearch": "Gépeljen a kereséshez",
+          "confirmation": "Feladat megosztva!",
+          "title": "Együttműködők",
+          "pending": "Folyamatban",
+          "accepted": "Elfogadva",
+          "declined": "Elutasítva",
+          "addMore": "Továbbiak hozzáadása",
+          "me": "(Én)"
+        }
 
       },
       "filters": {
@@ -216,11 +253,12 @@
         "shortName": "A projekt neve minimum 3, maximum 20 karaktert kell tartalmazzon!"
 
       },
-      "options": {
-        "settings": "Beállítások",
-        "logout": "Kijelentkezés"
-      },
       "settings": {
+        "options": {
+          "notifications": "Értesítések",
+          "settings": "Beállítások",
+          "logout": "Kijelentkezés"
+        },
         "title": "Beállítások",
         "menu":{
           "general": "Álltalános beállítások",
@@ -252,6 +290,13 @@
         "archive": "Archiválás",
         "restore": "Visszaállítás"
 
+      },
+      "notifications": {
+        "shareRequests": "Megosztási kérelmek",
+        "noShareRequests": "Nincsenek kérések!",
+        "shareMessage": " szeretné veled megosztani a következő feladatot: ",
+        "accept": "Elfogad",
+        "decline": "Elutasít"
       }
     }
   },
@@ -313,7 +358,22 @@
         "date": "Data",
         "project": "Proiect",
         "prevStep": "Înapoi",
-        "shortTaskName": "Numele taskului trebuie să conțină cel puțin 3, maxim 20 de caractere!"
+        "shortTaskName": "Numele taskului trebuie să conțină cel puțin 3, maxim 20 de caractere!",
+        "share":{
+          "shareTask": "Diviza",
+          "name": "Diviza activitate",
+          "cancel": "Anulare",
+          "search": "Căutare după nume sau e-mail",
+          "noResultsText": "Nici un rezultat",
+          "typeToSearch": "Tastați pentru a căuta",
+          "confirmation": "Solicitarea a fost trimisă!",
+          "title": "Colaboratori",
+          "pending": "În curs",
+          "accepted": "Acceptat",
+          "declined": "Refuzat",
+          "addMore": "Adăugați mai mult",
+          "me": "(Eu)"
+        }
       },
       "filters": {
         "timeFilter": "Afișarea activitățile între...",
@@ -343,11 +403,12 @@
         },
         "shortName": "Numele proiectului trebuie să conțină cel puțin 3, maxim 20 de caractere!"
       },
-      "options": {
-        "settings": "Setări",
-        "logout": "Deconectare"
-      },
       "settings": {
+        "options": {
+          "notifications": "Anunțuri",
+          "settings": "Setări",
+          "logout": "Deconectare"
+        },
         "title": "Setări",
         "menu":{
           "general": "Setări generale",
@@ -378,6 +439,13 @@
         "title": "Arhivă",
         "archive": "Arhivare",
         "restore": "Restabilire"
+      },
+      "notifications": {
+        "shareRequests": "solicitări de distribuire",
+        "noShareRequests": "Nu există solicitări!",
+        "shareMessage": " ar dori să împărtășesc cu tine următoarea activitatea: ",
+        "accept": "Acceptă",
+        "decline": "Refuză"
       }
     }
   }

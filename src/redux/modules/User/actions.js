@@ -26,28 +26,30 @@ export function login(payload) {
 }
 
 export function loginFacebook(payload) {
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      type: constants.SET_USER,
-      payload: {
-        email: payload.user.email,
-        photo_url: payload.user.picture.data.url,
-        name: payload.user.name
-      }
+  if (payload.authResponse){
+    store.dispatch((dispatch, getState) => {
+      return dispatch({
+        type: constants.SET_USER,
+        payload: {
+          email: payload.user.email,
+          photo_url: payload.user.picture.data.url,
+          name: payload.user.name
+        }
+      })
     })
-  })
-  store.dispatch((dispatch, getState) => {
-    return dispatch({
-      types: [
-        constants.LOGIN_PENDING,
-        constants.LOGIN_SUCCESS,
-        constants.LOGIN_ERROR
-      ],
-      payload: {
-        promise: api.loginFacebook(payload)
-      }
+    store.dispatch((dispatch, getState) => {
+      return dispatch({
+        types: [
+          constants.LOGIN_PENDING,
+          constants.LOGIN_SUCCESS,
+          constants.LOGIN_ERROR
+        ],
+        payload: {
+          promise: api.loginFacebook(payload)
+        }
+      })
     })
-  })
+  }
 }
 
 export function loginGoogle(payload) {
@@ -195,6 +197,62 @@ export function updateAccountSettings(settings) {
         promise: api.updateAccountSettings({
           token: getState().User.authDetails.token,
           settings: settings
+        })
+      }
+    })
+  })
+}
+
+export function getUsersByFilter(filter, taskId) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.GET_USERS_BY_FILTER_PENDING,
+        constants.GET_USERS_BY_FILTER_SUCCESS,
+        constants.GET_USERS_BY_FILTER_ERROR
+      ],
+      payload: {
+        promise: api.getUsersByFilter({
+          token: getState().User.authDetails.token,
+          filter: filter,
+          taskId: taskId
+        })
+      }
+    })
+  })
+}
+
+
+export function getCollaborators(payload) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.GET_COLLABORATORS_PENDING,
+        constants.GET_COLLABORATORS_SUCCESS,
+        constants.GET_COLLABORATORS_ERROR
+      ],
+      payload: {
+        promise: api.getCollaborators({
+          token: getState().User.authDetails.token,
+          ...payload
+        })
+      }
+    })
+  })
+}
+
+export function getNotifications(payload) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.GET_NOTIFICATIONS_PENDING,
+        constants.GET_NOTIFICATIONS_SUCCESS,
+        constants.GET_NOTIFICATIONS_ERROR
+      ],
+      payload: {
+        promise: api.getNotifications({
+          token: getState().User.authDetails.token,
+          parameters: payload
         })
       }
     })

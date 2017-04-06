@@ -1,6 +1,7 @@
 import store from 'redux/config/store'
 import constants from './constants'
 import * as api from 'api/tasks'
+import * as userActions from '../User/actions'
 
 export function sendTask(payload) {
   store.dispatch((dispatch, getState) => {
@@ -98,6 +99,68 @@ export function applyDateFilter(filter) {
       type: constants.APPLY_DATE_FILTER,
       payload: filter
     })
+  })
+}
+
+export function shareTask(payload) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.SHARE_TASK_PENDING,
+        constants.SHARE_TASK_SUCCESS,
+        constants.SHARE_TASK_ERROR
+      ],
+      payload: {
+        promise: api.shareTask({
+          token: getState().User.authDetails.token,
+          ...payload
+        })
+      }
+    })
+  }).then (function(){
+    userActions.getCollaborators({taskId: payload.task.id})
+  })
+}
+
+
+export function acceptShare(taskId) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.ACCEPT_SHARE_PENDING,
+        constants.ACCEPT_SHARE_SUCCESS,
+        constants.ACCEPT_SHARE_ERROR
+      ],
+      payload: {
+        promise: api.acceptShare({
+          token: getState().User.authDetails.token,
+          taskId: taskId
+        })
+      }
+    })
+  }).then (function(){
+    userActions.getNotifications()
+  })
+}
+
+
+export function declineShare(taskId) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.DECLINE_SHARE_PENDING,
+        constants.DECLINE_SHARE_SUCCESS,
+        constants.DECLINE_SHARE_ERROR
+      ],
+      payload: {
+        promise: api.declineShare({
+          token: getState().User.authDetails.token,
+          taskId: taskId
+        })
+      }
+    })
+  }).then (function(){
+    userActions.getNotifications()
   })
 }
 

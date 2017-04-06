@@ -8,20 +8,35 @@
     margin-left: 10px;
     margin-top: -5px;
     cursor: pointer;
+    border: 1px solid $primary-color;
     &:hover{
       box-shadow: 0 0px 10px 0px dimgray;
       transition: all 0.2s ease;
     }
   }
+
   .userIcon{
     width: 40px;
     height: 40px;
     font-size: 43px;
     margin-top: -5px;
-    margin-left: 8px;
+    margin-left: 10px;
     color: $primary-color;
     cursor: pointer;
   }
+
+  .notificationIcon{
+    color: $red-color;
+    position: absolute;
+    font-size: 20px;
+    margin-left: -13px;
+    margin-top: -15px;
+    box-shadow: -1px 3px 3px 1px #888;
+    border-radius: 100%;
+    width: 16px;
+    height: 16px;
+  }
+
   .options{
     position: absolute;
     right: 0;
@@ -31,7 +46,7 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     margin-top: 10px;
-    box-shadow: 2px 2px 10px 0;
+    box-shadow: 1px 2px 10px 0 #aaa;
     transition: all 0.2s ease;
     &:focus{
       background-color: #3e5a95;
@@ -60,7 +75,7 @@
       margin-top: -20px;
       font-size: 28px;
       right: 10px;
-      color: darkgrey;
+      color: #fff;
     }
   }
 }

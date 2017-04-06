@@ -74,3 +74,49 @@ export function deleteTask (payload) {
       })
   })
 }
+
+
+export function shareTask (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'tasks/share')
+      .set('x-access-token', payload.token)
+      .send({users: payload.users, task: payload.task})
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
+export function acceptShare (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'tasks/acceptShare')
+      .set('x-access-token', payload.token)
+      .send({taskId: payload.taskId})
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
+export function declineShare (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'tasks/declineShare')
+      .set('x-access-token', payload.token)
+      .send({taskId: payload.taskId})
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}

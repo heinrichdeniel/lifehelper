@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Modal from 'react-bootstrap/lib/Modal'
 import css from './style.scss'
 import moment from 'moment';
-import {browserHistory} from 'react-router';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -12,6 +11,7 @@ import TimePicker from 'components/TimePicker';
 import ErrorBox from 'components/ErrorBox';
 import Dropdown from 'components/Dropdown';
 import Map from 'components/Map';
+import ConfirmationBox from 'components/ConfirmationBox';
 
 class AddTask extends Component {
   constructor(props){
@@ -30,9 +30,7 @@ class AddTask extends Component {
     this.renderButton = this.renderButton.bind(this);
     this.renderDetails = this.renderDetails.bind(this);
     this.renderMap = this.renderMap.bind(this);
-    this.renderConfirmation = this.renderConfirmation.bind(this);
     this.timeModalChanged = this.timeModalChanged.bind(this);
-    this.handleDocumentClick = this.handleDocumentClick.bind(this);
 
     this.state = {
       showModal: false,
@@ -44,10 +42,8 @@ class AddTask extends Component {
         description: "",
         date: moment(),
         location: "",
-        ProjectId: null
-      },
-      style:{
-        opacity: '1'
+        ProjectId: null,
+        status: "pending"
       }
     }
   }
@@ -221,7 +217,7 @@ class AddTask extends Component {
     else{
       this.setState({
         ...this.state,
-        opacity: 1 - this.state.opacity,
+        opacity: 1 - this.state.opacity
       });
     }
   }
@@ -234,28 +230,14 @@ class AddTask extends Component {
     this.setState({
       ...this.state,
       showModal: !this.state.showModal,
-      sent: true,
-      style: {
-        opacity: '1'
-      }
+      sent: true
     });
     if (this.props.onHide){
       this.props.onHide();
     }
-    this.props.sendTask(Object.assign({},this.state.task,{completed: false,archived: false}));
-    document.addEventListener('click', this.handleDocumentClick, false);
-
+    this.props.sendTask(Object.assign({},this.state.task));
   }
 
-  handleDocumentClick() {      //if the user clicked somewhere in the page
-      this.setState({
-        style:{
-          opacity: '0'
-        }
-      });
-    document.removeEventListener('click', this.handleDocumentClick, false);
-
-  }
 
   nextStep(e){     //changing to the next step
     e.preventDefault();
@@ -356,25 +338,17 @@ class AddTask extends Component {
     );
   }
 
-  renderConfirmation(){     //after saving the task
-    let message = this.props.update ? this.props.content.page.tasks.editTask.confirmation : this.props.content.page.tasks.addTask.confirmation;
-
-    return (
-      <div className={css.confirmation} style={this.state.style}>
-        <p>{message}</p>
-      </div>
-    )
-  }
 
   render() {
+    let message = this.props.update ? this.props.content.page.tasks.editTask.confirmation : this.props.content.page.tasks.addTask.confirmation;
     if (this.props.hide){
-      return this.state.sent ? this.renderConfirmation() : null
+      return this.state.sent ? <ConfirmationBox content={message} /> : null;
     }
     else if (!this.state.showModal){
       return (
         <div>
           {this.renderButton()}
-          {this.state.sent ? this.renderConfirmation() : null}
+          {this.state.sent ? <ConfirmationBox content={message} /> : null}
         </div>
       );
     }

@@ -14,7 +14,7 @@ const mapActionsToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   task: selectors.task(state),
   content: contentSelectors.content(state),
-  user: userSelectors.user(state)
+  user: userSelectors.user(state).current
 });
 
 

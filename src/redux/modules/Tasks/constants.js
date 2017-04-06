@@ -5,7 +5,10 @@ const actionTypes = [
   'DELETE_TASK',
   'GET_TASK',
   'DELETE_TASK',
-  'GET_LIST'
+  'GET_LIST',
+  'SHARE_TASK',
+  'ACCEPT_SHARE',
+  'DECLINE_SHARE'
 ];
 
 const statusTypes = ['PENDING', 'SUCCESS', 'ERROR'];

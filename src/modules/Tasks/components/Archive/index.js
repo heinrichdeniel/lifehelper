@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import css from './style.scss';
 import TaskItem from '../TaskList/TaskItem';
+import Spinner from 'components/Spinner';
 
 class Archive extends Component {
   constructor(props){
@@ -14,16 +15,19 @@ class Archive extends Component {
   }
 
   renderTask(task){
-    if (task && !task.deleted && (task.completed || task.archived)){         //if the task was not deleted
+    if (task && (task.status == "completed" || task.status == "archived")){         //if the task was not deleted
       return (
         <TaskItem
           key={task.id}
           task={task}
           content={this.props.content}
-          dateFormat={this.props.user.dateFormat}
-          timeFormat={this.props.user.timeFormat}
+          dateFormat={this.props.user.current.dateFormat}
+          timeFormat={this.props.user.current.timeFormat}
           deleteTask={this.props.deleteTask}
-          updateTask={this.props.updateTask}/>
+          updateTask={this.props.updateTask}
+          users={this.props.user.list}
+          getUsersByFilter={this.props.getUsersByFilter}
+          shareTask={this.props.shareTask}/>
       )
     }
     return  null;
@@ -34,9 +38,7 @@ class Archive extends Component {
       return(
         <div className={css.base}>
           <h1>{this.props.content.page.archive.title}</h1>
-          <div className={css.spinner}>
-            <i className={"fa fa-spinner fa-spin"} />
-          </div>
+          <Spinner/>
         </div>
       )
     }

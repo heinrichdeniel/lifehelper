@@ -31,7 +31,7 @@ export default class GoogleLogin extends Component{
           responseHandler(googleUser);
           onLogin();
         });
-      });
+      })
     });
   }
   render() {

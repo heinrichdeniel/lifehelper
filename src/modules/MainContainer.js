@@ -10,7 +10,6 @@ import Footer from 'components/Footer'
 class MainContainer extends Component {
   constructor(props){
     super(props);
-    this.switchLanguage = this.switchLanguage.bind(this);
   }
 
   componentWillMount(){
@@ -18,25 +17,22 @@ class MainContainer extends Component {
   }
 
   componentDidMount(){
-    if (this.props.user.language && window.location.pathname.substring(1,3)!= this.props.user.language){
-      this.props.switchLanguage(this.props.user.language);
+    if (this.props.user.current.language && window.location.pathname.substring(1,3)!= this.props.user.current.language){
+      this.props.switchLanguage(this.props.user.current.language);
     }
   }
-  switchLanguage(lang){
-    this.props.switchLanguage(lang);
-    this.props.updateGeneralSettings({language:lang});
-  }
+
   render() {
     return (
       <div style={{position: 'relative', minHeight: '100vh'}}>
         <Header content={this.props.content}
-                user={this.props.user}
+                user={this.props.user.current}
                 token={this.props.authDetails.token}
                 logout={this.props.logout}/>
         <div>
           {this.props.children}   {/*the content depends on the route*/}
         </div>
-        <Footer switchLanguage={this.switchLanguage}/>
+        <Footer switchLanguage={this.props.switchLanguage}/>
       </div>
     )
   }

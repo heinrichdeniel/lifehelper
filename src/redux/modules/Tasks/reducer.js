@@ -8,14 +8,20 @@ const initialState = {
       name: "",
       description: "",
       date: moment(),
-      time: moment().add(1,'hours').format("H:m"),
+      time: moment().add(1, 'hours').format("H:m"),
       location: "",
-      ProjectId: "0"
+      ProjectId: "0",
+      status: "pending"
     },
     dateFrom: moment(),
-    dateTo: moment().add(1,'weeks'),
+    dateTo: moment().add(1, 'weeks'),
     pending: false,
     error: false
+  },
+  share: {
+    pending: false,
+    error: false,
+    success: false
   }
 };
 
@@ -41,7 +47,7 @@ const TaskReducer = (state = initialState, action = {}) => {
     case constants.CREATE_TASK_SUCCESS:
       let task = action.payload.task;
       let list = [];
-      if (task.completed||task.archived||task.deleted){
+      if (task.status != "pending"){
         list = state.task.list.filter((task) => task.id != action.payload.task.id)
       }else{
         list = [
@@ -174,6 +180,80 @@ const TaskReducer = (state = initialState, action = {}) => {
         }
       };
 
+    case constants.SHARE_TASK_PENDING:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: true})
+      };
+
+    case constants.SHARE_TASK_SUCCESS:
+      return {
+        ...state,
+        share: {
+          ...state.share,
+          pending: false,
+          success: true
+        },
+        task:{
+          ...state.task,
+          list: [
+            action.payload.task,
+            ...state.task.list.filter((task) => task.id != action.payload.task.id)
+          ]
+        }
+      };
+
+    case constants.SHARE_TASK_ERROR:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: false, error: action.payload.message})
+      };
+
+
+    case constants.ACCEPT_SHARE_PENDING:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: true})
+      };
+
+    case constants.ACCEPT_SHARE_SUCCESS:
+      return {
+        ...state,
+        share: {
+          ...state.share,
+          pending: false,
+          success: true
+        }
+      };
+
+    case constants.ACCEPT_SHARE_ERROR:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: false, error: action.payload.message})
+      };
+
+    case constants.DECLINE_SHARE_PENDING:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: true})
+      };
+
+    case constants.DECLINE_SHARE_SUCCESS:
+      return {
+        ...state,
+        share: {
+          ...state.share,
+          pending: false,
+          success: true
+        }
+      };
+
+    case constants.DECLINE_SHARE_ERROR:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: false, error: action.payload.message})
+      };
+
     case constants.RESET:
       return  {
         ...state,
@@ -181,7 +261,6 @@ const TaskReducer = (state = initialState, action = {}) => {
           ...state.task,
           current: initialState.task.current
         }
-
       };
 
     default:

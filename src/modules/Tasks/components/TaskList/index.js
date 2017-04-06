@@ -3,6 +3,7 @@ import css from './style.scss';
 import TaskItem from './TaskItem';
 import moment from 'moment';
 import AddTask from '../../containers/AddTaskContainer'
+import Spinner from 'components/Spinner';
 
 class TaskList extends Component {
   constructor(props){
@@ -56,10 +57,13 @@ class TaskList extends Component {
           key={task.id}
           task={task}
           content={this.props.content}
-          dateFormat={this.props.user.dateFormat}
-          timeFormat={this.props.user.timeFormat}
+          dateFormat={this.props.user.current.dateFormat}
+          timeFormat={this.props.user.current.timeFormat}
           deleteTask={this.props.deleteTask}
-          updateTask={this.props.updateTask}/>
+          updateTask={this.props.updateTask}
+          users={this.props.user.list}
+          getUsersByFilter={this.props.getUsersByFilter}
+          shareTask={this.props.shareTask}/>
       )
     }
     return  null;
@@ -70,9 +74,7 @@ class TaskList extends Component {
       return(
         <div className={css.base}>
           {this.renderTitle()}
-          <div className={css.spinner}>
-            <i className={"fa fa-spinner fa-spin"} />
-          </div>
+          <Spinner/>
         </div>
       )
     }

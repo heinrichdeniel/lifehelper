@@ -7,12 +7,15 @@ import * as taskActions from 'redux/modules/Tasks/actions'
 import * as taskSelectors from 'redux/modules/Tasks/selectors'
 import * as contentSelectors from 'redux/modules/Content/selectors'
 import * as userSelectors from 'redux/modules/User/selectors'
+import * as userActions from 'redux/modules/User/actions'
 
 const mapActionsToProps = (dispatch) => ({
   getTaskList: taskActions.getTaskList,
   sendProject: projectActions.createProject,
   deleteProject: projectActions.deleteProject,
-  deleteTask: taskActions.deleteTask
+  deleteTask: taskActions.deleteTask,
+  getUsersByFilter: userActions.getUsersByFilter,
+  shareTask: taskActions.shareTask
 
 });
 

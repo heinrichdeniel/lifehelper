@@ -39,17 +39,21 @@ class Filters extends Component {
   componentWillReceiveProps(){
     let pathname = window.location.pathname;
 
-    if (this.state.active!="projects" && pathname.substring(pathname.length - 8) == "projects" ) {
-      this.setState({
-        ...this.state,
-        active: "projects"
-      })
+    if (pathname.substring(pathname.length - 8) == "projects" ){
+      if (this.state.active!="projects"){
+        this.setState({
+          ...this.state,
+          active: "projects"
+        })
+      }
     }
-    else if (this.state.active!="archive" && pathname.substring(pathname.length - 7) == "archive") {
-      this.setState({
-        ...this.state,
-        active: "archive"
-      })
+    else if (pathname.substring(pathname.length - 7) == "archive") {
+      if (this.state.active!="archive"){
+        this.setState({
+          ...this.state,
+          active: "archive"
+        })
+      }
     }
     else if (this.state.active!="tasks") {
       this.setState({
@@ -98,6 +102,7 @@ class Filters extends Component {
     browserHistory.push(window.location.pathname.substring(0,3) + '/archive');
   }
 
+
   render() {
     return(
       <div className={css.base +" "+ this.state.style+" col-xs-1 col-sm-5 col-lg-5"}>
@@ -108,7 +113,6 @@ class Filters extends Component {
           <p className={css.filter + ((this.state.active=="tasks") ? " "+css.active : "")} onClick={this.goToTasks}>{this.props.content.goToTasks}<i className="fa fa-tasks" aria-hidden="true"/></p>
           <p className={css.filter + ((this.state.active=="projects") ? " "+css.active : "")} onClick={this.goToProjects}>{this.props.content.goToProjects}<i className="fa fa-chain" aria-hidden="true"/></p>
           <p className={css.filter + ((this.state.active=="archive") ? " "+css.active : "")} onClick={this.goToArchive}>{this.props.content.goToArchive}<i className="fa fa-archive" aria-hidden="true"/></p>
-          <p className={css.filter} onClick={this.goToArchive}>{this.props.content.goToGroups}<i className="fa fa-users" aria-hidden="true"/></p>
         </div>
       </div>
     )
