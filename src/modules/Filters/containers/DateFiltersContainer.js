@@ -8,6 +8,7 @@ import * as contentSelector from 'redux/modules/Content/selectors'
 
 
 const mapActionsToProps = (dispatch) => ({
+  changeDateFilter: taskActions.changeDateFilter,
   applyDateFilter: taskActions.applyDateFilter
 
 });
@@ -15,6 +16,7 @@ const mapStateToProps = (state) => ({
   dateFrom: taskSelectors.dateFrom(state),
   dateTo: taskSelectors.dateTo(state),
   content: contentSelector.content(state),
+  active: taskSelectors.task(state).filteringByDate,
   user: userSelectors.user(state).current
 });
 

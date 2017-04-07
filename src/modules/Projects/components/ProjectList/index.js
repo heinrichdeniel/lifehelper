@@ -13,7 +13,7 @@ class ProjectList extends Component {
   constructor(props){
     super(props);
 
-    this.applyDateFilter = this.applyDateFilter.bind(this);
+    this.changeDateFilter = this.changeDateFilter.bind(this);
     this.renderProject = this.renderProject.bind(this);
     this.renderTask = this.renderTask.bind(this);
     this.showProjectSettings = this.showProjectSettings.bind(this);
@@ -39,7 +39,7 @@ class ProjectList extends Component {
     this.props.getTaskList();
   }
 
-  applyDateFilter(task){
+  changeDateFilter(task){
     let date = moment(task.date);
     return (date.isBetween(this.props.dateFrom,this.props.dateTo,'days', '[]'));
   }
@@ -253,7 +253,7 @@ class ProjectList extends Component {
   }
 
   render() {
-    //let tasks = this.props.task.list.filter(this.applyDateFilter);
+    //let tasks = this.props.task.list.filter(this.changeDateFilter);
     let projects = this.props.project.list;
     let content = this.props.content.page.project;
     return(

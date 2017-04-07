@@ -93,11 +93,19 @@ export function getArchive() {
   })
 }
 
-export function applyDateFilter(filter) {
+export function changeDateFilter(filter) {
   store.dispatch((dispatch, getState) => {
     return dispatch({
-      type: constants.APPLY_DATE_FILTER,
+      type: constants.CHANGE_DATE_FILTER,
       payload: filter
+    })
+  })
+}
+
+export function applyDateFilter() {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.APPLY_DATE_FILTER
     })
   })
 }

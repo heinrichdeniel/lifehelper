@@ -1,20 +1,28 @@
 @import 'src/styles/globals.scss';
 .base{
-  border-bottom: 2px dashed #999;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
+  border-top: 2px dashed #999;
+  padding-top: 15px;
+  margin-top: 25px;
   text-align: center;
   h2{
-    color: $primary-color;
+    color: #4d4d4d;
     font-size: 18px;
     margin-top: 0;
     margin-bottom: 20px;
-    cursor: default;
+    cursor: pointer;
+
+    i{
+      margin-left: 5px;
+      font-size: 15px;
+    }
   }
   span{
     color: $primary-color;
     font-size: 20px;
     width: 10%;
     display: inline-block;
+  }
+  .datePickers{
+    margin-bottom: 10px;
   }
 }

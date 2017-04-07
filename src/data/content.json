@@ -75,7 +75,7 @@
         }
       },
       "filters": {
-        "timeFilter": "Show tasks between...",
+        "timeFilter": "Filter by date",
         "goToTasks": "Tasks",
         "goToProjects": "Projects",
         "goToArchive": "Archive",
@@ -225,7 +225,7 @@
 
       },
       "filters": {
-        "timeFilter": "Idő intervallum",
+        "timeFilter": "Szűrés dátum szerint",
         "goToTasks": "Feladatok",
         "goToProjects": "Projektek",
         "goToArchive": "Archívum",
@@ -376,7 +376,7 @@
         }
       },
       "filters": {
-        "timeFilter": "Afișarea activitățile între...",
+        "timeFilter": "Filtrare după dată",
         "goToTasks": "Activități",
         "goToProjects": "Proiecte",
         "goToArchive": "Arhivă",

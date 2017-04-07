@@ -33,6 +33,13 @@
         margin-right: 5px;
         color: #888;
       }
+      .overdue{
+        color: $red-color;
+        font-size: 13px;
+        &:hover{
+          color: $red-color;
+        }
+      }
     }
     .project{
       color: $project-color;

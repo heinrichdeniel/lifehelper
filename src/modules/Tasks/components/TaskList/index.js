@@ -79,7 +79,8 @@ class TaskList extends Component {
       )
     }
     else{
-      let tasks = this.props.task.list.filter(this.applyDateFilter);
+
+      let tasks = this.props.task.filteringByDate ? this.props.task.list.filter(this.applyDateFilter) : this.props.task.list;
       return(
         <div className={css.base}>
           {this.renderTitle()}

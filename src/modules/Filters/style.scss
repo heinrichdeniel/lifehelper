@@ -30,7 +30,7 @@
 
   .filter {
     max-width: 300px;
-    margin: 15px auto;
+    margin-bottom: 15px ;
     background-color: $primary-color;
     box-shadow: 0 2px 10px 0px lightslategray;
     transition: all 0.2s ease;
@@ -45,12 +45,7 @@
   }
 
   .active {
-    max-width: 300px;
-    margin: 15px auto;
     background-color: $secondary-color;
-    box-shadow: 0 2px 10px 0px slategray;
-    transition: all 0.2s ease;
-    position: relative;
     &:hover {
       box-shadow: 0 2px 10px 0px #4d4d4d;
     }

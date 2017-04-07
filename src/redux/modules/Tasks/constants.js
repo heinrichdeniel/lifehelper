@@ -22,6 +22,7 @@ for (let actionType of actionTypes) {
 
 constants['LOGOUT'] = module + '_' + 'LOGOUT';
 constants['APPLY_DATE_FILTER'] = module + '_' + 'APPLY_DATE_FILTER';
+constants['CHANGE_DATE_FILTER'] = module + '_' + 'CHANGE_DATE_FILTER';
 constants['RESET'] = module + '_' + 'RESET';
 
 export default constants;

@@ -13,8 +13,9 @@ const initialState = {
       ProjectId: "0",
       status: "pending"
     },
-    dateFrom: moment(),
-    dateTo: moment().add(1, 'weeks'),
+    dateFrom: moment().add(-1, 'years'),
+    dateTo: moment().add(1, 'years'),
+    filteringByDate: false,
     pending: false,
     error: false
   },
@@ -171,6 +172,15 @@ const TaskReducer = (state = initialState, action = {}) => {
       };
 
     case constants.APPLY_DATE_FILTER:
+      return {
+        ...state,
+        task: {
+          ...state.task,
+          filteringByDate: !state.task.filteringByDate
+        }
+      };
+
+    case constants.CHANGE_DATE_FILTER:
       return {
         ...state,
         task: {

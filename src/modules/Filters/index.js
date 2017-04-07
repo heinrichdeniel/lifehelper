@@ -109,10 +109,10 @@ class Filters extends Component {
         <i className={"fa fa-angle-double-"+this.state.arrow +" " + css.arrow} onClick={this.changeVisibility} />
         <div className={css.shadow} onClick={this.changeVisibility}/>
         <div className={css.filters}>
-          <DateFilters/>
           <p className={css.filter + ((this.state.active=="tasks") ? " "+css.active : "")} onClick={this.goToTasks}>{this.props.content.goToTasks}<i className="fa fa-tasks" aria-hidden="true"/></p>
           <p className={css.filter + ((this.state.active=="projects") ? " "+css.active : "")} onClick={this.goToProjects}>{this.props.content.goToProjects}<i className="fa fa-chain" aria-hidden="true"/></p>
           <p className={css.filter + ((this.state.active=="archive") ? " "+css.active : "")} onClick={this.goToArchive}>{this.props.content.goToArchive}<i className="fa fa-archive" aria-hidden="true"/></p>
+          <DateFilters/>
         </div>
       </div>
     )

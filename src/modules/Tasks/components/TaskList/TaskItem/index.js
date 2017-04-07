@@ -279,7 +279,12 @@ class TaskItem extends Component {
     }
 
     let date = moment(this.props.task.date).format(this.props.dateFormat);
-    if (this.props.task.status == "archived" || this.props.task.status == "completed"){
+    let overdue = null;
+    if (this.props.task.time){
+      date += ", "+moment(this.props.task.time,"hh:m").format(this.props.timeFormat)
+    }
+
+    if (this.props.task.status == "archived" || this.props.task.status == "completed"){     //if the task was moved to archive
       date = (
         <span>
           <i className="fa fa-check" aria-hidden="true"/>
@@ -287,15 +292,16 @@ class TaskItem extends Component {
         </span>
       )
     }
-    else if (this.props.task.time){
-      date += ", "+moment(this.props.task.time,"hh:m").format(this.props.timeFormat)
+    else if (moment(this.props.task.date).isBefore(moment())){
+      overdue=<i className={css.overdue + " fa fa-exclamation-triangle"}/>;
     }
+
     return(
       <div className={css.base + " "} style={this.state.style} onClick={this.onClick}>
         <div className={css.task}>
           <h2>{this.props.task.name}</h2>
           {project}
-          <p className={css.date}>{date}</p>
+          <p className={css.date}>{overdue}{date}</p>
           {this.renderCircleBeforeTitle()}
           <SharedList task={this.props.task}/>    {/* this will be rendered only if the task was shared */}
           <i className={css.dots + " fa fa-ellipsis-h"} onClick={this.showOptions} aria-hidden="true"/>
