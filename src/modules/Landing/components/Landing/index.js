@@ -20,8 +20,10 @@ class Landing extends Component {
       this.props.getProfile();
     }
   }
-  componentDidUpdate(){
-    if (this.props.user.current.language && window.location.pathname.substring(1,3)!= this.props.user.current.language){
+  componentWillReceiveProps(newProps){
+    let lang = window.location.pathname.substring(1,3);
+
+    if (newProps.user.current.language && lang!= "en" && lang!="hu" && lang!="ro"){
       this.props.switchLanguage(this.props.user.current.language);
     }
   }
