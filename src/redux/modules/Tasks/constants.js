@@ -8,7 +8,8 @@ const actionTypes = [
   'GET_LIST',
   'SHARE_TASK',
   'ACCEPT_SHARE',
-  'DECLINE_SHARE'
+  'DECLINE_SHARE',
+  'REMOVE_SHARE'
 ];
 
 const statusTypes = ['PENDING', 'SUCCESS', 'ERROR'];

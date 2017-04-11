@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/lib/Modal'
 import TaskItem from 'modules/Tasks/components/TaskList/TaskItem'
 import AddProject from './AddProject'
 import AddTask from 'modules/Tasks/containers/AddTaskContainer'
+import ProjectShare from 'modules/Shares/containers/ProjectShareContainer'
 import reactDom from 'react-dom';
 
 class ProjectList extends Component {
@@ -45,23 +46,33 @@ class ProjectList extends Component {
   }
 
   editProject(e){
+    document.removeEventListener('click', this.handleDocumentClick, false);
     e.stopPropagation();
     this.setState({
       ...this.state,
       updateProject: true,
       deleteProject: false,
-      error: false
+      error: false,
+      projectSettings:{
+        ...this.state.projectSettings,
+        show: false
+      }
     })
   }
 
   showHideDeleteModal(e){
+    document.removeEventListener('click', this.handleDocumentClick, false);
     if (e){
       e.stopPropagation();
     }
     this.setState({
       ...this.state,
       updateProject: false,
-      deleteProject: !this.state.deleteProject
+      deleteProject: !this.state.deleteProject,
+      projectSettings:{
+        ...this.state.projectSettings,
+        show: false
+      }
     })
   }
 
@@ -95,12 +106,19 @@ class ProjectList extends Component {
 
   showProjectSettings( project, e){
     e.stopPropagation();
+
+    let selectedProjects = this.state.selectedProjects;
+
+    if (this.state.selectedProjects.indexOf(project.id) < 0){
+      selectedProjects.push(project.id);
+    }
     this.setState({
       ...this.state,
       projectSettings: {
         show: true,
         project: project
-      }
+      },
+      selectedProjects: selectedProjects
     });
     document.addEventListener('click', this.handleDocumentClick, false);
   }
@@ -181,6 +199,7 @@ class ProjectList extends Component {
             {project.name}
             <span> ({tasks.length}) </span>
             <i className="fa fa-arrow-down" aria-hidden="true"/>
+            <ProjectShare project={project} />    {/* share modal */}
             <i className={css.projectSettings + " fa fa-cog"} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>
           {this.renderProjectSettings(project)}
@@ -194,6 +213,7 @@ class ProjectList extends Component {
             {project.name}
             <span> ({tasks.length})</span>
             <i className="fa fa-arrow-up" aria-hidden="true"/>
+            <ProjectShare project={project} />    {/* share modal */}
             <i className={css.projectSettings + " fa fa-cog"} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>
           {this.renderProjectSettings(project)}

@@ -5,7 +5,7 @@ import Button from "components/Button";
 import User from "./User";
 import MultiSelect from "components/MultiSelect";
 
-class SharedList extends Component{
+class ProjectShare extends Component{
   constructor(props){
     super(props);
 
@@ -30,7 +30,7 @@ class SharedList extends Component{
     }
 
     if (!this.state.showModal){     //sending request to the server
-      this.props.getCollaborators({taskId:this.props.task.id})
+      this.props.getCollaborators({projectId:this.props.project.id})
     }
 
     this.setState({
@@ -57,23 +57,31 @@ class SharedList extends Component{
     })
   }
 
-  sendShare(showModal){      //sending the share request to the server
+  sendShare(){      //sending the share request to the server
     if (this.state.selectedUsers.length > 0){
-      this.props.shareTask({users: this.state.selectedUsers, task: this.props.task});
+      this.props.shareProject({users: this.state.selectedUsers, project: this.props.project});
     }
     this.setState({
       ...this.state,
       selectedUsers: [],
       showShareModal: false,
-      showModal: showModal
+      showModal: true
 
     })
   }
 
   renderUser(user){
-    return (
-      <User key={user.id} owner={this.props.task.owner} user={user} content={this.props.content} profile={this.props.profile}/>
-    )
+    if (user.Projects[0].UserProject.shareStatus != "deleted"){
+      return (
+        <User key={user.id}
+              owner={this.props.project.owner}
+              user={user}
+              content={this.props.content}
+              profile={this.props.profile}
+              projectId={this.props.project.id}
+              removeShare={this.props.removeShare}/>
+      )
+    }
   }
 
   renderShareModal(){
@@ -82,7 +90,7 @@ class SharedList extends Component{
       <Modal show={this.state.showShareModal}   dialogClassName={css.modal} onHide={this.showHideShareModal}>
         <div  className={css.container}>
           <i className={`fa fa-close ${css.close}`} onClick={this.showHideShareModal} />
-          <h1>{content.name}</h1>
+          <h1><i className="fa fa-chain"/> {this.props.project.name}</h1>
           <MultiSelect options={this.props.users}
                        getUsersByFilter={this.props.getUsersByFilter}
                        placeholder={content.search}
@@ -90,8 +98,8 @@ class SharedList extends Component{
                        typeToSearch={content.typeToSearch}
                        selected={this.state.selectedUsers}
                        selectValue={this.selectUsers}
-                       taskId={this.props.task.id}/>
-          <Button type="button" onClick={this.sendShare.bind(this,false)} text={content.shareTask} style={css.share}/>
+                       projectId={this.props.project.id}/>
+          <Button type="button" onClick={this.sendShare} text={content.shareTask} style={css.share}/>
           <Button type="button" onClick={this.showHideShareModal} text={content.cancel} style={css.cancelRed}/>
 
         </div>
@@ -107,10 +115,17 @@ class SharedList extends Component{
         <Modal show={this.state.showModal}  dialogClassName={css.modal} onHide={this.showHideModal}>
           <div  className={css.container}>
             <i className={`fa fa-close ${css.close}`} onClick={this.showHideModal} />
-            <h1> {this.props.content.title}</h1>
+            <h1><i className="fa fa-chain"/>  {this.props.project.name}</h1>
 
+            <p className={css.addMore}>{this.props.content.title}</p>
             <div className={css.collaborators}>
-              <User me={true} owner={this.props.task.owner} user={this.props.profile} content={this.props.content} profile={this.props.profile}/>
+              <User me={true}
+                    owner={this.props.project.owner}
+                    user={this.props.profile}
+                    content={this.props.content}
+                    profile={this.props.profile}
+                    projectId={this.props.project.id}
+                    removeShare={this.props.removeShare}/>
               {!this.props.collaborators.pending ? this.props.collaborators.list.map( this.renderUser): null}
             </div>
 
@@ -122,8 +137,8 @@ class SharedList extends Component{
                          typeToSearch={this.props.content.typeToSearch}
                          selected={this.state.selectedUsers}
                          selectValue={this.selectUsers}
-                         taskId={this.props.task.id}/>
-            <Button type="button" onClick={this.sendShare.bind(this,true)} text={this.props.content.shareTask} style={css.share}/>
+                         projectId={this.props.project.id}/>
+            <Button type="button" onClick={this.sendShare} text={this.props.content.shareTask} style={css.share}/>
           </div>
         </Modal>
       </div>
@@ -131,8 +146,7 @@ class SharedList extends Component{
   }
 
   render(){
-
-    if (!this.props.task.shared && !this.state.showShareModal){     //if the task was not shared
+    if (!this.props.project.shared && !this.state.showShareModal){     //if the project was not shared
       return (
         <i className={css.icon + " " + css.shareIcon + " fa fa-share-alt"} onClick={this.showHideShareModal}/>
       )
@@ -155,4 +169,4 @@ class SharedList extends Component{
   }
 }
 
-export default SharedList
+export default ProjectShare

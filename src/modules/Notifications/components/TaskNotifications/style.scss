@@ -1,21 +1,19 @@
 @import 'src/styles/globals.scss';
 .base{
-  .shareIcon{
-    margin-right: 15px;
-  }
-  h1{
-    font-size:26px;
-    margin-left: 45px;
-    margin-bottom: 35px;
-  }
+  padding-left: 15px;
+  padding-right: 0px;
+
+
   .task{
     margin-bottom: 15px;
+
     background-color: #eee;
     border-radius: 5px;
     padding: 10px;
     font-size: 15px;
     opacity: 1;
     transition: all 0.2s linear;
+    position: relative;
     &:hover{
       background-color: #ddd;
     }
@@ -43,13 +41,13 @@
       }
     }
 
+    button{
+      width: 100px;
+      height: 30px;
+    }
+
     .buttons{
       margin-left: 35px;
-      button{
-        width: 100px;
-        height: 30px;
-      }
-
       .decline{
         background-color: $red-color;
         &:hover{
@@ -57,6 +55,7 @@
         }
       }
     }
+
   }
 
   .taskDetails{

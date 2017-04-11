@@ -9,6 +9,7 @@ if (window.location.pathname.substring(0,3) == "/ro"){
   lang = "ro";
 }
 
+
 const initialState = {
   lang: lang,
   content: pageContent.getContent(lang)

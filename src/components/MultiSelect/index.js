@@ -15,20 +15,18 @@ class MultiSelect extends Component{
     }
   }
 
+  componentWillMount(){
+    this.props.getUsersByFilter("", this.props.taskId, this.props.projectId);
+  }
+
   selectValue(selected){
     this.setState({
       input: ""
     });
     this.props.selectValue(selected);
-
-  }
-  componentWillMount(){
-    this.props.getUsersByFilter("", this.props.taskId);
   }
 
   onInputChange(e){
-    if (e.length == 1){
-    }
     this.setState({
       input: e
     });

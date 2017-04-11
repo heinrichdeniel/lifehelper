@@ -8,7 +8,7 @@ import Button from "components/Button";
 import AddTask from "modules/Tasks/containers/AddTaskContainer";
 import MultiSelect from "components/MultiSelect";
 import ConfirmationBox from "components/ConfirmationBox";
-import SharedList from "modules/Shares/containers/SharedListContainer";
+import TaskShare from "modules/Shares/containers/TaskShareContainer";
 
 class TaskItem extends Component {
   constructor(props){
@@ -303,7 +303,7 @@ class TaskItem extends Component {
           {project}
           <p className={css.date}>{overdue}{date}</p>
           {this.renderCircleBeforeTitle()}
-          <SharedList task={this.props.task}/>    {/* this will be rendered only if the task was shared */}
+          <TaskShare task={this.props.task}/>    {/* share modal */}
           <i className={css.dots + " fa fa-ellipsis-h"} onClick={this.showOptions} aria-hidden="true"/>
         </div>
         {this.renderOptions()}      {/*dropdown with the task options*/}

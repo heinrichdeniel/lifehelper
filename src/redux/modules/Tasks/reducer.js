@@ -30,7 +30,7 @@ const initialState = {
 const TaskReducer = (state = initialState, action = {}) => {
   if (action.payload && (action.payload.message == "Expired token" || action.payload.message == "Token is missing")){
     localStorage.clear();
-    window.location.href = '/'
+    window.location.href = window.location.pathname.substring(0,3);
   }
   switch (action.type) {
     case constants.CREATE_TASK_PENDING:
@@ -259,6 +259,28 @@ const TaskReducer = (state = initialState, action = {}) => {
       };
 
     case constants.DECLINE_SHARE_ERROR:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: false, error: action.payload.message})
+      };
+
+    case constants.REMOVE_SHARE_PENDING:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: true})
+      };
+
+    case constants.REMOVE_SHARE_SUCCESS:
+      return {
+        ...state,
+        share: {
+          ...state.share,
+          pending: false,
+          success: true
+        }
+      };
+
+    case constants.REMOVE_SHARE_ERROR:
       return {
         ...state,
         share: Object.assign({}, state.share, {pending: false, error: action.payload.message})

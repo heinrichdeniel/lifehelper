@@ -1,6 +1,6 @@
 @import 'src/styles/globals.scss';
 .button{
-  width: 80px;
+  min-width: 80px;
   border-radius: 3px;
   background-color: $primary-color;
   border: 0;

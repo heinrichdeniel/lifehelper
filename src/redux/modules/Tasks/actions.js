@@ -127,6 +127,7 @@ export function shareTask(payload) {
     })
   }).then (function(){
     userActions.getCollaborators({taskId: payload.task.id})
+    userActions.getUsersByFilter("" , payload.task.id)
   })
 }
 
@@ -169,6 +170,28 @@ export function declineShare(taskId) {
     })
   }).then (function(){
     userActions.getNotifications()
+  })
+}
+
+
+export function removeShare(payload) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.REMOVE_SHARE_PENDING,
+        constants.REMOVE_SHARE_SUCCESS,
+        constants.REMOVE_SHARE_ERROR
+      ],
+      payload: {
+        promise: api.removeShare({
+          token: getState().User.authDetails.token,
+          data: payload
+        })
+      }
+    })
+  }).then (function(){
+    userActions.getCollaborators({taskId:payload.taskId})
+    userActions.getUsersByFilter("" , payload.taskId)
   })
 }
 

@@ -142,9 +142,13 @@
       "notifications": {
         "shareRequests": "Sharing Requests",
         "noShareRequests": "No requests!",
-        "shareMessage": " would like to share with you the next task: ",
+        "shareTaskMessage": " would like to share with you the next task: ",
+        "shareProjectMessage": " would like to share with you the next project: ",
+        "deletedTaskAccess": " removed your access to task: ",
+        "deletedProjectAccess": " removed your access to project: ",
         "accept": "Accept",
-        "decline": "Decline"
+        "decline": "Decline",
+        "confirm": "Okay"
       }
     }
   },
@@ -294,9 +298,13 @@
       "notifications": {
         "shareRequests": "Megosztási kérelmek",
         "noShareRequests": "Nincsenek kérések!",
-        "shareMessage": " szeretné veled megosztani a következő feladatot: ",
+        "shareTaskMessage": " szeretné veled megosztani a következő feladatot: ",
+        "shareProjectMessage": " szeretné veled megosztani a következő projektet: ",
+        "deletedTaskAccess": " törölte a hozzáférésed a következő feladathoz:",
+        "deletedProjectAccess": " törölte a hozzáférésed a következő projekthez:",
         "accept": "Elfogad",
-        "decline": "Elutasít"
+        "decline": "Elutasít",
+        "confirm": "Rendben"
       }
     }
   },
@@ -443,9 +451,13 @@
       "notifications": {
         "shareRequests": "solicitări de distribuire",
         "noShareRequests": "Nu există solicitări!",
-        "shareMessage": " ar dori să împărtășesc cu tine următoarea activitatea: ",
+        "shareTaskMessage": " ar dori să împărtășesc cu tine următoarea activitatea: ",
+        "shareProjectMessage": " ar dori să împărtășesc cu tine următorul proiect: ",
+        "deletedTaskAccess": " a șters accesul tău la activitate: ",
+        "deletedProjectAccess": " a șters accesul tău la proiectul: ",
         "accept": "Acceptă",
-        "decline": "Refuză"
+        "decline": "Refuză",
+        "confirm": "Ok"
       }
     }
   }

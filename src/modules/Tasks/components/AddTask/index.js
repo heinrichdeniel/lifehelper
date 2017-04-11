@@ -171,13 +171,11 @@ class AddTask extends Component {
     });
   }
 
-  changeModalState(){
+  changeModalState(e){
     if (this.state.showModal && this.props.onHide){
       this.props.onHide();
     }
     if (this.props.update){     //if a task was selected to update then not needed to empty the state
-      let pathname = window.location.pathname;
-      this.props.getTaskById(pathname.substring(pathname.lastIndexOf('/')+1));
       this.setState({
         ...this.state,
         showModal: !this.state.showModal,

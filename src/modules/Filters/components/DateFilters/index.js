@@ -30,7 +30,6 @@ class DateFilters extends Component {
   }
 
   render() {
-    console.log(this.props)
     if (this.props.active){
       return(
         <div className={css.base}>

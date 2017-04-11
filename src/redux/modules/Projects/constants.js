@@ -3,7 +3,11 @@ const actionTypes = [
   'CREATE_PROJECT',
   'UPDATE_PROJECT',
   'DELETE_PROJECT',
-  'GET_LIST'
+  'GET_LIST',
+  'SHARE_PROJECT',
+  'ACCEPT_SHARE',
+  'DECLINE_SHARE',
+  'REMOVE_SHARE'
 ];
 
 const statusTypes = ['PENDING', 'SUCCESS', 'ERROR'];

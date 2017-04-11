@@ -43,3 +43,64 @@ export function deleteProject (payload) {
       })
   })
 }
+
+export function shareProject (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'projects/share')
+      .set('x-access-token', payload.token)
+      .send({users: payload.users, project: payload.project})
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
+export function acceptShare (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'projects/acceptShare')
+      .set('x-access-token', payload.token)
+      .send({projectId: payload.projectId})
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
+export function declineShare (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'projects/declineShare')
+      .set('x-access-token', payload.token)
+      .send({projectId: payload.projectId})
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
+
+export function removeShare (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'projects/removeShare')
+      .set('x-access-token', payload.token)
+      .send(payload.data)
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}

@@ -85,6 +85,7 @@ export function getProfile (payload) {
 }
 
 export function updateGeneralSettings (payload) {
+
   return new Promise((resolve, reject) => {
     request
       .post(config.api.host + 'user/updateGeneralSettings')
@@ -119,7 +120,7 @@ export function getUsersByFilter (payload) {
     request
       .get(config.api.host + 'user/list')
       .set('x-access-token', payload.token)
-      .query({filter: payload.filter, taskId: payload.taskId})
+      .query({filter: payload.filter, taskId: payload.taskId, projectId: payload.projectId})
       .end(function (err, res) {
         if (!res.body.success) {
           reject(res.body);
@@ -134,7 +135,7 @@ export function getCollaborators (payload) {
     request
       .get(config.api.host + 'user/collaborators')
       .set('x-access-token', payload.token)
-      .query({taskId: payload.taskId})
+      .query({taskId: payload.taskId, projectId: payload.projectId})
       .end(function (err, res) {
         if (!res.body.success) {
           reject(res.body);

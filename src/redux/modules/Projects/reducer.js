@@ -10,6 +10,11 @@ const initialState = {
     selected: "",
     pending: false,
     error: false
+  },
+  share: {
+    pending: false,
+    error: false,
+    success: false
   }
 };
 
@@ -17,7 +22,7 @@ const initialState = {
 const ProjectReducer = (state = initialState, action = {}) => {
   if (action.payload && (action.payload.message == "Expired token" || action.payload.message == "Token is missing")){
     localStorage.clear();
-    window.location.href = '/'
+    window.location.href = window.location.pathname.substring(0,3);
   }
   switch (action.type) {
     case constants.CREATE_PROJECT_PENDING:
@@ -137,6 +142,103 @@ const ProjectReducer = (state = initialState, action = {}) => {
           error: false
         }
       };
+
+    case constants.SHARE_TASK_PENDING:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: true})
+      };
+
+    case constants.SHARE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        share: {
+          ...state.share,
+          pending: false,
+          success: true
+        },
+        project:{
+          ...state.project,
+          list: [
+            action.payload.project,
+            ...state.project.list.filter((project) => project.id != action.payload.project.id)
+          ]
+        }
+      };
+
+    case constants.SHARE_TASK_ERROR:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: false, error: action.payload.message})
+      };
+
+
+    case constants.ACCEPT_SHARE_PENDING:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: true})
+      };
+
+    case constants.ACCEPT_SHARE_SUCCESS:
+      return {
+        ...state,
+        share: {
+          ...state.share,
+          pending: false,
+          success: true
+        }
+      };
+
+    case constants.ACCEPT_SHARE_ERROR:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: false, error: action.payload.message})
+      };
+
+    case constants.DECLINE_SHARE_PENDING:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: true})
+      };
+
+    case constants.DECLINE_SHARE_SUCCESS:
+      return {
+        ...state,
+        share: {
+          ...state.share,
+          pending: false,
+          success: true
+        }
+      };
+
+    case constants.DECLINE_SHARE_ERROR:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: false, error: action.payload.message})
+      };
+
+    case constants.REMOVE_SHARE_PENDING:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: true})
+      };
+
+    case constants.REMOVE_SHARE_SUCCESS:
+      return {
+        ...state,
+        share: {
+          ...state.share,
+          pending: false,
+          success: true
+        }
+      };
+
+    case constants.REMOVE_SHARE_ERROR:
+      return {
+        ...state,
+        share: Object.assign({}, state.share, {pending: false, error: action.payload.message})
+      };
+
 
     default:
       return state

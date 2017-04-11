@@ -23,6 +23,7 @@ class TaskPage extends Component {
   }
 
   componentWillMount() {
+
     //get id from the url
     let pathname = window.location.pathname
     this.props.getTaskById(pathname.substring(pathname.lastIndexOf('/')+1))

@@ -203,7 +203,7 @@ export function updateAccountSettings(settings) {
   })
 }
 
-export function getUsersByFilter(filter, taskId) {
+export function getUsersByFilter(filter, taskId, projectId) {
   store.dispatch((dispatch, getState) => {
     return dispatch({
       types: [
@@ -215,7 +215,8 @@ export function getUsersByFilter(filter, taskId) {
         promise: api.getUsersByFilter({
           token: getState().User.authDetails.token,
           filter: filter,
-          taskId: taskId
+          taskId: taskId,
+          projectId: projectId
         })
       }
     })

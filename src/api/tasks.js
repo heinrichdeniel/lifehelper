@@ -75,7 +75,6 @@ export function deleteTask (payload) {
   })
 }
 
-
 export function shareTask (payload) {
   return new Promise((resolve, reject) => {
     request
@@ -112,6 +111,22 @@ export function declineShare (payload) {
       .post(config.api.host + 'tasks/declineShare')
       .set('x-access-token', payload.token)
       .send({taskId: payload.taskId})
+      .end(function (err, res) {
+        if (!res.body.success) {
+          reject(res.body);
+        }
+        resolve(res.body);
+      })
+  })
+}
+
+
+export function removeShare (payload) {
+  return new Promise((resolve, reject) => {
+    request
+      .post(config.api.host + 'tasks/removeShare')
+      .set('x-access-token', payload.token)
+      .send(payload.data)
       .end(function (err, res) {
         if (!res.body.success) {
           reject(res.body);

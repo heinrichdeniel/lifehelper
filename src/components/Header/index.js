@@ -41,7 +41,7 @@ export default class Header extends Component {
       return (
         <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
           <div className="container">
-            <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
+            <Link to={window.location.pathname.substring(0,3)} className={css.logo}><h1>LifeHelper</h1></Link>
             <div className={"collapse navbar-collapse " +css.rightIcons} id="navbar-collapse">
               <ul className="nav navbar-nav navbar-right">
                 <Button onClick={this.openModal.bind(this,{loginModal:true})} text={content.login.name} />
@@ -63,7 +63,7 @@ export default class Header extends Component {
       return (
         <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
           <div className="container">
-            <Link to={'/'} className={css.logo}><h1>LifeHelper</h1></Link>
+            <Link to={window.location.pathname.substring(0,3)} className={css.logo}><h1>LifeHelper</h1></Link>
             <div className={css.rightIcons+" "+ css.afterLogin} >
               <ul className="nav navbar-nav navbar-right">
                 <Search/>
@@ -86,8 +86,7 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  fixed: React.PropTypes.bool,
-  logout: React.PropTypes.func
+  fixed: React.PropTypes.bool
 }
 
 Header.defaultProps = {

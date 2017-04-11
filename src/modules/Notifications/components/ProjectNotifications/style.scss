@@ -1,0 +1,59 @@
+@import 'src/styles/globals.scss';
+.base{
+  padding-left: 15px;
+  padding-right: 0px;
+
+
+  .project{
+    margin-bottom: 15px;
+
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+    opacity: 1;
+    transition: all 0.2s linear;
+    position: relative;
+    &:hover{
+      background-color: #ddd;
+    }
+
+    .userIcon{
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      margin-right: 10px;
+    }
+
+    .nameSpan{
+      font-weight: 700;
+      color: $secondary-color;
+    }
+    .projectSpan{
+      position: absolute;
+      font-weight: 700;
+      color: $primary-color;
+      display: inline;
+      .projectIcon{
+        margin-right: 3px;
+        margin-left: 3px;
+        margin-top: 7px;
+      }
+    }
+
+    button{
+      width: 100px;
+      height: 30px;
+    }
+
+    .buttons{
+      margin-left: 35px;
+      .decline{
+        background-color: $red-color;
+        &:hover{
+          box-shadow: 0 0 5px 0px #d30000;
+        }
+      }
+    }
+  }
+}

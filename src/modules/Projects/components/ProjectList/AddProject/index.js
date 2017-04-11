@@ -98,8 +98,9 @@ class AddProject extends Component {
             <form  action="POST" onSubmit={this.saveProject}>
               <Input type="text" placeholder={content.name} value={project.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
               {this.state.error ? <ErrorBox error={this.state.error}/> : null}
-              <Button type="button" onClick={this.saveProject} text={this.props.sendButtonText} style={css.addButton}/>
               <Button type="button" onClick={this.changeModalState} text={content.cancel} style={css.cancel}/>
+              <Button type="button" onClick={this.saveProject} text={this.props.sendButtonText} style={css.addButton}/>
+
             </form>
           </div>
         </div>

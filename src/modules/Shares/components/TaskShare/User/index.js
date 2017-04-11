@@ -6,10 +6,12 @@ class User extends Component{
     super(props);
 
     this.getStatus = this.getStatus.bind(this);
+    this.removeShare = this.removeShare.bind(this);
   }
 
   getStatus(){
     let user = this.props.user;
+
     if (this.props.me){
       return <span className={css.spanMe}>{this.props.content.me}</span>
     }
@@ -39,13 +41,15 @@ class User extends Component{
     }
   }
 
+  removeShare(){      //removing the user from the list of collaborators
+    this.props.removeShare({userId: this.props.user.id, taskId: this.props.taskId});
+  }
+
   render(){
     let user = this.props.user;
     let trash = null;
-    console.log(this.props)
-
-    if (!this.props.me || this.props.owner == this.props.profile.id || (this.props.user.Tasks && this.props.user.Tasks[0].UserTask.sharedBy == this.props.profile.id)){
-      trash = <i className={`fa fa-trash ${css.trash}`} onClick={this.removeShare} />;
+    if (!this.props.me && ( this.props.owner == this.props.profile.id || (this.props.user.Tasks && this.props.user.Tasks[0].UserTask.sharedBy == this.props.profile.id))){
+      trash = <i className={`fa fa-ban ${css.trash}`} onClick={this.removeShare} />;
     }
 
     if (user.photo_url){

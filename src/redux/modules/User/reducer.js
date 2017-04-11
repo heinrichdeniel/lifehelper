@@ -30,15 +30,16 @@ const initialState = {
   notifications: {
     pending: false,
     error: false,
-    tasks: []
+    tasks: [],
+    projects: []
   }
-}
+};
 
 
 const UserReducer = (state = initialState, action = {}) => {
   if (action.payload && (action.payload.message == "Expired token" || action.payload.message == "Token is missing")){
     localStorage.clear();
-    window.location.href = '/'
+    window.location.href = window.location.pathname.substring(0,3);
   }
   switch (action.type) {
     case constants.LOGIN_PENDING:
@@ -184,12 +185,19 @@ const UserReducer = (state = initialState, action = {}) => {
       };
 
     case constants.GET_USERS_BY_FILTER_SUCCESS:
+      let list = [];
+      if (action.payload.taskId){
+        list = action.payload.users.filter( (user) => (user.Tasks.filter( (task) => task.id == action.payload.taskId).length == 0));
+      }
+      else{
+        list = action.payload.users.filter( (user) => (user.Projects.filter( (project) => project.id == action.payload.projectId).length == 0))
+      }
       return {
         ...state,
         user: {
           ...state.user,
           pending: false,
-          list: action.payload.users.filter( (user) => (user.Tasks.filter( (task) => task.id == action.payload.taskId).length == 0))
+          list: list
         }
       };
 
@@ -233,7 +241,8 @@ const UserReducer = (state = initialState, action = {}) => {
         notifications: {
           ...state.notifications,
           pending: false,
-          tasks: action.payload.notifications.tasks
+          tasks: action.payload.notifications.tasks,
+          projects: action.payload.notifications.projects
         },
         user:{
           ...state.user,
@@ -300,7 +309,7 @@ const UserReducer = (state = initialState, action = {}) => {
     case constants.LOGOUT:
       localStorage.clear();
       initialState.authDetails = {};
-      window.location.href = '/';
+      window.location.href = '/'+ window.location.pathname.substring(1,3);
       return initialState;
 
     case constants.RESET:

@@ -1,15 +1,15 @@
 import { connect } from 'react-redux'
-import SharedList from "../components/SharedList"
+import ProjectShare from "../components/ProjectShare"
 import * as userActions from 'redux/modules/User/actions'
-import * as taskActions from 'redux/modules/Tasks/actions'
+import * as projectActions from 'redux/modules/Projects/actions'
 import * as userSelectors from 'redux/modules/User/selectors'
 import * as contentSelectors from 'redux/modules/Content/selectors'
 
 const mapActionsToProps = (dispatch) => ({
   getCollaborators: userActions.getCollaborators,
   getUsersByFilter: userActions.getUsersByFilter,
-  shareTask: taskActions.shareTask
-
+  shareProject: projectActions.shareProject,
+  removeShare: projectActions.removeShare
 });
 const mapStateToProps = (state) => ({
   content: contentSelectors.content(state).page.tasks.share,
@@ -19,4 +19,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps, mapActionsToProps) (SharedList);
+export default connect(mapStateToProps, mapActionsToProps) (ProjectShare);
