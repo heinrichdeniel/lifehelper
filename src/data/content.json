@@ -30,7 +30,7 @@
         "differentPasswords": "Passwords do not match!"
       },
       "tasks": {
-        "yourTasks": "Your tasks",
+        "yourTasks": "Tasks",
         "addTask":{
           "addTask": "Add task",
           "name": "Create task",
@@ -137,7 +137,9 @@
       "archive": {
         "title": "Archive",
         "archive": "Archive task",
-        "restore": "Restore"
+        "restore": "Restore",
+        "taskTab": "Tasks",
+        "projectTab": "Projects"
       },
       "notifications": {
         "shareRequests": "Sharing Requests",
@@ -148,7 +150,8 @@
         "deletedProjectAccess": " removed your access to project: ",
         "accept": "Accept",
         "decline": "Decline",
-        "confirm": "Okay"
+        "confirm": "Okay",
+        "back": "Back"
       }
     }
   },
@@ -292,7 +295,9 @@
       "archive": {
         "title": "Archívum",
         "archive": "Archiválás",
-        "restore": "Visszaállítás"
+        "restore": "Visszaállítás",
+        "taskTab": "Feladatok",
+        "projectTab": "Projektek"
 
       },
       "notifications": {
@@ -304,7 +309,8 @@
         "deletedProjectAccess": " törölte a hozzáférésed a következő projekthez:",
         "accept": "Elfogad",
         "decline": "Elutasít",
-        "confirm": "Rendben"
+        "confirm": "Rendben",
+        "back": "Vissza"
       }
     }
   },
@@ -446,7 +452,9 @@
       "archive": {
         "title": "Arhivă",
         "archive": "Arhivare",
-        "restore": "Restabilire"
+        "restore": "Restabilire",
+        "taskTab": "Activități",
+        "projectTab": "Proiecte"
       },
       "notifications": {
         "shareRequests": "solicitări de distribuire",
@@ -457,7 +465,8 @@
         "deletedProjectAccess": " a șters accesul tău la proiectul: ",
         "accept": "Acceptă",
         "decline": "Refuză",
-        "confirm": "Ok"
+        "confirm": "Ok",
+        "back": "Înapoi"
       }
     }
   }

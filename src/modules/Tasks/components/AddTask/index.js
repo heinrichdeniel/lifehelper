@@ -278,6 +278,11 @@ class AddTask extends Component {
   renderDetails(){         //rendering the modal with title, description and datetime
     let task = this.state.task;
     let content = this.props.content.page.tasks;
+    let project = null;
+
+    if (!task.owner || this.props.user.id == task.owner){      //only the task owner can change the project for a task
+      project = <Dropdown onChange={this.selectProject} placeholder={content.selectProject} projects={this.props.project.list} selected={task.ProjectId}/>
+    }
     return(
       <Modal style={{opacity : this.state.opacity}} show={this.state.showModal} onHide={this.changeModalState}>
         <div  className={css.container}>
@@ -290,7 +295,7 @@ class AddTask extends Component {
               <TextArea type="text" placeholder={content.description} value={task.description} onChange={this.changeDescription}  />
               <DatePicker value={task.date} onChange={this.changeDate} dateFormat={this.props.user.dateFormat} style={css.datePicker}/>
               <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime} timeFormat={this.props.user.timeFormat}/>
-              <Dropdown onChange={this.selectProject} placeholder={content.selectProject} projects={this.props.project.list} selected={task.ProjectId}/>
+              {project}
               <div className={css.locationDiv}>
                 <Input type="text" placeholder={content.searchLocation} value={task.location} onChange={this.changeLocation} onFocus={this.nextStep} style={css.input + " " + css.locationInput} minLength={3} maxLength={20} />
                 <i className={css.mapMarker + " fa fa-map-marker"}/>

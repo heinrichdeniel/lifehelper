@@ -1,0 +1,58 @@
+@import 'src/styles/globals.scss';
+
+.base {
+  background-color: #ddd;
+  border-radius: 5px;
+  max-height: 80vh;
+  z-index: 1000;
+  border: 7.5px solid #ddd;
+  padding-bottom: 0;
+  box-shadow: 2px 2px 25px -5px #333;
+
+  .tasks {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 60vh;
+    padding: 0 7.5px;
+    padding-bottom: 7.5px;
+    @media screen and (max-height: 600px) {
+      max-height: 50vh;
+    }
+    @media screen and (max-height: 500px) {
+      max-height: 43vh;
+    }
+  }
+
+  .tabs{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    display: flex;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px 0px #999;
+    .taskTab, .projectTab{
+      width: 100px;
+      text-align: center;
+      color: $primary-color;
+      background-color: #fafafa;
+      padding: 5px;
+      border: 2px solid $primary-color;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .projectTab{
+      border-radius: 0 5px 5px 0;
+    }
+    .taskTab{
+      border-radius: 5px 0 0 5px;
+    }
+    .active{
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+}

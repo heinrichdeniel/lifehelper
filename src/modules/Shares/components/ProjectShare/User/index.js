@@ -48,10 +48,15 @@ class User extends Component{
   render(){
 
     let user = this.props.user;
-    let trash = null;
+    let rightIcon = null;
     if (!this.props.me && ( this.props.owner == this.props.profile.id || (this.props.user.projects && this.props.user.projects[0].UserProject.sharedBy == this.props.profile.id))){
-      trash = <i className={`fa fa-ban ${css.trash}`} onClick={this.removeShare} />;
+      rightIcon = <i className={`fa fa-ban ${css.trash}`} onClick={this.removeShare} />;
     }
+
+    if (this.props.owner == this.props.user.id){
+      rightIcon = <i className={`fa fa-star ${css.star}`}/>;
+    }
+
 
     if (user.photo_url){
       return (
@@ -59,7 +64,7 @@ class User extends Component{
           <img src={user.photo_url}/>
           <span>{user.username}</span>
           {this.getStatus()}
-          {trash}
+          {rightIcon}
         </div>
       )
     }
@@ -69,7 +74,7 @@ class User extends Component{
           <i className={css.userIcon + " fa fa-user"}/>
           <span className={css.name}>{user.username}</span>
           {this.getStatus()}
-          {trash}
+          {rightIcon}
         </div>
       )
     }

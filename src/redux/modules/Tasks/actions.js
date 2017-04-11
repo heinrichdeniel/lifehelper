@@ -56,6 +56,8 @@ export function deleteTask(id) {
         })
       }
     })
+  }).then (function(){
+    userActions.getNotifications()
   })
 }
 

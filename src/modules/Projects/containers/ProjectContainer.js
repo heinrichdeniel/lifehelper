@@ -15,7 +15,10 @@ const mapActionsToProps = (dispatch) => ({
   deleteProject: projectActions.deleteProject,
   deleteTask: taskActions.deleteTask,
   getUsersByFilter: userActions.getUsersByFilter,
-  shareTask: taskActions.shareTask
+  shareTask: taskActions.shareTask,
+  updateTask: taskActions.sendTask,
+  updateProject: projectActions.createProject
+
 
 });
 

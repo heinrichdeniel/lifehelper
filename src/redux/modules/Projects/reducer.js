@@ -44,7 +44,7 @@ const ProjectReducer = (state = initialState, action = {}) => {
             action.payload.project,
             ...state.project.list.filter((project) => project.id != action.payload.project.id)
           ],
-          selected: action.payload.project,
+          selected: {},
           current: {},
           pending: false,
           error: false

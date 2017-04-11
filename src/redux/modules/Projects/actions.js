@@ -39,7 +39,9 @@ export function deleteProject(id) {
     }).then(function(){
       TaskActions.getTaskList();
     })
-  });
+  }).then (function(){
+    userActions.getNotifications()
+  })
 }
 
 export function getProjectList() {

@@ -220,14 +220,7 @@ class TaskItem extends Component {
   }
 
   renderCircleBeforeTitle(){      //icon to show if the task is completed or uncompleted
-    if (this.props.task.status == "completed")  {
-      return (
-        <div className={css.restoreTask} onClick={this.restoreTask}>
-          <i className="fa fa-check" aria-hidden="true"/>
-        </div>
-      )
-    }
-    else if (this.props.task.status == "archived")  {
+    if (this.props.task.status == "completed" || this.props.task.status == "archived")  {
       return (
         <div className={css.restoreTask} onClick={this.restoreTask}>
           <i className="fa fa-check" aria-hidden="true"/>

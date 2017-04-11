@@ -6,6 +6,8 @@ class Dropdown extends Component{
   constructor(props){
     super(props);
 
+    this.onClick = this.onClick.bind(this);
+
   }
 
   onClick(){
@@ -16,7 +18,6 @@ class Dropdown extends Component{
     let { selected, onChange, projects } = this.props;
 
     let options=[];
-    let style=null;
     projects.map((project) => options.push({value: project.id.toString(), text: project.name})); //creating options from projects
 
     let value;

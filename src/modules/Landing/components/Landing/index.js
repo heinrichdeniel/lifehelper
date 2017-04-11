@@ -7,7 +7,7 @@ import Filters from 'modules/Filters'
 
 import TaskList from 'modules/Tasks/containers/TaskListContainer'
 import ProjectList from 'modules/Projects/containers/ProjectContainer'
-import Archive from 'modules/Tasks/containers/ArchiveContainer'
+import Archive from 'modules/Archive/containers/ArchiveContainer'
 
 class Landing extends Component {
   constructor(props){

@@ -23,8 +23,12 @@ class ProjectList extends Component {
     this.editProject = this.editProject.bind(this);
     this.showHideDeleteModal = this.showHideDeleteModal.bind(this);
     this.renderDeleteModal = this.renderDeleteModal.bind(this);
+    this.renderList = this.renderList.bind(this);
     this.deleteProject = this.deleteProject.bind(this);
     this.addTask = this.addTask.bind(this);
+    this.completeProject = this.completeProject.bind(this);
+    this.archiveProject = this.archiveProject.bind(this);
+    this.restoreProject = this.restoreProject.bind(this);
 
     this.state = {
       updateProject: false,
@@ -37,7 +41,9 @@ class ProjectList extends Component {
     }
   }
   componentWillMount(){
-    this.props.getTaskList();
+    if (!this.props.archived){
+      this.props.getTaskList();
+    }
   }
 
   changeDateFilter(task){
@@ -153,6 +159,63 @@ class ProjectList extends Component {
     })
   }
 
+  completeProject(project,e){   //sending request for updating the complete attribute of the project
+   console.log(this.props)
+    e.stopPropagation();
+    let updatedProject = Object.assign({}, project, {status: "completed"});
+    this.props.updateProject(updatedProject);
+    this.setState({
+      ...this.state,
+      style: {
+        'opacity': '0',
+        'transition': 'opacity 0.2s linear'
+      }
+    })
+  }
+
+  archiveProject(project,e){   //sending request for updating the archive attribute of the project
+    e.stopPropagation();
+    let updatedProject = Object.assign({}, project, {status: "archived"});
+    this.props.updateProject(updatedProject);
+    this.setState({
+      ...this.state,
+      style: {
+        'opacity': '0',
+        'transition': 'opacity 0.2s linear'
+      }
+    })
+  }
+
+  restoreProject(project,e){   //sending request for updating the archived attribute of the task
+    e.stopPropagation();
+    let updatedProject = Object.assign({},project,{status: "pending", date: moment()});
+    this.props.updateProject(updatedProject);
+    this.setState({
+      ...this.state,
+      style: {
+        'opacity': '0',
+        'transition': 'opacity 0.2s linear'
+      }
+    })
+  }
+
+  renderCircleBeforeName(project){      //icon to show if the task is completed or uncompleted
+    if (project.status == "completed" || project.status == "archived")  {
+      return (
+        <div className={css.restoreProject} onClick={this.restoreProject.bind(this,project)}>
+          <i className="fa fa-check" aria-hidden="true"/>
+        </div>
+      )
+    }
+    else{
+      return (
+        <div className={css.finishProject} onClick={this.completeProject.bind(this,project)}>
+          <i className="fa fa-check" aria-hidden="true"/>
+        </div>
+      )
+    }
+  }
+
   renderTask(task){
     if (task && !task.deleted){         //if the task was not deleted
       return (
@@ -163,6 +226,7 @@ class ProjectList extends Component {
           dateFormat={this.props.user.current.dateFormat}
           timeFormat={this.props.user.current.timeFormat}
           deleteTask={this.props.deleteTask}
+          updateTask={this.props.updateTask}
           users={this.props.user.list}
           getUsersByFilter={this.props.getUsersByFilter}
           shareTask={this.props.shareTask}/>
@@ -191,11 +255,27 @@ class ProjectList extends Component {
   }
 
   renderProject(project){     //if the project was selected showing the tasks else only the header
-    let tasks = this.props.task.list.filter((task) => task.ProjectId == project.id && task.status == "pending");
+    let tasks = []
+    if (this.props.archived){
+      tasks = this.props.task.list.filter((task) => task.ProjectId == project.id && (task.status=="completed" || task.status=="archived"));
+      console.log(project)
+
+      if (tasks.length == 0 && project.status!="completed" && project.status!="archived"){
+        return null;
+      }
+    }
+    else{
+      tasks = this.props.task.list.filter((task) => task.ProjectId == project.id && task.status == "pending");
+      if (project.status=="completed" || project.status=="archived"){
+        return null;
+      }
+    }
+
     if (this.state.selectedProjects.indexOf(project.id) < 0 && this.props.project.selected != project){
       return (
         <div key={project.id} onClick={this.selectProject.bind(this,project.id)} className={css.project}>
           <h3>
+            {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length}) </span>
             <i className="fa fa-arrow-down" aria-hidden="true"/>
@@ -210,6 +290,7 @@ class ProjectList extends Component {
       return (
         <div key={project.id} onClick={this.selectProject.bind(this,project.id)} className={css.project +" "+css.activeProject}>
           <h3>
+            {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length})</span>
             <i className="fa fa-arrow-up" aria-hidden="true"/>
@@ -272,9 +353,26 @@ class ProjectList extends Component {
     }
   }
 
-  render() {
-    //let tasks = this.props.task.list.filter(this.changeDateFilter);
+  renderList(){
     let projects = this.props.project.list;
+    return (
+      <div className={css.projects}>
+        {
+          projects.map( (project) =>
+            this.renderProject(project)
+          )
+        }
+      </div>
+    )
+  }
+
+  render() {
+
+    if (this.props.archived){   //if the projectList was called from archive
+      return this.renderList();
+
+    }
+
     let content = this.props.content.page.project;
     return(
       <div className={css.base}>
@@ -293,15 +391,9 @@ class ProjectList extends Component {
         {this.renderDeleteModal()}      {/*modal for delete*/}
         {this.renderEditProject()}      {/*modal for update*/}
         {this.renderAddTask()}      {/*modal for adding a new task*/}
+        {this.renderList()}
 
-        <div className={css.projects}>
-          {
-            projects.map( (project) =>
-              this.renderProject(project)
-            )
-          }
-        </div>
-        {this.props.project.pending? <Spinner/> : null}
+        {this.props.project.pending&&this.props.project.list.length==0? <Spinner/> : null}
 
       </div>
     );
