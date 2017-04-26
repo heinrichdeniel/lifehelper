@@ -83,22 +83,26 @@ class CommentBox extends Component {
   };
 
   render(){
-
     let title = null;
+    let comments = null;
+
     if (this.props.selectedTask){
       title = <span><i className={css.taskIcon + " fa fa-tasks"}/>{this.props.selectedTask.name}</span>
+      comments = this.props.selectedTask.Comments.map((comment) => this.renderComment(comment));
     }
     else{
       title = <span><i className={css.taskIcon + " fa fa-chain"}/>{this.props.selectedProject.name}</span>
+      comments = this.props.selectedProject.Comments.map((comment) => this.renderComment(comment));
     }
+
     return (
       <div className={css.base}>
         <div className={css.title}>
           {title}
           <i className={css.closeIcon + " fa fa-times"} onClick={this.props.closePanel}/>
         </div>
-        <div ref={(comments) => { this.comments = comments; }}className={css.comments}>
-          {this.props.selectedTask.Comments.map((comment) => this.renderComment(comment))}
+        <div ref={(comments) => { this.comments = comments; }} className={css.comments}>
+          {comments}
         </div>
 
         <div className={css.newComment}>

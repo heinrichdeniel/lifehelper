@@ -97,17 +97,27 @@ const CommentReducer = (state = initialState, action = {}) => {
       };
 
     case constants.CLEAR_NEW_COMMENT_SUCCESS:
+      let tasks = state.comments.tasks;
+      let projects = state.comments.projects;
+
+      if (action.payload.taskComment){
+        tasks = [
+          ...state.comments.tasks.filter((task) => (task.id != action.payload.taskComment.id)),
+          action.payload.taskComment
+        ]
+      }
+      else{
+        projects =  [
+          ...state.comments.projects.filter((project) => ( project.id != action.payload.projectComment.id)),
+          action.payload.projectComment
+        ]
+      }
+
       return {
         ...state,
         comments:{
-          tasks: [
-            ...state.comments.tasks.filter((task) => (task.id != action.payload.taskComment.id)),
-            action.payload.taskComment
-            ],
-          projects: [
-            ...state.comments.projects.filter((project) => (project.id != action.payload.projectComment.id)),
-            action.payload.projectComment
-            ]
+          tasks: tasks,
+          projects: projects
         },
         pending: false,
         error: false

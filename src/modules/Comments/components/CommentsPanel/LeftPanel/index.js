@@ -25,9 +25,9 @@ class LeftPanel extends Component {
     let tasks = this.props.comments.tasks;
     return(
       <div className={css.commentedItems}>
-        {tasks.map((task) => {
+        {tasks.map((task,index) => {
           return (
-            <div className={css.item} key={task.id} onClick={this.props.selectTask.bind(this, task)}>
+            <div className={css.item} key={index} onClick={this.props.selectTask.bind(this, task)}>
               <i className={css.taskIcon + " fa fa-tasks"}/>
               {task.name}
               {(task.UserTasks[0].newComment) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
@@ -42,9 +42,9 @@ class LeftPanel extends Component {
     let projects = this.props.comments.projects;
     return(
       <div className={css.commentedItems}>
-        {projects.map((project) => {
+        {projects.map((project, index) => {
           return (
-            <div className={css.item} key={project.id} onClick={this.props.selectProject.bind(this, project)}>
+            <div className={css.item} key={index} onClick={this.props.selectProject.bind(this, project)}>
               <i className={css.chain + " fa fa-chain"}/>
               {project.name}
               {(project.UserProjects[0].newComment) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
