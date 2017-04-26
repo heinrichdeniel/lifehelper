@@ -2,6 +2,7 @@ import store from 'redux/config/store'
 import constants from './constants'
 import * as api from 'api/tasks'
 import * as userActions from '../User/actions'
+import * as commentActions from '../Comments/actions'
 
 export function sendTask(payload) {
   store.dispatch((dispatch, getState) => {
@@ -17,6 +18,9 @@ export function sendTask(payload) {
                     token: getState().User.authDetails.token
         })
       }
+    }).then(function(){
+      commentActions.getTasksAndProjects();
+      commentActions.getComments();
     })
   });
 }
@@ -57,7 +61,9 @@ export function deleteTask(id) {
       }
     })
   }).then (function(){
-    userActions.getNotifications()
+    userActions.getNotifications();
+    commentActions.getTasksAndProjects();
+    commentActions.getComments();
   })
 }
 

@@ -8,6 +8,7 @@ import Filters from 'modules/Filters'
 import TaskList from 'modules/Tasks/containers/TaskListContainer'
 import ProjectList from 'modules/Projects/containers/ProjectContainer'
 import Archive from 'modules/Archive/containers/ArchiveContainer'
+import Comments from 'modules/Comments/containers/CommentContainer'
 
 class Landing extends Component {
   constructor(props){
@@ -58,8 +59,8 @@ class Landing extends Component {
                 token={this.props.authDetails.token}
                 logout={this.props.logout}/>
 
-            {this.renderContent()}
-
+        {this.renderContent()}
+        {this.props.authDetails.token ? <Comments/> : null}
         <Footer switchLanguage={this.props.switchLanguage}/>
       </div>
     )

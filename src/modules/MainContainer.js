@@ -6,6 +6,7 @@ import * as contentActions from 'redux/modules/Content/actions'
 import * as contentSelectors from 'redux/modules/Content/selectors'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
+import Comments from 'modules/Comments/containers/CommentContainer';
 
 class MainContainer extends Component {
   constructor(props){
@@ -31,6 +32,7 @@ class MainContainer extends Component {
                 logout={this.props.logout}/>
         <div>
           {this.props.children}   {/*the content depends on the route*/}
+          {this.props.authDetails.token ? <Comments/> : null}
         </div>
         <Footer switchLanguage={this.props.switchLanguage}/>
       </div>

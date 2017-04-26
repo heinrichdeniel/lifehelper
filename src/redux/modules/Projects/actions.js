@@ -3,6 +3,7 @@ import constants from './constants'
 import * as api from 'api/projects'
 import * as TaskActions from '../Tasks/actions'
 import * as userActions from '../User/actions'
+import * as commentActions from '../Comments/actions'
 
 export function createProject(payload) {
   store.dispatch((dispatch, getState) => {
@@ -18,6 +19,9 @@ export function createProject(payload) {
           token: getState().User.authDetails.token
         })
       }
+    }).then(function(){
+      commentActions.getTasksAndProjects();
+      commentActions.getComments();
     })
   });
 }
@@ -38,9 +42,11 @@ export function deleteProject(id) {
       }
     }).then(function(){
       TaskActions.getTaskList();
+      commentActions.getTasksAndProjects();
     })
   }).then (function(){
     userActions.getNotifications()
+    commentActions.getComments();
   })
 }
 

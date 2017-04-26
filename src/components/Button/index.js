@@ -18,7 +18,7 @@ class Button extends Component {
 }
 
 Button.propTypes = {
-  text: React.PropTypes.string.isRequired,
+  text: React.PropTypes.string,
   style: React.PropTypes.string,
   type: React.PropTypes.string,
   disabled: React.PropTypes.bool,

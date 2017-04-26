@@ -160,7 +160,6 @@ class ProjectList extends Component {
   }
 
   completeProject(project,e){   //sending request for updating the complete attribute of the project
-   console.log(this.props)
     e.stopPropagation();
     let updatedProject = Object.assign({}, project, {status: "completed"});
     this.props.updateProject(updatedProject);
@@ -258,7 +257,6 @@ class ProjectList extends Component {
     let tasks = []
     if (this.props.archived){
       tasks = this.props.task.list.filter((task) => task.ProjectId == project.id && (task.status=="completed" || task.status=="archived"));
-      console.log(project)
 
       if (tasks.length == 0 && project.status!="completed" && project.status!="archived"){
         return null;
@@ -278,7 +276,6 @@ class ProjectList extends Component {
             {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length}) </span>
-            <i className="fa fa-arrow-down" aria-hidden="true"/>
             <ProjectShare project={project} />    {/* share modal */}
             <i className={css.projectSettings + " fa fa-cog"} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>
@@ -293,7 +290,6 @@ class ProjectList extends Component {
             {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length})</span>
-            <i className="fa fa-arrow-up" aria-hidden="true"/>
             <ProjectShare project={project} />    {/* share modal */}
             <i className={css.projectSettings + " fa fa-cog"} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>

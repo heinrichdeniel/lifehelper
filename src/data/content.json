@@ -152,6 +152,16 @@
         "decline": "Decline",
         "confirm": "Okay",
         "back": "Back"
+      },
+      "comments": {
+        "commentedTasks": "Commented tasks",
+        "commentedProjects": "Commented projects",
+        "newComment": "New comment",
+        "taskTab": "Tasks",
+        "projectTab": "Projects",
+        "task/project": "Select a task or a project",
+        "example": "Type a comment...",
+        "noResults": "No results found..."
       }
     }
   },
@@ -311,6 +321,16 @@
         "decline": "Elutasít",
         "confirm": "Rendben",
         "back": "Vissza"
+      },
+      "comments": {
+        "commentedTasks": "Feladatok hozzászólásai",
+        "commentedProjects": "Projektek hozzászólásai",
+        "newComment": "Új hozzászólás",
+        "taskTab": "Feladatok",
+        "projectTab": "Projektek",
+        "task/project": "Válassz ki egy feladatot vagy egy projektet",
+        "example": "Írd egy hozzászólást...",
+        "noResults": "Nincs találat..."
       }
     }
   },
@@ -467,6 +487,16 @@
         "decline": "Refuză",
         "confirm": "Ok",
         "back": "Înapoi"
+      },
+      "comments": {
+        "commentedTasks": "Activități comentate",
+        "commentedProjects": "Proiecte comentate",
+        "newComment": "Comentariu nou",
+        "taskTab": "Activități",
+        "projectTab": "Proiecte",
+        "task/project": "Alegeți o activitate sau un proiect",
+        "example": "Scrieți un comentariu...",
+        "noResults": "Nici un rezultat..."
       }
     }
   }

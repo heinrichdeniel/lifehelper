@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProjectList from "../components/ProjectList"
 import * as projectActions from 'redux/modules/Projects/actions'
@@ -18,8 +17,6 @@ const mapActionsToProps = (dispatch) => ({
   shareTask: taskActions.shareTask,
   updateTask: taskActions.sendTask,
   updateProject: projectActions.createProject
-
-
 });
 
 const mapStateToProps = (state) => ({

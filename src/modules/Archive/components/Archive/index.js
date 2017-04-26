@@ -63,7 +63,7 @@ class Archive extends Component {
     }
     else  if (this.state.activeTab == 2){      //if the project tab is selected then return the archived projects
       return (
-        <div className={css.tasks}>
+        <div >
          <ProjectList archived={true} />
         </div>
       )

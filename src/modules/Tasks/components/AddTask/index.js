@@ -343,15 +343,15 @@ class AddTask extends Component {
 
 
   render() {
-    let message = this.props.update ? this.props.content.page.tasks.editTask.confirmation : this.props.content.page.tasks.addTask.confirmation;
+    let Comment = this.props.update ? this.props.content.page.tasks.editTask.confirmation : this.props.content.page.tasks.addTask.confirmation;
     if (this.props.hide){
-      return this.state.sent ? <ConfirmationBox content={message} /> : null;
+      return this.state.sent ? <ConfirmationBox content={Comment} /> : null;
     }
     else if (!this.state.showModal){
       return (
         <div>
           {this.renderButton()}
-          {this.state.sent ? <ConfirmationBox content={message} /> : null}
+          {this.state.sent ? <ConfirmationBox content={Comment} /> : null}
         </div>
       );
     }

@@ -162,7 +162,8 @@
 }
 
 .options{
-  position: relative;
+  position: fixed;
+  margin-left: 476px;
   float: right;
   z-index: 10;
   width: 160px;
@@ -200,6 +201,15 @@
     font-size: 28px;
     right: 14px;
     color: darkgrey;
+  }
+  @media screen and (max-width: 1200px){
+    margin-left: 360px;
+  }
+  @media screen and (max-width: 991px){
+    margin-left: 231px;
+  }
+  @media screen and (max-width: 768px){
+    right: 30px;
   }
 }
 
