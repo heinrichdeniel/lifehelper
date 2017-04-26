@@ -1,6 +1,6 @@
 import store from 'redux/config/store'
 import constants from './constants'
-import * as api from 'api/Comments'
+import * as api from 'api/comments'
 
 export function showHideMessagePanel() {
   store.dispatch((dispatch, getState) => {
