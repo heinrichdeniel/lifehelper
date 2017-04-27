@@ -29,6 +29,7 @@ class ProjectList extends Component {
     this.completeProject = this.completeProject.bind(this);
     this.archiveProject = this.archiveProject.bind(this);
     this.restoreProject = this.restoreProject.bind(this);
+    this.openCommentBox = this.openCommentBox.bind(this);
 
     this.state = {
       updateProject: false,
@@ -185,6 +186,14 @@ class ProjectList extends Component {
     })
   }
 
+  openCommentBox(project, e){
+    console.log(e)
+    if (e){
+      e.stopPropagation();
+    }
+    this.props.selectProject(project.id);
+  }
+
   restoreProject(project,e){   //sending request for updating the archived attribute of the task
     e.stopPropagation();
     let updatedProject = Object.assign({},project,{status: "pending", date: moment()});
@@ -228,7 +237,8 @@ class ProjectList extends Component {
           updateTask={this.props.updateTask}
           users={this.props.user.list}
           getUsersByFilter={this.props.getUsersByFilter}
-          shareTask={this.props.shareTask}/>
+          shareTask={this.props.shareTask}
+          selectTask={this.props.selectTask}/>
       )
     }
     return  null;
@@ -276,6 +286,7 @@ class ProjectList extends Component {
             {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length}) </span>
+            <i className={css.commentIcon + " fa fa-commenting"} onClick={this.openCommentBox.bind(this, project)}/>
             <ProjectShare project={project} />    {/* share modal */}
             <i className={css.projectSettings + " fa fa-cog"} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>
@@ -290,6 +301,7 @@ class ProjectList extends Component {
             {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length})</span>
+            <i className={css.commentIcon + " fa fa-commenting"} onClick={this.openCommentBox}/>
             <ProjectShare project={project} />    {/* share modal */}
             <i className={css.projectSettings + " fa fa-cog"} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>

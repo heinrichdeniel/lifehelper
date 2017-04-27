@@ -6,7 +6,7 @@ import * as contentSelectors from 'redux/modules/Content/selectors'
 
 const mapActionsToProps = (dispatch) => ({
   logout: userActions.logout,
-  getNotifications: userActions.getNotifications
+  getProfile: userActions.getProfile,
 });
 const mapStateToProps = (state) => ({
   authDetails: userSelectors.authDetails(state),

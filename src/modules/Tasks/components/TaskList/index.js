@@ -63,7 +63,8 @@ class TaskList extends Component {
           updateTask={this.props.updateTask}
           users={this.props.user.list}
           getUsersByFilter={this.props.getUsersByFilter}
-          shareTask={this.props.shareTask}/>
+          shareTask={this.props.shareTask}
+          selectTask={this.props.selectTask}/>
       )
     }
     return  null;

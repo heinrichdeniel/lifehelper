@@ -80,6 +80,36 @@ export function clearNewComment(payload) {
         })
       }
     })
+  }).then (() =>{
+    if (payload.task){
+      selectTask(payload.task.id)
+    }
+    else{
+      selectProject(payload.project.id)
+    }
+  })
+}
+
+export function selectTask(taskId) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.SELECT_TASK,
+      payload: {
+        taskId: taskId
+      }
+    })
+  })
+}
+
+
+export function selectProject(projectId) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.SELECT_PROJECT,
+      payload: {
+        projectId: projectId
+      }
+    })
   })
 }
 

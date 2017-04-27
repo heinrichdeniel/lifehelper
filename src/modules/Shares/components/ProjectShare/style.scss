@@ -1,12 +1,16 @@
 @import 'src/styles/globals.scss';
 .icon{
-  top: 10px;
-  right: 40px;
+  top: 11px;
+  right: 39px;
   font-size: 16px;
   position: absolute;
+  &:hover{
+    color: #aaa;
+  }
   &.shareIcon{
     font-size: 18px;
     right: 40px;
+    top: 10px;
   }
 }
 

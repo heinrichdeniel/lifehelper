@@ -70,9 +70,11 @@
         width: auto;
         background-color: #eee;
         padding: 5px 10px;
-        border-radius: 500px;
+        border-radius: 15px;
         display: inline-block;
         margin-left: 40px;
+        max-width: 85%;
+        word-wrap: break-word;
       }
     }
   }

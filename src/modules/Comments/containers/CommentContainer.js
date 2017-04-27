@@ -11,7 +11,9 @@ const mapActionsToProps = (dispatch) => ({
   getTasksAndProjects: commentActions.getTasksAndProjects,
   sendComment: commentActions.sendComment,
   getComments: commentActions.getComments,
-  clearNewComment: commentActions.clearNewComment
+  clearNewComment: commentActions.clearNewComment,
+  selectTask: commentActions.selectTask,
+  selectProject: commentActions.selectProject
 });
 
 const mapStateToProps = (state) => ({
@@ -19,6 +21,8 @@ const mapStateToProps = (state) => ({
   content: contentSelectors.content(state),
   taskList: commentSelectors.taskList(state),
   projectList: commentSelectors.projectList(state),
+  selectedTaskId: commentSelectors.selectedTaskId(state),
+  selectedProjectId: commentSelectors.selectedProjectId(state),
   comments: commentSelectors.comments(state),
   dateFormat: userSelectors.user(state).current.dateFormat,
   timeFormat: userSelectors.user(state).current.timeFormat,

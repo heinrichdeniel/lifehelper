@@ -30,7 +30,7 @@ class LeftPanel extends Component {
             <div className={css.item} key={index} onClick={this.props.selectTask.bind(this, task)}>
               <i className={css.taskIcon + " fa fa-tasks"}/>
               {task.name}
-              {(task.UserTasks[0].newComment) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
+              {(task.UserTasks[0].newComment && task != this.props.selectedTask) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
             </div>
           );
         })}
@@ -47,7 +47,7 @@ class LeftPanel extends Component {
             <div className={css.item} key={index} onClick={this.props.selectProject.bind(this, project)}>
               <i className={css.chain + " fa fa-chain"}/>
               {project.name}
-              {(project.UserProjects[0].newComment) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
+              {(project.UserProjects[0].newComment && project!= this.props.selectedProject) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
 
             </div>
           );

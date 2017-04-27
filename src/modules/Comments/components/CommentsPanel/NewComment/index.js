@@ -32,6 +32,20 @@ class NewComment extends Component {
     })
   }
 
+  componentDidMount(){
+    let self = this;
+    $('textarea').on('keydown', function(event) {
+      if (event.keyCode == 13){
+        console.log("ASD")
+        if (!event.shiftKey) self.sendComment(event);
+      }
+    });
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener('click', this.handleDocumentClick, false);
+  }
+
   changeInput(e){     //filtering the tasks and the projects
     document.addEventListener('click', this.handleDocumentClick, false);
 
@@ -144,7 +158,8 @@ class NewComment extends Component {
     )
   }
 
-  sendComment(){
+  sendComment(e){
+    e.preventDefault();
     if (this.state.comment.length > 0 && (this.state.selectedTask || this.state.selectedProject)){
       let payload = {
         comment: this.state.comment,
@@ -168,11 +183,11 @@ class NewComment extends Component {
         </div>
         {this.selectTaskOrProject()}
         <div className={css.newComment}>
-          <form action="POST" onSubmit={this.sendComment}>
+          <form id="form" action="POST" onSubmit={this.sendComment}>
             <textarea className={css.textArea}
-                    value={this.state.comment}
-                    onChange={this.changeComment}
-                    placeholder={this.props.content.page.comments.example}/>
+                   value={this.state.comment}
+                   onChange={this.changeComment}
+                   placeholder={this.props.content.page.comments.example}/>
             <span className={css.arrow + " fa fa-arrow-right"} onClick={this.sendComment}/>
           </form>
         </div>

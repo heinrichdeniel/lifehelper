@@ -2,62 +2,42 @@ import React, { Component } from 'react';
 import css from './style.scss';
 import moment from 'moment';
 import reactDom from 'react-dom';
+import { browserHistory } from 'react-router';
 
 class CommentBox extends Component {
   constructor(props){
     super(props);
-    this.changeComment = this.changeComment.bind(this);
     this.sendComment = this.sendComment.bind(this);
     this.renderComment = this.renderComment.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
+    this.goToProjectPage = this.goToProjectPage.bind(this);
+    this.goToTaskPage = this.goToTaskPage.bind(this);
 
-    this.state={
-      title: "",
-      comment: ""
-    }
   }
 
   componentDidMount() {
     this.scrollToBottom();
-
-    if (this.props.selectedTask && this.props.selectedTask.UserTasks[0].newComment){
-      this.props.clearNewComment({task: this.props.selectedTask});
-    }
-    else if (this.props.selectedProject && this.props.selectedProject.UserProjects[0].newComment){
-      this.props.clearNewComment({project: this.props.selectedProject});
-    }
+      let self = this;
+      $('textarea').on('keydown', function(event) {
+        if (event.keyCode == 13)
+          if (!event.shiftKey) self.sendComment(event);
+      });
   }
 
   componentDidUpdate() {
     this.scrollToBottom();
-
-    if (this.props.selectedTask && this.props.selectedTask.UserTasks[0].newComment){
-      this.props.clearNewComment({task: this.props.selectedTask});
-    }
-    else if (this.props.selectedProject && this.props.selectedProject.UserProjects[0].newComment){
-      this.props.clearNewComment({project: this.props.selectedProject});
-    }
   }
 
-  changeComment(e){
-    this.setState({
-      ...this.state,
-      comment: e.target.value
-    })
-  }
 
-  sendComment(){
-    if (this.state.comment.length > 0){
+  sendComment(e){
+    e.preventDefault();
+    if (this.props.comment.length > 0){
       let payload = {
-        comment: this.state.comment,
+        comment: this.props.comment,
         task: this.props.selectedTask ? this.props.selectedTask.id : null,
         project: this.props.selectedProject ? this.props.selectedProject.id : null
       };
       this.props.sendComment(payload);
-      this.setState({
-        ...this.state,
-        comment: ""
-      });
     }
   }
 
@@ -82,18 +62,31 @@ class CommentBox extends Component {
     comments.scrollTop = comments.scrollHeight;
   };
 
+  goToTaskPage(){
+    browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+this.props.selectedTask.id);
+  }
+
+  goToProjectPage(){
+    browserHistory.push(window.location.pathname.substring(0,3)+"/projects/");
+  }
+
   render(){
     let title = null;
     let comments = null;
 
-    if (this.props.selectedTask){
-      title = <span><i className={css.taskIcon + " fa fa-tasks"}/>{this.props.selectedTask.name}</span>
-      comments = this.props.selectedTask.Comments.map((comment) => this.renderComment(comment));
+    if (this.props.selectedTask && (this.props.selectedTask.Comments || !this.props.selectedTask.commented)){
+      title = <span onClick={this.goToTaskPage}><i className={css.taskIcon + " fa fa-tasks"}/>{this.props.selectedTask.name}</span>
+      if (this.props.selectedTask.Comments){
+        comments = this.props.selectedTask.Comments.map((comment) => this.renderComment(comment));
+      }
     }
-    else{
-      title = <span><i className={css.taskIcon + " fa fa-chain"}/>{this.props.selectedProject.name}</span>
-      comments = this.props.selectedProject.Comments.map((comment) => this.renderComment(comment));
+    else if (this.props.selectedProject && (this.props.selectedProject.Comments || !this.props.selectedProject.commented)){
+      title = <span onClick={this.goToProjectPage}><i className={css.taskIcon + " fa fa-chain"}/>{this.props.selectedProject.name}</span>
+      if (this.props.selectedProject.Comments){
+        comments = this.props.selectedProject.Comments.map((comment) => this.renderComment(comment));
+      }
     }
+
 
     return (
       <div className={css.base}>
@@ -108,8 +101,8 @@ class CommentBox extends Component {
         <div className={css.newComment}>
           <form action="POST" onSubmit={this.sendComment}>
           <textarea className={css.textArea}
-                    value={this.state.comment}
-                    onChange={this.changeComment}
+                    value={this.props.comment}
+                    onChange={this.props.changeComment}
                     placeholder={this.props.content.page.comments.example}/>
             <span className={css.arrow + " fa fa-arrow-right"} onClick={this.sendComment}/>
           </form>

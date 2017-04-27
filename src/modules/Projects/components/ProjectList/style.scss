@@ -86,11 +86,23 @@
     h2{
       font-size: 18px;
     }
+
+    .commentIcon{
+      position: absolute;
+      right: 70px;
+      &:hover{
+        color: #999;
+      }
+    }
+
     .projectSettings{
       right: 10px;
       top: 10px;
       position: absolute;
       margin-right: 0;
+      &:hover{
+        color: #aaa;
+      }
     }
     .finishProject{
       border-radius: 100%;

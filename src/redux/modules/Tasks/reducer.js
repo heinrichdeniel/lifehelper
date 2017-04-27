@@ -11,7 +11,8 @@ const initialState = {
       time: moment().add(1, 'hours').format("H:m"),
       location: "",
       ProjectId: "0",
-      status: "pending"
+      status: "pending",
+      commented: false
     },
     dateFrom: moment().add(-1, 'years'),
     dateTo: moment().add(1, 'years'),

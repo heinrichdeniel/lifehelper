@@ -49,11 +49,19 @@
       }
     }
 
+    .commentIcon{
+      position: absolute;
+      right: 65px;
+      font-size: 18px;
+      top: 14.5px;
+      transition: all 0.2s linear;
+    }
+
     .dots{
       position: absolute;
       top: 15px;
       right: 15px;
-      font-size: 20px;
+      font-size: 19px;
       color: #333;
       transition: color 0.3s;
     }

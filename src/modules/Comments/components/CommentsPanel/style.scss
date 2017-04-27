@@ -1,13 +1,14 @@
 @import 'src/styles/globals.scss';
 .hidePanel{
-  position: fixed;
-  bottom: 15px;
-  left: 15px;
-  font-size: 35px;
-  color: #4d4d4d;
-  z-index: 100;
-  i{
+
+  .commentIcon{
     cursor: pointer;
+    position: fixed;
+    bottom: 23px;
+    left: 20px;
+    font-size: 35px;
+    color: #4d4d4d;
+    z-index: 100;
 
   }
 }
@@ -17,7 +18,7 @@
     cursor: pointer;
     position: fixed;
     bottom: 23px;
-    left: 15px;
+    left: 20px;
     font-size: 35px;
     color: $primary-color;
     z-index: 100;

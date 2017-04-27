@@ -20,6 +20,22 @@ class Settings extends Component {
     }
   }
 
+
+  componentWillMount(){
+    this.pusher = new Pusher('c8ef916cb507629d3a96', {
+      encrypted: true,
+      cluster: 'eu'
+    });
+    this.channel = this.pusher.subscribe('notifications');
+  }
+
+  componentDidUpdate(){
+    let self = this;
+    this.channel.bind(this.props.user.id.toString() , function () {
+      self.props.getProfile();
+    });
+  }
+
   handleDocumentClick(e) {      //if the user clicked somewhere need to close the dropdown
     if (!reactDom.findDOMNode(this).contains(e.target)) {
       this.hideOptions();

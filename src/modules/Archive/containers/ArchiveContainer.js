@@ -6,6 +6,7 @@ import * as contentSelectors from 'redux/modules/Content/selectors'
 import * as userSelectors from 'redux/modules/User/selectors'
 import * as projectSelectors from 'redux/modules/Projects/selectors'
 import * as userActions from 'redux/modules/User/actions'
+import * as commentActions from 'redux/modules/Comments/actions'
 
 const mapActionsToProps = (dispatch) => ({
   getArchive: actions.getArchive,
@@ -13,7 +14,8 @@ const mapActionsToProps = (dispatch) => ({
   deleteTask: actions.deleteTask,
   updateTask: actions.sendTask,
   getUsersByFilter: userActions.getUsersByFilter,
-  shareTask: actions.shareTask
+  shareTask: actions.shareTask,
+  selectTask: commentActions.selectTask
 });
 const mapStateToProps = (state) => ({
   task: selectors.task(state),

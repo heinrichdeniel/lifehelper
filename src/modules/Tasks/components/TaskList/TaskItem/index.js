@@ -25,6 +25,7 @@ class TaskItem extends Component {
     this.shareTask = this.shareTask.bind(this);
     this.selectUsers = this.selectUsers.bind(this);
     this.sendShare = this.sendShare.bind(this);
+    this.openCommentBox = this.openCommentBox.bind(this);
     this.renderShareModal = this.renderShareModal.bind(this);
     this.renderDeleteModal = this.renderDeleteModal.bind(this);
 
@@ -144,6 +145,13 @@ class TaskItem extends Component {
       showOptions: false,
       showShareModal: !this.state.showShareModal
     })
+  }
+
+  openCommentBox(e){
+    if (e){
+      e.stopPropagation();
+    }
+    this.props.selectTask(this.props.task.id);
   }
 
   selectUsers(selected){
@@ -296,6 +304,7 @@ class TaskItem extends Component {
           {project}
           <p className={css.date}>{overdue}{date}</p>
           {this.renderCircleBeforeTitle()}
+          <i className={css.commentIcon + " fa fa-commenting"} onClick={this.openCommentBox}/>
           <TaskShare task={this.props.task}/>    {/* share modal */}
           <i className={css.dots + " fa fa-ellipsis-h"} onClick={this.showOptions} aria-hidden="true"/>
         </div>

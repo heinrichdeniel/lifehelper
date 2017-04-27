@@ -5,6 +5,8 @@ const initialState = {
     tasks: [],
     projects: []
   },
+  selectedTaskId: null,
+  selectedProjectId: null,
   taskList: [],
   projectList: [],
   showPanel: false,
@@ -102,14 +104,14 @@ const CommentReducer = (state = initialState, action = {}) => {
 
       if (action.payload.taskComment){
         tasks = [
-          ...state.comments.tasks.filter((task) => (task.id != action.payload.taskComment.id)),
-          action.payload.taskComment
+          action.payload.taskComment,
+          ...state.comments.tasks.filter((task) => (task.id != action.payload.taskComment.id))
         ]
       }
       else{
         projects =  [
-          ...state.comments.projects.filter((project) => ( project.id != action.payload.projectComment.id)),
-          action.payload.projectComment
+          action.payload.projectComment,
+          ...state.comments.projects.filter((project) => ( project.id != action.payload.projectComment.id))
         ]
       }
 
@@ -128,6 +130,18 @@ const CommentReducer = (state = initialState, action = {}) => {
         ...state,
         pending: false,
         error: action.payload.message
+      };
+
+    case constants.SELECT_TASK:
+      return {
+        ...state,
+        selectedTaskId: action.payload.taskId
+      };
+
+    case constants.SELECT_PROJECT:
+      return {
+        ...state,
+        selectedProjectId: action.payload.projectId
       };
 
 
