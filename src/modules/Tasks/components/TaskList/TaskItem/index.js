@@ -39,6 +39,15 @@ class TaskItem extends Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.task.UserTasks[0].newComment) {
+      this.setState({
+        ...this.state,
+        commentStyle:  {color: "#d30000"}
+      });
+    }
+  }
+
   onClick(){
     browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+this.props.task.id);
   }
@@ -151,6 +160,11 @@ class TaskItem extends Component {
     if (e){
       e.stopPropagation();
     }
+    this.setState({
+      ...this.state,
+      commentStyle: null
+    });
+    this.props.clearNewComment({task: this.props.task});
     this.props.selectTask(this.props.task.id);
   }
 
@@ -304,7 +318,7 @@ class TaskItem extends Component {
           {project}
           <p className={css.date}>{overdue}{date}</p>
           {this.renderCircleBeforeTitle()}
-          <i className={css.commentIcon + " fa fa-commenting"} onClick={this.openCommentBox}/>
+          <i className={css.commentIcon + " fa fa-commenting"} style={this.state.commentStyle} onClick={this.openCommentBox}/>
           <TaskShare task={this.props.task}/>    {/* share modal */}
           <i className={css.dots + " fa fa-ellipsis-h"} onClick={this.showOptions} aria-hidden="true"/>
         </div>

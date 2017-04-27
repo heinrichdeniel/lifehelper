@@ -209,9 +209,10 @@ class CommentPanel extends Component {
 
   render(){
     if (!this.props.showPanel){         //showing only the comment icon
+      let commentStyle = (this.props.comments.count > 0) ? {color: "#d90000"} : null;
       return (
         <div className={css.hidePanel}>
-          <i className={css.commentIcon + " fa fa-commenting"} onClick={this.showHideMessagePanel}/>
+          <i className={css.commentIcon + " fa fa-commenting"} style={commentStyle} onClick={this.showHideMessagePanel}/>
           {this.renderCommentTab()}
         </div>
       )

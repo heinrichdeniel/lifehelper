@@ -19,7 +19,8 @@ const mapActionsToProps = (dispatch) => ({
   updateTask: actions.sendTask,
   getUsersByFilter: userActions.getUsersByFilter,
   shareTask: actions.shareTask,
-  selectTask: commentActions.selectTask
+  selectTask: commentActions.selectTask,
+  clearNewComment: commentActions.clearNewComment
 });
 const mapStateToProps = (state) => ({
   task: selectors.task(state),

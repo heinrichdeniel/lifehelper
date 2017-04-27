@@ -64,6 +64,7 @@ class TaskList extends Component {
           users={this.props.user.list}
           getUsersByFilter={this.props.getUsersByFilter}
           shareTask={this.props.shareTask}
+          clearNewComment={this.props.clearNewComment}
           selectTask={this.props.selectTask}/>
       )
     }

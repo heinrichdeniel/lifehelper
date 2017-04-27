@@ -1,6 +1,8 @@
 import store from 'redux/config/store'
 import constants from './constants'
 import * as api from 'api/comments'
+import * as taskActions from '../Tasks/actions'
+import * as projectActions from '../Projects/actions'
 
 export function showHideMessagePanel() {
   store.dispatch((dispatch, getState) => {
@@ -88,6 +90,8 @@ export function clearNewComment(payload) {
       selectProject(payload.project.id)
     }
   })
+  taskActions.getTaskList();
+  projectActions.getProjectList();
 }
 
 export function selectTask(taskId) {

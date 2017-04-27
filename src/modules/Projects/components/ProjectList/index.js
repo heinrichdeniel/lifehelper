@@ -187,10 +187,10 @@ class ProjectList extends Component {
   }
 
   openCommentBox(project, e){
-    console.log(e)
     if (e){
       e.stopPropagation();
     }
+    this.props.clearNewComment({project: this.props.project});
     this.props.selectProject(project.id);
   }
 
@@ -279,6 +279,7 @@ class ProjectList extends Component {
       }
     }
 
+    let commentStyle = project.UserProjects[0].newComment ? {color: "#d90000"} : null
     if (this.state.selectedProjects.indexOf(project.id) < 0 && this.props.project.selected != project){
       return (
         <div key={project.id} onClick={this.selectProject.bind(this,project.id)} className={css.project}>
@@ -286,7 +287,7 @@ class ProjectList extends Component {
             {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length}) </span>
-            <i className={css.commentIcon + " fa fa-commenting"} onClick={this.openCommentBox.bind(this, project)}/>
+            <i className={css.commentIcon + " fa fa-commenting"} style={commentStyle} onClick={this.openCommentBox.bind(this, project)}/>
             <ProjectShare project={project} />    {/* share modal */}
             <i className={css.projectSettings + " fa fa-cog"} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>
@@ -301,7 +302,7 @@ class ProjectList extends Component {
             {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length})</span>
-            <i className={css.commentIcon + " fa fa-commenting"} onClick={this.openCommentBox}/>
+            <i className={css.commentIcon + " fa fa-commenting"} style={commentStyle} onClick={this.openCommentBox}/>
             <ProjectShare project={project} />    {/* share modal */}
             <i className={css.projectSettings + " fa fa-cog"} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>

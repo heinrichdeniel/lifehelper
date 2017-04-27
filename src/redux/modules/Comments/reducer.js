@@ -3,7 +3,8 @@ import constants from './constants'
 const initialState = {
   comments: {
     tasks: [],
-    projects: []
+    projects: [],
+    count: 0
   },
   selectedTaskId: null,
   selectedProjectId: null,
@@ -78,7 +79,8 @@ const CommentReducer = (state = initialState, action = {}) => {
         ...state,
         comments:{
           tasks: action.payload.taskComments,
-          projects: action.payload.projectComments
+          projects: action.payload.projectComments,
+          count: action.payload.commentCount
         },
         pending: false,
         error: false
@@ -119,7 +121,8 @@ const CommentReducer = (state = initialState, action = {}) => {
         ...state,
         comments:{
           tasks: tasks,
-          projects: projects
+          projects: projects,
+          count: state.comments.count - 1
         },
         pending: false,
         error: false

@@ -19,7 +19,8 @@ const mapActionsToProps = (dispatch) => ({
   updateTask: taskActions.sendTask,
   updateProject: projectActions.createProject,
   selectTask: commentActions.selectTask,
-  selectProject: commentActions.selectProject
+  selectProject: commentActions.selectProject,
+  clearNewComment: commentActions.clearNewComment
 });
 
 const mapStateToProps = (state) => ({
