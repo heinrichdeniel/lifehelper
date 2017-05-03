@@ -1,13 +1,11 @@
 @import "src/styles/colors.scss";
 
 .nav{
-  background: -moz-linear-gradient(to bottom, #ddd 0%, #d6d6d6 22%, #e6e6e6 50%, #d6d6d6 78%, #ddd 100%);
-  background: -webkit-linear-gradient(to bottom, #ddd 0%, #d6d6d6 22%, #e6e6e6 50%, #d6d6d6 78%, #ddd 100%);
-  background: linear-gradient(to bottom, #ddd 0%, #d6d6d6 22%, #e6e6e6 50%, #d6d6d6 78%, #ddd 100%);
+  background-color: rgba(200, 200, 200, 0.2);
   min-height: 80px;
   border: 0px;
   margin-bottom: 15px;
-  box-shadow: 0 0 15px 0px #999;
+  box-shadow: 0 1px 15px 1px #555;
   z-index: 100;
   .navbarToggle{
     border-color: #aaa;

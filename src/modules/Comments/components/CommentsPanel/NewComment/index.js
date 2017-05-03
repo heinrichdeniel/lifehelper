@@ -36,7 +36,6 @@ class NewComment extends Component {
     let self = this;
     $('textarea').on('keydown', function(event) {
       if (event.keyCode == 13){
-        console.log("ASD")
         if (!event.shiftKey) self.sendComment(event);
       }
     });

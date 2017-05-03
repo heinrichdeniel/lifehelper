@@ -89,9 +89,10 @@ export function clearNewComment(payload) {
     else{
       selectProject(payload.project.id)
     }
+    taskActions.getTaskList();
+    projectActions.getProjectList();
   })
-  taskActions.getTaskList();
-  projectActions.getProjectList();
+
 }
 
 export function selectTask(taskId) {

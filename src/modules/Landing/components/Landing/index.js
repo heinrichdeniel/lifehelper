@@ -4,6 +4,7 @@ import css from './style.scss'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Filters from 'modules/Filters'
+import Shortcuts from 'modules/Shortcuts/containers/ShortcutsContainer'
 
 import TaskList from 'modules/Tasks/containers/TaskListContainer'
 import ProjectList from 'modules/Projects/containers/ProjectContainer'
@@ -16,16 +17,19 @@ class Landing extends Component {
 
     this.renderContent = this.renderContent.bind(this);
   }
-  componentWillMount(){
-    if (this.props.authDetails.token){
-      this.props.getProfile();
-    }
-  }
+
   componentWillReceiveProps(newProps){
     let lang = window.location.pathname.substring(1,3);
 
     if (newProps.user.current.language && lang!= "en" && lang!="hu" && lang!="ro"){
       this.props.switchLanguage(this.props.user.current.language);
+    }
+  }
+
+
+  componentWillMount(){
+    if (this.props.authDetails.token){
+      this.props.getProfile();
     }
   }
 
@@ -41,12 +45,14 @@ class Landing extends Component {
       }
 
       return(
-        <div className={css.content + " container"}>
-          <Filters content={this.props.content.page.filters}/>
-          <div className={css.taskList + " col-sm-7 col-lg-7"}>
-            {content}
+          <div className={css.content + " container"}>
+            <Filters content={this.props.content.page.filters}/>
+            <Shortcuts content={this.props.content}/>
+            <div className={css.taskList + " col-sm-7 col-lg-7"}>
+              {content}
+            </div>
           </div>
-        </div>
+
       )
     }
   }
@@ -65,6 +71,10 @@ class Landing extends Component {
       </div>
     )
   }
+}
+
+Landing.childContextTypes = {
+  shortcuts: React.PropTypes.object.isRequired
 }
 
 export default Landing

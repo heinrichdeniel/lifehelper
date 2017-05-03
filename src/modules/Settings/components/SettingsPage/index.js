@@ -63,13 +63,15 @@ class SettingsPage extends Component {
 
   render() {
     return (
-      <div className={css.base}>
+      <div >
         <Header user={this.props.user}/>
-        <div className={"container " + css.body}>
+        <div className={"container " + css.base}>
+          <div className={css.body}>
           <Menu content={this.props.content.page.settings.menu}
                 onClick={this.selectTab}
                 active={this.state.selectedTab}/>
           {this.renderSettingsTab()}
+          </div>
         </div>
         <Footer switchLanguage={this.props.switchLanguage}/>
       </div>

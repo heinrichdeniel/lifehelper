@@ -77,7 +77,7 @@ class Search extends Component {
   renderProject(project){
     if (project.name.toLowerCase().indexOf(this.state.searchValue) !== -1){
       return (
-        <p key={project.id} className={css.groupItem} onClick={this.selectProject.bind(this,project)}>
+        <p key={project.id} className={css.groupItem + " " + css.project} onClick={this.selectProject.bind(this,project)}>
           {project.name}
         </p>
       )
@@ -88,7 +88,7 @@ class Search extends Component {
   renderTask(task) {
     if (task.name.toLowerCase().indexOf(this.state.searchValue) !== -1) {
       return (
-        <p key={task.id} className={css.groupItem} onClick={this.selectTask.bind(this,task)}>
+        <p key={task.id} className={css.groupItem + " " + css.task} onClick={this.selectTask.bind(this,task)}>
           {task.name}
         </p>
       )
@@ -106,7 +106,10 @@ class Search extends Component {
       if (projectList.length > 0) {    //if any project finded
         projects = (
           <div className={css.group}>
-            <p className={css.groupName}>{this.props.content.page.filters.search.projects}</p>
+            <p className={css.groupName}>
+              <i className={"fa fa-chain"}/>
+              {this.props.content.page.filters.search.projects}
+            </p>
             {projectList}
           </div>
         )
@@ -115,7 +118,10 @@ class Search extends Component {
       if (taskList.length > 0) {    //if any task finded
         tasks = (
           <div className={css.group}>
-            <p className={css.groupName}>{this.props.content.page.filters.search.tasks}</p>
+            <p className={css.groupName}>
+              <i className={"fa fa-tasks"}/>
+              {this.props.content.page.filters.search.tasks}
+            </p>
             {taskList}
           </div>
         )

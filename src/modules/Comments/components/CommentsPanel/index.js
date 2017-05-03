@@ -21,7 +21,7 @@ class CommentPanel extends Component {
 
     this.state = {
       newComment: false,
-      channelAdded: false,
+      channelAdded: false
     }
   }
 
@@ -156,9 +156,6 @@ class CommentPanel extends Component {
 
 
   showHideMessagePanel(){
-    if (!this.props.showPanel){
-      this.props.getComments();
-    }
     this.props.showHideMessagePanel();
   }
 

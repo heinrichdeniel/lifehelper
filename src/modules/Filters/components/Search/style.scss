@@ -104,6 +104,10 @@
       background-color: #eee;
       cursor: default;
       margin-bottom: 0;
+      i{
+        margin-right: 5px;
+        font-size: 16px;
+      }
     }
     .groupItem{
       padding: 10px;
@@ -112,8 +116,14 @@
       border-radius: 3px;
       cursor: pointer;
       &:hover{
-        background-color: #ccc;
+        background-color: $primary-color;
+        color: #fff;
       }
+
+    }
+    .project:hover{
+      background-color: $secondary-color;
+      color: #fff;
     }
   }
 }

@@ -60,7 +60,7 @@ class CommentBox extends Component {
   scrollToBottom(){
     const comments = reactDom.findDOMNode(this.comments);
     comments.scrollTop = comments.scrollHeight;
-  };
+  }
 
   goToTaskPage(){
     browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+this.props.selectedTask.id);

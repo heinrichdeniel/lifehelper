@@ -51,7 +51,7 @@ class TaskList extends Component {
   }
 
   renderTask(task){
-    if (task && !task.deleted){         //if the task was not deleted
+    if (task && !task.deleted && !task.archived && !task.completed){         //if the task was not deleted
       return (
         <TaskItem
           key={task.id}

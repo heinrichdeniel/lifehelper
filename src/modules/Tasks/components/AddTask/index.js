@@ -172,9 +172,7 @@ class AddTask extends Component {
   }
 
   changeModalState(e){
-    if (this.state.showModal && this.props.onHide){
-      this.props.onHide();
-    }
+    let show = this.state.showModal;
     if (this.props.update){     //if a task was selected to update then not needed to empty the state
       this.setState({
         ...this.state,
@@ -183,7 +181,7 @@ class AddTask extends Component {
         error: ""
       });
     }
-    else{
+    else {
       this.setState({
         ...this.state,
         showModal: !this.state.showModal,
@@ -198,6 +196,9 @@ class AddTask extends Component {
           ProjectId: null
         }
       });
+    }
+    if (show && this.props.onHide){
+      this.props.onHide();
     }
   }
 

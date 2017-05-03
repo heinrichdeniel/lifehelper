@@ -40,7 +40,7 @@ class TaskItem extends Component {
   }
 
   componentDidMount() {
-    if (this.props.task.UserTasks[0].newComment) {
+    if (this.props.task.UserTasks && this.props.task.UserTasks[0].newComment) {
       this.setState({
         ...this.state,
         commentStyle:  {color: "#d30000"}
@@ -164,7 +164,9 @@ class TaskItem extends Component {
       ...this.state,
       commentStyle: null
     });
-    this.props.clearNewComment({task: this.props.task});
+    if (this.props.task.UserTasks[0].newComment) {
+      this.props.clearNewComment({task: this.props.task});
+    }
     this.props.selectTask(this.props.task.id);
   }
 

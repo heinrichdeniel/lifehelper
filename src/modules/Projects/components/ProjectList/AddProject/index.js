@@ -33,6 +33,12 @@ class AddProject extends Component {
         project: this.props.project
       })
     }
+    if (this.props.showModal){
+      this.setState({
+        ...this.state,
+        showModal: true
+      })
+    }
   }
 
   changeName(e){
@@ -71,7 +77,7 @@ class AddProject extends Component {
   }
 
   renderButton(){     //rendering the button
-    if(!this.props.update){
+    if(!this.props.update && !this.props.hideIcon){
       return(
         <div className={css.base}>
           <div className={this.props.iconStyle + " " + css.addIcon} data-tip={this.props.buttonText} onClick={this.changeModalState}>

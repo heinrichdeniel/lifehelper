@@ -67,7 +67,7 @@ class LeftPanel extends Component {
             {this.props.content.projectTab}
           </div>
         </div>
-        {(this.state.activeTab == 1) ? this.renderCommentedTasks() : this.renderCommentedProjects() }
+        {(this.state.activeTab == 1) ? this.renderCommentedTasks() : this.renderCommentedProjects()}
         <div className={css.newComment}>
           <Button style={css.addButton} onClick={this.props.newComment}>
             <i className={css.addIcon + " fa fa-plus"} aria-hidden="true"/>

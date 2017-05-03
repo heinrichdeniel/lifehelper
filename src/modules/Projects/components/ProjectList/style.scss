@@ -1,10 +1,10 @@
 @import 'src/styles/globals.scss';
 .base{
-  background-color: #ddd;
+  background: url('assets/img/background2.jpg') center;
+  border: 7.5px solid rgba(255,255,255,0);
   border-radius: 5px;
   max-height: 80vh;
   z-index: 1000;
-  border: 7.5px solid #ddd;
   padding-bottom: 0;
   box-shadow: 2px 2px 25px -5px #333;
   h1{

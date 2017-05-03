@@ -8,10 +8,12 @@ import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Comments from 'modules/Comments/containers/CommentContainer';
 
+
 class MainContainer extends Component {
   constructor(props){
     super(props);
   }
+
 
   componentWillMount(){
     this.props.getProfile();
@@ -53,5 +55,6 @@ const mapStateToProps = (state) => ({
   user: selectors.user(state),
   content: contentSelectors.content(state)
 });
+
 
 export default connect(mapStateToProps,mapActionsToProps)(MainContainer);
