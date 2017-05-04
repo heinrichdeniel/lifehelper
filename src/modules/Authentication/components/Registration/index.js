@@ -15,7 +15,6 @@ export default class Registration extends Component{
     this.changeName = this.changeName.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
     this.changePassword = this.changePassword.bind(this);
-    this.closeModal = this.closeModal.bind(this);
     this.onSendRegistration = this.onSendRegistration.bind(this);
     this.onSocialLogin = this.onSocialLogin.bind(this);
     this.state = {
@@ -24,14 +23,9 @@ export default class Registration extends Component{
 
   }
 
-  closeModal(){
-    this.props.reset();
-    this.props.closeModal();
-  }
 
   onSocialLogin(){
     this.props.reset();
-    this.props.closeModal();
   }
 
   onSendRegistration(e) {
@@ -107,11 +101,8 @@ export default class Registration extends Component{
     let content = this.props.content.page.registration;
 
     return (
-      <Modal className="login-modal" show={this.props.isModalOpen} onHide={this.closeModal}>
-        <div className={css.container}>
+        <div className={css.container + " container"}>
           <div className={css.body}>
-            <i className={`fa fa-close ${css.close}`} onClick={this.closeModal} />
-            <h1>{content.name}</h1>
             <div className={css.buttons}>
               <FacebookLogin onLogin={this.onSocialLogin}
                              responseHandler={this.props.loginFacebook}
@@ -120,23 +111,22 @@ export default class Registration extends Component{
                            responseHandler={this.props.loginGoogle}
                            buttonText={content.google}/>
               <div className={css.separator}>
-                <div>
+                <div className={css.left}/>
+                <div className={css.or}>
                   {content.or}
                 </div>
+                <div className={css.right}/>
               </div>
 
             </div>
             {this.renderForm()}
           </div>
         </div>
-      </Modal>
     )
   }
 }
 
 Registration.propTypes = {
-  isModalOpen: React.PropTypes.bool.isRequired,
-  closeModal: React.PropTypes.func.isRequired,
   sendRegistration: React.PropTypes.func,
   setEmail: React.PropTypes.func,
   setPassword: React.PropTypes.func,

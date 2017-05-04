@@ -32,7 +32,8 @@ const initialState = {
     error: false,
     tasks: [],
     projects: []
-  }
+  },
+  selectedForm: "login"
 };
 
 
@@ -59,6 +60,7 @@ const UserReducer = (state = initialState, action = {}) => {
           current: {
             ...state.user.current,
             ...action.payload.user,
+            password: "",
             pending: false
           }
         }
@@ -93,6 +95,7 @@ const UserReducer = (state = initialState, action = {}) => {
           current: {
             ...state.user.current,
             ...action.payload.user,
+            password: "",
             pending: false
           }
         }
@@ -312,12 +315,19 @@ const UserReducer = (state = initialState, action = {}) => {
       window.location.href = '/'+ window.location.pathname.substring(1,3);
       return initialState;
 
+    case constants.SELECT_FORM:
+      return {
+        ...state,
+        selectedForm: action.payload,
+        user: initialState.user
+      };
+
     case constants.RESET:
       return  initialState;
 
     default:
       return state
   }
-}
+};
 
 export default UserReducer;

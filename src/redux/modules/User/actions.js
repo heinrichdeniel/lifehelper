@@ -259,3 +259,13 @@ export function getNotifications(payload) {
     })
   })
 }
+
+
+export function selectForm(selected) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      type: constants.SELECT_FORM,
+      payload: selected
+    })
+  })
+}

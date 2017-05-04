@@ -1,7 +1,8 @@
 @import "src/styles/colors.scss";
 
+
 .nav{
-  background-color: rgba(200, 200, 200, 0.2);
+  background-color: rgba(250, 250, 250, 0.2);
   min-height: 80px;
   border: 0px;
   margin-bottom: 15px;
@@ -20,10 +21,6 @@
     display: block;
     border: 0;
     margin-top: -50px;
-    @media screen and (max-width: 450px){
-      margin-top: 0px;
-      text-align: center;
-    }
 
     button{
       min-width: 100px;
@@ -41,11 +38,8 @@
 
     ul{
       display: inline-flex;
-      @media screen and (min-width: 450px){
-        float: right;
-        margin: 0;
-      }
-
+      float: right;
+      margin: 0;
     }
     .addTask{
       background-color: $secondary-color;

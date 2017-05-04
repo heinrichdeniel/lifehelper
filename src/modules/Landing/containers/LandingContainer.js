@@ -11,12 +11,14 @@ const mapActionsToProps = (dispatch) => ({
   getProfile: userActions.getProfile,
   logout: userActions.logout,
   switchLanguage: contentActions.switchLanguage,
-  updateGeneralSettings: userActions.updateGeneralSettings
+  updateGeneralSettings: userActions.updateGeneralSettings,
+  selectForm: userActions.selectForm
 });
 const mapStateToProps = (state) => ({
   authDetails: userSelectors.authDetails(state),
   user: userSelectors.user(state),
-  content: contentSelectors.content(state)
+  content: contentSelectors.content(state),
+  selectedForm: userSelectors.selectedForm(state)
 });
 
 

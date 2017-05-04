@@ -14,7 +14,6 @@ export default class Login extends Component{
     this.renderLoginForm=this.renderLoginForm.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
     this.changePassword = this.changePassword.bind(this);
-    this.closeModal = this.closeModal.bind(this);
     this.onSendLogin = this.onSendLogin.bind(this);
     this.onSocialLogin = this.onSocialLogin.bind(this);
     this.state = {
@@ -23,14 +22,8 @@ export default class Login extends Component{
 
   }
 
-  closeModal(){
-    this.props.reset();
-    this.props.closeModal();
-  }
-
   onSocialLogin(){
     this.props.reset();
-    this.props.closeModal();
   }
 
   onSendLogin(e) {
@@ -106,11 +99,8 @@ export default class Login extends Component{
     let content = this.props.content.page.login;
 
     return (
-      <Modal className="login-modal" show={this.props.isModalOpen} onHide={this.closeModal}>
-        <div className={css.container}>
+        <div className={css.container + " container"}>
           <div className={css.body}>
-            <i className={`fa fa-close ${css.close}`} onClick={this.closeModal} />
-            <h1>{content.name}</h1>
             <div className={css.buttons}>
               <FacebookLogin onLogin={this.onSocialLogin}
                              responseHandler={this.props.loginFacebook}
@@ -119,23 +109,22 @@ export default class Login extends Component{
                            responseHandler={this.props.loginGoogle}
                            buttonText={content.google}/>
               <div className={css.separator}>
-                <div>
+                <div className={css.left}/>
+                <div className={css.or}>
                   {content.or}
                 </div>
+                <div className={css.right}/>
               </div>
 
             </div>
             {this.renderLoginForm()}
           </div>
         </div>
-      </Modal>
     )
   }
 }
 
 Login.propTypes = {
-  isModalOpen: React.PropTypes.bool.isRequired,
-  closeModal: React.PropTypes.func.isRequired,
   sendLogin: React.PropTypes.func,
   setEmail: React.PropTypes.func,
   setPassword: React.PropTypes.func,

@@ -10,6 +10,7 @@ import TaskList from 'modules/Tasks/containers/TaskListContainer'
 import ProjectList from 'modules/Projects/containers/ProjectContainer'
 import Archive from 'modules/Archive/containers/ArchiveContainer'
 import Comments from 'modules/Comments/containers/CommentContainer'
+import Authentication from 'modules/Authentication/containers/AuthenticationContainer'
 
 class Landing extends Component {
   constructor(props){
@@ -43,16 +44,20 @@ class Landing extends Component {
       else if (pathname.substring(pathname.length-7) == "archive"){     //render the archive
         content = <Archive/>
       }
-
       return(
-          <div className={css.content + " container"}>
-            <Filters content={this.props.content.page.filters}/>
-            <Shortcuts content={this.props.content}/>
-            <div className={css.taskList + " col-sm-7 col-lg-7"}>
-              {content}
-            </div>
+        <div className={css.content + " container"}>
+          <Filters content={this.props.content.page.filters}/>
+          <Shortcuts content={this.props.content}/>
+          <div className={css.taskList + " col-sm-7 col-lg-7"}>
+            {content}
           </div>
+        </div>
 
+      )
+    }
+    else{
+      return (
+        <Authentication/>
       )
     }
   }
@@ -63,7 +68,9 @@ class Landing extends Component {
         <Header content={this.props.content}
                 user={this.props.user.current}
                 token={this.props.authDetails.token}
-                logout={this.props.logout}/>
+                logout={this.props.logout}
+                selectForm={this.props.selectForm}
+                selectedForm={this.props.selectedForm}/>
 
         {this.renderContent()}
         {this.props.authDetails.token ? <Comments/> : null}
@@ -71,10 +78,6 @@ class Landing extends Component {
       </div>
     )
   }
-}
-
-Landing.childContextTypes = {
-  shortcuts: React.PropTypes.object.isRequired
 }
 
 export default Landing

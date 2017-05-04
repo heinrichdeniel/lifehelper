@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as actions from 'redux/modules/User/actions'
 import * as selectors from 'redux/modules/User/selectors'
 import * as contentSelector from 'redux/modules/Content/selectors'
-import Login from "../components/Login"
+import Authentication from "../components/index"
 
 const mapActionsToProps = (dispatch) => ({
   setEmail: actions.setEmail,
@@ -12,12 +12,18 @@ const mapActionsToProps = (dispatch) => ({
   resetLogin: actions.resetLogin,
   loginFacebook: actions.loginFacebook,
   loginGoogle: actions.loginGoogle,
-  reset: actions.reset
+  reset: actions.reset,
+  setName: actions.setName,
+  setPassword2: actions.setPassword2,
+  sendRegistration: actions.registration,
+  resetRegistration: actions.resetRegistration,
 });
 const mapStateToProps = (state) => ({
   user: selectors.user(state).current,
   login: selectors.login(state),
-  content: contentSelector.content(state)
+  registration: selectors.registration(state),
+  content: contentSelector.content(state),
+  selectedForm: selectors.selectedForm(state)
 });
 
-export default connect(mapStateToProps, mapActionsToProps)(Login);
+export default connect(mapStateToProps, mapActionsToProps)(Authentication);

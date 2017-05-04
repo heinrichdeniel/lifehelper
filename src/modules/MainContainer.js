@@ -31,7 +31,10 @@ class MainContainer extends Component {
         <Header content={this.props.content}
                 user={this.props.user.current}
                 token={this.props.authDetails.token}
-                logout={this.props.logout}/>
+                logout={this.props.logout}
+                selectForm={this.props.selectForm}
+                selectedForm={this.props.selectedForm}/>
+
         <div>
           {this.props.children}   {/*the content depends on the route*/}
           {this.props.authDetails.token ? <Comments/> : null}
@@ -47,12 +50,14 @@ const mapActionsToProps = (dispatch) => ({
   getProfile: actions.getProfile,
   logout: actions.logout,
   updateGeneralSettings: actions.updateGeneralSettings,
+  selectForm: actions.selectForm,
   switchLanguage: contentActions.switchLanguage
 });
 
 const mapStateToProps = (state) => ({
   authDetails: selectors.authDetails(state),
   user: selectors.user(state),
+  selectedForm: selectors.selectedForm(state),
   content: contentSelectors.content(state)
 });
 
