@@ -9,9 +9,59 @@ class Shortcuts extends Component {
 
   render() {
     return(
-      <div>
+      <div className={css.base}>
+        <div className={css.items}>
+          <div className={css.item}>
+            <div className={css.name}>
+              {this.props.content.newTask}
+            </div>
+            <div className={css.key}>
+              t
+            </div>
+          </div>
+          <div className={css.item}>
+            <div className={css.name}>
+              {this.props.content.newProject}
+            </div>
+            <div className={css.key}>
+              p
+            </div>
+          </div>
+          <div className={css.item}>
+            <div className={css.name}>
+              {this.props.content.comments}
+            </div>
+            <div className={css.key}>
+              c
+            </div>
+          </div>
+          <div className={css.item}>
+            <div className={css.name}>
+              {this.props.content.settings}
+            </div>
+            <div className={css.key}>
+              s
+            </div>
+          </div>
+          <div className={css.item}>
+            <div className={css.name}>
+              {this.props.content.notifications}
+            </div>
+            <div className={css.key}>
+              n
+            </div>
+          </div>
+          <div className={css.item}>
+            <div className={css.name}>
+              {this.props.content.homepage}
+            </div>
+            <div className={css.key}>
+              h
+            </div>
+          </div>
+        </div>
       </div>
-   )
+    )
   }
 }
 

@@ -132,6 +132,14 @@
           "setPassword": "Set new password",
           "saveChanges": "Save changes",
           "updated": "Your account has been updated."
+        },
+        "shortcuts": {
+          "newTask": "Add a new task",
+          "newProject": "Add a new project",
+          "comments": "Show/hide comments",
+          "settings": "Open settings",
+          "notifications": "Open notifications",
+          "homepage": "Go to homepage"
         }
       },
       "archive": {
@@ -300,6 +308,14 @@
           "setPassword": "Új jelszó beállítása",
           "saveChanges": "Változtatások mentése",
           "updated": "A fiókod sikeresen frissítve lett."
+        },
+        "shortcuts": {
+          "newTask": "Új feladat hozzáadása",
+          "newProject": "Új projekt hozzáadása",
+          "comments": "Kommentek mutatása/elrejtése",
+          "settings": "Beállítások megnyitása",
+          "notifications": "Értesítések megjelenítése",
+          "homepage": "Kezdőoldalra navigálás"
         }
       },
       "archive": {
@@ -467,6 +483,14 @@
           "setPassword": "Setați o parolă nouă",
           "saveChanges": "Salvare",
           "updated": "Contul tău a fost actualizat."
+        },
+        "shortcuts": {
+          "newTask": "Adăugare o activitate nouă",
+          "newProject": "Adăugare un project nou",
+          "comments": "Afișarea / ascundarea comentăriile",
+          "settings": "Deschide setările",
+          "notifications": "Arată notificări",
+          "homepage": "Pagina principală"
         }
       },
       "archive": {

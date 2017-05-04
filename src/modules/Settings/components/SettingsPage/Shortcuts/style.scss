@@ -1,4 +1,42 @@
 @import 'src/styles/globals.scss';
 .base{
+  padding: 0px 20%;
+  border-radius: 0 0 5px 5px;
+  background-color: #eee;
+  position: relative;
+  display: block;
+  height: 60vh;
+  overflow-y: auto;
+  .items{
+    top: 50%;
+    width: 60%;
+    position: absolute;
+    transform: translateY(-50%);
+    .item{
+      display: flex;
+      position: relative;
+      padding: 15px 0;
+      .name{
 
+      }
+      .key {
+        position: absolute;
+        right: 0;
+        background-color: #68ca4d;
+        color: white;
+        width: 30px;
+        padding: 5px;
+        text-align: center;
+        margin-top: -5px;
+        border-radius: 10px;
+      }
+    }
+  }
+  @media screen and (max-height:560px) {
+    max-height: 45vh;
+    padding: 0 10%;
+    .items{
+      width: 80%;
+    }
+  }
 }

@@ -47,8 +47,12 @@
     padding: 15px 10%;
     text-align: center;
     .buttons{
-      margin-top: 25px;
+      margin-top: 0px;
       padding-top: 20px;
+    }
+    .center{
+      padding-bottom: 0;
+      height: 65%;
     }
   }
   @media screen and (max-height:560px) {
