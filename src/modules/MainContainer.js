@@ -4,8 +4,8 @@ import * as selectors from 'redux/modules/User/selectors'
 import * as actions from 'redux/modules/User/actions'
 import * as contentActions from 'redux/modules/Content/actions'
 import * as contentSelectors from 'redux/modules/Content/selectors'
-import Header from 'components/Header'
-import Footer from 'components/Footer'
+import Header from 'modules/Header/containers/HeaderContainer'
+import Footer from 'modules/Footer/containers/FooterContainer'
 import Comments from 'modules/Comments/containers/CommentContainer';
 
 
@@ -28,18 +28,13 @@ class MainContainer extends Component {
   render() {
     return (
       <div style={{position: 'relative', minHeight: '100vh'}}>
-        <Header content={this.props.content}
-                user={this.props.user.current}
-                token={this.props.authDetails.token}
-                logout={this.props.logout}
-                selectForm={this.props.selectForm}
-                selectedForm={this.props.selectedForm}/>
+        <Header />
 
         <div>
           {this.props.children}   {/*the content depends on the route*/}
           {this.props.authDetails.token ? <Comments/> : null}
         </div>
-        <Footer switchLanguage={this.props.switchLanguage}/>
+        <Footer />
       </div>
     )
   }
@@ -47,17 +42,12 @@ class MainContainer extends Component {
 
 
 const mapActionsToProps = (dispatch) => ({
-  getProfile: actions.getProfile,
-  logout: actions.logout,
-  updateGeneralSettings: actions.updateGeneralSettings,
-  selectForm: actions.selectForm,
-  switchLanguage: contentActions.switchLanguage
+  getProfile: actions.getProfile
 });
 
 const mapStateToProps = (state) => ({
   authDetails: selectors.authDetails(state),
   user: selectors.user(state),
-  selectedForm: selectors.selectedForm(state),
   content: contentSelectors.content(state)
 });
 

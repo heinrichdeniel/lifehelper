@@ -287,6 +287,37 @@ const TaskReducer = (state = initialState, action = {}) => {
         share: Object.assign({}, state.share, {pending: false, error: action.payload.message})
       };
 
+    case constants.CHANGE_TASK_ORDER_PENDING:
+      return {
+        ...state,
+        task:{
+          ...state.task,
+          pending: true,
+          error: false
+        }
+      };
+
+    case constants.CHANGE_TASK_ORDER_SUCCESS:
+      return {
+        ...state,
+        task:{
+          ...state.task,
+          list: action.payload.tasks,
+          pending: false,
+          error: false
+        }
+      };
+
+    case constants.CHANGE_TASK_ORDER_ERROR:
+      return {
+        ...state,
+        task:{
+          ...state.task,
+          pending: false,
+          error: action.payload.message
+        }
+      };
+
     case constants.RESET:
       return  {
         ...state,

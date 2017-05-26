@@ -52,7 +52,7 @@ class CommentPanel extends Component {
     if (this.props.selectedTaskId ) {     //if the user clicked to a comment icon of a task
       this.setState({
         ...this.state,
-        selectedTask: this.props.comments.tasks.filter((task) => (task.id == this.props.selectedTaskId))[0],
+        selectedTask: this.props.comments.tasks.find((task) => (task.id == this.props.selectedTaskId)),
         selectedProject: null
       });
       this.props.selectTask(null);
@@ -60,13 +60,13 @@ class CommentPanel extends Component {
     else if (this.props.selectedProjectId) {  //if the user clicked to a comment icon of a project
       this.setState({
         ...this.state,
-        selectedProject: this.props.comments.projects.filter((project) => (project.id == this.props.selectedProjectId))[0],
+        selectedProject: this.props.comments.projects.find((project) => (project.id == this.props.selectedProjectId)),
         selectedTask: null
       });
       this.props.selectProject(null);
     }
     else if (this.state.selectedTask){
-      let selectedTask = this.props.comments.tasks.filter((task) => (task.id == this.state.selectedTask.id))[0];
+      let selectedTask = this.props.comments.tasks.find((task) => (task.id == this.state.selectedTask.id));
       if (selectedTask != this.state.selectedTask){
         this.setState({
           ...this.state,
@@ -76,7 +76,7 @@ class CommentPanel extends Component {
       }
     }
     else if (this.state.selectedProject){
-      let selectedProject = this.props.comments.projects.filter((project) => (project.id == this.state.selectedProject.id))[0]
+      let selectedProject = this.props.comments.projects.find((project) => (project.id == this.state.selectedProject.id))
       if (selectedProject != this.state.selectedProject) {
         this.setState({
           ...this.state,
@@ -164,8 +164,8 @@ class CommentPanel extends Component {
     this.setState({
       ...this.state,
       newComment: false,
-      selectedTask: this.props.comments.tasks.filter((task) => (task.id == payload.task))[0],
-      selectedProject: this.props.comments.projects.filter((project) => (project.id == payload.project))[0]
+      selectedTask: this.props.comments.tasks.find((task) => (task.id == payload.task)),
+      selectedProject: this.props.comments.projects.find((project) => (project.id == payload.project))
     })
   }
 

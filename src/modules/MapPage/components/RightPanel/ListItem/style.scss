@@ -1,0 +1,21 @@
+@import 'src/styles/globals.scss';
+
+.task{
+  padding: 5px 10px;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  cursor: move;
+  span{
+    margin-right: 5px;
+  }
+  .marker{
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+    z-index: 300;
+    &:hover{
+      color: $primary-color;
+      cursor: pointer;
+    }
+  }
+}

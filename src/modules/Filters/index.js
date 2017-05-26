@@ -12,6 +12,7 @@ class Filters extends Component {
     this.goToTasks = this.goToTasks.bind(this);
     this.goToProjects = this.goToProjects.bind(this);
     this.goToArchive = this.goToArchive.bind(this);
+    this.goToMap = this.goToMap.bind(this);
 
     this.state = {
       style: css.hideFilters,
@@ -34,6 +35,12 @@ class Filters extends Component {
         active: "archive"
       })
     }
+    else if (pathname.substring(pathname.length - 3) == "map"){
+      this.setState({
+        ...this.state,
+        active: "map"
+      })
+    }
   }
 
   componentWillReceiveProps(){
@@ -54,6 +61,12 @@ class Filters extends Component {
           active: "archive"
         })
       }
+    }
+    else if (pathname.substring(pathname.length - 3) == "map"){
+      this.setState({
+        ...this.state,
+        active: "map"
+      })
     }
     else if (this.state.active!="tasks") {
       this.setState({
@@ -102,6 +115,13 @@ class Filters extends Component {
     browserHistory.push(window.location.pathname.substring(0,3) + '/archive');
   }
 
+  goToMap(){
+    this.setState({
+      ...this.state,
+      active: "map"
+    });
+    browserHistory.push(window.location.pathname.substring(0,3) + '/map');
+  }
 
   render() {
     return(
@@ -112,6 +132,7 @@ class Filters extends Component {
           <p className={css.filter + ((this.state.active=="tasks") ? " "+css.active : "")} onClick={this.goToTasks}>{this.props.content.goToTasks}<i className="fa fa-tasks" aria-hidden="true"/></p>
           <p className={css.filter + ((this.state.active=="projects") ? " "+css.active : "")} onClick={this.goToProjects}>{this.props.content.goToProjects}<i className="fa fa-chain" aria-hidden="true"/></p>
           <p className={css.filter + ((this.state.active=="archive") ? " "+css.active : "")} onClick={this.goToArchive}>{this.props.content.goToArchive}<i className="fa fa-archive" aria-hidden="true"/></p>
+          <p className={css.filter + ((this.state.active=="map") ? " "+css.active : "")} onClick={this.goToMap}>{this.props.content.goToMap}<i className="fa fa-archive" aria-hidden="true"/></p>
           <DateFilters/>
         </div>
       </div>

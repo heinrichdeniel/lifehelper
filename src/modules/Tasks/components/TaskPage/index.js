@@ -80,31 +80,33 @@ class TaskPage extends Component {
         <div className={css.base + " container"}>
           {this.props.task.pending? <Spinner/>: null}
         </div>
-        )
+      )
     }
     if (task.name){       //returning the task data
       return(
         <div className={css.base + " container"}>
-          <h1>{task.name}</h1>
-          <div className={css.details}>
-            <p className={css.description}><span>{content.description}: </span> {task.description}</p>
-            <p className={css.date}>{moment(task.date).format(this.props.user.dateFormat)}{time}</p>
-            <p className={css.project}><span>{content.project}: </span>{task.Project?task.Project.name:"-"}</p>
+          <div className={css.body}>
+            <div className={css.details}>
+              <p className={css.name}><span>{content.name}: </span> {task.name}</p>
+              <p className={css.project}><span>{content.project}: </span>{task.Project?task.Project.name:"-"}</p>
+              <p className={css.description}><span>{content.description}: </span> {task.description}</p>
+              <p className={css.date}><span>{content.date}: </span>{moment(task.date).format(this.props.user.dateFormat)}{time}</p>
+              <p className={css.location}><span>{content.location}: </span>{task.location}</p>
+            </div>
+
+            {this.renderMap()}
+
+            <div className={css.buttons}>
+              <AddTask              //rendering a button for editing the task
+                buttonText={content.editTask.name}
+                sendButtonText={content.editTask.update}
+                buttonStyle={css.update}
+                update={true}
+                taskToUpdate={task}/>
+              {this.renderDeleteModal()}
+              <Button type="button" onClick={this.changeModalState} text={content.deleteTask.name} style={css.delete}/>
+            </div>
           </div>
-
-          {this.renderMap()}
-
-          <div className={css.buttons}>
-            <AddTask              //rendering a button for editing the task
-              buttonText={content.editTask.name}
-              sendButtonText={content.editTask.update}
-              buttonStyle={css.update}
-              update={true}
-              taskToUpdate={task}/>
-            {this.renderDeleteModal()}
-            <Button type="button" onClick={this.changeModalState} text={content.deleteTask.name} style={css.delete}/>
-          </div>
-
         </div>
       );
     }

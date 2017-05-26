@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import css from './style.scss'
 
-import Header from 'components/Header'
-import Footer from 'components/Footer'
+import Header from 'modules/Header/containers/HeaderContainer'
+import Footer from 'modules/Footer/containers/FooterContainer'
 import Filters from 'modules/Filters'
 import Shortcuts from 'modules/Shortcuts/containers/ShortcutsContainer'
 
@@ -24,13 +24,6 @@ class Landing extends Component {
 
     if (newProps.user.current.language && lang!= "en" && lang!="hu" && lang!="ro"){
       this.props.switchLanguage(this.props.user.current.language);
-    }
-  }
-
-
-  componentWillMount(){
-    if (this.props.authDetails.token){
-      this.props.getProfile();
     }
   }
 
@@ -65,16 +58,11 @@ class Landing extends Component {
   render() {
     return(
       <div className={css.base}>
-        <Header content={this.props.content}
-                user={this.props.user.current}
-                token={this.props.authDetails.token}
-                logout={this.props.logout}
-                selectForm={this.props.selectForm}
-                selectedForm={this.props.selectedForm}/>
+        <Header />
 
         {this.renderContent()}
         {this.props.authDetails.token ? <Comments/> : null}
-        <Footer switchLanguage={this.props.switchLanguage}/>
+        <Footer />
       </div>
     )
   }

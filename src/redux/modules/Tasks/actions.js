@@ -203,6 +203,24 @@ export function removeShare(payload) {
   })
 }
 
+export function changeTaskOrder(payload) {
+  store.dispatch((dispatch, getState) => {
+    return dispatch({
+      types: [
+        constants.CHANGE_TASK_ORDER_PENDING,
+        constants.CHANGE_TASK_ORDER_SUCCESS,
+        constants.CHANGE_TASK_ORDER_ERROR
+      ],
+      payload: {
+        promise: api.changeTaskOrder({
+          token: getState().User.authDetails.token,
+          data: payload
+        })
+      }
+    })
+  })
+}
+
 export function reset() {
   store.dispatch((dispatch, getState) => {
     return dispatch({

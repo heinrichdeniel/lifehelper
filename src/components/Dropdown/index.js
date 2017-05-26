@@ -22,7 +22,7 @@ class Dropdown extends Component{
 
     let value;
     if (selected != "0" && selected != null){   //if selected contain the id
-      value = options.filter((option) => option.value == selected)[0];
+      value = options.find((option) => option.value == selected);
     }
     else{
       value = {value: "0", text: this.props.placeholder};

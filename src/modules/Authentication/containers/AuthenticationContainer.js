@@ -16,7 +16,7 @@ const mapActionsToProps = (dispatch) => ({
   setName: actions.setName,
   setPassword2: actions.setPassword2,
   sendRegistration: actions.registration,
-  resetRegistration: actions.resetRegistration,
+  resetRegistration: actions.resetRegistration
 });
 const mapStateToProps = (state) => ({
   user: selectors.user(state).current,

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import css from './style.scss';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+
+import Header from 'modules/Header/containers/HeaderContainer'
+import Footer from 'modules/Footer/containers/FooterContainer'
 import Button from 'components/Button';
 import TaskNotifications from '../TaskNotifications';
 import ProjectNotifications from '../ProjectNotifications';
@@ -14,9 +15,6 @@ class Notifications extends Component{
   }
 
   componentWillMount(){
-    if (!this.props.user.current.id){
-      this.props.getProfile();
-    }
     this.props.getNotifications();
   }
 
@@ -27,9 +25,7 @@ class Notifications extends Component{
   render(){
     return (
       <div >
-        <Header content={this.props.content}
-                user={this.props.user.current}
-                token={this.props.authDetails.token}/>
+        <Header />
         <div className={css.base} >
           <div className="container">
             <Button text={this.props.content.page.notifications.back} onClick={this.backToPreviousPage} style={css.backButton}>
@@ -55,7 +51,7 @@ class Notifications extends Component{
 
 
         </div>
-        <Footer switchLanguage={this.props.switchLanguage}/>
+        <Footer />
       </div>
     )
   }

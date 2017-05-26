@@ -9,7 +9,8 @@ const actionTypes = [
   'SHARE_TASK',
   'ACCEPT_SHARE',
   'DECLINE_SHARE',
-  'REMOVE_SHARE'
+  'REMOVE_SHARE',
+  'CHANGE_TASK_ORDER'
 ];
 
 const statusTypes = ['PENDING', 'SUCCESS', 'ERROR'];

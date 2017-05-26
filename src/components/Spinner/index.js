@@ -7,8 +7,6 @@ class Spinner extends Component{
   }
 
   render(){
-
-
     return(
       <div className={css.spinner}>
         <i className={"fa fa-spinner fa-spin"} />

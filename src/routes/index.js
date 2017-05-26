@@ -6,6 +6,7 @@ import LandingPage from 'modules/Landing/routes'
 import TaskPage from 'modules/Tasks/routes'
 import SettingsPage from 'modules/Settings/routes'
 import NotificationsPage from 'modules/Notifications/routes'
+import MapPage from 'modules/MapPage/routes'
 
 class Routes extends Component {
 
@@ -16,6 +17,7 @@ class Routes extends Component {
           {LandingPage}
           {SettingsPage}
           {NotificationsPage}
+          {MapPage}
           <Route component={MainContainer}>
             <IndexRedirect to="/"/>
             {LandingPage}

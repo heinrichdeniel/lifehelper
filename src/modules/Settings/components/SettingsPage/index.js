@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import css from './style.scss'
 
 import Header from './Header'
-import Footer from 'components/Footer'
+import Footer from 'modules/Footer/containers/FooterContainer'
 import Menu from './Menu'
 import GeneralSettings from './GeneralSettings'
 import AccountSettings from './AccountSettings'
@@ -20,6 +20,7 @@ class SettingsPage extends Component {
       selectedTab: 1
     };
   }
+
   componentWillMount(){
     if (!this.props.user.id){       //if the state not contain the user
       this.props.getProfile();
@@ -73,7 +74,7 @@ class SettingsPage extends Component {
           {this.renderSettingsTab()}
           </div>
         </div>
-        <Footer switchLanguage={this.props.switchLanguage}/>
+        <Footer/>
       </div>
     )
   }

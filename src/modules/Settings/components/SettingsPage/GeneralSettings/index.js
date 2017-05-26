@@ -84,9 +84,9 @@ class GeneralSettings extends Component {
   }
 
   render() {
-    let language = this.state.selectedLanguage ? this.state.selectedLanguage : this.state.languages.filter( lang => lang.value == this.props.user.language)[0];
-    let dateFormat = this.state.selectedDateFormat ? this.state.selectedDateFormat : this.state.dateFormats.filter( dateFormat => dateFormat.value == this.props.user.dateFormat)[0];
-    let timeFormat = this.state.selectedTimeFormat ? this.state.selectedTimeFormat : this.state.timeFormats.filter( timeFormat => timeFormat.value == this.props.user.timeFormat)[0];
+    let language = this.state.selectedLanguage ? this.state.selectedLanguage : this.state.languages.find( lang => lang.value == this.props.user.language);
+    let dateFormat = this.state.selectedDateFormat ? this.state.selectedDateFormat : this.state.dateFormats.find( dateFormat => dateFormat.value == this.props.user.dateFormat);
+    let timeFormat = this.state.selectedTimeFormat ? this.state.selectedTimeFormat : this.state.timeFormats.find( timeFormat => timeFormat.value == this.props.user.timeFormat);
 
     return(
       <div className={css.base}>

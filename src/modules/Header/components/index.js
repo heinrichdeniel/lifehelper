@@ -11,6 +11,11 @@ export default class Header extends Component {
     super(props);
   }
 
+  componentWillMount(){
+    if (this.props.authDetails.token && !this.props.user.id){
+      this.props.getProfile();
+    }
+  }
 
   render() {
     let fixed = this.props.fixed ? 'navbar-fixed-top' : null;
@@ -20,7 +25,7 @@ export default class Header extends Component {
     if (this.props.selectedForm == "login"){
       button = <Button onClick={this.props.selectForm.bind(this,"registration")} text={content.registration.name} />;
     }
-    if (!this.props.token){
+    if (!this.props.authDetails.token){
       return (
         <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
           <div className="container">

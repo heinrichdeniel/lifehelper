@@ -16,7 +16,6 @@ const mapActionsToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  authDetails: userSelectors.authDetails(state),
   user: userSelectors.user(state).current,
   content: contentSelectors.content(state)
 });
