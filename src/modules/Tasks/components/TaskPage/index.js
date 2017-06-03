@@ -8,6 +8,8 @@ import AddTask from 'modules/Tasks/containers/AddTaskContainer'
 import Button from 'components/Button'
 import Map from 'components/Map'
 import Spinner from 'components/Spinner';
+import { Scrollbars } from 'react-custom-scrollbars';
+
 
 class TaskPage extends Component {
   constructor(props){
@@ -45,11 +47,13 @@ class TaskPage extends Component {
 
     if (task.location){       {/*google Map*/}
       return (
-        <Map setLocation={this.props.setLocation}
-             location={task.location}
-             lat={task.lat}
-             lng={task.lng}
-             suggestEnabled={true}/>
+        <div className={css.map}>
+          <Map setLocation={this.props.setLocation}
+               location={task.location}
+               lat={task.lat}
+               lng={task.lng}
+               suggestEnabled={true}/>
+        </div>
       )
     }
   }
@@ -77,37 +81,40 @@ class TaskPage extends Component {
 
     if (this.props.task.pending){
       return(
-        <div className={css.base + " container"}>
+        <div className={css.base}>
           {this.props.task.pending? <Spinner/>: null}
         </div>
       )
     }
     if (task.name){       //returning the task data
       return(
-        <div className={css.base + " container"}>
-          <div className={css.body}>
-            <div className={css.details}>
-              <p className={css.name}><span>{content.name}: </span> {task.name}</p>
-              <p className={css.project}><span>{content.project}: </span>{task.Project?task.Project.name:"-"}</p>
-              <p className={css.description}><span>{content.description}: </span> {task.description}</p>
-              <p className={css.date}><span>{content.date}: </span>{moment(task.date).format(this.props.user.dateFormat)}{time}</p>
-              <p className={css.location}><span>{content.location}: </span>{task.location}</p>
-            </div>
 
-            {this.renderMap()}
+        <div className={css.base}>
+          <Scrollbars style={{ width: '100%', height: '100%' }}>
+            <div className={css.body  + " container"}>
+              <div className={css.details}>
+                <p className={css.name}><span>{content.name}: </span> {task.name}</p>
+                {task.Project? <p className={css.project}><span>{content.project}: </span>{task.Project.name}</p>: null}
+                {task.description? <p className={css.description}><span>{content.description}: </span> {task.description}</p>: null}
+                <p className={css.date}><span>{content.date}: </span>{moment(task.date).format(this.props.user.dateFormat)}{time}</p>
+                {task.location? <p className={css.location}><span>{content.location}: </span>{task.location}</p>: null}
+              </div>
 
-            <div className={css.buttons}>
-              <AddTask              //rendering a button for editing the task
-                buttonText={content.editTask.name}
-                sendButtonText={content.editTask.update}
-                buttonStyle={css.update}
-                update={true}
-                taskToUpdate={task}/>
-              {this.renderDeleteModal()}
-              <Button type="button" onClick={this.changeModalState} text={content.deleteTask.name} style={css.delete}/>
+              <div className={css.buttons}>
+                <AddTask              //rendering a button for editing the task
+                  buttonText={content.editTask.name}
+                  sendButtonText={content.editTask.update}
+                  buttonStyle={css.update}
+                  update={true}
+                  taskToUpdate={task}/>
+                {this.renderDeleteModal()}
+                <Button type="button" onClick={this.changeModalState} text={content.deleteTask.name} style={css.delete}/>
+              </div>
+              {this.renderMap()}
             </div>
-          </div>
+          </Scrollbars>
         </div>
+
       );
     }
     else return null;

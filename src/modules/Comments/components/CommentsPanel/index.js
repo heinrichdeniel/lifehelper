@@ -3,6 +3,8 @@ import css from './style.scss';
 import LeftPanel from './LeftPanel'
 import NewComment from './NewComment'
 import CommentBox from './CommentBox'
+import reactDom from 'react-dom'
+import Mousetrap from 'mousetrap'
 
 class CommentPanel extends Component {
   constructor(props){
@@ -18,6 +20,7 @@ class CommentPanel extends Component {
     this.sendFirstComment = this.sendFirstComment.bind(this);
     this.sendComment = this.sendComment.bind(this);
     this.changeComment = this.changeComment.bind(this);
+    this.handleDocumentClick = this.handleDocumentClick.bind(this);
 
     this.state = {
       newComment: false,
@@ -34,6 +37,10 @@ class CommentPanel extends Component {
       cluster: 'eu'
     });
     this.channel = this.pusher.subscribe('comments');
+  }
+
+  componentDidMount(){
+    Mousetrap(document.getElementById("commentPanel")).bind(['esc'], this.handleDocumentClick);
   }
 
   componentDidUpdate(){
@@ -90,6 +97,8 @@ class CommentPanel extends Component {
   componentWillUnmount() {
     this.channel.unbind();
     this.pusher.unsubscribe(this.channel);
+    document.removeEventListener('click', this.handleDocumentClick, false);
+    Mousetrap(document.getElementById("commentPanel")).unbind(['esc'], this.props.closePanel);
   }
 
   newCommentReceived(){
@@ -102,7 +111,18 @@ class CommentPanel extends Component {
     }
   }
 
+  handleDocumentClick(e) {      //if the user clicked somewhere in the page
+    if (e){
+      e.stopPropagation();
+    }
+    if (this.props.showPanel && reactDom.findDOMNode(this.refs.panel) && !reactDom.findDOMNode(this.refs.panel).contains(e.target) ) {
+      this.showHideMessagePanel();
+    }
+  }
+
   newComment(){
+    console.log("ASD")
+
     this.setState({
       ...this.state,
       newComment: !this.state.newComment,
@@ -156,8 +176,15 @@ class CommentPanel extends Component {
 
 
   showHideMessagePanel(){
+    if (!this.props.showPanel){
+      document.addEventListener('click', this.handleDocumentClick, false);
+    }
+    else{
+      document.removeEventListener('click', this.handleDocumentClick, false);
+    }
     this.props.showHideMessagePanel();
   }
+
 
   sendFirstComment(payload){
     this.props.sendComment(payload);
@@ -216,16 +243,18 @@ class CommentPanel extends Component {
     }
     else{
       return (                  //rendering the Comment panel
-        <div className={css.showPanel}>
+        <div id="commentPanel" className={css.showPanel}>
           <i className={css.commentIcon + " fa fa-commenting"} onClick={this.showHideMessagePanel}/>
-          <LeftPanel
-            content={this.props.content.page.comments}
-            comments={this.props.comments}
-            selectTask={this.selectTask}
-            selectedTask={this.state.selectedTask}
-            selectProject={this.selectProject}
-            selectedProject={this.state.selectedProject}
-            newComment={this.newComment}/>
+          <div ref="panel">
+            <LeftPanel
+              content={this.props.content.page.comments}
+              comments={this.props.comments}
+              selectTask={this.selectTask}
+              selectedTask={this.state.selectedTask}
+              selectProject={this.selectProject}
+              selectedProject={this.state.selectedProject}
+              newComment={this.newComment}/>
+          </div>
           {this.renderCommentTab()}
         </div>
       )

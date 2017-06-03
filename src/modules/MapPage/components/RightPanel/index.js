@@ -2,16 +2,27 @@ import React, { Component } from 'react'
 import css from './style.scss'
 import Reorder  from 'react-reorder';
 import ListItem  from './ListItem';
+import { Scrollbars } from 'react-custom-scrollbars';
+import domCss from 'dom-css';
 
 class RightPanel extends Component{
   constructor(props){
     super(props);
 
-    this.renderTask = this.renderTask.bind(this);
     this.onSort = this.onSort.bind(this);
+    this.changeVisibility = this.changeVisibility.bind(this);
+    this.handleScrollUpdate = this.handleScrollUpdate.bind(this);
 
     this.state={
-      selected: undefined
+      selected: undefined,
+      arrow: "left",
+      style:{
+        display: "none",
+        width: "0"
+      },
+      scrollTop: 0,
+      scrollHeight: 0,
+      clientHeight: 0
     }
   }
 
@@ -24,6 +35,16 @@ class RightPanel extends Component{
     }
   }
 
+  handleScrollUpdate(values) {
+    const { shadowTop, shadowBottom } = this.refs;
+    const { scrollTop, scrollHeight, clientHeight } = values;
+    const shadowTopOpacity = 1 / 20 * Math.min(scrollTop, 20);
+    const bottomScrollTop = scrollHeight - clientHeight;
+    const shadowBottomOpacity = 1 / 20 * (bottomScrollTop - Math.max(scrollTop, bottomScrollTop - 20));
+    domCss(shadowTop, { opacity: shadowTopOpacity });
+    domCss(shadowBottom, { opacity: shadowBottomOpacity });
+  }
+
   onSort(e,item,from,to,list){
     let tasks = this.props.tasks;
     if (to < from){
@@ -34,7 +55,7 @@ class RightPanel extends Component{
         this.props.changeTaskOrder({taskId: item.id, priority: ((tasks[to].UserTasks[0].priority)/2)})
       }
     }
-    else {
+    else if (to != from){
       if (to < tasks.length - 1) {
         this.props.changeTaskOrder({taskId: item.id, priority: ((tasks[to].UserTasks[0].priority + tasks[to + 1].UserTasks[0].priority) / 2)})
       }
@@ -48,15 +69,28 @@ class RightPanel extends Component{
     })
   }
 
+  changeVisibility(){
+    if (this.state.arrow == "left"){
+      this.setState({
+        ...this.state,
+        arrow: "right",
+        style: {
+          display: 'block',
+          width: "250px"
+        }
 
-  renderTask(task,index){
-    let marker = null;
-    if (task.location) {
-      marker = <i onClick={this.props.onClick.bind(this,task.lat, task.lng)} className={css.marker + " fa fa-map-marker"} aria-hidden="true"/>;
+      })
     }
-    return (
-        <div key={index} className={css.task} > <span>{index+1}. </span>{task.name} {marker}</div>
-    )
+    else{
+      this.setState({
+        ...this.state,
+        arrow: "left",
+        style: {
+          display: "none",
+          width: "0"
+        }
+      })
+    }
   }
 
   render(){
@@ -69,21 +103,34 @@ class RightPanel extends Component{
     }
     return(
       <div className={css.base}>
-        <h3>{this.props.content.page.tasks.order}</h3>
-        <div className={css.tasks}>
-          <Reorder
-            itemKey="key"
-            lock="horizontal"
-            holdTime="0"
-            list={list}
-            template= {ListItem}
-            callback={this.onSort}
-            listClass={css.myList}
-            itemClass={css.listItem}
-            itemClicked={this.itemClicked}
-            selected={this.state.selected}
-            selectedKey="key"
-            disableReorder={false}/>
+        <i className={"fa fa-angle-double-"+this.state.arrow +" " + css.arrow} onClick={this.changeVisibility} />
+        <div style={this.state.style}>
+          <h3>{this.props.content.page.tasks.order}</h3>
+          <div className={css.tasks}>
+            <Scrollbars ref="scrollbars"
+                        onUpdate={this.handleScrollUpdate}
+                        style={{ width: '100%', height: '100%' ,zIndex: 500}}>
+              <Reorder
+                itemKey="key"
+                lock="horizontal"
+                holdTime="0"
+                list={list}
+                template= {ListItem}
+                callback={this.onSort}
+                listClass={css.myList}
+                itemClass={css.listItem}
+                itemClicked={this.itemClicked}
+                selected={this.state.selected}
+                selectedKey="key"
+                disableReorder={false}/>
+            </Scrollbars>
+            <div
+              ref="shadowTop"
+              className={css.shadowTopStyle}/>
+            <div
+              ref="shadowBottom"
+              className={css.shadowBottomStyle}/>
+          </div>
         </div>
       </div>
     )

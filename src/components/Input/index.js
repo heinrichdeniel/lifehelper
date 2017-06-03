@@ -9,6 +9,12 @@ class Input extends Component{
     }
   }
 
+  componentDidMount(){
+    if (this.props.focused){
+      this.input.focus();
+    }
+  }
+
   render(){
     let { placeholder, value,  onChange, style} = this.props;
 
@@ -18,7 +24,7 @@ class Input extends Component{
         <div className="form-group ">
           <div className={"input-group "+css.inputGroup}>
 
-          <input type={this.props.type}
+            <input type={this.props.type}
                    className={"form-control"}
                    placeholder={placeholder}
                    value={value}
@@ -27,7 +33,7 @@ class Input extends Component{
                    onFocus={this.props.onFocus}
                    onBlur={this.props.onBlur}
                    id={this.props.id}
-                   ref={input => this.props.focused && input && input.focus()} />
+                   ref={(input) => { this.input = input; }} />
           </div>
         </div>
       </div>

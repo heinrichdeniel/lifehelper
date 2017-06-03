@@ -42,7 +42,8 @@ class MainContainer extends Component {
 
 
 const mapActionsToProps = (dispatch) => ({
-  getProfile: actions.getProfile
+  getProfile: actions.getProfile,
+  switchLanguage: contentActions.switchLanguage
 });
 
 const mapStateToProps = (state) => ({

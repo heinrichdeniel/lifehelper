@@ -4,16 +4,17 @@
   border-radius: 5px;
   max-height: 80vh;
   z-index: 1000;
-  border: 7.5px solid rgba(255,255,255,0);
   padding-bottom: 0;
-  box-shadow: 0px 0px 15px 0px #999;
+  box-shadow: 2px 2px 25px -5px #333;
 
   .tasks {
+    border-top: 3px solid $primary-color;
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 60vh;
-    padding: 0 7.5px;
-    padding-bottom: 7.5px;
+    height: 60vh;
+    padding: 0;
+    padding-left: 7.5px;
+    margin-top: 15px;
     @media screen and (max-height: 600px) {
       max-height: 50vh;
     }
@@ -24,7 +25,7 @@
   h1 {
     color: $primary-color;
     text-align: left;
-    margin: 0px;
+    margin: 7.5px;
     margin-bottom: 10px;
     font-size: 25px;
     font-weight: 700;
@@ -51,6 +52,26 @@
         }
       }
     }
+  }
+
+  .shadowTopStyle{
+    z-index: 10;
+    position: absolute;
+    top: 57px;
+    left: 0px;
+    right: 0px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+  }
+  .shadowBottomStyle{
+    z-index: 10;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 50px;
+    border-radius: 5px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
   }
 }
 

@@ -4,6 +4,8 @@ import TaskItem from './TaskItem';
 import moment from 'moment';
 import AddTask from '../../containers/AddTaskContainer'
 import Spinner from 'components/Spinner';
+import { Scrollbars } from 'react-custom-scrollbars';
+import domCss from 'dom-css';
 
 class TaskList extends Component {
   constructor(props){
@@ -13,10 +15,27 @@ class TaskList extends Component {
     this.renderTask = this.renderTask.bind(this);
     this.renderTitle = this.renderTitle.bind(this);
     this.changeName = this.changeName.bind(this);
+    this.handleScrollUpdate = this.handleScrollUpdate.bind(this);
+
+    this.state = {
+      scrollTop: 0,
+      scrollHeight: 0,
+      clientHeight: 0
+    };
   }
 
   componentWillMount() {
     this.props.getTaskList();
+  }
+
+  handleScrollUpdate(values) {
+    const { shadowTop, shadowBottom } = this.refs;
+    const { scrollTop, scrollHeight, clientHeight } = values;
+    const shadowTopOpacity = 1 / 20 * Math.min(scrollTop, 20);
+    const bottomScrollTop = scrollHeight - clientHeight;
+    const shadowBottomOpacity = 1 / 20 * (bottomScrollTop - Math.max(scrollTop, bottomScrollTop - 20));
+    domCss(shadowTop, { opacity: shadowTopOpacity });
+    domCss(shadowBottom, { opacity: shadowBottomOpacity });
   }
 
   applyDateFilter(task){
@@ -72,6 +91,8 @@ class TaskList extends Component {
   }
 
   render() {
+
+
     if (this.props.task.pending) {    /* while dont get response from server */
       return(
         <div className={css.base}>
@@ -87,11 +108,21 @@ class TaskList extends Component {
         <div className={css.base}>
           {this.renderTitle()}
           <div className={css.tasks}>
-            {
-              tasks.map( (task) =>
-                this.renderTask(task)
-              )
-            }
+            <Scrollbars ref="scrollbars"
+                        onUpdate={this.handleScrollUpdate}
+                        style={{ width: '100%', height: '100%' }}>
+              {
+                tasks.map( (task) =>
+                  this.renderTask(task)
+                )
+              }
+            </Scrollbars>
+            <div
+              ref="shadowTop"
+              className={css.shadowTopStyle}/>
+            <div
+              ref="shadowBottom"
+              className={css.shadowBottomStyle}/>
           </div>
         </div>
       );

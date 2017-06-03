@@ -292,7 +292,7 @@ class AddTask extends Component {
 
             <h1>{content.addTask.addTask}</h1>
             <form  action="POST" onSubmit={this.nextStep}>
-              <Input type="text" placeholder={content.name} value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
+              <Input focused={true} type="text" placeholder={content.name} value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
               <TextArea type="text" placeholder={content.description} value={task.description} onChange={this.changeDescription}  />
               <DatePicker value={task.date} onChange={this.changeDate} dateFormat={this.props.user.dateFormat} style={css.datePicker}/>
               <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime} timeFormat={this.props.user.timeFormat}/>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import css from './style.scss';
 import reactDom from 'react-dom'
+import Mousetrap from 'mousetrap'
 
 class NewComment extends Component {
   constructor(props){
@@ -38,11 +39,22 @@ class NewComment extends Component {
       if (event.keyCode == 13){
         if (!event.shiftKey) self.sendComment(event);
       }
+      if (event.keyCode == 27){
+        self.props.closePanel();
+      }
     });
+    $('input').on('keydown', function(event) {
+      if (event.keyCode == 27){
+        self.props.closePanel();
+      }
+    });
+    this.input.focus();
+    Mousetrap.bind(['esc'], this.props.closePanel);
   }
 
   componentWillUnmount(){
     document.removeEventListener('click', this.handleDocumentClick, false);
+    Mousetrap.unbind(['esc'], this.props.closePanel);
   }
 
   changeInput(e){     //filtering the tasks and the projects
@@ -108,7 +120,8 @@ class NewComment extends Component {
       placeholder = this.state.selectedProject ? this.state.selectedProject.name : placeholder;
       return (
         <div ref="dropdown" className={css.dropdown}>
-          <input className={css.searchInput}
+          <input ref={(input) => { this.input = input; }}
+                 className={css.searchInput}
                  value={this.state.title}
                  onChange={this.changeInput}
                  placeholder={placeholder}
@@ -183,10 +196,11 @@ class NewComment extends Component {
         {this.selectTaskOrProject()}
         <div className={css.newComment}>
           <form id="form" action="POST" onSubmit={this.sendComment}>
-            <textarea className={css.textArea}
-                   value={this.state.comment}
-                   onChange={this.changeComment}
-                   placeholder={this.props.content.page.comments.example}/>
+            <textarea ref={(input) => { this.textarea = input; }}
+                      className={css.textArea}
+                      value={this.state.comment}
+                      onChange={this.changeComment}
+                      placeholder={this.props.content.page.comments.example}/>
             <span className={css.arrow + " fa fa-arrow-right"} onClick={this.sendComment}/>
           </form>
         </div>

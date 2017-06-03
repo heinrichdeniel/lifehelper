@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import css from './style.scss';
 import Button from 'components/Button';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 class LeftPanel extends Component {
   constructor(props){
@@ -25,15 +26,17 @@ class LeftPanel extends Component {
     let tasks = this.props.comments.tasks;
     return(
       <div className={css.commentedItems}>
-        {tasks.map((task,index) => {
-          return (
-            <div className={css.item} key={index} onClick={this.props.selectTask.bind(this, task)}>
-              <i className={css.taskIcon + " fa fa-tasks"}/>
-              {task.name}
-              {(task.UserTasks[0].newComment && task != this.props.selectedTask) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
-            </div>
-          );
-        })}
+        <Scrollbars style={{ width: '100%', height: '100%' }}>
+          {tasks.map((task,index) => {
+            return (
+              <div className={css.item} key={index} onClick={this.props.selectTask.bind(this, task)}>
+                <i className={css.taskIcon + " fa fa-tasks"}/>
+                {task.name}
+                {(task.UserTasks[0].newComment && task != this.props.selectedTask) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
+              </div>
+            );
+          })}
+        </Scrollbars>
       </div>
     )
   }
@@ -42,16 +45,18 @@ class LeftPanel extends Component {
     let projects = this.props.comments.projects;
     return(
       <div className={css.commentedItems}>
-        {projects.map((project, index) => {
-          return (
-            <div className={css.item} key={index} onClick={this.props.selectProject.bind(this, project)}>
-              <i className={css.chain + " fa fa-chain"}/>
-              {project.name}
-              {(project.UserProjects[0].newComment && project!= this.props.selectedProject) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
+        <Scrollbars style={{ width: '100%', height: '100%' }}>
+          {projects.map((project, index) => {
+            return (
+              <div className={css.item} key={index} onClick={this.props.selectProject.bind(this, project)}>
+                <i className={css.chain + " fa fa-chain"}/>
+                {project.name}
+                {(project.UserProjects[0].newComment && project!= this.props.selectedProject) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
 
-            </div>
-          );
-        })}
+              </div>
+            );
+          })}
+        </Scrollbars>
       </div>
     )
   }

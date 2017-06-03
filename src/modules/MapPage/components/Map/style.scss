@@ -5,7 +5,7 @@
   top: 80px;
   left: 0px;
   bottom: 73px;
-  right: 250px;
+  right: 0px;
   z-index: 50;
   @media screen and (max-width: 500px){
     margin-top: 50px;
@@ -48,6 +48,32 @@
     color: $primary-color;
     @media screen and (max-width: 400px){
       margin-top: -295px;
+    }
+  }
+}
+
+
+
+
+:global .gm-style-iw {
+  left: 0 !important;
+
+  div ,p {
+    text-align: left;
+
+    h1 {
+      font-size: 16px!important;
+      margin: 5px 0 ;
+    }
+    div {
+      color: $secondary-color;
+      font-size: 14px;
+      margin: 0 0 5px 0;
+
+    }
+    p{
+      color: #333;
+      margin: 0 0 5px 0;
     }
   }
 }

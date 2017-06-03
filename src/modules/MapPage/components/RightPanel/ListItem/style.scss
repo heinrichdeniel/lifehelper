@@ -3,19 +3,22 @@
 .task{
   padding: 5px 10px;
   width: 100%;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 0.5px solid #ccc;
   cursor: move;
+  &:hover{
+    background-color: #eee;
+  }
   span{
     margin-right: 5px;
   }
   .marker{
     position: absolute;
-    right: 10px;
+    right: 15px;
     font-size: 20px;
+    cursor: pointer;
     z-index: 300;
     &:hover{
       color: $primary-color;
-      cursor: pointer;
     }
   }
 }

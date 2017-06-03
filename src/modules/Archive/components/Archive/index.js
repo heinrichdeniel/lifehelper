@@ -3,6 +3,8 @@ import css from './style.scss';
 import TaskItem from 'modules/Tasks/components/TaskList/TaskItem';
 import ProjectList from 'modules/Projects/containers/ProjectContainer';
 import Spinner from 'components/Spinner';
+import { Scrollbars } from 'react-custom-scrollbars';
+import domCss from 'dom-css';
 
 class Archive extends Component {
   constructor(props){
@@ -11,14 +13,28 @@ class Archive extends Component {
     this.selectTab = this.selectTab.bind(this);
     this.renderTask = this.renderTask.bind(this);
     this.renderContent = this.renderContent.bind(this);
+    this.handleScrollUpdate = this.handleScrollUpdate.bind(this);
 
     this.state = {
-      activeTab: 1
+      activeTab: 1,
+      scrollTop: 0,
+      scrollHeight: 0,
+      clientHeight: 0
     }
   }
 
   componentWillMount() {
     this.props.getArchive();
+  }
+
+  handleScrollUpdate(values) {
+    const { shadowTop, shadowBottom } = this.refs;
+    const { scrollTop, scrollHeight, clientHeight } = values;
+    const shadowTopOpacity = 1 / 20 * Math.min(scrollTop, 20);
+    const bottomScrollTop = scrollHeight - clientHeight;
+    const shadowBottomOpacity = 1 / 20 * (bottomScrollTop - Math.max(scrollTop, bottomScrollTop - 20));
+    domCss(shadowTop, { opacity: shadowTopOpacity });
+    domCss(shadowBottom, { opacity: shadowBottomOpacity });
   }
 
   selectTab(tab){
@@ -54,48 +70,52 @@ class Archive extends Component {
     if (this.state.activeTab == 1){        //if the task tab is selected then return the archived tasks
       return (
         <div className={css.tasks}>
-          {
-            tasks.map( (task) =>
-              this.renderTask(task)
-            )
-          }
+          <Scrollbars ref="scrollbars"
+                      onUpdate={this.handleScrollUpdate}
+                      style={{ width: '100%', height: '100%' }}>
+
+            {
+              tasks.map( (task) =>
+                this.renderTask(task)
+              )
+            }
+          </Scrollbars>
+          <div
+            ref="shadowTop"
+            className={css.shadowTopStyle}/>
+          <div
+            ref="shadowBottom"
+            className={css.shadowBottomStyle}/>
         </div>
       )
     }
     else  if (this.state.activeTab == 2){      //if the project tab is selected then return the archived projects
       return (
-        <div >
-         <ProjectList archived={true} />
-        </div>
+        <ProjectList archived={true} />
       )
     }
   }
 
   render() {
-    if (this.props.task.pending) {    /* while dont get response from server */
-      return(
-        <div className={css.base}>
-          <Spinner/>
-        </div>
-      )
+    let content = <Spinner/>;
+    if (!this.props.task.pending){
+      content = this.renderContent();
     }
-    else{
-      return(
-        <div className={css.base}>
-          <div className={css.tabs}>
-            <div onClick={this.selectTab.bind(this,1)} className={css.taskTab +"   " + ((this.state.activeTab==1) ? css.active : null)}>
-              {this.props.content.page.archive.taskTab}
-              </div>
-            <div onClick={this.selectTab.bind(this,2)} className={css.projectTab +"   " + ((this.state.activeTab==2) ? css.active : null)}>
-              {this.props.content.page.archive.projectTab}
-              </div>
+
+    return(
+      <div className={css.base}>
+        <div className={css.tabs}>
+
+          <div onClick={this.selectTab.bind(this,1)} className={css.taskTab +"   " + ((this.state.activeTab==1) ? css.active : null)}>
+            {this.props.content.page.archive.taskTab}
           </div>
-
-          {this.renderContent()}
-
+          <div onClick={this.selectTab.bind(this,2)} className={css.projectTab +"   " + ((this.state.activeTab==2) ? css.active : null)}>
+            {this.props.content.page.archive.projectTab}
+          </div>
         </div>
-      );
-    }
+        {content}
+      </div>
+    );
   }
 }
 

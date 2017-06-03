@@ -1,6 +1,7 @@
 @import 'src/styles/globals.scss';
 
 .base{
+  z-index:100;
   width: 350px;
   position: absolute;
   right: 15px;
@@ -47,6 +48,7 @@
   .comments{
     max-height: 297px;
     overflow-y: auto;
+    height: 100%;
     .comment{
       position: relative;
       margin: 10px;

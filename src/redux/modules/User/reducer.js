@@ -1,6 +1,11 @@
 import constants from './constants'
+import moment from 'moment';
 
 let auth = JSON.parse(localStorage.getItem('auth'));
+
+if (auth && moment().isAfter(moment(auth.exp))){
+  auth = null;
+}
 
 const initialState = {
   login: {
@@ -50,7 +55,7 @@ const UserReducer = (state = initialState, action = {}) => {
       };
 
     case constants.LOGIN_SUCCESS:
-      localStorage.setItem('auth', JSON.stringify({token:action.payload.token}));
+      localStorage.setItem('auth', JSON.stringify({token:action.payload.token, exp: action.payload.exp}));
       return {
         ...state,
         login: Object.assign({}, state.login, {pending: false, error: false}),
@@ -85,7 +90,7 @@ const UserReducer = (state = initialState, action = {}) => {
       };
 
     case constants.REGISTRATION_SUCCESS:
-      localStorage.setItem('auth', JSON.stringify({token:action.payload.token}));
+      localStorage.setItem('auth', JSON.stringify({token:action.payload.token, exp: action.payload.exp}));
       return {
         ...state,
         registration: Object.assign({}, state.registration, {pending: false, error: false}),

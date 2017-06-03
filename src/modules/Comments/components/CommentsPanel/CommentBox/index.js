@@ -3,6 +3,7 @@ import css from './style.scss';
 import moment from 'moment';
 import reactDom from 'react-dom';
 import { browserHistory } from 'react-router';
+import Mousetrap from 'mousetrap'
 
 class CommentBox extends Component {
   constructor(props){
@@ -17,15 +18,26 @@ class CommentBox extends Component {
 
   componentDidMount() {
     this.scrollToBottom();
-      let self = this;
-      $('textarea').on('keydown', function(event) {
-        if (event.keyCode == 13)
-          if (!event.shiftKey) self.sendComment(event);
-      });
+    let self = this;
+    $('textarea').on('keydown', function(event) {
+      if (event.keyCode == 13){
+        if (!event.shiftKey) self.sendComment(event);
+      }
+      if (event.keyCode == 27){
+        self.props.closePanel();
+      }
+    });
+    this.textarea.focus();
+    Mousetrap.bind(['esc'], this.props.closePanel);
   }
 
   componentDidUpdate() {
     this.scrollToBottom();
+    this.textarea.focus();
+  }
+
+  componentWillUnmount() {
+    Mousetrap.unbind(['esc'], this.props.closePanel);
   }
 
 
@@ -39,6 +51,19 @@ class CommentBox extends Component {
       };
       this.props.sendComment(payload);
     }
+  }
+
+  scrollToBottom(){
+    const comments = reactDom.findDOMNode(this.comments);
+    comments.scrollTop = comments.scrollHeight;
+  }
+
+  goToTaskPage(){
+    browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+this.props.selectedTask.id);
+  }
+
+  goToProjectPage(){
+    browserHistory.push(window.location.pathname.substring(0,3)+"/projects/");
   }
 
   renderComment(comment){
@@ -55,19 +80,6 @@ class CommentBox extends Component {
         <div className={css.text}>{comment.text}</div>
       </div>
     )
-  }
-
-  scrollToBottom(){
-    const comments = reactDom.findDOMNode(this.comments);
-    comments.scrollTop = comments.scrollHeight;
-  }
-
-  goToTaskPage(){
-    browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+this.props.selectedTask.id);
-  }
-
-  goToProjectPage(){
-    browserHistory.push(window.location.pathname.substring(0,3)+"/projects/");
   }
 
   render(){
@@ -89,18 +101,19 @@ class CommentBox extends Component {
 
 
     return (
-      <div className={css.base}>
+      <div className={css.base} id="box">
         <div className={css.title}>
           {title}
           <i className={css.closeIcon + " fa fa-times"} onClick={this.props.closePanel}/>
         </div>
         <div ref={(comments) => { this.comments = comments; }} className={css.comments}>
-          {comments}
+            {comments}
         </div>
 
         <div className={css.newComment}>
           <form action="POST" onSubmit={this.sendComment}>
-          <textarea className={css.textArea}
+          <textarea ref={(input) => { this.textarea = input; }}
+                    className={css.textArea}
                     value={this.props.comment}
                     onChange={this.props.changeComment}
                     placeholder={this.props.content.page.comments.example}/>

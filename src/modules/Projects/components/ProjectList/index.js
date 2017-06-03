@@ -9,6 +9,8 @@ import AddProject from './AddProject'
 import AddTask from 'modules/Tasks/containers/AddTaskContainer'
 import ProjectShare from 'modules/Shares/containers/ProjectShareContainer'
 import reactDom from 'react-dom';
+import { Scrollbars } from 'react-custom-scrollbars';
+import domCss from 'dom-css';
 
 class ProjectList extends Component {
   constructor(props){
@@ -30,6 +32,7 @@ class ProjectList extends Component {
     this.archiveProject = this.archiveProject.bind(this);
     this.restoreProject = this.restoreProject.bind(this);
     this.openCommentBox = this.openCommentBox.bind(this);
+    this.handleScrollUpdate = this.handleScrollUpdate.bind(this);
 
     this.state = {
       updateProject: false,
@@ -38,13 +41,26 @@ class ProjectList extends Component {
       selectedProjects: [],
       projectSettings:{
         show: false
-      }
+      },
+      scrollTop: 0,
+      scrollHeight: 0,
+      clientHeight: 0
     }
   }
   componentWillMount(){
     if (!this.props.archived){
       this.props.getTaskList();
     }
+  }
+
+  handleScrollUpdate(values) {
+    const { shadowTop, shadowBottom } = this.refs;
+    const { scrollTop, scrollHeight, clientHeight } = values;
+    const shadowTopOpacity = 1 / 20 * Math.min(scrollTop, 20);
+    const bottomScrollTop = scrollHeight - clientHeight;
+    const shadowBottomOpacity = 1 / 20 * (bottomScrollTop - Math.max(scrollTop, bottomScrollTop - 20));
+    domCss(shadowTop, { opacity: shadowTopOpacity });
+    domCss(shadowBottom, { opacity: shadowBottomOpacity });
   }
 
   changeDateFilter(task){
@@ -368,11 +384,24 @@ class ProjectList extends Component {
     let projects = this.props.project.list;
     return (
       <div className={css.projects}>
+        {this.props.project.pending&&this.props.project.list.length==0? <Spinner/> : null}
+
+        <Scrollbars ref="scrollbars"
+                    onUpdate={this.handleScrollUpdate}
+                    style={{ width: '100%', height: '100%' }}>
         {
           projects.map( (project) =>
             this.renderProject(project)
           )
         }
+        </Scrollbars>
+
+        <div
+          ref="shadowTop"
+          className={css.shadowTopStyle}/>
+        <div
+          ref="shadowBottom"
+          className={css.shadowBottomStyle}/>
       </div>
     )
   }
@@ -399,12 +428,12 @@ class ProjectList extends Component {
             sendProject={this.props.sendProject}
             deleteProject={this.props.deleteProject}/>
         </div>
+
         {this.renderDeleteModal()}      {/*modal for delete*/}
         {this.renderEditProject()}      {/*modal for update*/}
         {this.renderAddTask()}      {/*modal for adding a new task*/}
         {this.renderList()}
 
-        {this.props.project.pending&&this.props.project.list.length==0? <Spinner/> : null}
 
       </div>
     );

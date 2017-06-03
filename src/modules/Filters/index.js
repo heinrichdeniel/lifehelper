@@ -132,7 +132,7 @@ class Filters extends Component {
           <p className={css.filter + ((this.state.active=="tasks") ? " "+css.active : "")} onClick={this.goToTasks}>{this.props.content.goToTasks}<i className="fa fa-tasks" aria-hidden="true"/></p>
           <p className={css.filter + ((this.state.active=="projects") ? " "+css.active : "")} onClick={this.goToProjects}>{this.props.content.goToProjects}<i className="fa fa-chain" aria-hidden="true"/></p>
           <p className={css.filter + ((this.state.active=="archive") ? " "+css.active : "")} onClick={this.goToArchive}>{this.props.content.goToArchive}<i className="fa fa-archive" aria-hidden="true"/></p>
-          <p className={css.filter + ((this.state.active=="map") ? " "+css.active : "")} onClick={this.goToMap}>{this.props.content.goToMap}<i className="fa fa-archive" aria-hidden="true"/></p>
+          <p className={css.filter + " " + css.map +  ((this.state.active=="map") ? " "+css.active : "")} onClick={this.goToMap}>{this.props.content.goToMap}<i className="fa fa-map-marker" aria-hidden="true"/></p>
           <DateFilters/>
         </div>
       </div>

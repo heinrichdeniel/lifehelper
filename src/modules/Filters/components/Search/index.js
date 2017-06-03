@@ -45,7 +45,7 @@ class Search extends Component {
       searchValue: "",
       showInput: css.hideInput,
       showIcon: css.showIcon
-    })
+    });
     browserHistory.push(window.location.pathname.substring(0,3)+"/projects");
   }
 

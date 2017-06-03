@@ -12,7 +12,7 @@ export default class Header extends Component {
   }
 
   componentWillMount(){
-    if (this.props.authDetails.token && !this.props.user.id){
+    if (this.props.authDetails.token && !this.props.user.id ){
       this.props.getProfile();
     }
   }

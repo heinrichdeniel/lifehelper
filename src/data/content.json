@@ -60,6 +60,7 @@
         "prevStep": "Back",
         "shortTaskName": "The task name must contain at least 3, maximum 20 character!",
         "order": "Tasks order",
+        "showMap": "Show on map",
         "share":{
           "shareTask": "Share",
           "name": "Share task",
@@ -173,6 +174,17 @@
         "task/project": "Select a task or a project",
         "example": "Type a comment...",
         "noResults": "No results found..."
+      },
+      "map": {
+        "selectProjects": "Select projects",
+        "allTasks": "All tasks",
+        "intervals": {
+          "title": "Select an interval",
+          "every": "Every task",
+          "today": "Today's tasks",
+          "weekly": "Weekly tasks",
+          "monthly": "Monthly tasks"
+        }
       }
     }
   },
@@ -237,6 +249,7 @@
         "prevStep": "Vissza",
         "shortTaskName": "A feladat neve minimum 3, maximum 20 karaktert kell tartalmazzon!",
         "order": "Feladatok sorrendje",
+        "showMap": "Mutat a térképen",
         "share":{
           "shareTask": "Megosztás",
           "name": "Feladat megosztása",
@@ -353,6 +366,17 @@
         "task/project": "Válassz ki egy feladatot vagy egy projektet",
         "example": "Írj egy hozzászólást...",
         "noResults": "Nincs találat..."
+      },
+      "map": {
+        "selectProjects": "Válassz ki projekteket",
+        "allTasks": "Összes feladat",
+        "intervals": {
+          "title": "Válassz ki egy intervallumot",
+          "every": "Összes feladat",
+          "today": "Mai feladatok",
+          "weekly": "Heti feladatok",
+          "monthly": "Havi feladatok"
+        }
       }
     }
   },
@@ -417,6 +441,7 @@
         "prevStep": "Înapoi",
         "shortTaskName": "Numele taskului trebuie să conțină cel puțin 3, maxim 20 de caractere!",
         "order": "Ordinea activității",
+        "showMap": "Vezi pe hartă",
         "share":{
           "shareTask": "Diviza",
           "name": "Diviza activitate",
@@ -530,6 +555,17 @@
         "task/project": "Alegeți o activitate sau un proiect",
         "example": "Scrieți un comentariu...",
         "noResults": "Nici un rezultat..."
+      },
+      "map": {
+        "selectProjects": "Selectați proiecte",
+        "allTasks": "Arată toate",
+        "intervals": {
+          "title": "Selectați un interval",
+          "every": "Toate activități",
+          "today": "Astăzi",
+          "weekly": "Activități săptămânale",
+          "monthly": "Activități lunare"
+        }
       }
     }
   }
