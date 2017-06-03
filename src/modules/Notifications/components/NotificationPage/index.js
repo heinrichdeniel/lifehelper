@@ -3,7 +3,6 @@ import css from './style.scss';
 
 import Header from 'modules/Header/containers/HeaderContainer'
 import Footer from 'modules/Footer/containers/FooterContainer'
-import Button from 'components/Button';
 import TaskNotifications from '../TaskNotifications';
 import ProjectNotifications from '../ProjectNotifications';
 
@@ -18,20 +17,11 @@ class Notifications extends Component{
     this.props.getNotifications();
   }
 
-  backToPreviousPage(){
-    window.history.back();
-  }
-
   render(){
     return (
       <div >
         <Header />
         <div className={css.base} >
-          <div className="container">
-            <Button text={this.props.content.page.notifications.back} onClick={this.backToPreviousPage} style={css.backButton}>
-              <i className={css.arrowLeft + " fa fa-arrow-left"}/>
-            </Button>
-          </div>
           <h1><i className={css.flag + " fa fa-flag"}/>{this.props.content.page.settings.options.notifications} </h1>
 
           <ProjectNotifications content={this.props.content.page.notifications}

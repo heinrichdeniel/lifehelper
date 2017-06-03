@@ -50,7 +50,9 @@ class Filters extends Component {
       if (this.state.active!="projects"){
         this.setState({
           ...this.state,
-          active: "projects"
+          active: "projects",
+          style: css.hideFilters,
+          arrow: "right"
         })
       }
     }
@@ -58,20 +60,26 @@ class Filters extends Component {
       if (this.state.active!="archive"){
         this.setState({
           ...this.state,
-          active: "archive"
+          active: "archive",
+          style: css.hideFilters,
+          arrow: "right"
         })
       }
     }
     else if (pathname.substring(pathname.length - 3) == "map"){
       this.setState({
         ...this.state,
-        active: "map"
+        active: "map",
+        style: css.hideFilters,
+        arrow: "right"
       })
     }
     else if (this.state.active!="tasks") {
       this.setState({
         ...this.state,
-        active: "tasks"
+        active: "tasks",
+        style: css.hideFilters,
+        arrow: "right"
       })
     }
   }
@@ -124,6 +132,7 @@ class Filters extends Component {
   }
 
   render() {
+    console.log(this.state)
     return(
       <div className={css.base +" "+ this.state.style+" col-xs-1 col-sm-5 col-lg-5"}>
         <i className={"fa fa-angle-double-"+this.state.arrow +" " + css.arrow} onClick={this.changeVisibility} />

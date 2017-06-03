@@ -1,6 +1,8 @@
 @import 'src/styles/globals.scss';
 .hidePanel{
-
+  @media screen and (max-width: 660px){
+    display: none
+  }
   .commentIcon{
     cursor: pointer;
     position: fixed;
@@ -14,6 +16,9 @@
 }
 
 .showPanel{
+  @media screen and (max-width: 660px){
+    display: none
+  }
   .commentIcon{
     cursor: pointer;
     position: fixed;

@@ -59,6 +59,9 @@
     @media screen and (max-height: 460px){
       display: none;
     }
+    @media screen and (max-width: 500px){
+      display: none;
+    }
   }
 }
 

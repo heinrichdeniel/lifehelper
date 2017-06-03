@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import AddTask from 'modules/Tasks/containers/AddTaskContainer'
 import Settings from 'modules/Settings/containers/Settings'
 import Search from 'modules/Filters/containers/SearchContainer'
+import { browserHistory } from 'react-router'
 
 export default class Header extends Component {
   constructor(props){
@@ -15,6 +16,11 @@ export default class Header extends Component {
     if (this.props.authDetails.token && !this.props.user.id ){
       this.props.getProfile();
     }
+  }
+
+  goToHomePage(){
+    browserHistory.push(window.location.pathname.substring(0,3));
+
   }
 
   render() {
@@ -53,6 +59,9 @@ export default class Header extends Component {
                   sendButtonText={content.tasks.addTask.name}>
                   <i className="fa fa-plus-square" aria-hidden="true"/>
                 </AddTask>
+                <div className={css.home} onClick={this.goToHomePage}>
+                  <i className="fa fa-home"/>
+                </div>
                 <Settings/>
               </ul>
             </div>

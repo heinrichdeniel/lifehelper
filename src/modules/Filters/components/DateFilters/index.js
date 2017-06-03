@@ -34,6 +34,7 @@ class DateFilters extends Component {
       return(
         <div className={css.base}>
           <h2 onClick={this.props.applyDateFilter}>{this.props.content.page.filters.timeFilter}<i className={"fa fa-arrow-up"}/></h2>
+
           <div className={css.datePickers}>
             <DatePicker onChange={this.changeDateFrom}
                         value={this.props.dateFrom}

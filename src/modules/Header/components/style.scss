@@ -71,6 +71,39 @@
       }
     }
   }
+
+  .home{
+    height: 40px;
+    width: 40px;
+    border: 1px solid #68ca4d;
+    margin-top: -5px;
+    margin-left: 5px;
+    background-color: #f6f6f6;
+    cursor: pointer;
+    position: relative;
+    border-radius: 50%;
+    &:hover{
+      background-color: #68ca4d;
+      transition: all 0.3s ease;
+      i{
+        color: #fff;
+        transition: all 0.3s ease;
+      }
+    }
+    @media screen and (max-width: 350px){
+      display: none;
+    }
+    i {
+      color: #68ca4d;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%) ;
+      position: absolute;
+      font-size: 30px;
+      transition: all 0.3s ease;
+      margin-left: 5px;
+    }
+  }
   h1{
     margin-left: 60px;
     font-size: 26px;
