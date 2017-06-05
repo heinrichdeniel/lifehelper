@@ -78,17 +78,31 @@ class Archive extends Component {
     let tasks = this.props.task.list.filter(this.applyDateFilter);
 
     if (this.state.activeTab == 1){        //if the task tab is selected then return the archived tasks
+      let content = [];
+      tasks.map( (task) => {
+          let object = this.renderTask(task);
+          if (object){
+            content.push(object)
+          }
+        }
+      );
+      if (content.length == 0){
+        return (
+          <div className={css.tasks}>
+            <div className={css.emptyList}>
+              <h1>{this.props.content.page.tasks.emptyList}</h1>
+              <i className="fa fa-tasks"/>
+            </div>
+          </div>
+        )
+      }
       return (
         <div className={css.tasks}>
           <Scrollbars ref="scrollbars"
                       onUpdate={this.handleScrollUpdate}
                       style={{ width: '100%', height: '100%' }}>
 
-            {
-              tasks.map( (task) =>
-                this.renderTask(task)
-              )
-            }
+            {content}
           </Scrollbars>
           <div
             ref="shadowTop"

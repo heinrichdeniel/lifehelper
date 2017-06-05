@@ -106,9 +106,6 @@
 
     }
 
-    h2{
-      font-size: 18px;
-    }
 
     .commentIcon{
       z-index: 20;
@@ -233,7 +230,28 @@
       }
     }
   }
+
+  .emptyList{
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+    h1{
+      text-align: center;
+      color: $secondary-color;
+      margin-bottom: 30px;
+    }
+    i{
+      font-size: 100px;
+      color: $secondary-color;
+    }
+  }
+
 }
+
+
 
 .projectOptions{
   position: absolute;

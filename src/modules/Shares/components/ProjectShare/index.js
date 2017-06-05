@@ -148,20 +148,20 @@ class ProjectShare extends Component{
   render(){
     if (!this.props.project.shared && !this.state.showShareModal){     //if the project was not shared
       return (
-        <i className={css.icon + " " + css.shareIcon + " fa fa-share-alt"} onClick={this.showHideShareModal}/>
+        <i className={css.icon + " " + css.shareIcon + " fa fa-share-alt"} data-tip={this.props.content.name} onClick={this.showHideShareModal}/>
       )
     }
     if (this.state.showShareModal){
        return (
          <div>
-           <i className={css.icon + " " + css.shareIcon + " fa fa-share-alt"} onClick={this.showHideShareModal}/>
+           <i className={css.icon + " " + css.shareIcon + " fa fa-share-alt"} data-tip={this.props.content.name} onClick={this.showHideShareModal}/>
            {this.renderShareModal()}
          </div>
        )
     }
     if (!this.state.showModal){
       return (
-        <i className={css.icon + " fa fa-users"} onClick={this.showHideModal}/>
+        <i className={css.icon + " fa fa-users"} data-tip={this.props.content.name} onClick={this.showHideModal}/>
       )
     }
 

@@ -5,15 +5,24 @@ import Header from 'modules/Header/containers/HeaderContainer'
 import Footer from 'modules/Footer/containers/FooterContainer'
 import TaskNotifications from '../TaskNotifications';
 import ProjectNotifications from '../ProjectNotifications';
+import { browserHistory } from 'react-router';
 
 class Notifications extends Component{
   constructor(props) {
     super(props);
-
   }
 
   componentWillMount(){
     this.props.getNotifications();
+  }
+
+  componentWillUpdate(nextProps) {
+    let prevCount = this.props.notifications.projects.length + this.props.notifications.tasks.length;
+    let count = nextProps.notifications.projects.length + nextProps.notifications.tasks.length;
+
+    if (prevCount > 0 && count == 0) {
+      browserHistory.push(window.location.pathname.substring(0, 3));
+    }
   }
 
   render(){

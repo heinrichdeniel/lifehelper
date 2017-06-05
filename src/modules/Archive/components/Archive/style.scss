@@ -88,6 +88,23 @@
     }
   }
 
+  .emptyList{
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+    h1{
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    i{
+      font-size: 100px;
+      color: $primary-color;
+    }
+  }
+
   .shadowTopStyle{
     z-index: 10;
     position: absolute;

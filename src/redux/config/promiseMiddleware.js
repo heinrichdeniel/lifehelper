@@ -25,6 +25,7 @@ const promiseMiddleware = ({dispatch}) => {
       ...meta && {meta}
     })
 
+
     /**
      * If successful, dispatch the fulfilled action, otherwise dispatch
      * rejected action.

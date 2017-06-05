@@ -9,6 +9,7 @@ import AddTask from "modules/Tasks/containers/AddTaskContainer";
 import MultiSelect from "components/MultiSelect";
 import ConfirmationBox from "components/ConfirmationBox";
 import TaskShare from "modules/Shares/containers/TaskShareContainer";
+import ReactTooltip from 'react-tooltip'
 
 class TaskItem extends Component {
   constructor(props){
@@ -205,30 +206,6 @@ class TaskItem extends Component {
     )
   }
 
-  renderOptions(){
-    let content = this.props.content.page;
-
-    let archive = null;
-    let restore = null;
-    if (this.props.task.status == "pending"){     //if the task does not in archive
-      archive = <p className={css.option} onClick={this.archiveTask}>{content.archive.archive}<i className="fa fa-archive"/></p>
-    }
-    else{     //if the task is in the archive
-      restore = <p className={css.option} onClick={this.restoreTask}>{content.archive.restore}<i className="fa fa-undo"/></p>
-    }
-    if (this.state.showOptions){
-      return (
-        <div className={css.options} ref="settings">
-          <i className={css.caretUp + " fa fa-caret-up"} aria-hidden="true"/>
-          <p className={css.option} onClick={this.editTask}>{content.tasks.editTask.name}<i className="fa fa-pencil"/></p>
-          <p className={css.option} onClick={this.shareTask}>{content.tasks.share.shareTask}<i className="fa fa-share-alt"/></p>
-          {archive}
-          {restore}
-          <p className={css.option + " " + css.delete} onClick={this.showHideDeleteModal}>{content.tasks.deleteTask.name}<i className="fa fa-trash"/></p>
-        </div>
-      )
-    }
-  }
 
   renderEditTask(){
     if (this.state.editTask){      //if the user want to add a new task to this project
@@ -309,8 +286,11 @@ class TaskItem extends Component {
         </span>
       )
     }
-    else if (moment(this.props.task.date).isBefore(moment())){
+    else if (moment(this.props.task.date).isBefore(moment(),'days')){
       overdue=<i className={css.overdue + " fa fa-exclamation-triangle"}/>;
+    }
+    else if (moment(this.props.task.date).isBefore(moment())){
+      overdue=<i className={css.overdue + " fa fa-exclamation-triangle"} style={{color: 'orange'}}/>;
     }
 
     return(
@@ -320,11 +300,13 @@ class TaskItem extends Component {
           {project}
           <p className={css.date}>{overdue}{date}</p>
           {this.renderCircleBeforeTitle()}
-          <i className={css.commentIcon + " fa fa-commenting"} style={this.state.commentStyle} onClick={this.openCommentBox}/>
+          <i className={css.editIcon + " fa fa-pencil"}  data-tip={this.props.content.page.tasks.editTask.name} onClick={this.editTask} />
+          <i className={css.commentIcon + " fa fa-commenting"} data-tip={this.props.content.page.comments.newComment} style={this.state.commentStyle} onClick={this.openCommentBox}/>
           <TaskShare task={this.props.task}/>    {/* share modal */}
-          <i className={css.dots + " fa fa-ellipsis-h"} onClick={this.showOptions} aria-hidden="true"/>
+          <i className={css.deleteIcon + " fa fa-trash"} data-tip={this.props.content.page.tasks.deleteTask.name} onClick={this.showHideDeleteModal} />
+
+          <ReactTooltip />
         </div>
-        {this.renderOptions()}      {/*dropdown with the task options*/}
         {this.renderDeleteModal()}    {/*modal for deleting a task*/}
         {this.renderEditTask()}      {/*modal for editing the new task*/}
         {this.renderShareModal()}      {/*modal for sharing the task*/}

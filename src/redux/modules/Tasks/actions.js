@@ -55,9 +55,10 @@ export function deleteTask(id) {
         promise: api.deleteTask({
           token: getState().User.authDetails.token,
           id: id
-        }).then( () => {
-          getTaskList();
         })
+      },
+      data: {
+        id: id
       }
     })
   }).then (function(){

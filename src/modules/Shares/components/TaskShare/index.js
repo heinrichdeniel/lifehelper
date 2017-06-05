@@ -115,7 +115,7 @@ class TaskShare extends Component{
         <Modal show={this.state.showModal}  dialogClassName={css.modal} onHide={this.showHideModal}>
           <div  className={css.container}>
             <i className={`fa fa-close ${css.close}`} onClick={this.showHideModal} />
-            <h1><i className="fa fa-tasks"/> {this.props.task.name}</h1>
+            <h1><i className="fa fa-tasks" /> {this.props.task.name}</h1>
 
             <p className={css.addMore}>{this.props.content.title}</p>
             <div className={css.collaborators}>
@@ -146,23 +146,22 @@ class TaskShare extends Component{
   }
 
   render(){
-
     if (!this.props.task.shared && !this.state.showShareModal){     //if the task was not shared
       return (
-        <i className={css.icon + " " + css.shareIcon + " fa fa-share-alt"} onClick={this.showHideShareModal}/>
+        <i className={css.icon + " " + css.shareIcon + " fa fa-share-alt"} data-tip={this.props.content.name} onClick={this.showHideShareModal}/>
       )
     }
     if (this.state.showShareModal){
        return (
          <div>
-           <i className={css.icon + " " + css.shareIcon + " fa fa-share-alt"} onClick={this.showHideShareModal}/>
+           <i className={css.icon + " " + css.shareIcon + " fa fa-share-alt"} data-tip={this.props.content.name} onClick={this.showHideShareModal}/>
            {this.renderShareModal()}
          </div>
        )
     }
     if (!this.state.showModal){
       return (
-        <i className={css.icon + " fa fa-users"} onClick={this.showHideModal}/>
+        <i className={css.icon + " fa fa-users"} data-tip={this.props.content.name} onClick={this.showHideModal}/>
       )
     }
 

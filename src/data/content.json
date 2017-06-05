@@ -61,6 +61,7 @@
         "shortTaskName": "The task name must contain at least 3, maximum 20 character!",
         "order": "Tasks order",
         "showMap": "Show on map",
+        "emptyList": "There are no tasks",
         "share":{
           "shareTask": "Share",
           "name": "Share task",
@@ -98,6 +99,7 @@
         "deleteProject": "Delete project",
         "updateProject": "Update project",
         "cancel": "Cancel",
+        "emptyList": "There are no projects",
         "delete": {
           "question": "Are you sure you want to delete this project?",
           "warning": "If you delete the project then all contained tasks will be deleted!",
@@ -250,6 +252,7 @@
         "shortTaskName": "A feladat neve minimum 3, maximum 20 karaktert kell tartalmazzon!",
         "order": "Feladatok sorrendje",
         "showMap": "Mutat a térképen",
+        "emptyList": "Nincsenek feladatok",
         "share":{
           "shareTask": "Megosztás",
           "name": "Feladat megosztása",
@@ -288,6 +291,7 @@
         "deleteProject": "Projekt törlése",
         "updateProject": "Mentés",
         "cancel": "Mégse",
+        "emptyList": "Nincsenek projektek",
         "delete": {
           "question": "Biztosan törölni akarod ezt a projektet?",
           "warning": "Ha törlöd a projektet, akkor az összes hozzá kapcsolódó teendő elveszik!",
@@ -442,6 +446,7 @@
         "shortTaskName": "Numele taskului trebuie să conțină cel puțin 3, maxim 20 de caractere!",
         "order": "Ordinea activității",
         "showMap": "Vezi pe hartă",
+        "emptyList": "Nu există activitate",
         "share":{
           "shareTask": "Diviza",
           "name": "Diviza activitate",
@@ -479,6 +484,7 @@
         "editProject": "Editare proiect",
         "deleteProject": "Ștergere proiect",
         "cancel": "Anulare",
+        "emptyList": "Nu există nici un proiect",
         "delete": {
           "question": "Sunteți sigur că doriți să ștergeți acest proiect?",
           "warning": "Dacă ștergeți proiectul, atunci toate activitățile conținute vor fi șterse!",

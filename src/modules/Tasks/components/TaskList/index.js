@@ -3,9 +3,9 @@ import css from './style.scss';
 import TaskItem from './TaskItem';
 import moment from 'moment';
 import AddTask from '../../containers/AddTaskContainer'
+import domCss from 'dom-css';
 import Spinner from 'components/Spinner';
 import { Scrollbars } from 'react-custom-scrollbars';
-import domCss from 'dom-css';
 
 class TaskList extends Component {
   constructor(props){
@@ -16,6 +16,7 @@ class TaskList extends Component {
     this.renderTitle = this.renderTitle.bind(this);
     this.changeName = this.changeName.bind(this);
     this.handleScrollUpdate = this.handleScrollUpdate.bind(this);
+    this.renderEmptyList = this.renderEmptyList.bind(this);
 
     this.state = {
       scrollTop: 0,
@@ -93,6 +94,17 @@ class TaskList extends Component {
     return  null;
   }
 
+  renderEmptyList(tasks){
+    if (tasks.length == 0){
+      return (
+        <div className={css.emptyList}>
+          <h1>{this.props.content.page.tasks.emptyList}</h1>
+          <i className="fa fa-tasks"/>
+        </div>
+      )
+    }
+  }
+
   render() {
     if (this.props.task.pending) {    /* while dont get response from server */
       return(
@@ -114,6 +126,7 @@ class TaskList extends Component {
             <Scrollbars ref="scrollbars"
                         onUpdate={this.handleScrollUpdate}
                         style={{ width: '100%', height: '100%' }}>
+              {this.renderEmptyList(tasks)}
               {
                 tasks.map( (task) =>
                   this.renderTask(task)

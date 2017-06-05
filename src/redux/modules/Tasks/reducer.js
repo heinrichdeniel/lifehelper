@@ -152,11 +152,12 @@ const TaskReducer = (state = initialState, action = {}) => {
       };
 
     case constants.DELETE_TASK_SUCCESS:
-
+      console.log(action)
       return {
         ...state,
         task: {
           ...state.task,
+          list: state.task.list.filter((task) => task.id != action.payload.taskId),
           pending: false,
           error: false
         }

@@ -11,6 +11,7 @@ import ProjectShare from 'modules/Shares/containers/ProjectShareContainer'
 import reactDom from 'react-dom';
 import { Scrollbars } from 'react-custom-scrollbars';
 import domCss from 'dom-css';
+import ReactTooltip from 'react-tooltip'
 
 class ProjectList extends Component {
   constructor(props){
@@ -315,9 +316,9 @@ class ProjectList extends Component {
             {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length}) </span>
-            <i className={css.commentIcon + " fa fa-commenting"} style={commentStyle} onClick={this.openCommentBox.bind(this, project)}/>
+            <i className={css.commentIcon + " fa fa-commenting"} style={commentStyle} data-tip={this.props.content.page.project.editProject} onClick={this.openCommentBox.bind(this, project)}/>
             <ProjectShare project={project} />    {/* share modal */}
-            <i className={css.projectSettings + " fa fa-cog"} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
+            <i className={css.projectSettings + " fa fa-cog"}  data-tip={this.props.content.page.project.deleteProject} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>
           {this.renderProjectSettings(project)}
         </div>
@@ -330,9 +331,9 @@ class ProjectList extends Component {
             {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length})</span>
-            <i className={css.commentIcon + " fa fa-commenting"} style={commentStyle} onClick={this.openCommentBox.bind(this, project)}/>
+            <i className={css.commentIcon + " fa fa-commenting"}  data-tip={this.props.content.page.project.editProject} style={commentStyle} onClick={this.openCommentBox.bind(this, project)}/>
             <ProjectShare project={project} />    {/* share modal */}
-            <i className={css.projectSettings + " fa fa-cog"} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
+            <i className={css.projectSettings + " fa fa-cog"}  data-tip={this.props.content.page.project.deleteProject} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>
           {this.renderProjectSettings(project)}
           <div className={css.tasks}>
@@ -391,6 +392,25 @@ class ProjectList extends Component {
 
   renderList(){
     let projects = this.props.project.list;
+    let content = [];
+    projects.map( (project) => {
+       let object = this.renderProject(project);
+       if (object){
+         content.push(object)
+       }
+      }
+    );
+
+    if (content.length == 0){
+      return (
+        <div className={css.projects}>
+          <div className={css.emptyList}>
+            <h1>{this.props.content.page.project.emptyList}</h1>
+            <i className="fa fa-chain"/>
+          </div>
+        </div>
+      )
+    }
     return (
       <div className={css.projects}>
         {this.props.project.pending&&this.props.project.list.length==0? <Spinner/> : null}
@@ -399,9 +419,7 @@ class ProjectList extends Component {
                     onUpdate={this.handleScrollUpdate}
                     style={{ width: '100%', height: '100%' }}>
           {
-            projects.map( (project) =>
-              this.renderProject(project)
-            )
+            content
           }
         </Scrollbars>
 
@@ -426,16 +444,16 @@ class ProjectList extends Component {
     return(
       <div className={css.base}>
         <div className={css.title}>
-            <h1>{content.title}</h1>
-            <AddProject
-              content={content}
-              buttonText={content.addProject}
-              buttonStyle={css.addTask}
-              sendButtonText={content.createProject}
-              update={false}
-              iconStyle={css.addIcon}
-              sendProject={this.props.sendProject}
-              deleteProject={this.props.deleteProject}/>
+          <h1>{content.title}</h1>
+          <AddProject
+            content={content}
+            buttonText={content.addProject}
+            buttonStyle={css.addTask}
+            sendButtonText={content.createProject}
+            update={false}
+            iconStyle={css.addIcon}
+            sendProject={this.props.sendProject}
+            deleteProject={this.props.deleteProject}/>
         </div>
 
         {this.renderDeleteModal()}      {/*modal for delete*/}
@@ -443,6 +461,7 @@ class ProjectList extends Component {
         {this.renderAddTask()}      {/*modal for adding a new task*/}
         {this.renderList()}
 
+        <ReactTooltip />
 
       </div>
     );
