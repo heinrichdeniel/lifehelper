@@ -314,7 +314,7 @@ class TaskItem extends Component {
     }
 
     return(
-      <div className={css.base + " "} style={this.state.style} onClick={this.onClick}>
+      <div className={css.base + " " + this.props.style} style={this.state.style} onClick={this.onClick}>
         <div className={css.task}>
           <h2>{this.props.task.name}</h2>
           {project}

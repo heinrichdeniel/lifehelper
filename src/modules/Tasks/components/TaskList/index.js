@@ -28,18 +28,11 @@ class TaskList extends Component {
     this.props.getTaskList();
   }
 
-  handleScrollUpdate(values) {
-    const { shadowTop, shadowBottom } = this.refs;
-    const { scrollTop, scrollHeight, clientHeight } = values;
-    const shadowTopOpacity = 1 / 20 * Math.min(scrollTop, 20);
-    const bottomScrollTop = scrollHeight - clientHeight;
-    const shadowBottomOpacity = 1 / 20 * (bottomScrollTop - Math.max(scrollTop, bottomScrollTop - 20));
-    domCss(shadowTop, { opacity: shadowTopOpacity });
-    domCss(shadowBottom, { opacity: shadowBottomOpacity });
-  }
-
   applyDateFilter(task){
     let date = moment(task.date);
+    if (this.props.dateTo == null){
+      return true;
+    }
     return (date.isBetween(this.props.dateFrom,this.props.dateTo,'days', '[]'));
   }
 
@@ -53,18 +46,28 @@ class TaskList extends Component {
     })
   }
 
+  handleScrollUpdate(values) {
+    const { shadowTop, shadowBottom } = this.refs;
+    const { scrollTop, scrollHeight, clientHeight } = values;
+    const shadowTopOpacity = 1 / 20 * Math.min(scrollTop, 20);
+    const bottomScrollTop = scrollHeight - clientHeight;
+    const shadowBottomOpacity = 1 / 20 * (bottomScrollTop - Math.max(scrollTop, bottomScrollTop - 20));
+    domCss(shadowTop, { opacity: shadowTopOpacity });
+    domCss(shadowBottom, { opacity: shadowBottomOpacity });
+  }
+
   renderTitle(){
     let content = this.props.content.page;
 
     return (
-      <div className={css.projectTitle}>
-        <h1>{content.tasks.yourTasks}</h1>
-        <AddTask
-          buttonText={content.tasks.addTask.addTask}
-          buttonStyle={css.addTask}
-          sendButtonText={content.tasks.addTask.name}
-          update={false}
-          iconStyle={css.addIcon}/>
+      <div className={css.title}>
+          <h1>{content.tasks.yourTasks}</h1>
+          <AddTask
+            buttonText={content.tasks.addTask.addTask}
+            buttonStyle={css.addTask}
+            sendButtonText={content.tasks.addTask.name}
+            update={false}
+            iconStyle={css.addIcon}/>
       </div>
     );
   }
@@ -91,19 +94,19 @@ class TaskList extends Component {
   }
 
   render() {
-
-
     if (this.props.task.pending) {    /* while dont get response from server */
       return(
         <div className={css.base}>
           {this.renderTitle()}
-          <Spinner/>
+          <div className={css.tasks}>
+            <Spinner/>
+          </div>
         </div>
       )
     }
     else{
 
-      let tasks = this.props.task.filteringByDate ? this.props.task.list.filter(this.applyDateFilter) : this.props.task.list;
+      let tasks = this.props.task.list.filter(this.applyDateFilter);
       return(
         <div className={css.base}>
           {this.renderTitle()}
@@ -117,6 +120,7 @@ class TaskList extends Component {
                 )
               }
             </Scrollbars>
+
             <div
               ref="shadowTop"
               className={css.shadowTopStyle}/>

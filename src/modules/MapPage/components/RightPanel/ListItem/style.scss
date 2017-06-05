@@ -5,19 +5,25 @@
   width: 100%;
   border-bottom: 0.5px solid #ccc;
   cursor: move;
+  z-index: 0;
   &:hover{
-    background-color: #eee;
+    background-color: #f6f6f6;
   }
+
   span{
     margin-right: 5px;
   }
   .marker{
-    position: absolute;
-    right: 15px;
+    position: relative;
+    float: right;
+    right: 5px;
     font-size: 20px;
     cursor: pointer;
     z-index: 300;
     &:hover{
+      color: $primary-color;
+    }
+    &:active{
       color: $primary-color;
     }
   }

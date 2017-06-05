@@ -16,10 +16,7 @@ class RightPanel extends Component{
     this.state={
       selected: undefined,
       arrow: "left",
-      style:{
-        display: "none",
-        width: "0"
-      },
+      style:css.bodyHide,
       scrollTop: 0,
       scrollHeight: 0,
       clientHeight: 0
@@ -47,26 +44,31 @@ class RightPanel extends Component{
 
   onSort(e,item,from,to,list){
     let tasks = this.props.tasks;
-    if (to < from){
-      if (to > 0 ){
-        this.props.changeTaskOrder({taskId: item.id, priority: ((tasks[to-1].UserTasks[0].priority + tasks[to].UserTasks[0].priority)/2)})
+    if (to != from){
+      if (to < from){
+        if (to > 0 ){
+          this.props.changeTaskOrder({taskId: item.id, priority: ((tasks[to-1].UserTasks[0].priority + tasks[to].UserTasks[0].priority)/2)})
+        }
+        else{
+          this.props.changeTaskOrder({taskId: item.id, priority: ((tasks[to].UserTasks[0].priority)/2)})
+        }
       }
       else{
-        this.props.changeTaskOrder({taskId: item.id, priority: ((tasks[to].UserTasks[0].priority)/2)})
+        if (to < tasks.length - 1) {
+          this.props.changeTaskOrder({taskId: item.id, priority: ((tasks[to].UserTasks[0].priority + tasks[to + 1].UserTasks[0].priority) / 2)})
+        }
+        else {
+          this.props.changeTaskOrder({taskId: item.id, priority: ((tasks[to].UserTasks[0].priority + (Number.MAX_VALUE/2)) / 2)})
+        }
       }
-    }
-    else if (to != from){
-      if (to < tasks.length - 1) {
-        this.props.changeTaskOrder({taskId: item.id, priority: ((tasks[to].UserTasks[0].priority + tasks[to + 1].UserTasks[0].priority) / 2)})
-      }
-      else {
-        this.props.changeTaskOrder({taskId: item.id, priority: ((tasks[to].UserTasks[0].priority + (Number.MAX_VALUE/2)) / 2)})
-      }
-    }
 
-    this.setState({
-      list: list
-    })
+      this.setState({
+        list: list
+      })
+    }
+    else if(e.target.closest('i')){
+      this.props.onClick(item.lat,item.lng)
+    }
   }
 
   changeVisibility(){
@@ -74,21 +76,14 @@ class RightPanel extends Component{
       this.setState({
         ...this.state,
         arrow: "right",
-        style: {
-          display: 'block',
-          width: "250px"
-        }
-
+        style: css.bodyShow
       })
     }
     else{
       this.setState({
         ...this.state,
         arrow: "left",
-        style: {
-          display: "none",
-          width: "0"
-        }
+        style: css.bodyHide
       })
     }
   }
@@ -104,7 +99,7 @@ class RightPanel extends Component{
     return(
       <div className={css.base}>
         <i className={"fa fa-angle-double-"+this.state.arrow +" " + css.arrow} onClick={this.changeVisibility} />
-        <div style={this.state.style}>
+        <div className={css.body + " " + this.state.style}>
           <h3>{this.props.content.page.tasks.order}</h3>
           <div className={css.tasks}>
             <Scrollbars ref="scrollbars"

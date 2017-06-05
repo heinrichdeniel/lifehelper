@@ -1,6 +1,9 @@
 @import 'src/styles/globals.scss';
 
 .spinner{
+  position: relative;
+  top:50%;
+  transform: translateY(-50%);
   font-size: 50px;
   text-align: center;
   color: $primary-color;

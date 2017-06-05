@@ -16,6 +16,7 @@ class ProjectList extends Component {
   constructor(props){
     super(props);
 
+    this.applyDateFilter = this.applyDateFilter.bind(this);
     this.changeDateFilter = this.changeDateFilter.bind(this);
     this.renderProject = this.renderProject.bind(this);
     this.renderTask = this.renderTask.bind(this);
@@ -59,8 +60,11 @@ class ProjectList extends Component {
     const shadowTopOpacity = 1 / 20 * Math.min(scrollTop, 20);
     const bottomScrollTop = scrollHeight - clientHeight;
     const shadowBottomOpacity = 1 / 20 * (bottomScrollTop - Math.max(scrollTop, bottomScrollTop - 20));
-    domCss(shadowTop, { opacity: shadowTopOpacity });
-    domCss(shadowBottom, { opacity: shadowBottomOpacity });
+    let displayTop = (shadowTopOpacity==0) ? {display: 'none'} : {display: 'block'};
+    let displayBottom = (shadowBottomOpacity==0) ? {display: 'none'} : {display: 'block'};
+
+    domCss(shadowTop, { opacity: shadowTopOpacity, ...displayTop });
+    domCss(shadowBottom, { opacity: shadowBottomOpacity, ...displayBottom });
   }
 
   changeDateFilter(task){
@@ -130,18 +134,12 @@ class ProjectList extends Component {
   showProjectSettings( project, e){
     e.stopPropagation();
 
-    let selectedProjects = this.state.selectedProjects;
-
-    if (this.state.selectedProjects.indexOf(project.id) < 0){
-      selectedProjects.push(project.id);
-    }
     this.setState({
       ...this.state,
       projectSettings: {
         show: true,
         project: project
-      },
-      selectedProjects: selectedProjects
+      }
     });
     document.addEventListener('click', this.handleDocumentClick, false);
   }
@@ -176,6 +174,14 @@ class ProjectList extends Component {
     })
   }
 
+  applyDateFilter(task){
+    let date = moment(task.date);
+    if (this.props.task.dateTo == null){
+      return true;
+    }
+    return (date.isBetween(this.props.task.dateFrom,this.props.task.dateTo,'days', '[]'));
+  }
+
   completeProject(project,e){   //sending request for updating the complete attribute of the project
     e.stopPropagation();
     let updatedProject = Object.assign({}, project, {status: "completed"});
@@ -206,7 +212,6 @@ class ProjectList extends Component {
     if (e){
       e.stopPropagation();
     }
-    console.log(project)
     if (project.UserProjects[0].newComment){
       this.props.clearNewComment({project: this.props.project});
     }
@@ -249,6 +254,7 @@ class ProjectList extends Component {
         <TaskItem
           key={task.id}
           task={task}
+          style={css.task}
           content={this.props.content}
           dateFormat={this.props.user.current.dateFormat}
           timeFormat={this.props.user.current.timeFormat}
@@ -297,6 +303,9 @@ class ProjectList extends Component {
         return null;
       }
     }
+
+    tasks = tasks.filter(this.applyDateFilter);
+
 
     let commentStyle = !project.UserProject? null : project.UserProjects[0].newComment ? {color: "#d90000"} : null
     if (this.state.selectedProjects.indexOf(project.id) < 0 && this.props.project.selected != project){
@@ -389,11 +398,11 @@ class ProjectList extends Component {
         <Scrollbars ref="scrollbars"
                     onUpdate={this.handleScrollUpdate}
                     style={{ width: '100%', height: '100%' }}>
-        {
-          projects.map( (project) =>
-            this.renderProject(project)
-          )
-        }
+          {
+            projects.map( (project) =>
+              this.renderProject(project)
+            )
+          }
         </Scrollbars>
 
         <div
@@ -416,17 +425,17 @@ class ProjectList extends Component {
     let content = this.props.content.page.project;
     return(
       <div className={css.base}>
-        <div className={css.projectTitle}>
-          <h1 className={css.title}>{content.title}</h1>
-          <AddProject
-            content={content}
-            buttonText={content.addProject}
-            buttonStyle={css.addTask}
-            sendButtonText={content.createProject}
-            update={false}
-            iconStyle={css.addIcon}
-            sendProject={this.props.sendProject}
-            deleteProject={this.props.deleteProject}/>
+        <div className={css.title}>
+            <h1>{content.title}</h1>
+            <AddProject
+              content={content}
+              buttonText={content.addProject}
+              buttonStyle={css.addTask}
+              sendButtonText={content.createProject}
+              update={false}
+              iconStyle={css.addIcon}
+              sendProject={this.props.sendProject}
+              deleteProject={this.props.deleteProject}/>
         </div>
 
         {this.renderDeleteModal()}      {/*modal for delete*/}

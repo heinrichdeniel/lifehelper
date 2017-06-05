@@ -34,13 +34,11 @@ export default class Header extends Component {
     if (!this.props.authDetails.token){
       return (
         <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
-          <div className="container">
-            <Link to={window.location.pathname.substring(0,3)} className={css.logo}><h1>LifeHelper</h1></Link>
-            <div className={"collapse navbar-collapse " +css.rightIcons} id="navbar-collapse">
-              <ul className="nav navbar-nav navbar-right">
-                {button}
-              </ul>
-            </div>
+          <Link to={window.location.pathname.substring(0,3)} className={css.logo}><h1>LifeHelper</h1></Link>
+          <div className={"collapse navbar-collapse " +css.rightIcons} id="navbar-collapse">
+            <ul className="nav navbar-nav navbar-right">
+              {button}
+            </ul>
           </div>
         </nav>
       )
@@ -48,23 +46,21 @@ export default class Header extends Component {
     else{
       return (
         <nav className={"navbar navbar-default "+css.nav + " "+fixed}>
-          <div className="container">
-            <Link to={window.location.pathname.substring(0,3)} className={css.logo}><h1>LifeHelper</h1></Link>
-            <div className={css.rightIcons+" "+ css.afterLogin} >
-              <ul className="nav navbar-nav navbar-right">
-                <Search/>
-                <AddTask
-                  buttonText={content.tasks.addTask.addTask}
-                  buttonStyle={css.addTask}
-                  sendButtonText={content.tasks.addTask.name}>
-                  <i className="fa fa-plus-square" aria-hidden="true"/>
-                </AddTask>
-                <div className={css.home} onClick={this.goToHomePage}>
-                  <i className="fa fa-home"/>
-                </div>
-                <Settings/>
-              </ul>
-            </div>
+          <Link to={window.location.pathname.substring(0,3)} className={css.logo}><h1>LifeHelper</h1></Link>
+          <div className={css.rightIcons+" "+ css.afterLogin} >
+            <ul className="nav navbar-nav navbar-right">
+              <Search/>
+              <AddTask
+                buttonText={content.tasks.addTask.addTask}
+                buttonStyle={css.addTask}
+                sendButtonText={content.tasks.addTask.name}>
+                <i className="fa fa-plus-square" aria-hidden="true"/>
+              </AddTask>
+              <div className={css.home} onClick={this.goToHomePage}>
+                <i className="fa fa-home"/>
+              </div>
+              <Settings/>
+            </ul>
           </div>
         </nav>
       )

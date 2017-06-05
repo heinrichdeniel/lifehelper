@@ -1,4 +1,7 @@
 .base{
+  background: -moz-linear-gradient(to bottom, #ddd 0%, #d6d6d6 22%, #e6e6e6 50%, #d6d6d6 78%, #ddd 100%);
+  background: -webkit-linear-gradient(to bottom, #ddd 0%, #d6d6d6 22%, #e6e6e6 50%, #d6d6d6 78%, #ddd 100%);
+  background: linear-gradient(to bottom, #ddd 0%, #d6d6d6 22%, #e6e6e6 50%, #d6d6d6 78%, #ddd 100%);  min-height: 80px;
   bottom:0;
   position: absolute;
   text-align: center;
@@ -6,8 +9,9 @@
   width: 100%;
   margin: 0;
   border-radius: 0;
-  box-shadow: 0 -1px 15px 1px #555;
   z-index: 100;
+  border-top: 1px solid #ccc;
+  box-shadow: 0px 0px 15px 0px #333;
   .flags{
     margin: auto;
     display: inline-flex;

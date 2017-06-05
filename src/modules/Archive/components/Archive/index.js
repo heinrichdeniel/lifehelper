@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import css from './style.scss';
 import TaskItem from 'modules/Tasks/components/TaskList/TaskItem';
 import ProjectList from 'modules/Projects/containers/ProjectContainer';
+import moment from 'moment';
 import Spinner from 'components/Spinner';
 import { Scrollbars } from 'react-custom-scrollbars';
 import domCss from 'dom-css';
@@ -10,6 +11,7 @@ class Archive extends Component {
   constructor(props){
     super(props);
 
+    this.applyDateFilter = this.applyDateFilter.bind(this);
     this.selectTab = this.selectTab.bind(this);
     this.renderTask = this.renderTask.bind(this);
     this.renderContent = this.renderContent.bind(this);
@@ -25,6 +27,14 @@ class Archive extends Component {
 
   componentWillMount() {
     this.props.getArchive();
+  }
+
+  applyDateFilter(task){
+    let date = moment(task.date);
+    if (this.props.task.dateTo == null){
+      return true;
+    }
+    return (date.isBetween(this.props.task.dateFrom,this.props.task.dateTo,'days', '[]'));
   }
 
   handleScrollUpdate(values) {
@@ -65,7 +75,7 @@ class Archive extends Component {
   }
 
   renderContent(){
-    let tasks = this.props.task.list;
+    let tasks = this.props.task.list.filter(this.applyDateFilter);
 
     if (this.state.activeTab == 1){        //if the task tab is selected then return the archived tasks
       return (
@@ -104,13 +114,15 @@ class Archive extends Component {
 
     return(
       <div className={css.base}>
-        <div className={css.tabs}>
-
-          <div onClick={this.selectTab.bind(this,1)} className={css.taskTab +"   " + ((this.state.activeTab==1) ? css.active : null)}>
-            {this.props.content.page.archive.taskTab}
-          </div>
-          <div onClick={this.selectTab.bind(this,2)} className={css.projectTab +"   " + ((this.state.activeTab==2) ? css.active : null)}>
-            {this.props.content.page.archive.projectTab}
+        <div className={css.title}>
+          <h1>{this.props.content.page.archive.title}</h1>
+          <div className={css.tabs}>
+            <div onClick={this.selectTab.bind(this,1)} className={css.taskTab +"   " + ((this.state.activeTab==1) ? css.active : null)}>
+              {this.props.content.page.archive.taskTab}
+            </div>
+            <div onClick={this.selectTab.bind(this,2)} className={css.projectTab +"   " + ((this.state.activeTab==2) ? css.active : null)}>
+              {this.props.content.page.archive.projectTab}
+            </div>
           </div>
         </div>
         {content}

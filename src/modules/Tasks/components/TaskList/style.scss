@@ -2,76 +2,90 @@
 .base {
   background: url('/assets/img/background2.jpg') center;
   border-radius: 5px;
-  max-height: 80vh;
-  z-index: 1000;
-  padding-bottom: 0;
-  box-shadow: 2px 2px 25px -5px #333;
-
+  position: fixed;
+  top: 80px;
+  bottom: 80px;
+  width: 100%;
   .tasks {
-    border-top: 3px solid $primary-color;
+    position: relative;
+    height: 100%;
+    width: 50%;
+    left: 50%;
+    padding: 0 5px;
+    transform: translateX(-50%);
     overflow-y: auto;
     overflow-x: hidden;
-    height: 60vh;
-    padding: 0;
-    padding-left: 7.5px;
-    margin-top: 15px;
-    @media screen and (max-height: 600px) {
-      max-height: 50vh;
+    box-shadow: inset 0 0px 10px 0px #555;
+    padding-top: 42px;
+    margin-top: 3px;
+    @media screen and (min-width: 1200px) {
+      width: 40%;
     }
-    @media screen and (max-height: 500px) {
-      max-height: 43vh;
+    @media screen and (max-width: 768px) {
+      left: 50px;
+      transform: none;
+      right: 50px;
+      width: auto;
+      position: absolute;
+    }
+    @media screen and (max-width: 500px) {
+      left: 35px;
+      right: 35px;
     }
   }
   h1 {
     color: $primary-color;
     text-align: left;
-    margin: 7.5px;
-    margin-bottom: 10px;
+    margin: 7.5px 0;
     font-size: 25px;
-    font-weight: 700;
-  }
-  .projectTitle {
-    padding: 7.5px;
-    padding-bottom: 0;
-    .addIcon {
-      border-color: $primary-color;
-      position: absolute;
-      right: 0;
-      top: -33px;
-      width: 30px;
-      height: 30px;
-      margin-right: 3px;
-      i {
-        font-size: 22px;
-        color: $primary-color;
-      }
-      &:hover {
-        background-color: $primary-color;
-        i {
-          color: white;
-        }
-      }
-    }
-  }
-
-  .shadowTopStyle{
-    z-index: 10;
-    position: absolute;
-    top: 57px;
-    left: 0px;
-    right: 0px;
-    height: 50px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
-  }
-  .shadowBottomStyle{
-    z-index: 10;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    height: 50px;
-    border-radius: 5px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+    font-weight: 500;
   }
 }
 
+.title {
+  padding: 0 15px;
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0px 0px 3px 0px #333;
+  z-index: 100;
+  background-color: #ddd;
+  .addIcon {
+    border-color: $primary-color;
+    position: absolute;
+    right: 0;
+    top: -31px;
+    width: 30px;
+    height: 30px;
+    margin-right: 3px;
+    i {
+      font-size: 22px;
+      color: $primary-color;
+    }
+    &:hover {
+      background-color: $primary-color;
+      i {
+        color: white;
+      }
+    }
+  }
+}
+
+.shadowTopStyle{
+  position: absolute;
+  top: 42px;
+  left: 0px;
+  right: 0px;
+  height: 50px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.shadowBottomStyle{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 50px;
+  border-radius: 5px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+}

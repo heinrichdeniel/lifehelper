@@ -121,8 +121,6 @@ class CommentPanel extends Component {
   }
 
   newComment(){
-    console.log("ASD")
-
     this.setState({
       ...this.state,
       newComment: !this.state.newComment,

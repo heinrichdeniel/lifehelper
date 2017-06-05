@@ -14,9 +14,9 @@ const initialState = {
       status: "pending",
       commented: false
     },
-    dateFrom: moment().add(-1, 'years'),
-    dateTo: moment().add(1, 'years'),
-    filteringByDate: false,
+    dateFrom: null,
+    dateTo: null,
+    filteringByDate: true,
     pending: false,
     error: false
   },
@@ -187,7 +187,8 @@ const TaskReducer = (state = initialState, action = {}) => {
         task: {
           ...state.task,
           dateFrom: action.payload.dateFrom,
-          dateTo: action.payload.dateTo
+          dateTo: action.payload.dateTo,
+          filteringByDate: true
         }
       };
 

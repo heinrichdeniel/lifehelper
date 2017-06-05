@@ -14,8 +14,8 @@ export function sendTask(payload) {
       ],
       payload: {
         promise: api.createTask({
-                    ...payload,
-                    token: getState().User.authDetails.token
+          ...payload,
+          token: getState().User.authDetails.token
         })
       }
     }).then(function(){
@@ -107,6 +107,7 @@ export function changeDateFilter(filter) {
       type: constants.CHANGE_DATE_FILTER,
       payload: filter
     })
+
   })
 }
 

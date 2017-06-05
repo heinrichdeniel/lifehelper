@@ -14,10 +14,7 @@ class LeftPanel extends Component{
 
     this.state={
       arrow: "right",
-      style:{
-        display: "none",
-        width: "0"
-      },
+      style: css.bodyHide,
       scrollTop: 0,
       scrollHeight: 0,
       clientHeight: 0
@@ -39,10 +36,7 @@ class LeftPanel extends Component{
       this.setState({
         ...this.state,
         arrow: "left",
-        style: {
-          display: 'block',
-          width: "250px"
-        }
+        style: css.bodyShow
 
       })
     }
@@ -50,10 +44,7 @@ class LeftPanel extends Component{
       this.setState({
         ...this.state,
         arrow: "right",
-        style: {
-          display: "none",
-          width: "0"
-        }
+        style: css.bodyHide
       })
     }
   }
@@ -135,7 +126,7 @@ class LeftPanel extends Component{
     return(
       <div className={css.base}>
         <i className={"fa fa-angle-double-"+this.state.arrow +" " + css.arrow} onClick={this.changeVisibility} />
-        <div style={this.state.style} className={css.body}>
+        <div className={css.body + " " + this.state.style}>
 
           <div className={css.projects}>
             <h3>{this.props.content.page.map.selectProjects}</h3>

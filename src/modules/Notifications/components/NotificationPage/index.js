@@ -10,7 +10,6 @@ class Notifications extends Component{
   constructor(props) {
     super(props);
 
-    this.backToPreviousPage =  this.backToPreviousPage.bind(this);
   }
 
   componentWillMount(){

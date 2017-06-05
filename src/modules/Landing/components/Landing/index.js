@@ -38,7 +38,7 @@ class Landing extends Component {
         content = <Archive/>
       }
       return(
-        <div className={css.content + " container"}>
+        <div className={css.content }>
           <Filters content={this.props.content.page.filters}/>
           <Shortcuts content={this.props.content}/>
           <div className={css.taskList + " col-sm-7 col-lg-7"}>

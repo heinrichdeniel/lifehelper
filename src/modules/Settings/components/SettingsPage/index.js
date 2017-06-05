@@ -66,7 +66,7 @@ class SettingsPage extends Component {
     return (
       <div >
         <Header user={this.props.user}/>
-        <div className={"container " + css.base}>
+        <div className={css.base}>
           <div className={css.body}>
           <Menu content={this.props.content.page.settings.menu}
                 onClick={this.selectTab}
