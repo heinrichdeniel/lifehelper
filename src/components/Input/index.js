@@ -13,6 +13,14 @@ class Input extends Component{
     if (this.props.focused){
       this.input.focus();
     }
+    if (this.props.onEnterDown){
+      let self = this;
+      $('input').on('keydown', function(event) {
+        if (event.keyCode == 13){
+          self.props.onEnterDown(event);
+        }
+      });
+    }
   }
 
   render(){

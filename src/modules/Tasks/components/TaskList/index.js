@@ -6,17 +6,18 @@ import AddTask from '../../containers/AddTaskContainer'
 import domCss from 'dom-css';
 import Spinner from 'components/Spinner';
 import { Scrollbars } from 'react-custom-scrollbars';
+import Reorder from 'react-reorder';
 
 class TaskList extends Component {
   constructor(props){
     super(props);
 
     this.applyDateFilter = this.applyDateFilter.bind(this);
-    this.renderTask = this.renderTask.bind(this);
     this.renderTitle = this.renderTitle.bind(this);
     this.changeName = this.changeName.bind(this);
     this.handleScrollUpdate = this.handleScrollUpdate.bind(this);
     this.renderEmptyList = this.renderEmptyList.bind(this);
+    this.onSort = this.onSort.bind(this);
 
     this.state = {
       scrollTop: 0,
@@ -27,6 +28,15 @@ class TaskList extends Component {
 
   componentWillMount() {
     this.props.getTaskList();
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.task.list!= this.props.task.list){
+      this.setState({
+        ...this.state,
+        list: null
+      })
+    }
   }
 
   applyDateFilter(task){
@@ -62,36 +72,15 @@ class TaskList extends Component {
 
     return (
       <div className={css.title}>
-          <h1>{content.tasks.yourTasks}</h1>
-          <AddTask
-            buttonText={content.tasks.addTask.addTask}
-            buttonStyle={css.addTask}
-            sendButtonText={content.tasks.addTask.name}
-            update={false}
-            iconStyle={css.addIcon}/>
+        <h1>{content.tasks.yourTasks}</h1>
+        <AddTask
+          buttonText={content.tasks.addTask.addTask}
+          buttonStyle={css.addTask}
+          sendButtonText={content.tasks.addTask.name}
+          update={false}
+          iconStyle={css.addIcon}/>
       </div>
     );
-  }
-
-  renderTask(task){
-    if (task && !task.deleted && !task.archived && !task.completed){         //if the task was not deleted
-      return (
-        <TaskItem
-          key={task.id}
-          task={task}
-          content={this.props.content}
-          dateFormat={this.props.user.current.dateFormat}
-          timeFormat={this.props.user.current.timeFormat}
-          deleteTask={this.props.deleteTask}
-          updateTask={this.props.updateTask}
-          users={this.props.user.list}
-          getUsersByFilter={this.props.getUsersByFilter}
-          shareTask={this.props.shareTask}
-          clearNewComment={this.props.clearNewComment}
-          selectTask={this.props.selectTask}/>
-      )
-    }
-    return  null;
   }
 
   renderEmptyList(tasks){
@@ -105,45 +94,90 @@ class TaskList extends Component {
     }
   }
 
+
+  onSort(e,item,from,to,list){
+    let tasks = this.props.task.list;
+    if (to != from){
+      e.stopPropagation();
+      this.setState({
+        list: list
+      })
+      if (to < from){
+        if (to > 0 ){
+          this.props.changeTaskOrder({taskId: item.task.id, priority: ((tasks[to-1].UserTasks[0].priority + tasks[to].UserTasks[0].priority)/2)})
+        }
+        else{
+          this.props.changeTaskOrder({taskId: item.task.id, priority: ((tasks[to].UserTasks[0].priority)/2)})
+        }
+      }
+      else{
+        if (to < tasks.length - 1) {
+          this.props.changeTaskOrder({taskId: item.task.id, priority: ((tasks[to].UserTasks[0].priority + tasks[to + 1].UserTasks[0].priority) / 2)})
+        }
+        else {
+          this.props.changeTaskOrder({taskId: item.task.id, priority: ((tasks[to].UserTasks[0].priority + (Number.MAX_VALUE/2)) / 2)})
+        }
+      }
+    }
+  }
+
   render() {
-    if (this.props.task.pending) {    /* while dont get response from server */
-      return(
-        <div className={css.base}>
-          {this.renderTitle()}
-          <div className={css.tasks}>
-            <Spinner/>
-          </div>
-        </div>
-      )
+    let tasks = this.props.task.list.filter(this.applyDateFilter);
+    let list = [];
+    if (this.state.list){
+      list = this.state.list;
     }
-    else{
-
-      let tasks = this.props.task.list.filter(this.applyDateFilter);
-      return(
-        <div className={css.base}>
-          {this.renderTitle()}
-          <div className={css.tasks}>
-            <Scrollbars ref="scrollbars"
-                        onUpdate={this.handleScrollUpdate}
-                        style={{ width: '100%', height: '100%' }}>
-              {this.renderEmptyList(tasks)}
-              {
-                tasks.map( (task) =>
-                  this.renderTask(task)
-                )
-              }
-            </Scrollbars>
-
-            <div
-              ref="shadowTop"
-              className={css.shadowTopStyle}/>
-            <div
-              ref="shadowBottom"
-              className={css.shadowBottomStyle}/>
-          </div>
-        </div>
-      );
+    else {
+      tasks.map((task, index) => {
+        if (task && !task.deleted && !task.archived && !task.completed) {         //if the task was not deleted
+          list.push({
+            task: task,
+            key: index,
+            content: this.props.content,
+            dateFormat: this.props.user.current.dateFormat,
+            timeFormat: this.props.user.current.timeFormat,
+            deleteTask: this.props.deleteTask,
+            updateTask: this.props.updateTask,
+            users: this.props.user.list,
+            getUsersByFilter: this.props.getUsersByFilter,
+            shareTask: this.props.shareTask,
+            clearNewComment: this.props.clearNewComment,
+            selectTask: this.props.selectTask
+          })
+        }
+      });
     }
+    return(
+      <div className={css.base}>
+        {this.renderTitle()}
+        <div className={css.tasks}>
+          <Scrollbars ref="scrollbars"
+                      onUpdate={this.handleScrollUpdate}
+                      style={{ width: '100%', height: '100%' }}>
+            {this.renderEmptyList(tasks)}
+            <Reorder
+              itemKey="key"
+              lock="horizontal"
+              holdTime="500"
+              list={list}
+              template= {TaskItem}
+              callback={this.onSort}
+              listClass={css.myList}
+              itemClass={css.listItem}
+              selected={this.state.selected}
+              selectedKey="key"
+              disableReorder={false}/>
+          </Scrollbars>
+
+          <div
+            ref="shadowTop"
+            className={css.shadowTopStyle}/>
+          <div
+            ref="shadowBottom"
+            className={css.shadowBottomStyle}/>
+        </div>
+      </div>
+    );
   }
 }
 

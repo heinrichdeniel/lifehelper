@@ -5,44 +5,51 @@ import reactDom from 'react-dom';
 import { browserHistory } from 'react-router';
 import Mousetrap from 'mousetrap'
 
-class CommentBox extends Component {
-  constructor(props){
-    super(props);
-    this.sendComment = this.sendComment.bind(this);
-    this.renderComment = this.renderComment.bind(this);
-    this.scrollToBottom = this.scrollToBottom.bind(this);
-    this.goToProjectPage = this.goToProjectPage.bind(this);
-    this.goToTaskPage = this.goToTaskPage.bind(this);
+  class CommentBox extends Component {
+    constructor(props){
+      super(props);
+      this.sendComment = this.sendComment.bind(this);
+      this.renderComment = this.renderComment.bind(this);
+      this.scrollToBottom = this.scrollToBottom.bind(this);
+      this.goToProjectPage = this.goToProjectPage.bind(this);
+      this.goToTaskPage = this.goToTaskPage.bind(this);
 
-  }
-
-  componentDidMount() {
-    this.scrollToBottom();
-    let self = this;
-    $('textarea').on('keydown', function(event) {
-      if (event.keyCode == 13){
-        if (!event.shiftKey) self.sendComment(event);
+      this.state = {
+        newComment: null
       }
-      if (event.keyCode == 27){
-        self.props.closePanel();
-      }
-    });
-    this.textarea.focus();
-    Mousetrap.bind(['esc'], this.props.closePanel);
-  }
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-    this.textarea.focus();
-  }
+    }
 
-  componentWillUnmount() {
-    Mousetrap.unbind(['esc'], this.props.closePanel);
-  }
+    componentDidMount() {
+      this.scrollToBottom();
+      let self = this;
+      $('textarea').on('keydown', function(event) {
+        if (event.keyCode == 13){
+          if (!event.shiftKey) self.sendComment(event);
+        }
+        if (event.keyCode == 27){
+          self.props.closePanel();
+        }
+      });
+      this.textarea.focus();
+      Mousetrap.bind(['esc'], this.props.closePanel);
+    }
+
+    componentDidUpdate() {
+      this.scrollToBottom();
+      this.textarea.focus();
+    }
+
+    componentWillUnmount() {
+      Mousetrap.unbind(['esc'], this.props.closePanel);
+    }
 
 
   sendComment(e){
     e.preventDefault();
+    this.setState({
+      newComment: this.props.comment
+    });
     if (this.props.comment.length > 0){
       let payload = {
         comment: this.props.comment,
@@ -99,7 +106,6 @@ class CommentBox extends Component {
       }
     }
 
-
     return (
       <div className={css.base} id="box">
         <div className={css.title}>
@@ -107,7 +113,8 @@ class CommentBox extends Component {
           <i className={css.closeIcon + " fa fa-times"} onClick={this.props.closePanel}/>
         </div>
         <div ref={(comments) => { this.comments = comments; }} className={css.comments}>
-            {comments}
+          {comments}
+          {this.state.newComment && this.props.pending ? this.renderComment({text: this.state.newComment,User: this.props.user.current}) : null}
         </div>
 
         <div className={css.newComment}>

@@ -19,6 +19,7 @@ export function sendTask(payload) {
         })
       }
     }).then(function(){
+      getTaskList();
       commentActions.getTasksAndProjects();
       commentActions.getComments();
     })

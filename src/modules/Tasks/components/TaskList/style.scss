@@ -71,6 +71,22 @@
   }
 }
 
+.listItem {
+  transform-origin: 50% 50%;
+  position: relative;
+  &:hover {
+    z-index: 200;
+  }
+}
+
+:global .dragged{
+  z-index: 300;
+  opacity: 0;
+  margin-top: -100px;
+  left: 5px!important;
+}
+
+
 .emptyList{
   position: absolute;
   text-align: center;

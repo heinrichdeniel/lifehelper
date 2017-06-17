@@ -224,7 +224,9 @@ class CommentPanel extends Component {
                     closePanel={this.clearSelect}
                     dateFormat={this.props.dateFormat}
                     timeFormat={this.props.timeFormat}
-                    clearNewComment={this.props.clearNewComment}/>
+                    clearNewComment={this.props.clearNewComment}
+                    user={this.props.user}
+                    pending={this.props.comments.pending}/>
       )
     }
   }

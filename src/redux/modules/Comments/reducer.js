@@ -4,15 +4,16 @@ const initialState = {
   comments: {
     tasks: [],
     projects: [],
-    count: 0
+    count: 0,
+    error: false,
+    pending: false
   },
   selectedTaskId: null,
   selectedProjectId: null,
   taskList: [],
   projectList: [],
   showPanel: false,
-  error: false,
-  pending: false
+
 };
 
 const CommentReducer = (state = initialState, action = {}) => {
@@ -26,8 +27,11 @@ const CommentReducer = (state = initialState, action = {}) => {
     case constants.GET_ALL_PENDING:
       return {
         ...state,
-        pending: true,
-        error: false
+        comments:{
+          ...state.comments,
+          pending: true,
+          error: false
+        }
       };
 
     case constants.GET_ALL_SUCCESS:
@@ -35,43 +39,61 @@ const CommentReducer = (state = initialState, action = {}) => {
         ...state,
         taskList: action.payload.tasks,
         projectList: action.payload.projects,
-        pending: false,
-        error: false
+        comments: {
+          ...state.comments,
+          pending: false,
+          error: false
+        }
       };
 
     case constants.GET_ALL_ERROR:
       return {
         ...state,
-        pending: false,
-        error: action.payload.message
+        comments: {
+          ...state.comments,
+          pending: false,
+          error: action.payload.message
+        }
       };
 
     case constants.SEND_COMMENT_PENDING:
       return {
         ...state,
-        pending: true,
-        error: false
+        comments: {
+          ...state.comments,
+          pending: true,
+          error: false
+        }
       };
 
     case constants.SEND_COMMENT_SUCCESS:
       return {
         ...state,
-        pending: false,
-        error: false
+        comments: {
+          ...state.comments,
+          pending: false,
+          error: false
+        }
       };
 
     case constants.SEND_COMMENT_ERROR:
       return {
         ...state,
-        pending: false,
-        error: action.payload.message
+        comments: {
+          ...state.comments,
+          pending: false,
+          error: action.payload.message
+        }
       };
 
     case constants.GET_COMMENTS_PENDING:
       return {
         ...state,
-        pending: true,
-        error: false
+        comments: {
+          ...state.comments,
+          pending: true,
+          error: false
+        }
       };
 
     case constants.GET_COMMENTS_SUCCESS:
@@ -80,24 +102,31 @@ const CommentReducer = (state = initialState, action = {}) => {
         comments:{
           tasks: action.payload.taskComments,
           projects: action.payload.projectComments,
-          count: action.payload.commentCount
-        },
-        pending: false,
-        error: false
+          count: action.payload.commentCount,
+          pending: false,
+          error: false
+        }
+
       };
 
     case constants.GET_COMMENTS_ERROR:
       return {
         ...state,
-        pending: false,
-        error: action.payload.message
+        comments: {
+          ...state.comments,
+          pending: false,
+          error: action.payload.message
+        }
       };
 
     case constants.CLEAR_NEW_COMMENT_PENDING:
       return {
         ...state,
-        pending: true,
-        error: false
+        comments: {
+          ...state.comments,
+          pending: true,
+          error: false
+        }
       };
 
     case constants.CLEAR_NEW_COMMENT_SUCCESS:
@@ -122,17 +151,20 @@ const CommentReducer = (state = initialState, action = {}) => {
         comments:{
           tasks: tasks,
           projects: projects,
-          count: state.comments.count - 1
-        },
-        pending: false,
-        error: false
+          count: state.comments.count - 1,
+          pending: false,
+          error: false
+        }
       };
 
     case constants.CLEAR_NEW_COMMENT_ERROR:
       return {
         ...state,
-        pending: false,
-        error: action.payload.message
+        comments: {
+          ...state.comments,
+          pending: false,
+          error: action.payload.message
+        }
       };
 
     case constants.SELECT_TASK:

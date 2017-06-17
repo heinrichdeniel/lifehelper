@@ -53,8 +53,8 @@ const TaskReducer = (state = initialState, action = {}) => {
         list = state.task.list.filter((task) => task.id != action.payload.task.id)
       }else{
         list = [
-          task,
-          ...state.task.list.filter((task) => task.id != action.payload.task.id)
+          ...state.task.list.filter((task) => task.id != action.payload.task.id),
+          task
         ]
       }
       return {
@@ -152,7 +152,6 @@ const TaskReducer = (state = initialState, action = {}) => {
       };
 
     case constants.DELETE_TASK_SUCCESS:
-      console.log(action)
       return {
         ...state,
         task: {

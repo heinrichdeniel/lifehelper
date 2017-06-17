@@ -30,7 +30,6 @@ class TaskItem extends Component {
     this.renderShareModal = this.renderShareModal.bind(this);
     this.renderDeleteModal = this.renderDeleteModal.bind(this);
 
-
     this.state= {
       showOptions: false,
       showDeleteModal: false,
@@ -41,7 +40,8 @@ class TaskItem extends Component {
   }
 
   componentDidMount() {
-    if (this.props.task.UserTasks && this.props.task.UserTasks[0].newComment) {
+    let props = this.props.item ? this.props.item : this.props;
+    if (props.task.UserTasks && props.task.UserTasks[0].newComment) {
       this.setState({
         ...this.state,
         commentStyle:  {color: "#d30000"}
@@ -50,7 +50,8 @@ class TaskItem extends Component {
   }
 
   onClick(){
-    browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+this.props.task.id);
+    let props = this.props.item ? this.props.item : this.props;
+    browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+props.task.id);
   }
 
   showOptions(e){
@@ -89,7 +90,8 @@ class TaskItem extends Component {
   }
 
   deleteTask(){       //sending request for deleting the task
-    this.props.deleteTask(this.props.task.id);
+    let props = this.props.item ? this.props.item : this.props;
+    props.deleteTask(props.task.id);
   }
 
   editTask(e){        //updating the task details
@@ -106,8 +108,9 @@ class TaskItem extends Component {
 
   completeTask(e){   //sending request for updating the complete attribute of the task
     e.stopPropagation();
-    let task = Object.assign({},this.props.task,{status: "completed"});
-    this.props.updateTask(task);
+    let props = this.props.item ? this.props.item : this.props;
+    let task = Object.assign({},props.task,{status: "completed"});
+    props.updateTask(task);
     this.setState({
       ...this.state,
       style: {
@@ -119,8 +122,9 @@ class TaskItem extends Component {
 
   archiveTask(e){   //sending request for updating the archive attribute of the task
     e.stopPropagation();
-    let task = Object.assign({},this.props.task,{status: "archived"});
-    this.props.updateTask(task);
+    let props = this.props.item ? this.props.item : this.props;
+    let task = Object.assign({},props.task,{status: "archived"});
+    props.updateTask(task);
     this.setState({
       ...this.state,
       style: {
@@ -132,8 +136,9 @@ class TaskItem extends Component {
 
   restoreTask(e){   //sending request for updating the archived attribute of the task
     e.stopPropagation();
-    let task = Object.assign({},this.props.task,{status: "pending", date: moment()});
-    this.props.updateTask(task);
+    let props = this.props.item ? this.props.item : this.props;
+    let task = Object.assign({},props.task,{status: "pending", date: moment()});
+    props.updateTask(task);
     this.setState({
       ...this.state,
       style: {
@@ -158,6 +163,7 @@ class TaskItem extends Component {
   }
 
   openCommentBox(e){
+    let props = this.props.item ? this.props.item : this.props;
     if (e){
       e.stopPropagation();
     }
@@ -165,10 +171,10 @@ class TaskItem extends Component {
       ...this.state,
       commentStyle: null
     });
-    if (this.props.task.UserTasks[0].newComment) {
-      this.props.clearNewComment({task: this.props.task});
+    if (props.task.UserTasks[0].newComment) {
+      props.clearNewComment({task: props.task});
     }
-    this.props.selectTask(this.props.task.id);
+    props.selectTask(props.task.id);
   }
 
   selectUsers(selected){
@@ -179,8 +185,9 @@ class TaskItem extends Component {
   }
 
   sendShare(){      //sending the share request to the server
+    let props = this.props.item ? this.props.item : this.props;
     if (this.state.selectedUsers.length > 0){
-      this.props.shareTask({users: this.state.selectedUsers, task: this.props.task});
+      props.shareTask({users: this.state.selectedUsers, task: props.task});
     }
 
     this.setState({
@@ -192,12 +199,13 @@ class TaskItem extends Component {
   }
 
   renderDeleteModal(){
-    let content = this.props.content.page.tasks.deleteTask;
+    let props = this.props.item ? this.props.item : this.props;
+    let content = props.content.page.tasks.deleteTask;
     return (
       <Modal show={this.state.showDeleteModal}  dialogClassName={css.modal} onHide={this.showHideDeleteModal}>
         <div  className={css.container}>
           <i className={`fa fa-close ${css.close}`} onClick={this.showHideDeleteModal} />
-          <h1>{this.props.task.name}</h1>
+          <h1>{props.task.name}</h1>
           <p>{content.question}</p>
           <Button type="button" onClick={this.deleteTask} text={content.delete} style={css.confirm}/>
           <Button type="button" onClick={this.showHideDeleteModal} text={content.cancel} style={css.cancel}/>
@@ -208,20 +216,24 @@ class TaskItem extends Component {
 
 
   renderEditTask(){
+    let props = this.props.item ? this.props.item : this.props;
+
     if (this.state.editTask){      //if the user want to add a new task to this project
       return (
         <AddTask
-          buttonText={this.props.content.page.tasks.editTask.name}
-          sendButtonText={this.props.content.page.tasks.editTask.update}
+          buttonText={props.content.page.tasks.editTask.name}
+          sendButtonText={props.content.page.tasks.editTask.update}
           showModal={true}
-          taskToUpdate={this.props.task}
+          taskToUpdate={props.task}
           onHide={this.editTask}/>
       )
     }
   }
 
   renderCircleBeforeTitle(){      //icon to show if the task is completed or uncompleted
-    if (this.props.task.status == "completed" || this.props.task.status == "archived")  {
+    let props = this.props.item ? this.props.item : this.props;
+
+    if (props.task.status == "completed" || props.task.status == "archived")  {
       return (
         <div className={css.restoreTask} onClick={this.restoreTask}>
           <i className="fa fa-check" aria-hidden="true"/>
@@ -238,20 +250,22 @@ class TaskItem extends Component {
   }
 
   renderShareModal(){
-    let content = this.props.content.page.tasks.share;
+    let props = this.props.item ? this.props.item : this.props;
+
+    let content = props.content.page.tasks.share;
     return (
       <Modal show={this.state.showShareModal}   dialogClassName={css.modal} onHide={this.shareTask}>
         <div  className={css.container}>
           <i className={`fa fa-close ${css.close}`} onClick={this.shareTask} />
           <h1>{content.name}</h1>
-          <MultiSelect options={this.props.users}
-                       getUsersByFilter={this.props.getUsersByFilter}
+          <MultiSelect options={props.users}
+                       getUsersByFilter={props.getUsersByFilter}
                        placeholder={content.search}
                        noResultsText={content.noResultsText}
                        typeToSearch={content.typeToSearch}
                        selected={this.state.selectedUsers}
                        selectValue={this.selectUsers}
-                       taskId={this.props.task.id}/>
+                       taskId={props.task.id}/>
           <Button type="button" onClick={this.sendShare} text={content.shareTask} style={css.share}/>
           <Button type="button" onClick={this.shareTask} text={content.cancel} style={css.cancelRed}/>
 
@@ -261,56 +275,65 @@ class TaskItem extends Component {
   }
 
   render() {
+    let props = this.props.item ? this.props.item : this.props;
     let project = null;
 
-    if (this.props.task.Project) {  //if a task was selected
+    if (props.task.Project) {  //if a task was selected
       project =  (
         <p className={css.project}>
           <i className={" fa fa-chain"}/>
-          {this.props.task.Project.name}
+          {props.task.Project.name}
         </p>
       )
     }
 
-    let date = moment(this.props.task.date).format(this.props.dateFormat);
+    let date = moment(props.task.date).format(props.dateFormat);
     let overdue = null;
-    if (this.props.task.time){
-      date += ", "+moment(this.props.task.time,"hh:m").format(this.props.timeFormat)
+    if (props.task.time){
+      date += ", "+moment(props.task.time,"hh:m").format(props.timeFormat)
     }
 
-    if (this.props.task.status == "archived" || this.props.task.status == "completed"){     //if the task was moved to archive
+    let editIcon = <i className={css.editIcon + " fa fa-pencil"}  data-tip={props.content.page.tasks.editTask.name} onClick={this.editTask} />;
+    let shareIcon = <TaskShare task={props.task}/>;
+    let commentIcon = <i className={css.commentIcon + " fa fa-commenting"} data-tip={props.content.page.comments.newComment} style={this.state.commentStyle} onClick={this.openCommentBox}/>
+    if (props.task.status == "archived" || props.task.status == "completed"){     //if the task was moved to archive
       date = (
         <span>
           <i className="fa fa-check" aria-hidden="true"/>
-          {moment(this.props.task.completedAt).format(this.props.dateFormat+", "+this.props.timeFormat)}
+          {moment(props.task.completedAt).format(props.dateFormat+", "+props.timeFormat)}
         </span>
       )
+      editIcon = null;
+      shareIcon = null;
+      commentIcon = null;
     }
-    else if (moment(this.props.task.date).isBefore(moment(),'days')){
+    else if (moment(props.task.date).isBefore(moment(),'days')){
       overdue=<i className={css.overdue + " fa fa-exclamation-triangle"}/>;
     }
-    else if (moment(this.props.task.date).isBefore(moment())){
+    else if (moment(props.task.date).isBefore(moment())){
       overdue=<i className={css.overdue + " fa fa-exclamation-triangle"} style={{color: 'orange'}}/>;
     }
 
     return(
-      <div className={css.base + " " + this.props.style} style={this.state.style} onClick={this.onClick}>
+      <div className={css.base + " " + props.style} style={this.state.style} onClick={this.onClick}>
         <div className={css.task}>
-          <h2>{this.props.task.name}</h2>
+          <h2>{props.task.name}</h2>
           {project}
           <p className={css.date}>{overdue}{date}</p>
           {this.renderCircleBeforeTitle()}
-          <i className={css.editIcon + " fa fa-pencil"}  data-tip={this.props.content.page.tasks.editTask.name} onClick={this.editTask} />
-          <i className={css.commentIcon + " fa fa-commenting"} data-tip={this.props.content.page.comments.newComment} style={this.state.commentStyle} onClick={this.openCommentBox}/>
-          <TaskShare task={this.props.task}/>    {/* share modal */}
-          <i className={css.deleteIcon + " fa fa-trash"} data-tip={this.props.content.page.tasks.deleteTask.name} onClick={this.showHideDeleteModal} />
+
+          {commentIcon}
+          {shareIcon}
+          {editIcon}
+
+          <i className={css.deleteIcon + " fa fa-trash"} data-tip={props.content.page.tasks.deleteTask.name} onClick={this.showHideDeleteModal} />
 
           <ReactTooltip />
         </div>
         {this.renderDeleteModal()}    {/*modal for deleting a task*/}
         {this.renderEditTask()}      {/*modal for editing the new task*/}
         {this.renderShareModal()}      {/*modal for sharing the task*/}
-        {this.state.shareSent ? <ConfirmationBox content={this.props.content.page.tasks.share.confirmation}/> : null}      {/*confirmation after sending share*/}
+        {this.state.shareSent ? <ConfirmationBox content={props.content.page.tasks.share.confirmation}/> : null}      {/*confirmation after sending share*/}
       </div>
     );
   }

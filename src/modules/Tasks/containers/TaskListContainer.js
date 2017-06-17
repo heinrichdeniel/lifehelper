@@ -20,7 +20,8 @@ const mapActionsToProps = (dispatch) => ({
   getUsersByFilter: userActions.getUsersByFilter,
   shareTask: actions.shareTask,
   selectTask: commentActions.selectTask,
-  clearNewComment: commentActions.clearNewComment
+  clearNewComment: commentActions.clearNewComment,
+  changeTaskOrder: actions.changeTaskOrder
 });
 const mapStateToProps = (state) => ({
   task: selectors.task(state),

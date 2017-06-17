@@ -84,7 +84,7 @@ class AddTask extends Component {
     document.removeEventListener('click', this.handleDocumentClick, false);
   }
 
-    changeName(e){
+  changeName(e){
     this.setState({
       ...this.state,
       task:{
@@ -222,7 +222,9 @@ class AddTask extends Component {
   }
 
   sendTask(e){
-    e.preventDefault();
+    if (e){
+      e.preventDefault();
+    }
     if (this.state.task.name.length < 3 || this.state.task.name.length > 20) {
       return this.setState({error: this.props.content.page.tasks.shortTaskName})
     }
@@ -292,7 +294,7 @@ class AddTask extends Component {
 
             <h1>{content.addTask.addTask}</h1>
             <form  action="POST" onSubmit={this.nextStep}>
-              <Input focused={true} type="text" placeholder={content.name} value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
+              <Input onEnterDown={this.sendTask} focused={true} type="text" placeholder={content.name} value={task.name} onChange={this.changeName} style={css.input} minLength={3} maxLength={20} />
               <TextArea type="text" placeholder={content.description} value={task.description} onChange={this.changeDescription}  />
               <DatePicker value={task.date} onChange={this.changeDate} dateFormat={this.props.user.dateFormat} style={css.datePicker}/>
               <TimePicker value={task.time} onClick={this.timeModalChanged} onChange={this.changeTime} timeFormat={this.props.user.timeFormat}/>

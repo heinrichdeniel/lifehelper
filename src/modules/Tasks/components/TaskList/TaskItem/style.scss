@@ -3,6 +3,9 @@
   position: relative;
   max-height: 200px;
   padding: 0 15px ;
+  &:hover{
+    z-index: 100;
+  }
   .task{
     width: 100%;
     border-radius: 5px;
@@ -89,8 +92,8 @@
       top: 10px;
       left: 8px;
       i{
-        margin-top: 2px;
-        margin-left: 1px!important;
+        margin-top: 3px;
+        margin-left: 2px!important;
         position: absolute;
         font-size: 10px;
         opacity: 0;
@@ -113,8 +116,8 @@
       left: 10px;
       i{
         color: $primary-color;
-        margin-top: 2px;
-        margin-left: 1px!important;
+        margin-top: 3px;
+        margin-left: 2px!important;
         position: absolute;
         font-size: 10px;
         opacity: 1;
@@ -129,7 +132,6 @@
 
     &:hover{
       z-index: 10;
-
       background-color: $primary-color;
       border-color: $primary-color;
       box-shadow: 0px 0px 10px 0px #555;
@@ -160,6 +162,12 @@
           color: white;
           transition: color 0.3s;
         }
+      }
+      .overdue{
+        &:hover{
+          color: $red-color ;
+        }
+        font-size: 13px;
       }
       .dots{
         color: white;
