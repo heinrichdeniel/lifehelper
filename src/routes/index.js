@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import {IndexRedirect,Redirect, Router, Route} from "react-router";
-
-import MainContainer from 'modules/MainContainer'
-import LandingPage from 'modules/Landing/routes'
-import TaskPage from 'modules/Tasks/routes'
-import SettingsPage from 'modules/Settings/routes'
-import NotificationsPage from 'modules/Notifications/routes'
-import MapPage from 'modules/MapPage/routes'
+import React, {Component} from "react";
+import {IndexRedirect, Redirect, Router, Route} from "react-router";
+import MainContainer from "modules/MainContainer";
+import LandingPage from "modules/Landing/routes";
+import TaskPage from "modules/Tasks/routes";
+import SettingsPage from "modules/Settings/routes";
+import NotificationsPage from "modules/Notifications/routes";
+import MapPage from "modules/MapPage/routes";
 
 class Routes extends Component {
 

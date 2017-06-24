@@ -7,6 +7,7 @@ import css from './style.scss'
 
 import FacebookLogin from '../FacebookLogin';
 import GoogleLogin from '../GoogleLogin';
+import PropTypes from 'prop-types'
 
 export default class Registration extends Component{
   constructor(props) {
@@ -22,7 +23,6 @@ export default class Registration extends Component{
     }
 
   }
-
 
   onSocialLogin(){
     this.props.reset();
@@ -127,13 +127,13 @@ export default class Registration extends Component{
 }
 
 Registration.propTypes = {
-  sendRegistration: React.PropTypes.func,
-  setEmail: React.PropTypes.func,
-  setPassword: React.PropTypes.func,
-  resetRegistration: React.PropTypes.func,
-  loginFacebook: React.PropTypes.func,
-  loginGoogle: React.PropTypes.func,
-  reset: React.PropTypes.func,
-  user: React.PropTypes.object,
-  registration: React.PropTypes.object
+  sendRegistration: PropTypes.func,
+  setEmail: PropTypes.func,
+  setPassword: PropTypes.func,
+  resetRegistration: PropTypes.func,
+  loginFacebook: PropTypes.func,
+  loginGoogle: PropTypes.func,
+  reset: PropTypes.func,
+  user: PropTypes.object,
+  registration: PropTypes.object
 };

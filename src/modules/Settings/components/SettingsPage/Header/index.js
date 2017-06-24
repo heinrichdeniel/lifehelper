@@ -20,10 +20,10 @@ export default class Header extends Component {
 
             <ul className="nav navbar-nav navbar-right">
               <p className={css.userName}>{this.props.user.username}</p>
-              <Settings/>
               <div className={css.home} onClick={this.goToHomePage}>
                 <i className="fa fa-home"/>
               </div>
+              <Settings/>
             </ul>
         </div>
       </nav>

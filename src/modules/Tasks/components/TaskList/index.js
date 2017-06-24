@@ -4,7 +4,6 @@ import TaskItem from './TaskItem';
 import moment from 'moment';
 import AddTask from '../../containers/AddTaskContainer'
 import domCss from 'dom-css';
-import Spinner from 'components/Spinner';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Reorder from 'react-reorder';
 
@@ -14,7 +13,6 @@ class TaskList extends Component {
 
     this.applyDateFilter = this.applyDateFilter.bind(this);
     this.renderTitle = this.renderTitle.bind(this);
-    this.changeName = this.changeName.bind(this);
     this.handleScrollUpdate = this.handleScrollUpdate.bind(this);
     this.renderEmptyList = this.renderEmptyList.bind(this);
     this.onSort = this.onSort.bind(this);
@@ -39,22 +37,14 @@ class TaskList extends Component {
     }
   }
 
+
+
   applyDateFilter(task){
     let date = moment(task.date);
     if (this.props.dateTo == null){
       return true;
     }
     return (date.isBetween(this.props.dateFrom,this.props.dateTo,'days', '[]'));
-  }
-
-  changeName(e){
-    this.setState({
-      ...this.state,
-      project:{
-        ...this.state.project,
-        name: e.target.value
-      }
-    })
   }
 
   handleScrollUpdate(values) {

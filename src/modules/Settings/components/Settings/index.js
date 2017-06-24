@@ -36,8 +36,12 @@ class Settings extends Component {
     });
   }
 
+  componentWillUnmount(){
+    document.removeEventListener('click', this.handleDocumentClick, false);
+  }
+
   handleDocumentClick(e) {      //if the user clicked somewhere need to close the dropdown
-    if (!reactDom.findDOMNode(this).contains(e.target)) {
+    if (reactDom.findDOMNode(this) && !reactDom.findDOMNode(this).contains(e.target)) {
       this.hideOptions();
     }
   }

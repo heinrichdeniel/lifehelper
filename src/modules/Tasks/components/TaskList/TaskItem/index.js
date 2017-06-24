@@ -49,6 +49,7 @@ class TaskItem extends Component {
     }
   }
 
+
   onClick(){
     let props = this.props.item ? this.props.item : this.props;
     browserHistory.push(window.location.pathname.substring(0,3)+"/task/"+props.task.id);
@@ -103,49 +104,44 @@ class TaskItem extends Component {
       ...this.state,
       showOptions: false,
       editTask: !this.state.editTask
-    })
+    });
   }
 
   completeTask(e){   //sending request for updating the complete attribute of the task
     e.stopPropagation();
     let props = this.props.item ? this.props.item : this.props;
+
     let task = Object.assign({},props.task,{status: "completed"});
+
     props.updateTask(task);
-    this.setState({
-      ...this.state,
-      style: {
-        'opacity': '0',
-        'transition': 'opacity 0.2s linear'
-      }
-    })
   }
 
   archiveTask(e){   //sending request for updating the archive attribute of the task
     e.stopPropagation();
     let props = this.props.item ? this.props.item : this.props;
     let task = Object.assign({},props.task,{status: "archived"});
-    props.updateTask(task);
     this.setState({
       ...this.state,
       style: {
         'opacity': '0',
         'transition': 'opacity 0.2s linear'
       }
-    })
+    });
+    props.updateTask(task);
   }
 
   restoreTask(e){   //sending request for updating the archived attribute of the task
     e.stopPropagation();
     let props = this.props.item ? this.props.item : this.props;
     let task = Object.assign({},props.task,{status: "pending", date: moment()});
-    props.updateTask(task);
     this.setState({
       ...this.state,
       style: {
         'opacity': '0',
         'transition': 'opacity 0.2s linear'
       }
-    })
+    });
+    props.updateTask(task);
   }
 
   shareTask(e){     //opening or hiding the share modal

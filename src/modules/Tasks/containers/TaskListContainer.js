@@ -25,8 +25,6 @@ const mapActionsToProps = (dispatch) => ({
 });
 const mapStateToProps = (state) => ({
   task: selectors.task(state),
-  dateFrom: selectors.dateFrom(state),
-  dateTo: selectors.dateTo(state),
   project: projectSelectors.project(state),
   content: contentSelectors.content(state),
   user: userSelectors.user(state)

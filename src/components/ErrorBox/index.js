@@ -1,5 +1,6 @@
 import React from 'react'
 import css from './style.scss'
+import PropTypes from 'prop-types'
 
 class ErrorBox extends React.Component {
   render() {
@@ -13,6 +14,6 @@ class ErrorBox extends React.Component {
 
 
 ErrorBox.propTypes = {
-  error: React.PropTypes.string
+  error: PropTypes.string
 }
 export default ErrorBox

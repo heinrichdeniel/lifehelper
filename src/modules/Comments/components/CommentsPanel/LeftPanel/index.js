@@ -28,13 +28,15 @@ class LeftPanel extends Component {
       <div className={css.commentedItems}>
         <Scrollbars style={{ width: '100%', height: '100%' }}>
           {tasks.map((task,index) => {
-            return (
-              <div className={css.item} key={index} onClick={this.props.selectTask.bind(this, task)}>
-                <i className={css.taskIcon + " fa fa-tasks"}/>
-                {task.name}
-                {(task.UserTasks[0].newComment && task != this.props.selectedTask) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
-              </div>
-            );
+            if (task.Comments.length > 0){
+              return (
+                <div className={css.item} key={index} onClick={this.props.selectTask.bind(this, task)}>
+                  <i className={css.taskIcon + " fa fa-tasks"}/>
+                  {task.name}
+                  {(task.UserTasks[0].newComment && task != this.props.selectedTask) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
+                </div>
+              );
+            }
           })}
         </Scrollbars>
       </div>
@@ -47,14 +49,17 @@ class LeftPanel extends Component {
       <div className={css.commentedItems}>
         <Scrollbars style={{ width: '100%', height: '100%' }}>
           {projects.map((project, index) => {
-            return (
-              <div className={css.item} key={index} onClick={this.props.selectProject.bind(this, project)}>
-                <i className={css.chain + " fa fa-chain"}/>
-                {project.name}
-                {(project.UserProjects[0].newComment && project!= this.props.selectedProject) ? <i className={css.info + " fa fa-exclamation-circle"}/> : null}
+            if (project.Comments.length > 0) {
+              return (
+                <div className={css.item} key={index} onClick={this.props.selectProject.bind(this, project)}>
+                  <i className={css.chain + " fa fa-chain"}/>
+                  {project.name}
+                  {(project.UserProjects[0].newComment && project != this.props.selectedProject) ?
+                    <i className={css.info + " fa fa-exclamation-circle"}/> : null}
 
-              </div>
-            );
+                </div>
+              );
+            }
           })}
         </Scrollbars>
       </div>

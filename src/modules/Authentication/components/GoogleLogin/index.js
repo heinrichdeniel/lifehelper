@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import css from './style.scss'
+import PropTypes from 'prop-types'
 
 export default class GoogleLogin extends Component{
   constructor(props) {
@@ -46,5 +47,5 @@ export default class GoogleLogin extends Component{
 }
 
 GoogleLogin.propTypes = {
-  buttonText: React.PropTypes.string
+  buttonText: PropTypes.string
 };

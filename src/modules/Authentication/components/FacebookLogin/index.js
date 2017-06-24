@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import css from './style.scss'
+import PropTypes from 'prop-types'
 
 export default class FacebookLogin extends Component{
   constructor(props) {
@@ -60,5 +61,5 @@ export default class FacebookLogin extends Component{
 }
 
 FacebookLogin.propTypes = {
-  buttonText: React.PropTypes.string
+  buttonText: PropTypes.string
 };

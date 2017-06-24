@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import css from './style.scss'
+import PropTypes from 'prop-types'
 
 class datePicker extends Component{
   constructor(props){
@@ -34,7 +35,7 @@ class datePicker extends Component{
 }
 
 datePicker.propTypes = {
-  onChange: React.PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired
 }
 
 export default datePicker

@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import * as selectors from 'redux/modules/User/selectors'
-import * as actions from 'redux/modules/User/actions'
-import * as contentActions from 'redux/modules/Content/actions'
-import * as contentSelectors from 'redux/modules/Content/selectors'
-import Header from 'modules/Header/containers/HeaderContainer'
-import Footer from 'modules/Footer/containers/FooterContainer'
-import Comments from 'modules/Comments/containers/CommentContainer';
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import * as selectors from "redux/modules/User/selectors";
+import * as actions from "redux/modules/User/actions";
+import * as contentActions from "redux/modules/Content/actions";
+import * as contentSelectors from "redux/modules/Content/selectors";
+import Header from "modules/Header/containers/HeaderContainer";
+import Footer from "modules/Footer/containers/FooterContainer";
+import Comments from "modules/Comments/containers/CommentContainer";
 
 
 class MainContainer extends Component {

@@ -12,6 +12,7 @@ import ErrorBox from 'components/ErrorBox';
 import Dropdown from 'components/Dropdown';
 import Map from 'components/Map';
 import ConfirmationBox from 'components/ConfirmationBox';
+import { browserHistory } from 'react-router';
 
 class AddTask extends Component {
   constructor(props){
@@ -237,6 +238,7 @@ class AddTask extends Component {
       this.props.onHide();
     }
     this.props.sendTask(Object.assign({},this.state.task));
+    browserHistory.push(window.location.pathname.substring(0,3)+'/tasks');
   }
 
 

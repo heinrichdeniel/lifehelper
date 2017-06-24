@@ -16,7 +16,7 @@ class Shortcuts extends Component {
               {this.props.content.newTask}
             </div>
             <div className={css.key}>
-              t
+              alt + t
             </div>
           </div>
           <div className={css.item}>
@@ -24,7 +24,7 @@ class Shortcuts extends Component {
               {this.props.content.newProject}
             </div>
             <div className={css.key}>
-              p
+              alt + p
             </div>
           </div>
           <div className={css.item}>
@@ -32,7 +32,31 @@ class Shortcuts extends Component {
               {this.props.content.comments}
             </div>
             <div className={css.key}>
-              c
+              alt + c
+            </div>
+          </div>
+          <div className={css.item}>
+            <div className={css.name}>
+              {this.props.content.tasks}
+            </div>
+            <div className={css.key}>
+              t
+            </div>
+          </div>
+          <div className={css.item}>
+            <div className={css.name}>
+              {this.props.content.projects}
+            </div>
+            <div className={css.key}>
+              p
+            </div>
+          </div>
+          <div className={css.item}>
+            <div className={css.name}>
+              {this.props.content.archive}
+            </div>
+            <div className={css.key}>
+              a
             </div>
           </div>
           <div className={css.item}>

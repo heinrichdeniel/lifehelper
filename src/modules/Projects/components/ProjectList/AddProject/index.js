@@ -5,6 +5,7 @@ import css from './style.scss'
 import Button from 'components/Button';
 import Input from 'components/Input';
 import ErrorBox from 'components/ErrorBox';
+import { browserHistory } from 'react-router';
 
 class AddProject extends Component {
   constructor(props){
@@ -74,6 +75,7 @@ class AddProject extends Component {
     }
     this.props.sendProject(this.state.project);
     this.changeModalState();
+    browserHistory.push(window.location.pathname.substring(0,3)+'/projects');
   }
 
   renderButton(){     //rendering the button

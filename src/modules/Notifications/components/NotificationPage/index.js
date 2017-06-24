@@ -10,6 +10,8 @@ import { browserHistory } from 'react-router';
 class Notifications extends Component{
   constructor(props) {
     super(props);
+
+    this.renderEmptyPage = this.renderEmptyPage.bind(this);
   }
 
   componentWillMount(){
@@ -25,13 +27,23 @@ class Notifications extends Component{
     }
   }
 
+  renderEmptyPage(){
+    if (this.props.notifications.projects.length == 0 && this.props.notifications.tasks.length == 0){
+      return (
+        <div className={css.emptyList}>
+            {this.props.content.page.notifications.emptyList}!
+        </div>
+      )
+    }
+  }
+
   render(){
     return (
       <div >
         <Header />
         <div className={css.base} >
           <h1><i className={css.flag + " fa fa-flag"}/>{this.props.content.page.settings.options.notifications} </h1>
-
+          {this.renderEmptyPage()}
           <ProjectNotifications content={this.props.content.page.notifications}
                                 projects={this.props.notifications.projects}
                                 pending={this.props.notifications.pending}

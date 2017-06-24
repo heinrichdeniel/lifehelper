@@ -143,6 +143,9 @@
           "newTask": "Add a new task",
           "newProject": "Add a new project",
           "comments": "Show/hide comments",
+          "tasks": "Show tasks",
+          "projects": "Show projects",
+          "archive": "Open the archive",
           "settings": "Open settings",
           "notifications": "Open notifications",
           "homepage": "Go to homepage"
@@ -165,7 +168,8 @@
         "accept": "Accept",
         "decline": "Decline",
         "confirm": "Okay",
-        "back": "Back"
+        "back": "Back",
+        "emptyList": "There are no notifications"
       },
       "comments": {
         "commentedTasks": "Commented tasks",
@@ -336,6 +340,9 @@
           "newTask": "Új feladat hozzáadása",
           "newProject": "Új projekt hozzáadása",
           "comments": "Kommentek mutatása/elrejtése",
+          "tasks": "Feladatok megjelenítése",
+          "projects": "Projektek megjelenítése",
+          "archive": "Archívum megnyitása",
           "settings": "Beállítások megnyitása",
           "notifications": "Értesítések megjelenítése",
           "homepage": "Kezdőoldalra navigálás"
@@ -359,7 +366,9 @@
         "accept": "Elfogad",
         "decline": "Elutasít",
         "confirm": "Rendben",
-        "back": "Vissza"
+        "back": "Vissza",
+        "emptyList": "Nincsenek értesítések"
+
       },
       "comments": {
         "commentedTasks": "Feladatok hozzászólásai",
@@ -495,7 +504,7 @@
       },
       "settings": {
         "options": {
-          "notifications": "Anunțuri",
+          "notifications": "Notificări",
           "settings": "Setări",
           "logout": "Deconectare"
         },
@@ -528,6 +537,9 @@
           "newTask": "Adăugare o activitate nouă",
           "newProject": "Adăugare un project nou",
           "comments": "Afișarea / ascundarea comentăriile",
+          "tasks": "Arată activitățile",
+          "projects": "Arată proiectele",
+          "archive": "Deschide archiva",
           "settings": "Deschide setările",
           "notifications": "Arată notificări",
           "homepage": "Pagina principală"
@@ -550,7 +562,8 @@
         "accept": "Acceptă",
         "decline": "Refuză",
         "confirm": "Ok",
-        "back": "Înapoi"
+        "back": "Înapoi",
+        "emptyList": "Nu există notificări"
       },
       "comments": {
         "commentedTasks": "Activități comentate",

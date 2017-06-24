@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import css from './style.scss'
+import PropTypes from 'prop-types'
 
 class TextArea extends Component{
   constructor(props){
@@ -29,12 +30,12 @@ class TextArea extends Component{
 }
 
 TextArea.propTypes = {
-  type: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
-  value: React.PropTypes.string,
-  minLength: React.PropTypes.number,
-  maxLength: React.PropTypes.number,
-  onChange: React.PropTypes.func.isRequired
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  minLength: PropTypes.number,
+  maxLength: PropTypes.number,
+  onChange: PropTypes.func.isRequired
 }
 
 export default TextArea

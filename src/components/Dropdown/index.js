@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import DropDown from 'react-bootstrap-dropdown';
 import css from './style.scss'
+import PropTypes from 'prop-types'
 
 class Dropdown extends Component{
   constructor(props){
@@ -43,7 +44,7 @@ class Dropdown extends Component{
 }
 
 Dropdown.propTypes = {
-  onChange: React.PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired
 };
 
 export default Dropdown

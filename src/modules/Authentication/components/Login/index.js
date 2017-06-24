@@ -7,6 +7,7 @@ import css from './style.scss'
 
 import FacebookLogin from '../FacebookLogin';
 import GoogleLogin from '../GoogleLogin';
+import PropTypes from 'prop-types'
 
 export default class Login extends Component{
   constructor(props) {
@@ -93,13 +94,13 @@ export default class Login extends Component{
 }
 
 Login.propTypes = {
-  sendLogin: React.PropTypes.func,
-  setEmail: React.PropTypes.func,
-  setPassword: React.PropTypes.func,
-  resetLogin: React.PropTypes.func,
-  loginFacebook: React.PropTypes.func,
-  loginGoogle: React.PropTypes.func,
-  reset: React.PropTypes.func,
-  user: React.PropTypes.object,
-  login: React.PropTypes.object
+  sendLogin: PropTypes.func,
+  setEmail: PropTypes.func,
+  setPassword: PropTypes.func,
+  resetLogin: PropTypes.func,
+  loginFacebook: PropTypes.func,
+  loginGoogle: PropTypes.func,
+  reset: PropTypes.func,
+  user: PropTypes.object,
+  login: PropTypes.object
 };

@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'components/Button'
 
 import css from './style.scss'
+import PropTypes from 'prop-types'
 
 class datePicker extends Component{
   constructor(props){
@@ -72,8 +73,8 @@ class datePicker extends Component{
 }
 
 datePicker.propTypes = {
-  value: React.PropTypes.string,
-  onChange: React.PropTypes.func.isRequired
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired
 }
 
 export default datePicker

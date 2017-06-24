@@ -19,18 +19,24 @@ class Shortcuts extends Component {
     }
   }
   componentDidMount() {
-    Mousetrap.bind(['t'], this.addNewTask);
-    Mousetrap.bind(['p'], this.addNewProject);
-    Mousetrap.bind(['c'], this.props.showHideMessagePanel);
+    Mousetrap.bind(['alt+t'], this.addNewTask);
+    Mousetrap.bind(['alt+p'], this.addNewProject);
+    Mousetrap.bind(['alt+c'], this.props.showHideMessagePanel);
+    Mousetrap.bind(['t'], this.goToTasks);
+    Mousetrap.bind(['p'], this.goToProjects);
+    Mousetrap.bind(['a'], this.goToArchive);
     Mousetrap.bind(['s'], this.goToSettings);
     Mousetrap.bind(['n'], this.goToNotifications);
     Mousetrap.bind(['h'], this.goToHomepage);
   }
 
   componentWillUnmount() {
-    Mousetrap.unbind(['t'], this.addNewTask);
-    Mousetrap.unbind(['p'], this.addNewProject);
-    Mousetrap.unbind(['c'], this.props.showHideMessagePanel);
+    Mousetrap.unbind(['alt+t'], this.addNewTask);
+    Mousetrap.unbind(['alt+p'], this.addNewProject);
+    Mousetrap.unbind(['alt+c'], this.props.showHideMessagePanel);
+    Mousetrap.unbind(['t'], this.goToTasks);
+    Mousetrap.unbind(['p'], this.goToProjects);
+    Mousetrap.unbind(['a'], this.goToArchive);
     Mousetrap.unbind(['s'], this.goToSettings);
     Mousetrap.unbind(['n'], this.goToNotifications);
     Mousetrap.unbind(['h'], this.goToHomepage);
@@ -75,6 +81,18 @@ class Shortcuts extends Component {
 
   goToHomepage(){
     browserHistory.push(window.location.pathname.substring(0,3));
+  }
+
+  goToTasks(){
+    browserHistory.push(window.location.pathname.substring(0,3)+'/tasks');
+  }
+
+  goToProjects(){
+    browserHistory.push(window.location.pathname.substring(0,3)+'/projects');
+  }
+
+  goToArchive(){
+    browserHistory.push(window.location.pathname.substring(0,3)+'/archive');
   }
 
   render() {
