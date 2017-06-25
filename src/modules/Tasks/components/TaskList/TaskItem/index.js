@@ -93,6 +93,7 @@ class TaskItem extends Component {
   deleteTask(){       //sending request for deleting the task
     let props = this.props.item ? this.props.item : this.props;
     props.deleteTask(props.task.id);
+    this.showHideDeleteModal();
   }
 
   editTask(e){        //updating the task details

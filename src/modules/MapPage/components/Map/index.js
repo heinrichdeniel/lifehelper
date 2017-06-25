@@ -17,7 +17,6 @@ class Map extends Component{
   }
 
   componentDidUpdate(nextProps){
-
     if( (this.props.tasks != nextProps.tasks && this.props.latitude) || (this.props.latitude != nextProps.latitude) || (this.state.map && (this.state.map.center.lat() != this.props.latitude))){
       this.createNewMap();
     }

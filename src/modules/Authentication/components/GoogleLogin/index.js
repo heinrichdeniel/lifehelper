@@ -35,6 +35,7 @@ export default class GoogleLogin extends Component{
       })
     });
   }
+
   render() {
     return (
       <div onClick={this.clickHandler} className={`${css.google}`}>

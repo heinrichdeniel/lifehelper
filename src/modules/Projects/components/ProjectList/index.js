@@ -318,7 +318,7 @@ class ProjectList extends Component {
             <span> ({tasks.length}) </span>
             <i className={css.commentIcon + " fa fa-commenting"} style={commentStyle} data-tip={this.props.content.page.project.editProject} onClick={this.openCommentBox.bind(this, project)}/>
             <ProjectShare project={project} />    {/* share modal */}
-            <i className={css.projectSettings + " fa fa-cog"}  data-tip={this.props.content.page.project.deleteProject} onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
+            <i className={css.projectSettings + " fa fa-cog"}  onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>
           {this.renderProjectSettings(project)}
         </div>

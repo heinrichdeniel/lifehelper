@@ -32,23 +32,18 @@ class MapPage extends Component{
 
   componentWillMount(){
     this.props.getTaskList();
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        let latitude = position.coords.latitude;
-        let longitude = position.coords.longitude;
-        this.setState({
-          ...this.state,
-          latitude: latitude,
-          longitude: longitude
-        });
-      }
-    );
+    this.setState({
+      ...this.state,
+      latitude: 46.770439,
+      longitude: 23.591423
+    });
   }
 
   componentDidUpdate(){
     let found = false;
 
-    if (this.state.latitude == 0){
+
+    if (this.state.latitude == 46.770439 && this.state.longitude == 23.591423 ){
       this.props.task.list.map((task,index) => {
         if (task.location){
           if (!found){

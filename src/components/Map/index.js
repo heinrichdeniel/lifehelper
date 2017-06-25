@@ -24,16 +24,10 @@ class Map extends Component{
       });
     }
     else{
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          let latitude = position.coords.latitude;
-          let longitude = position.coords.longitude;
-          this.setState({
-            latitude: latitude,
-            longitude: longitude
-          });
-        }
-      )
+      this.setState({
+        latitude: 46.770439,
+        longitude: 23.591423
+      });
     }
   }
 
@@ -54,8 +48,8 @@ class Map extends Component{
           defaultCenter={{ lat: this.state.latitude, lng: this.state.longitude }}>
           {
             this.props.location
-            ? <Marker position={new google.maps.LatLng(this.props.lat, this.props.lng)} title={this.props.location}/>
-            :null
+              ? <Marker position={new google.maps.LatLng(this.props.lat, this.props.lng)} title={this.props.location}/>
+              :null
           }
         </GoogleMap>
       );
@@ -68,7 +62,7 @@ class Map extends Component{
           containerElement={<div className={css.map + " " +this.props.style}/>}
           mapElement={<div style={{height: "100%", width: "100%", position: "absolute"}}/>}
           {...this.props}/>
-        <span className="fa fa-map-marker"/>
+        <span className={"fa fa-map-marker" + css.marker}/>
         <Geosuggest
           onSuggestSelect={this.onSuggestSelect}
           location={new google.maps.LatLng(this.state.latitude, this.state.latitude)}

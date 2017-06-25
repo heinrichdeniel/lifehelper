@@ -29,7 +29,7 @@ export default class FacebookLogin extends Component{
   }
 
   login(){
-    FB.login(this.getDetails,{scope: 'public_profile, email'});
+      FB.login(this.getDetails,{scope: 'public_profile, email'});
   }
 
   getDetails(response){
