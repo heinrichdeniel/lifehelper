@@ -581,7 +581,7 @@
         "intervals": {
           "title": "Selectați un interval",
           "every": "Toate activități",
-          "today": "Astăzi",
+          "today": "Activități de azi",
           "weekly": "Activități săptămânale",
           "monthly": "Activități lunare"
         }

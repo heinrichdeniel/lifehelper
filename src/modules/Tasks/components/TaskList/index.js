@@ -41,10 +41,11 @@ class TaskList extends Component {
 
   applyDateFilter(task){
     let date = moment(task.date);
-    if (this.props.dateTo == null){
+    if (this.props.task.dateTo == null){
       return true;
     }
-    return (date.isBetween(this.props.dateFrom,this.props.dateTo,'days', '[]'));
+
+    return (date.isBetween(this.props.task.dateFrom,this.props.taskdateTo,'days', '[]'));
   }
 
   handleScrollUpdate(values) {
@@ -86,7 +87,7 @@ class TaskList extends Component {
 
 
   onSort(e,item,from,to,list){
-    let tasks = this.props.task.list;
+    let tasks = this.props.task.list.filter(this.applyDateFilter)
     if (to != from){
       e.stopPropagation();
       this.setState({

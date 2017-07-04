@@ -316,7 +316,7 @@ class ProjectList extends Component {
             {this.renderCircleBeforeName(project)}
             {project.name}
             <span> ({tasks.length}) </span>
-            <i className={css.commentIcon + " fa fa-commenting"} style={commentStyle} data-tip={this.props.content.page.project.editProject} onClick={this.openCommentBox.bind(this, project)}/>
+            <i className={css.commentIcon + " fa fa-commenting"} style={commentStyle} data-tip={this.props.content.page.comments.newComment} onClick={this.openCommentBox.bind(this, project)}/>
             <ProjectShare project={project} />    {/* share modal */}
             <i className={css.projectSettings + " fa fa-cog"}  onClick={this.showProjectSettings.bind(this,project)} aria-hidden="true"/>
           </h3>
